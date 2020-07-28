@@ -71,4 +71,7 @@ dependencies {
     //room
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
+
+    //lib
+    implementation project(path: ':lib:core')
 }

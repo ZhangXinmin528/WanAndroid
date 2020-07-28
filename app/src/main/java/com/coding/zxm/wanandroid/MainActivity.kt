@@ -2,10 +2,18 @@ package com.coding.zxm.wanandroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.coding.zxm.core.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity() {
+    override fun setLayoutId(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun initParamsAndValues() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initViews() {
+        TODO("Not yet implemented")
     }
 }

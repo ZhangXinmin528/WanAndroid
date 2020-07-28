@@ -1,4 +1,4 @@
-package com.coding.zxm.wanandroid.base
+package com.coding.zxm.core.base
 
 import android.content.Context
 import android.os.Bundle
