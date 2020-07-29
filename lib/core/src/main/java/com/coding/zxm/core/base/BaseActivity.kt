@@ -19,6 +19,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(setLayoutId());
 
         mContext = this
@@ -35,6 +36,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun jumpActivity(intent: Intent) {
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     protected fun jumpActivity(clazz: Class<*>) {
