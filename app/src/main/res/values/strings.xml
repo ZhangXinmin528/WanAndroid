@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WanAndroid</string>
+    <string name="welcome_to_wanandroid">Welcome to \'WanAndroid\'~</string>
 </resources>

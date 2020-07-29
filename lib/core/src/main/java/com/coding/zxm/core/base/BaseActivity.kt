@@ -1,6 +1,7 @@
 package com.coding.zxm.core.base
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
@@ -28,7 +29,22 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
-    abstract fun initParamsAndValues();
+    abstract fun initParamsAndValues()
 
-    abstract fun initViews();
+    abstract fun initViews()
+
+    protected fun jumpActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    protected fun jumpActivity(clazz: Class<*>) {
+        val intent = Intent(mContext, clazz)
+        jumpActivity(intent)
+    }
+
+    protected fun jumpActivity(bundle: Bundle, clazz: Class<*>) {
+        val intent = Intent(mContext, clazz)
+        intent.putExtras(bundle)
+        jumpActivity(intent)
+    }
 }
