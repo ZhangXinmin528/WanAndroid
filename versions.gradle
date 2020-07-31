@@ -24,8 +24,10 @@ def versions = [:]
 //classpath
 versions.android_gradle_plugin = '4.0.0'
 versions.kotlin = "1.3.72"
+versions.arouter_register = "1.0.2"
 //base
 versions.appcompat = "1.2.0-alpha02"
+versions.annotations = "1.0.0"
 versions.material = "1.0.0"
 //ui
 versions.cardview = "1.0.0"
@@ -34,41 +36,36 @@ versions.recyclerview = "1.0.0"
 versions.rvadapterhelper = "3.0.4"
 //kotlin
 versions.core_ktx = "1.1.0"
-
-versions.dagger = "2.16"
-
 versions.activity = '1.1.0'
 versions.fragment = "1.2.1"
-
+//coroutines
+versions.coroutines = "1.3.7"
+//dagger
+versions.dagger = "2.16"
 //glide
 versions.glide = "4.8.0"
-//okhttp
+//retrofit
 versions.retrofit = "2.9.0"
 versions.okhttp_logging_interceptor = "3.9.0"
+//arouter
+versions.arouter_api = "1.5.0"
+versions.arouter_compiler = "1.2.2"
 //lifecycle
 versions.lifecycle = "2.2.0"
-
+//room
 versions.room = "2.3.0-alpha01"
 //rx
 versions.rx_android = "2.0.1"
 versions.rxjava2 = "2.1.3"
-
 //util
 versions.coreUtil = "3.0.1"
+versions.tbssdk = "43903"
 
-versions.annotations = "1.0.0"
 versions.apache_commons = "2.5"
-versions.arch_core = "2.1.0"
-versions.atsl_core = "1.2.0"
-versions.atsl_junit = "1.1.1"
-versions.atsl_rules = "1.2.0"
-versions.atsl_runner = "1.2.0"
-versions.coroutines = "1.3.7"
+
 versions.dexmaker = "2.2.0"
 versions.navigation = "2.3.0-alpha01"
 versions.paging = "3.0.0-alpha02"
-versions.robolectric = "4.2"
-versions.timber = "4.7.1"
 versions.transition = "1.3.0"
 versions.truth = "1.0.1"
 versions.work = "2.2.0"
@@ -84,42 +81,42 @@ ext.build_versions = build_versions
 
 def deps = [:]
 
-def activity = [:]
-activity.activity_ktx = "androidx.activity:activity-ktx:$versions.activity"
-deps.activity = activity
-
+//TODO:classpath&plugin
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 
-deps.annotations = "androidx.annotation:annotation:$versions.annotations"
-
+//TODO:base
 deps.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
-
-def arch_core = [:]
-arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
-arch_core.testing = "androidx.arch.core:core-testing:$versions.arch_core"
-deps.arch_core = arch_core
-
-def atsl = [:]
-atsl.core = "androidx.test:core:$versions.atsl_core"
-atsl.ext_junit = "androidx.test.ext:junit:$versions.atsl_junit"
-atsl.runner = "androidx.test:runner:$versions.atsl_runner"
-atsl.rules = "androidx.test:rules:$versions.atsl_rules"
-deps.atsl = atsl
-
-deps.benchmark = "androidx.benchmark:benchmark-junit4:$versions.benchmark"
-deps.benchmark_gradle = "androidx.benchmark:benchmark-gradle-plugin:$versions.benchmark"
-
+deps.annotations = "androidx.annotation:annotation:$versions.annotations"
+deps.material = "com.google.android.material:material:$versions.material"
+//TODO:UI
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"
-
 deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
-
+//TODO:Recycleview
+deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+deps.rvadapterhelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.rvadapterhelper"
+//TODO:kotlin
 deps.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
-
+def kotlin = [:]
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+deps.kotlin = kotlin
+//TODO:coroutines
 def coroutines = [:]
 coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 coroutines.test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
 deps.coroutines = coroutines
-
+//TODO:activity的kotlin扩展包
+def activity = [:]
+activity.activity_ktx = "androidx.activity:activity-ktx:$versions.activity"
+deps.activity = activity
+//TODO:fragment中kotlin扩展包
+def fragment = [:]
+fragment.runtime = "androidx.fragment:fragment:${versions.fragment}"
+fragment.runtime_ktx = "androidx.fragment:fragment-ktx:${versions.fragment}"
+fragment.testing = "androidx.fragment:fragment-testing:${versions.fragment}"
+deps.fragment = fragment
 //TODO:Dagger
 def dagger = [:]
 dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
@@ -128,38 +125,23 @@ dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dag
 dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
 deps.dagger = dagger
-
-deps.dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:$versions.dexmaker"
-
-def espresso = [:]
-espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
-espresso.contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
-espresso.intents = "androidx.test.espresso:espresso-intents:$versions.espresso"
-deps.espresso = espresso
-
-def fragment = [:]
-fragment.runtime = "androidx.fragment:fragment:${versions.fragment}"
-fragment.runtime_ktx = "androidx.fragment:fragment-ktx:${versions.fragment}"
-fragment.testing = "androidx.fragment:fragment-testing:${versions.fragment}"
-deps.fragment = fragment
-
 //TODO:Glide
 def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
-
-
-//TODO:Kotlin
-def kotlin = [:]
-//Kotlin plugin
-kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
-
-kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
-deps.kotlin = kotlin
-
+//TODO:Retrofit
+def retrofit = [:]
+retrofit.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gsonConverter = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
+//TODO:ARouter
+def arouter = [:]
+arouter.api = "com.alibaba:arouter-api:$versions.arouter_api"
+arouter.compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+arouter.register = "com.alibaba:arouter-register:$versions.arouter_register"
+deps.arouter = arouter
 //TODO:Lifecycle
 def lifecycle = [:]
 lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
@@ -168,12 +150,17 @@ lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
 deps.lifecycle = lifecycle
-
-deps.material = "com.google.android.material:material:$versions.material"
-
-
-deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
-
+//TODO:Room
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+room.testing = "androidx.room:room-testing:$versions.room"
+deps.room = room
+//TODO:RX
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
 //TODO:Navigation
 def navigation = [:]
 navigation.runtime = "androidx.navigation:navigation-runtime:$versions.navigation"
@@ -185,38 +172,16 @@ navigation.ui = "androidx.navigation:navigation-ui:$versions.navigation"
 navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
 deps.navigation = navigation
+//TODO:CoreUtil
+deps.coreUtil = "com.zhangxm.utils:lib.coreutils:$versions.coreUtil"
+//TODO:TBSSDK
+deps.tbssdk = "com.tencent.tbs.tbssdk:sdk:$versions.tbssdk"
 
+def arch_core = [:]
+arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
+deps.arch_core = arch_core
 
 deps.paging_runtime = "androidx.paging:paging-runtime:$versions.paging"
-
-//TODO:Recycleview
-deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
-deps.rvadapterhelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.rvadapterhelper"
-
-//TODO:Retrofit
-def retrofit = [:]
-retrofit.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-retrofit.gsonConverter = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-deps.retrofit = retrofit
-
-deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
-
-deps.robolectric = "org.robolectric:robolectric:$versions.robolectric"
-
-//TODO:Room
-def room = [:]
-room.runtime = "androidx.room:room-runtime:$versions.room"
-room.compiler = "androidx.room:room-compiler:$versions.room"
-room.ktx = "androidx.room:room-ktx:$versions.room"
-room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
-room.testing = "androidx.room:room-testing:$versions.room"
-deps.room = room
-
-deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
-
-deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
-
-deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 
 deps.transition = "androidx.transition:transition:$versions.transition"
 
@@ -229,8 +194,6 @@ work.firebase = "androidx.work:work-firebase:$versions.work"
 work.runtime_ktx = "androidx.work:work-runtime-ktx:$versions.work"
 deps.work = work
 
-//util
-deps.coreUtil = "com.zhangxm.utils:lib.coreutils:$versions.coreUtil"
 ext.deps = deps
 
 def addRepos(RepositoryHandler handler) {

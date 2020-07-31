@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -20,6 +22,12 @@ android {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation":
                                      "$projectDir/schemas".toString()]
+            }
+        }
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
     }
@@ -71,6 +79,10 @@ dependencies {
     //room
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
+
+    //arouter
+    implementation deps.arouter.api
+    kapt deps.arouter.compiler
 
     //lib
     implementation project(path: ':lib:core')

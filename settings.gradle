@@ -1,3 +1,4 @@
+include ':lib:webview'
 include ':lib:network'
 include ':lib:util'
 include ':lib:core'

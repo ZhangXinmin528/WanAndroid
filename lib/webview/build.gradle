@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -14,6 +15,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -29,14 +36,15 @@ dependencies {
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
-    //androidx
+
     implementation deps.app_compat
+    implementation deps.constraint_layout
 
+    implementation deps.arouter.api
+    kapt deps.arouter.compiler
 
-    //lifecycle
-    implementation deps.lifecycle.runtime
-    implementation deps.lifecycle.viewmodel_ktx
-//    implementation deps.lifecycle.livedata_ktx
-//    annotationProcessor deps.lifecycle.compiler
+    implementation project(path: ':lib:core')
 
+    //tbs
+    api deps.tbssdk
 }
