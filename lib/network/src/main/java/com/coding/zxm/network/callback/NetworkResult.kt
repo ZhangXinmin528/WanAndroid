@@ -6,7 +6,7 @@ package com.coding.zxm.network.callback
  * 网络请求状态
  */
 sealed class NetworkResult<T : Any> {
-    class NetworkSuccess<T : Any>(val data: T) : NetworkResult<T>()
+    class NetworkSuccess<T : Any>(val data: T?) : NetworkResult<T>()
 
-    class NetworkError<T : Any>(val msg: String) : NetworkResult<T>()
+    class NetworkError<T : Any>(val error: Any?) : NetworkResult<T>()
 }
