@@ -5,8 +5,8 @@ package com.coding.zxm.network.callback
  * Copyright (c) 2020/7/30 . All rights reserved.
  * 网络请求状态
  */
-sealed class NetworkResult<T : Any> {
-    class NetworkSuccess<T : Any>(val data: T?) : NetworkResult<T>()
+sealed class NetworkResult<out T : Any> {
+    data class NetworkSuccess<T : Any>(val data: T?) : NetworkResult<T>()
 
-    class NetworkError<T : Any>(val error: Any?) : NetworkResult<T>()
+    data class NetworkError(val error: Exception?) : NetworkResult<Nothing>()
 }
