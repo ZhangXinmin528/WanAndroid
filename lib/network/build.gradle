@@ -33,7 +33,7 @@ dependencies {
     implementation deps.app_compat
 
     //retrofit
-    implementation deps.retrofit.retrofit2
+    api deps.retrofit.retrofit2
     implementation deps.retrofit.gsonConverter
     implementation deps.okhttp_logging_interceptor
 

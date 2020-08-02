@@ -86,4 +86,7 @@ dependencies {
 
     //lib
     implementation project(path: ':lib:core')
+    implementation project(path: ':lib:network')
+    implementation project(path: ':lib:util')
+    implementation project(path: ':lib:webview')
 }
