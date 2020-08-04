@@ -32,11 +32,6 @@ dependencies {
 
     implementation deps.app_compat
 
-    //retrofit
-    api deps.retrofit.retrofit2
-    implementation deps.retrofit.gsonConverter
-    implementation deps.okhttp_logging_interceptor
-
-    implementation deps.coroutines.android
-
+    implementation deps.glide.runtime
+    implementation deps.glide.compiler
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main_bg">
+
+    <include
+        android:id="@+id/toolbar_login"
+        layout="@layout/layout_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/textsize_16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_login"
+        tools:text="登录玩Android" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_user_name"
+        style="@style/MainPagePadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/all_user_name"
+            android:paddingStart="@dimen/margin_12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="@dimen/margin_12dp"
+            android:paddingBottom="8dp"
+            android:textSize="@dimen/textsize_16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_password"
+        style="@style/MainPagePadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_2dp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_user_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/all_password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/margin_12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="@dimen/margin_12dp"
+            android:paddingBottom="8dp"
+            android:textSize="@dimen/textsize_16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tv_login"
+        style="@style/MainPagePadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_login"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/all_login"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textsize_16sp"
+        app:layout_constraintTop_toBottomOf="@+id/layout_password" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,10 @@
 package com.coding.zxm.wanandroid.ui.activity
 
+import android.content.Intent
 import android.os.CountDownTimer
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
@@ -26,7 +27,7 @@ class SplashActivity : BaseActivity() {
 
         mCountDownTimer = object : CountDownTimer(5 * 1000, 1000) {
             override fun onFinish() {
-                jumpActivity(MainActivity::class.java)
+                jumpLogin()
                 finish()
             }
 
@@ -39,9 +40,14 @@ class SplashActivity : BaseActivity() {
         mCountDownTimer.start()
 
         tv_splash_timer.setOnClickListener {
-            jumpActivity(MainActivity::class.java)
+            jumpLogin()
             finish()
         }
+    }
+
+    private fun jumpLogin() {
+        val intent = Intent(mContext, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroy() {
