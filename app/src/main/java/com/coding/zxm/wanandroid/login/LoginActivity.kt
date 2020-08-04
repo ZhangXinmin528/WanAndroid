@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.zxm.utils.core.text.ClickableMovementMethod
 import com.zxm.utils.core.text.SpanUtils
@@ -65,12 +66,16 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 val userName = et_user_name.editableText.toString().trim()
                 if (userName.isEmpty()) {
                     Toast.makeText(mContext!!, "请输入用户名~", Toast.LENGTH_SHORT).show()
+                    return
                 }
                 val password = et_password.editableText.toString().trim()
                 if (password.isEmpty()) {
                     Toast.makeText(mContext!!, "请输入密码~", Toast.LENGTH_SHORT).show()
+                    return
                 }
-                loginViewModel.login(userName, password)
+
+                //loginViewModel.login(userName, password)
+                jumpActivity(MainActivity::class.java);
             }
         }
 
