@@ -4,9 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_login"
-        layout="@layout/layout_toolbar" />
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_welcome"

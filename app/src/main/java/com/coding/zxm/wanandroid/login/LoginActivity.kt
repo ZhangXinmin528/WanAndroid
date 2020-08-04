@@ -11,7 +11,6 @@ import com.coding.zxm.wanandroid.R
 import com.zxm.utils.core.text.ClickableMovementMethod
 import com.zxm.utils.core.text.SpanUtils
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
 
 /**
  * Created by ZhangXinmin on 2020/8/2.
@@ -27,14 +26,17 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setSupportActionBar(toolbar_wan)
+
+    }
+
+    override fun initViews() {
+
+        setSupportActionBar(toolbar_login)
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)
         actionBar?.title = "登录"
-    }
 
-    override fun initViews() {
         tv_login.setOnClickListener(this)
 
         val spannableStringBuilder =

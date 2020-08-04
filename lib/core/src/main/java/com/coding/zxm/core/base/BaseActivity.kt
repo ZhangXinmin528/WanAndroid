@@ -27,8 +27,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
         initParamsAndValues()
 
-        initViews()
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initViews()
     }
 
     abstract fun initParamsAndValues()
