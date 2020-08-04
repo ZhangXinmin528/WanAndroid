@@ -1,5 +1,7 @@
 package com.coding.zxm.network.callback
 
+import com.coding.zxm.network.ecxeption.NetworkException
+
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/7/30 . All rights reserved.
@@ -8,5 +10,5 @@ package com.coding.zxm.network.callback
 sealed class NetworkResult<out T : Any> {
     data class NetworkSuccess<T : Any>(val data: T?) : NetworkResult<T>()
 
-    data class NetworkError(val error: Exception?) : NetworkResult<Nothing>()
+    data class NetworkError(val error: NetworkException?) : NetworkResult<Nothing>()
 }

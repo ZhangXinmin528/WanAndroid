@@ -1,11 +1,13 @@
 package com.coding.zxm.wanandroid.login
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
+import com.coding.zxm.wanandroid.app.WanApp
 import kotlinx.coroutines.launch
 
 /**
@@ -26,7 +28,12 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
             if (result is NetworkResult.NetworkSuccess<UserEntity>) {
                 loginLiveData.postValue(result.data)
             } else if (result is NetworkResult.NetworkError) {
-//                Toast.makeText(context, result.error?.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    WanApp.getApplicationContext(),
+                    result.error?.errorMsg,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             }
         }
         return loginLiveData
@@ -41,7 +48,12 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
             if (result is NetworkResult.NetworkSuccess<UserEntity>) {
                 loginLiveData.postValue(result.data)
             } else if (result is NetworkResult.NetworkError) {
-//                Toast.makeText(context, result.error?.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    WanApp.getApplicationContext(),
+                    result.error?.errorMsg,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             }
         }
     }

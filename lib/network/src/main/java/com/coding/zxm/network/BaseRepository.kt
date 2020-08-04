@@ -20,7 +20,7 @@ open class BaseRepository {
             call()
         } catch (e: Exception) {
             e.printStackTrace()
-            NetworkResult.NetworkError(e)
+            NetworkResult.NetworkError(NetworkException(e.message))
         }
     }
 
