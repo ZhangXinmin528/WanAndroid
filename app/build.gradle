@@ -73,6 +73,7 @@ dependencies {
     //lifecycle
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.extensions
 //    implementation deps.lifecycle.livedata_ktx
     annotationProcessor deps.lifecycle.compiler
 

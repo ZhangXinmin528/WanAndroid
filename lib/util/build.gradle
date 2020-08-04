@@ -32,6 +32,6 @@ dependencies {
     //androidx
     implementation deps.app_compat
 
-    implementation deps.coreUtil
+    api deps.coreUtil
 
 }
