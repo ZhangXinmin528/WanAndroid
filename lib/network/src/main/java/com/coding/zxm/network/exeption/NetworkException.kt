@@ -1,4 +1,4 @@
-package com.coding.zxm.network.ecxeption
+package com.coding.zxm.network.exeption
 
 /**
  * Created by ZhangXinmin on 2020/7/26.

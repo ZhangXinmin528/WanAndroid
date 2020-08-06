@@ -1,6 +1,6 @@
 package com.coding.zxm.network.callback
 
-import com.coding.zxm.network.ecxeption.NetworkException
+import com.coding.zxm.network.exeption.NetworkException
 
 /**
  * Created by ZhangXinmin on 2020/7/26.

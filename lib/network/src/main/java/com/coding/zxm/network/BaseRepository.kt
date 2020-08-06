@@ -2,7 +2,8 @@ package com.coding.zxm.network
 
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.network.common.CommonResponse
-import com.coding.zxm.network.ecxeption.NetworkException
+import com.coding.zxm.network.exeption.NetworkException
+import comcodingzxmnetworkexeption.NetworkExceptionHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 
@@ -20,12 +21,12 @@ open class BaseRepository {
             call()
         } catch (e: Exception) {
             e.printStackTrace()
-            NetworkResult.NetworkError(NetworkException(e.message))
+            NetworkResult.NetworkError(NetworkExceptionHelper().handlerException(e))
         }
     }
 
     /**
-     *
+     * On Response
      */
     suspend fun <T : Any> onResponse(
         response: CommonResponse<T>,
