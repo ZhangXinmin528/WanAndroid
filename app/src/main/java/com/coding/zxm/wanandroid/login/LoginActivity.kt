@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SharedPreferenceAPI
+import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.text.ClickableMovementMethod
@@ -69,11 +70,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 val userName = et_user_name.editableText.toString().trim()
                 if (userName.isEmpty()) {
                     Toast.makeText(mContext!!, "请输入用户名~", Toast.LENGTH_SHORT).show()
+                    return
                 }
+
                 val password = et_password.editableText.toString().trim()
                 if (password.isEmpty()) {
                     Toast.makeText(mContext!!, "请输入密码~", Toast.LENGTH_SHORT).show()
+                    return
                 }
+
                 loginViewModel.login(userName, password)
                     .observe(this, Observer {
                         SharedPreferencesUtil.put(
@@ -86,10 +91,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             SharedPreferenceAPI.CONFIG_PASSWORD,
                             it.password
                         )
+
+                        jumpActivity(MainActivity::class.java)
+                        finish()
                     })
             }
         }
-
     }
 }
 
