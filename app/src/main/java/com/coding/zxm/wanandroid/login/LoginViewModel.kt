@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() {
 
-    private val loginLiveData = MutableLiveData<UserEntity>()
+    private val mLoginLiveData = MutableLiveData<UserEntity>()
 
     /**
      * User login
@@ -26,7 +26,7 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
         viewModelScope.launch {
             val result = loginRepo.login(userName, passWord)
             if (result is NetworkResult.NetworkSuccess<UserEntity>) {
-                loginLiveData.postValue(result.data)
+                mLoginLiveData.postValue(result.data)
             } else if (result is NetworkResult.NetworkError) {
                 Toast.makeText(
                     WanApp.getApplicationContext(),
@@ -36,7 +36,7 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
                     .show()
             }
         }
-        return loginLiveData
+        return mLoginLiveData
     }
 
     /**
@@ -46,7 +46,7 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
         viewModelScope.launch {
             val result = loginRepo.register(userName, passWord, repassword)
             if (result is NetworkResult.NetworkSuccess<UserEntity>) {
-                loginLiveData.postValue(result.data)
+                mLoginLiveData.postValue(result.data)
             } else if (result is NetworkResult.NetworkError) {
                 Toast.makeText(
                     WanApp.getApplicationContext(),

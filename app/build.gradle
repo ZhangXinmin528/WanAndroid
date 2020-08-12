@@ -85,6 +85,9 @@ dependencies {
     implementation deps.arouter.api
     kapt deps.arouter.compiler
 
+    //banner
+    implementation deps.banner
+
     //lib
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:network')

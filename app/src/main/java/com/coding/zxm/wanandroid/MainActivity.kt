@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
 import com.example.kotlinlearning.HomePageAdapter
-import com.example.kotlinlearning.fragment.HomeFragment
+import com.coding.zxm.wanandroid.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {

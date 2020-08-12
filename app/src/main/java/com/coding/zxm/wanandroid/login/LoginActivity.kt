@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
  */
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
-    private val loginViewModel: LoginViewModel by viewModels { LoginViewModel.LoginViewModelFactory }
+    private val mLoginViewModel: LoginViewModel by viewModels { LoginViewModel.LoginViewModelFactory }
 
     override fun setLayoutId(): Int {
         return R.layout.activity_login
@@ -79,7 +79,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     return
                 }
 
-                loginViewModel.login(userName, password)
+                mLoginViewModel.login(userName, password)
                     .observe(this, Observer {
                         SharedPreferencesUtil.put(
                             mContext!!,

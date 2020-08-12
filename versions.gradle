@@ -13,6 +13,7 @@ versions.cardview = "1.0.0"
 versions.constraint_layout = "2.0.0-alpha2"
 versions.recyclerview = "1.0.0"
 versions.rvadapterhelper = "3.0.4"
+versions.banner = "2.1.0"
 //kotlin
 versions.core_ktx = "1.1.0"
 versions.activity = '1.1.0'
@@ -70,6 +71,7 @@ deps.material = "com.google.android.material:material:$versions.material"
 //TODO:UI
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"
 deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.banner = "com.youth.banner:banner:$versions.banner"
 //TODO:Recycleview
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.rvadapterhelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.rvadapterhelper"
