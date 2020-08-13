@@ -3,6 +3,7 @@ package com.coding.zxm.wanandroid.home
 import com.coding.zxm.network.common.CommonResponse
 import com.coding.zxm.wanandroid.home.model.BannerEntity
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * Created by ZhangXinmin on 2020/8/12.
@@ -12,4 +13,8 @@ interface HomeService {
 
     @GET("/banner/json")
     suspend fun getBannerData(): CommonResponse<MutableList<BannerEntity>>
+
+    @GET("/article/list/{count}/json")
+    suspend fun getHomeList(@Path("count") count: Int): CommonResponse<Any>
+
 }
