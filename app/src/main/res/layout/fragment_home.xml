@@ -16,7 +16,6 @@
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/sr_home_layout"
-        style="@style/MainPageMargin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_2dp"

@@ -1,16 +1,23 @@
 package com.coding.zxm.wanandroid.home
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
+import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.webview.X5WebviewActivity
-import com.youth.banner.indicator.RoundLinesIndicator
+import com.coding.zxm.webview.fragment.X5WebViewFragment
+import com.youth.banner.indicator.RectangleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -21,10 +28,11 @@ class HomeFragment private constructor() : BaseFragment() {
 
     private val mHomeViewModel: HomeViewModel by viewModels { HomeViewModel.HomeViewModelFactory }
 
-
     private val mNewsList: MutableList<NewsDetialEntity> = ArrayList()
 
     private var mCurrentPage: Int = 0
+
+    private lateinit var mNewsAdapter: HomeNewsAdapter
 
     companion object {
 
@@ -37,7 +45,7 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun setLayoutId(): Int = R.layout.fragment_home
 
     override fun initParamsAndValues() {
-
+        mNewsAdapter = HomeNewsAdapter(mNewsList)
     }
 
     override fun initViews(rootView: View) {
@@ -46,18 +54,43 @@ class HomeFragment private constructor() : BaseFragment() {
             it?.let {
                 val bannerAdapter = BannerImageAdapter(it)
                 banner_home?.addBannerLifecycleObserver(this)
-                banner_home?.indicator = RoundLinesIndicator(mContext)
+                banner_home?.indicator = RectangleIndicator(mContext)
                 banner_home?.setBannerRound(20f)
                 banner_home?.adapter = bannerAdapter
-                banner_home?.setOnBannerListener { data, position ->
-                    data?.let {
-                        val intent = Intent(mContext, X5WebviewActivity::class.java)
-                        startActivity(intent)
+                banner_home?.setOnBannerListener(object : OnBannerListener<BannerEntity> {
+                    override fun OnBannerClick(data: BannerEntity?, position: Int) {
+                        data?.let {
+                            val intent = Intent(mContext, X5WebviewActivity::class.java)
+                            val bundle = Bundle()
+                            bundle.putString(X5WebViewFragment.PARAMS_WEBVIEW_URL, data.url)
+                            intent.putExtras(bundle)
+                            startActivity(intent)
+                        }
                     }
-                }
+
+                })
+
                 banner_home?.isAutoLoop(true)
             }
         })
+
+        rv_fragment_home.layoutManager = LinearLayoutManager(mContext)
+        rv_fragment_home.adapter = mNewsAdapter
+        rv_fragment_home.addItemDecoration(
+            DividerItemDecoration(
+                mContext,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
+        mNewsAdapter.setOnItemClickListener { adapter, view, position ->
+            val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
+            val intent = Intent(mContext, X5WebviewActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString(X5WebViewFragment.PARAMS_WEBVIEW_URL, newsDetialEntity.link)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
 
         //是否在刷新的时候禁止列表的操作
         sr_home_layout.setDisableContentWhenRefresh(true)
@@ -78,14 +111,19 @@ class HomeFragment private constructor() : BaseFragment() {
     }
 
     private fun requestNewsData(isRefresh: Boolean) {
+        if (isRefresh) {
+            mCurrentPage = 0
+            if (mNewsList.isNotEmpty()) {
+                mNewsList.clear()
+                mNewsAdapter.notifyDataSetChanged()
+            }
+        }
+
         val newsLiveData: MutableLiveData<NewsEntity> = mHomeViewModel.getNewsData(mCurrentPage)
 
         newsLiveData.observe(this, Observer {
             if (isRefresh) {
                 sr_home_layout.finishRefresh()
-                if (mNewsList.isNotEmpty()) {
-                    mNewsList.clear()
-                }
             } else {
                 sr_home_layout.finishLoadMore()
             }
@@ -94,7 +132,9 @@ class HomeFragment private constructor() : BaseFragment() {
 
             if (datas.isNotEmpty()) {
                 mNewsList.addAll(datas)
+                mNewsAdapter.notifyDataSetChanged()
             }
+            mCurrentPage++
 
             //没有更多数据
             if (it.curPage >= it.pageCount || it.size < 20) {

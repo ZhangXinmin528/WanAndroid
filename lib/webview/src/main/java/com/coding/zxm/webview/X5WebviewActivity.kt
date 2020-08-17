@@ -46,7 +46,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
         super.onStart()
         if (mIsWebViewAvailable && !TextUtils.isEmpty(mUrl)
         ) {
-            x5WebView.loadUrl(mUrl)
+            x5WebView?.loadUrl(mUrl)
         }
     }
 
