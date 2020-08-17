@@ -1,13 +1,14 @@
 package com.coding.zxm.wanandroid.login
 
 import android.text.TextPaint
+import android.text.TextUtils
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.SharedPreferenceAPI
+import com.coding.zxm.util.SharedPreferenceConfig
 import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -62,6 +63,17 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
         tv_tips_register.text = spannableStringBuilder
         tv_tips_register.movementMethod = ClickableMovementMethod.getInstance()
+
+        val userName: String =
+            SharedPreferencesUtil.get(
+                mContext!!,
+                SharedPreferenceConfig.CONFIG_USER_NAME,
+                ""
+            ) as String
+        if (!TextUtils.isEmpty(userName)) {
+            et_user_name.setText(userName)
+        }
+
     }
 
     override fun onClick(v: View?) {
@@ -83,12 +95,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     .observe(this, Observer {
                         SharedPreferencesUtil.put(
                             mContext!!,
-                            SharedPreferenceAPI.CONFIG_USER_NAME,
+                            SharedPreferenceConfig.CONFIG_USER_NAME,
                             it.username
                         )
                         SharedPreferencesUtil.put(
                             mContext!!,
-                            SharedPreferenceAPI.CONFIG_PASSWORD,
+                            SharedPreferenceConfig.CONFIG_PASSWORD,
                             it.password
                         )
 

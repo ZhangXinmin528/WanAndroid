@@ -3,8 +3,8 @@ package com.coding.zxm.wanandroid
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
-import com.example.kotlinlearning.HomePageAdapter
 import com.coding.zxm.wanandroid.home.HomeFragment
+import com.example.kotlinlearning.HomePageAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {

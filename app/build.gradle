@@ -89,6 +89,11 @@ dependencies {
     //banner
     implementation deps.banner
 
+    //smart refresh
+    implementation deps.smart_layout
+    implementation deps.smart_header_classics
+    implementation deps.smart_footer_classics
+
     //lib
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:network')

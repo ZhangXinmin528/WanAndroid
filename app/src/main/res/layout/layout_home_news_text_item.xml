@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ListItemPadding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:id="@+id/tv_news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/textsize_16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Flutter架构综述" />
+
+    <TextView
+        android:id="@+id/tv_user_sort_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:background="@drawable/shape_sort_bg"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textsize_12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
+        tools:text="作者" />
+
+    <TextView
+        android:id="@+id/tv_persion_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_6dp"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toEndOf="@+id/tv_user_sort_logo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
+        tools:text="作者" />
+
+    <TextView
+        android:id="@+id/tv_news_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_main_bg"
+        android:textSize="@dimen/textsize_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="刚刚" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

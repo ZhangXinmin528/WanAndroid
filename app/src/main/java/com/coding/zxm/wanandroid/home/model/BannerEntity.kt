@@ -5,12 +5,12 @@ package com.coding.zxm.wanandroid.home.model
  * Copyright (c) 2020 . All rights reserved.
  */
 data class BannerEntity(
-    val desc: String,
-    val id: Int,
-    val imagePath: String,
-    val isVisible: Int,
-    val order: Int,
-    val title: String,
-    val type: Int,
-    val url: String
+    var desc: String? = null,
+    var id: Int,
+    var imagePath: String,
+    var isVisible: Int? = 0,
+    var order: Int? = 0,
+    var title: String? = null,
+    var type: Int? = 0,
+    var url: String
 )

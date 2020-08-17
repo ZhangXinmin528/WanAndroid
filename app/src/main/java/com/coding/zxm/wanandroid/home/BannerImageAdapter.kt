@@ -42,6 +42,7 @@ class BannerImageAdapter(datas: MutableList<BannerEntity>?) :
 
     override fun onBindView(holder: ImageHolder?, data: BannerEntity?, position: Int, size: Int) {
         Glide.with(holder!!.itemView)
+            .asBitmap()
             .load(data?.imagePath)
             .into(holder.imageView)
     }

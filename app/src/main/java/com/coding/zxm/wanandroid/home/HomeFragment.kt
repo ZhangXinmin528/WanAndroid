@@ -3,12 +3,14 @@ package com.coding.zxm.wanandroid.home
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.wanandroid.R
-import com.coding.zxm.wanandroid.home.model.BannerEntity
+import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
+import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.webview.X5WebviewActivity
 import com.youth.banner.indicator.RoundLinesIndicator
-import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -19,7 +21,10 @@ class HomeFragment private constructor() : BaseFragment() {
 
     private val mHomeViewModel: HomeViewModel by viewModels { HomeViewModel.HomeViewModelFactory }
 
-    private var mBannerList: MutableList<BannerEntity> = ArrayList()
+
+    private val mNewsList: MutableList<NewsDetialEntity> = ArrayList()
+
+    private var mCurrentPage: Int = 0
 
     companion object {
 
@@ -33,31 +38,70 @@ class HomeFragment private constructor() : BaseFragment() {
 
     override fun initParamsAndValues() {
 
-        val bannerList = mHomeViewModel.getBannerData().value
-
-        bannerList?.let {
-            mBannerList.addAll(bannerList)
-        }
-
     }
 
     override fun initViews(rootView: View) {
-
-        val bannerAdapter = BannerImageAdapter(mBannerList)
-        banner_home?.let {
-            it.adapter = bannerAdapter
-            it.addBannerLifecycleObserver(this)
-            it.indicator = RoundLinesIndicator(mContext)
-            it.setBannerRound(20f)
-            it.setOnBannerListener(object : OnBannerListener<BannerEntity> {
-                override fun OnBannerClick(data: BannerEntity?, position: Int) {
+        val bannerLiveData = mHomeViewModel.getBannerData()
+        bannerLiveData.observe(this, Observer {
+            it?.let {
+                val bannerAdapter = BannerImageAdapter(it)
+                banner_home?.addBannerLifecycleObserver(this)
+                banner_home?.indicator = RoundLinesIndicator(mContext)
+                banner_home?.setBannerRound(20f)
+                banner_home?.adapter = bannerAdapter
+                banner_home?.setOnBannerListener { data, position ->
                     data?.let {
                         val intent = Intent(mContext, X5WebviewActivity::class.java)
                         startActivity(intent)
                     }
                 }
-            })
+                banner_home?.isAutoLoop(true)
+            }
+        })
+
+        //是否在刷新的时候禁止列表的操作
+        sr_home_layout.setDisableContentWhenRefresh(true)
+        //是否在加载的时候禁止列表的操作
+        sr_home_layout.setDisableContentWhenLoading(true)
+
+        //延迟400毫秒后自动刷新
+        sr_home_layout.autoRefresh(400)
+
+        sr_home_layout.setOnRefreshListener {
+            requestNewsData(true)
         }
+
+        sr_home_layout.setOnLoadMoreListener {
+            requestNewsData(false)
+        }
+
+    }
+
+    private fun requestNewsData(isRefresh: Boolean) {
+        val newsLiveData: MutableLiveData<NewsEntity> = mHomeViewModel.getNewsData(mCurrentPage)
+
+        newsLiveData.observe(this, Observer {
+            if (isRefresh) {
+                sr_home_layout.finishRefresh()
+                if (mNewsList.isNotEmpty()) {
+                    mNewsList.clear()
+                }
+            } else {
+                sr_home_layout.finishLoadMore()
+            }
+
+            val datas = it.datas
+
+            if (datas.isNotEmpty()) {
+                mNewsList.addAll(datas)
+            }
+
+            //没有更多数据
+            if (it.curPage >= it.pageCount || it.size < 20) {
+                sr_home_layout.finishLoadMoreWithNoMoreData()
+            }
+        })
+
     }
 
     override fun onStart() {

@@ -14,6 +14,8 @@ versions.constraint_layout = "2.0.0-alpha2"
 versions.recyclerview = "1.0.0"
 versions.rvadapterhelper = "3.0.4"
 versions.banner = "2.1.0"
+versions.smartRefresh = "2.0.1"
+
 //kotlin
 versions.core_ktx = "1.1.0"
 versions.activity = '1.1.0'
@@ -72,6 +74,11 @@ deps.material = "com.google.android.material:material:$versions.material"
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"
 deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 deps.banner = "com.youth.banner:banner:$versions.banner"
+//SmartRefresh
+deps.smart_layout = "com.scwang.smart:refresh-layout-kernel:$versions.smartRefresh"
+deps.smart_header_classics = "com.scwang.smart:refresh-header-classics:$versions.smartRefresh"
+deps.smart_footer_classics = "com.scwang.smart:refresh-footer-classics:$versions.smartRefresh"
+
 //TODO:Recycleview
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.rvadapterhelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.rvadapterhelper"
