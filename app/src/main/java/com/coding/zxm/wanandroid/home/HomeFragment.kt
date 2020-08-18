@@ -3,6 +3,7 @@ package com.coding.zxm.wanandroid.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -76,12 +77,16 @@ class HomeFragment private constructor() : BaseFragment() {
 
         rv_fragment_home.layoutManager = LinearLayoutManager(mContext)
         rv_fragment_home.adapter = mNewsAdapter
-        rv_fragment_home.addItemDecoration(
-            DividerItemDecoration(
-                mContext,
-                DividerItemDecoration.VERTICAL
-            )
+        val itemDecoration = DividerItemDecoration(
+            mContext,
+            DividerItemDecoration.VERTICAL
         )
+        ContextCompat.getDrawable(context!!, R.drawable.icon_search_divider)?.let {
+            itemDecoration.setDrawable(
+                it
+            )
+        }
+        rv_fragment_home.addItemDecoration(itemDecoration)
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]

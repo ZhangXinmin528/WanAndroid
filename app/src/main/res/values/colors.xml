@@ -8,6 +8,7 @@
     <color name="colorBlack">#000000</color>
 
     <color name="color_main_bg">#DCDCDC</color>
+    <color name="colorGrayText">#8F8F8F</color>
 
     <!-- common -->
     <color name="app_color_blue">#00A8E1</color>
