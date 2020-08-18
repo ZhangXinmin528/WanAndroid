@@ -2,6 +2,7 @@ package com.coding.zxm.webview
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.text.TextUtils
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -11,6 +12,7 @@ import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIE
 import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIEW_URL
 import com.coding.zxm.webview.x5.X5WebView
 import com.tencent.smtt.sdk.WebView
+import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.activity_webview.*
 
 /**
@@ -39,6 +41,8 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
     }
 
     override fun initParamsAndValues() {
+        StatusBarCompat.setColor(this, Color.parseColor("#ffffff"))
+
         mUrl = intent.getStringExtra(PARAMS_WEBVIEW_URL)
         mTitle = intent.getStringExtra(PARAMS_WEBVIEW_TITLE)
 

@@ -1,10 +1,12 @@
 package com.coding.zxm.wanandroid.ui.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.CountDownTimer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
+import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
@@ -20,6 +22,7 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
+        StatusBarCompat.setColorNoTranslucent(this, Color.parseColor("#ffffff"))
     }
 
     override fun initViews() {

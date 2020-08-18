@@ -2,15 +2,56 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_home_search"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorWhite"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@drawable/shape_search_bg"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:src="@drawable/ic_search_white_24dp" />
+
+            <EditText
+                android:id="@+id/et_home_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="搜一搜"
+                android:textColor="@color/colorMainText"
+                android:textColorHint="@color/colorMainText"
+                android:textSize="@dimen/textsize_14sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_1dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_wan">
+        app:layout_constraintTop_toBottomOf="@+id/layout_home_search">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -29,8 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/margin_2dp"
-                android:layout_weight="1"
-                android:background="@color/colorWhite">
+                android:layout_weight="1">
 
                 <com.scwang.smart.refresh.header.ClassicsHeader
                     android:layout_width="match_parent"
@@ -39,7 +79,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_fragment_home"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhite" />
 
                 <com.scwang.smart.refresh.footer.ClassicsFooter
                     android:layout_width="match_parent"
