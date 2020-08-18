@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/icon_splash">
+    android:background="@mipmap/splash">
 
     <TextView
         android:id="@+id/tv_splash_timer"
@@ -12,24 +12,24 @@
         android:layout_height="30dp"
         android:layout_marginTop="@dimen/margin_12dp"
         android:layout_marginEnd="@dimen/margin_12dp"
-        android:layout_marginRight="@dimen/margin_12dp"
         android:background="@drawable/shape_timer"
         android:gravity="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorMainText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="5s" />
 
     <TextView
+        android:id="@+id/tv_try"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_to_wanandroid"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/shape_try_it"
+        android:text="@string/all_try_it_now"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/textsize_28sp"
-        android:textStyle="bold"
+        android:textSize="@dimen/textsize_18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,4 +25,8 @@ class HomePageAdapter(
             fragments.size
         } else 0
     }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return super.getPageTitle(position)
+    }
 }

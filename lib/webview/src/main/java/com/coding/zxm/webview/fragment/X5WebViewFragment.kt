@@ -136,6 +136,7 @@ class X5WebViewFragment : Fragment(), WebViewListener {
 
     companion object {
         const val PARAMS_WEBVIEW_URL = "webview_url"
+        const val PARAMS_WEBVIEW_TITLE = "webview_title"
         private val TAG = X5WebViewFragment::class.java.simpleName
         fun newInstance(url: String): X5WebViewFragment {
             val fragment = X5WebViewFragment()

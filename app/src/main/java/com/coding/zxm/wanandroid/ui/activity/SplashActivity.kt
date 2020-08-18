@@ -2,12 +2,9 @@ package com.coding.zxm.wanandroid.ui.activity
 
 import android.content.Intent
 import android.os.CountDownTimer
-import android.text.TextUtils
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.SharedPreferenceConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
-import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
@@ -23,7 +20,6 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-
     }
 
     override fun initViews() {
@@ -43,6 +39,11 @@ class SplashActivity : BaseActivity() {
         mCountDownTimer.start()
 
         tv_splash_timer.setOnClickListener {
+            jumpLogin()
+            finish()
+        }
+
+        tv_try.setOnClickListener {
             jumpLogin()
             finish()
         }

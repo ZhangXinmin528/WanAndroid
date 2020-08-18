@@ -1,7 +1,5 @@
 package com.coding.zxm.wanandroid.home
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -16,7 +14,6 @@ import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.webview.X5WebviewActivity
-import com.coding.zxm.webview.fragment.X5WebViewFragment
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -61,11 +58,8 @@ class HomeFragment private constructor() : BaseFragment() {
                 banner_home?.setOnBannerListener(object : OnBannerListener<BannerEntity> {
                     override fun OnBannerClick(data: BannerEntity?, position: Int) {
                         data?.let {
-                            val intent = Intent(mContext, X5WebviewActivity::class.java)
-                            val bundle = Bundle()
-                            bundle.putString(X5WebViewFragment.PARAMS_WEBVIEW_URL, data.url)
-                            intent.putExtras(bundle)
-                            startActivity(intent)
+
+                            X5WebviewActivity.loadUrl(mContext!!, data.title, data.url)
                         }
                     }
 
@@ -90,11 +84,8 @@ class HomeFragment private constructor() : BaseFragment() {
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
-            val intent = Intent(mContext, X5WebviewActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString(X5WebViewFragment.PARAMS_WEBVIEW_URL, newsDetialEntity.link)
-            intent.putExtras(bundle)
-            startActivity(intent)
+
+            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link)
         }
 
         //是否在刷新的时候禁止列表的操作
