@@ -16,6 +16,7 @@ import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.webview.X5WebviewActivity
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
+import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -43,6 +44,8 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun setLayoutId(): Int = R.layout.fragment_home
 
     override fun initParamsAndValues() {
+        StatusBarCompat.setColor(activity, resources.getColor(R.color.color_state_bar))
+        //TODO:设置StateBar字体颜色
         mNewsAdapter = HomeNewsAdapter(mNewsList)
     }
 

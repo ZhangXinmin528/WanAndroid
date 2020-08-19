@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_main_bg">#DCDCDC</color>
-    <color name="colorGrayText">#8F8F8F</color>
-
     <!-- common -->
     <color name="app_color_blue">#00A8E1</color>
     <color name="app_color_blue_disabled">#8000A8E1</color>

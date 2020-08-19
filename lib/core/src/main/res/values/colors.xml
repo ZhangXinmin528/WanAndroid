@@ -7,9 +7,9 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="color_main_bg">#DCDCDC</color>
+    <color name="color_main_bg">#E7E7E7</color>
     <color name="colorGrayText">#8F8F8F</color>
     <color name="colorMainText">#252020</color>
 
-    <color name="color_state_bar">#DCDCDC</color>
+    <color name="color_state_bar">#E8E8E8</color>
 </resources>
