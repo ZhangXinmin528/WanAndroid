@@ -15,6 +15,7 @@ versions.recyclerview = "1.0.0"
 versions.rvadapterhelper = "3.0.4"
 versions.banner = "2.1.0"
 versions.smartRefresh = "2.0.1"
+versions.flexbox = "2.0.1"
 
 //kotlin
 versions.core_ktx = "1.1.0"
@@ -78,6 +79,8 @@ deps.banner = "com.youth.banner:banner:$versions.banner"
 deps.smart_layout = "com.scwang.smart:refresh-layout-kernel:$versions.smartRefresh"
 deps.smart_header_classics = "com.scwang.smart:refresh-header-classics:$versions.smartRefresh"
 deps.smart_footer_classics = "com.scwang.smart:refresh-footer-classics:$versions.smartRefresh"
+//flexbox
+deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 
 //TODO:Recycleview
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"

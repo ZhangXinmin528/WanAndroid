@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.coding.zxm.core.R
+import com.zxm.utils.core.bar.StatusBarCompat
 
 /**
  * Created by ZhangXinmin on 2020/7/19.
@@ -46,6 +48,10 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    protected fun setStateBarColor() {
+        StatusBarCompat.setColor(this, resources.getColor(R.color.color_state_bar))
     }
 
     protected fun jumpActivity(intent: Intent) {

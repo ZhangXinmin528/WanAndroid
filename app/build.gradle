@@ -94,6 +94,9 @@ dependencies {
     implementation deps.smart_header_classics
     implementation deps.smart_footer_classics
 
+    //flexbox
+    implementation deps.flexbox
+
     //lib
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:network')

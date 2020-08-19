@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020 . All rights reserved.
+ * TODO:首页数据请求逻辑
  */
 class HomeFragment private constructor() : BaseFragment() {
 

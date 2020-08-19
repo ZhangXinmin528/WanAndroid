@@ -40,4 +40,5 @@ dependencies {
 //    implementation deps.lifecycle.livedata_ktx
     annotationProcessor deps.lifecycle.compiler
 
+    implementation project(path: ':lib:util')
 }

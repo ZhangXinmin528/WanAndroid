@@ -5,6 +5,7 @@ import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.home.model.BannerEntity
+import com.coding.zxm.wanandroid.home.model.HotWordEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 
 /**
@@ -34,4 +35,5 @@ class HomeRepository(private val client: RetrofitClient) : BaseRepository() {
     private suspend fun requestHomeNews(pageIndex: Int): NetworkResult<NewsEntity> {
         return onResponse(client.create(HomeService::class.java).getHomeList(pageIndex))
     }
+
 }

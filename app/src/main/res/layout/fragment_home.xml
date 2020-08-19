@@ -26,31 +26,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
                 android:src="@drawable/ic_search_gray_24dp" />
 
-            <EditText
-                android:id="@+id/et_home_search"
+            <TextView
+                android:id="@+id/tv_home_search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_6dp"
                 android:layout_weight="1"
-                android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="@string/all_search_hint"
-                android:textColor="@color/colorGrayText"
-                android:textColorHint="@color/colorMainText"
+                android:text="@string/all_search_hint"
+                android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_14sp" />
-
-            <ImageView
-                android:id="@+id/iv_home_search_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/margin_6dp"
-                android:src="@android:drawable/ic_notification_clear_all"
-                android:visibility="gone" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>

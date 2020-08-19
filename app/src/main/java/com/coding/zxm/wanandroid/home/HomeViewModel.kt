@@ -9,6 +9,7 @@ import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.home.model.BannerEntity
+import com.coding.zxm.wanandroid.home.model.HotWordEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import kotlinx.coroutines.launch
 
@@ -57,6 +58,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         }
         return mNewsLiveData
     }
+
 
     object HomeViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
