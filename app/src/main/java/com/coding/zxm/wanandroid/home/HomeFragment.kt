@@ -13,6 +13,7 @@ import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
+import com.coding.zxm.wanandroid.search.SearchActivity
 import com.coding.zxm.webview.X5WebviewActivity
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
@@ -106,6 +107,13 @@ class HomeFragment private constructor() : BaseFragment() {
 
         sr_home_layout.setOnLoadMoreListener {
             requestNewsData(false)
+        }
+
+        layout_home_search.setOnClickListener {
+            mContext?.let {
+                SearchActivity.startSearch(mContext!!)
+            }
+
         }
 
     }
