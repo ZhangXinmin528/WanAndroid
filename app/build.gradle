@@ -95,7 +95,9 @@ dependencies {
     implementation deps.smart_footer_classics
 
     //flexbox
-    implementation deps.flexbox
+//    implementation deps.flexbox
+
+    implementation deps.fastjson
 
     //lib
     implementation project(path: ':lib:core')

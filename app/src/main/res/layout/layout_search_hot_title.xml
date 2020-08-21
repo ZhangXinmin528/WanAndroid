@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_guess_sou"
+    style="@style/ListItemPadding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:drawableStart="@mipmap/icon_hot"
+    android:drawablePadding="@dimen/margin_6dp"
+    android:text="@string/all_guess_what"
+    android:textColor="@color/colorMainText"
+    android:textSize="@dimen/textsize_18sp" />

@@ -2,7 +2,6 @@ package com.coding.zxm.wanandroid.home
 
 import com.coding.zxm.network.common.CommonResponse
 import com.coding.zxm.wanandroid.home.model.BannerEntity
-import com.coding.zxm.wanandroid.home.model.HotWordEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import retrofit2.http.GET
 import retrofit2.http.Path

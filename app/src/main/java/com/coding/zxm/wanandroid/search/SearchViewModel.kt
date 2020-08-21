@@ -8,9 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
-import com.coding.zxm.wanandroid.home.HomeRepository
-import com.coding.zxm.wanandroid.home.HomeViewModel
-import com.coding.zxm.wanandroid.home.model.HotWordEntity
+import com.coding.zxm.wanandroid.search.model.HotWordEntity
 import kotlinx.coroutines.launch
 
 /**
@@ -38,10 +36,29 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         return mHotwordLiveData
     }
 
-    object HomeViewModelFactory : ViewModelProvider.Factory {
+    fun doSearch(page: Int, key: String): MutableLiveData<MutableList<Any>> {
+        val searchLiveData = MutableLiveData<MutableList<Any>>()
+
+        viewModelScope.launch {
+            val result = searchRepository.doSearch(page, key)
+            if (result is NetworkResult.NetworkSuccess<MutableList<Any>>) {
+                searchLiveData.postValue(result.data)
+            } else if (result is NetworkResult.NetworkError) {
+                Toast.makeText(
+                    WanApp.getApplicationContext(),
+                    result.error?.errorMsg,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+        }
+        return searchLiveData
+    }
+
+    object SearchViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return HomeViewModel(HomeRepository(RetrofitClient.INSTANCE)) as T
+            return SearchViewModel(SearchRepository(RetrofitClient.INSTANCE)) as T
         }
     }
 }

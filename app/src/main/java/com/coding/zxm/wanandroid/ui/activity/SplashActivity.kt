@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.CountDownTimer
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.zxm.utils.core.bar.StatusBarCompat
@@ -29,8 +30,7 @@ class SplashActivity : BaseActivity() {
 
         mCountDownTimer = object : CountDownTimer(5 * 1000, 1000) {
             override fun onFinish() {
-                jumpLogin()
-                finish()
+                jumpHome()
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -42,19 +42,24 @@ class SplashActivity : BaseActivity() {
         mCountDownTimer.start()
 
         tv_splash_timer.setOnClickListener {
-            jumpLogin()
-            finish()
+            jumpHome()
         }
 
         tv_try.setOnClickListener {
-            jumpLogin()
-            finish()
+            jumpHome()
         }
+    }
+
+    private fun jumpHome() {
+        val intent = Intent(mContext, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun jumpLogin() {
         val intent = Intent(mContext, LoginActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onDestroy() {

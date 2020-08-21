@@ -1,4 +1,7 @@
-package com.coding.zxm.wanandroid.home.model
+package com.coding.zxm.wanandroid.search.model
+
+import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.coding.zxm.wanandroid.search.adapter.HotWordAdapter
 
 /**
  * Created by ZhangXinmin on 2020/8/19.

@@ -18,6 +18,7 @@
             android:id="@+id/iv_search_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_6dp"
             android:padding="@dimen/margin_6dp"
             android:src="@drawable/ic_arrow_back_dark_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,6 +74,7 @@
             android:id="@+id/tv_search_action"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/margin_6dp"
             android:gravity="center_vertical"
             android:padding="@dimen/margin_6dp"
             android:text="@string/all_search"
@@ -82,10 +84,11 @@
             tools:ignore="RtlSymmetry" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--热词-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_1dp"
+        android:layout_marginTop="@dimen/margin_0_5dp"
         app:layout_constraintTop_toBottomOf="@+id/layout_search">
 
         <TextView
@@ -94,13 +97,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
+            android:drawableStart="@mipmap/icon_hot"
+            android:drawablePadding="@dimen/margin_6dp"
             android:text="@string/all_guess_what"
             android:textColor="@color/colorMainText"
+            android:textSize="@dimen/textsize_18sp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_0_5dp"
+            android:background="@color/colorWhite"
             app:layout_constraintTop_toBottomOf="@+id/tv_guess_sou" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

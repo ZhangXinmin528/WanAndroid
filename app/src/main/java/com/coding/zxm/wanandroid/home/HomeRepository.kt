@@ -5,7 +5,6 @@ import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.home.model.BannerEntity
-import com.coding.zxm.wanandroid.home.model.HotWordEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 
 /**

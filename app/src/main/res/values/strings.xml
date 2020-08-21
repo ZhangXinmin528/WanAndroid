@@ -8,7 +8,8 @@
     <string name="all_tips_not_register">还没有玩Android账号？</string>
     <string name="all_register">注册</string>
     <string name="all_try_it_now">立即体验</string>
-    <string name="all_search_hint">搜一搜</string>
+    <string name="all_search_hint">搜索你感兴趣的</string>
     <string name="all_search">搜索</string>
     <string name="all_guess_what">猜你想搜</string>
+    <string name="all_clear_search_history">清除搜索历史</string>
 </resources>

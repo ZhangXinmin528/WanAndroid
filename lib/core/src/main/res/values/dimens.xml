@@ -11,6 +11,7 @@
     <dimen name="textsize_28sp">28sp</dimen>
 
 
+    <dimen name="margin_0_5dp">0.5dp</dimen>
     <dimen name="margin_1dp">1dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_6dp">6dp</dimen>
