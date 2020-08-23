@@ -12,4 +12,5 @@
     <string name="all_search">搜索</string>
     <string name="all_guess_what">猜你想搜</string>
     <string name="all_clear_search_history">清除搜索历史</string>
+    <string name="all_nav_home">首页</string>
 </resources>
