@@ -9,6 +9,7 @@ import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
+import com.coding.zxm.wanandroid.search.model.SearchEntity
 import kotlinx.coroutines.launch
 
 /**
@@ -36,12 +37,12 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         return mHotwordLiveData
     }
 
-    fun doSearch(page: Int, key: String): MutableLiveData<MutableList<Any>> {
-        val searchLiveData = MutableLiveData<MutableList<Any>>()
+    fun doSearch(page: Int, key: String): MutableLiveData<SearchEntity> {
+        val searchLiveData = MutableLiveData<SearchEntity>()
 
         viewModelScope.launch {
             val result = searchRepository.doSearch(page, key)
-            if (result is NetworkResult.NetworkSuccess<MutableList<Any>>) {
+            if (result is NetworkResult.NetworkSuccess<SearchEntity>) {
                 searchLiveData.postValue(result.data)
             } else if (result is NetworkResult.NetworkError) {
                 Toast.makeText(

@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.home.adapter
 
+import android.text.Html
 import android.text.TextUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -18,7 +19,8 @@ class HomeNewsAdapter(dataList: MutableList<NewsDetialEntity>) :
     ) {
 
     override fun convert(holder: BaseViewHolder, item: NewsDetialEntity) {
-        holder.setText(R.id.tv_news_title, item.title)
+        holder.setText(R.id.tv_news_title, Html.fromHtml(item.title))
+
 
         val author = item.author
         val shareUser = item.shareUser

@@ -23,7 +23,7 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        StatusBarCompat.setColorNoTranslucent(this, Color.parseColor("#ffffff"))
+        setColorNoTranslucent()
     }
 
     override fun initViews() {

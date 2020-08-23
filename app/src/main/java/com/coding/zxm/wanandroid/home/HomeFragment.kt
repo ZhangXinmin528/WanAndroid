@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.home
 
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -17,13 +18,12 @@ import com.coding.zxm.wanandroid.search.SearchActivity
 import com.coding.zxm.webview.X5WebviewActivity
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
-import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020 . All rights reserved.
- * TODO:首页数据请求逻辑
+ * TODO:首页数据逻辑存在问题
  */
 class HomeFragment private constructor() : BaseFragment() {
 
@@ -46,12 +46,12 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun setLayoutId(): Int = R.layout.fragment_home
 
     override fun initParamsAndValues() {
-        StatusBarCompat.setColor(activity, resources.getColor(R.color.color_state_bar))
-        //TODO:设置StateBar字体颜色
         mNewsAdapter = HomeNewsAdapter(mNewsList)
     }
 
     override fun initViews(rootView: View) {
+        Log.d("zxm==", "initViews")
+
         val bannerLiveData = mHomeViewModel.getBannerData()
         bannerLiveData.observe(this, Observer {
             it?.let {
@@ -127,9 +127,13 @@ class HomeFragment private constructor() : BaseFragment() {
             }
         }
 
+        Log.d("zxm==", "requestNewsData..page : $mCurrentPage")
+
         val newsLiveData: MutableLiveData<NewsEntity> = mHomeViewModel.getNewsData(mCurrentPage)
 
-        newsLiveData.observe(this, Observer {
+        mCurrentPage += 1
+
+        newsLiveData.observeForever(Observer {
             if (isRefresh) {
                 sr_home_layout.finishRefresh()
             } else {
@@ -137,15 +141,14 @@ class HomeFragment private constructor() : BaseFragment() {
             }
 
             val datas = it.datas
-
+            Log.d("zxm==", "requestNewsData..observe..it.curPage : ${it.curPage}")
             if (datas.isNotEmpty()) {
                 mNewsList.addAll(datas)
                 mNewsAdapter.notifyDataSetChanged()
             }
-            mCurrentPage++
 
             //没有更多数据
-            if (it.curPage >= it.pageCount || it.size < 20) {
+            if (it.over) {
                 sr_home_layout.finishLoadMoreWithNoMoreData()
             }
         })

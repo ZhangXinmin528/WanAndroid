@@ -5,6 +5,7 @@ import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
+import com.coding.zxm.wanandroid.search.model.SearchEntity
 
 /**
  * Created by ZhangXinmin on 2020/8/19.
@@ -29,11 +30,11 @@ class SearchRepository(private val client: RetrofitClient) : BaseRepository() {
     suspend fun doSearch(
         @IntRange(from = 0) page: Int,
         key: String
-    ): NetworkResult<MutableList<Any>> {
+    ): NetworkResult<SearchEntity> {
         return onRequest(call = { onSearch(page, key) })
     }
 
-    private suspend fun onSearch(page: Int, key: String): NetworkResult<MutableList<Any>> {
+    private suspend fun onSearch(page: Int, key: String): NetworkResult<SearchEntity> {
         return onResponse(client.create(SearchService::class.java).doSearch(page, key))
     }
 }

@@ -17,7 +17,11 @@ import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SharedPreferenceConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.search.adapter.HotWordAdapter
+import com.coding.zxm.wanandroid.search.adapter.SearchResultAdapter
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
+import com.coding.zxm.wanandroid.search.model.SearchDetialEntity
+import com.coding.zxm.webview.X5WebviewActivity
+import com.zxm.utils.core.keyborad.KeyboradUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.time.TimeUtil
 import kotlinx.android.synthetic.main.activity_search.*
@@ -25,7 +29,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 /**
  * Created by ZhangXinmin on 2020/8/19.
  * Copyright (c) 2020 . All rights reserved.
- * TODO:搜索历史功能后期添加
+ * TODO:搜索历史功能后期添加；搜索结果请求逻辑存在问题
  */
 class SearchActivity : BaseActivity(), View.OnClickListener {
 
@@ -44,21 +48,25 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
     //搜索结果
     private var mPage: Int = 0
+    private val mSearchResult: MutableList<SearchDetialEntity> = ArrayList()
+    private lateinit var mSearchResultAdapter: SearchResultAdapter
 
     override fun setLayoutId(): Int {
         return R.layout.activity_search
     }
 
     override fun initParamsAndValues() {
-        setStateBarColor()
+        setColorNoTranslucent()
 
         mHotWordAdapter = HotWordAdapter(mSearchList)
 
+        mSearchResultAdapter = SearchResultAdapter(mSearchResult)
     }
 
     override fun initViews() {
         iv_search_back.setOnClickListener(this)
         tv_search_action.setOnClickListener(this)
+        iv_search_clear.setOnClickListener(this)
 
         rv_search.adapter = mHotWordAdapter
         rv_search.layoutManager = LinearLayoutManager(mContext)
@@ -74,6 +82,16 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         }
         rv_search.addItemDecoration(itemDecoration)
 
+        mHotWordAdapter.setOnItemClickListener { adapter, view, position ->
+            val keyWord = (adapter as HotWordAdapter).getItem(position).name as String
+
+            if (!TextUtils.isEmpty(keyWord)) {
+                et_search.setText(keyWord)
+                doSearch(keyWord)
+            }
+        }
+
+
         et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val result = s?.toString()?.trim()
@@ -82,6 +100,15 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                     //TODO:搜索
                 } else {
                     iv_search_clear.visibility = View.GONE
+                    if (!layout_hot_word.isShown) {
+                        layout_hot_word.visibility = View.VISIBLE
+                    }
+                    if (sr_search_result.isShown) {
+                        sr_search_result.visibility = View.GONE
+                    }
+                    if (mSearchResult.isNotEmpty()) {
+                        mSearchResult.clear()
+                    }
                 }
             }
 
@@ -93,6 +120,31 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
         })
         getHotWord()
+
+        //search action
+        //是否在加载的时候禁止列表的操作
+        sr_search_result.setDisableContentWhenLoading(true)
+        sr_search_result.setEnableRefresh(false)
+
+        sr_search_result.setOnLoadMoreListener {
+            val key = et_search.editableText.toString().trim()
+            doSearch(key)
+        }
+        rv_search_result.adapter = mSearchResultAdapter
+        rv_search_result.layoutManager = LinearLayoutManager(mContext)
+        rv_search_result.addItemDecoration(itemDecoration)
+        mSearchResultAdapter.setOnItemClickListener { adapter, view, position ->
+            val searchDetialEntity = (adapter as SearchResultAdapter).getItem(position)
+            searchDetialEntity?.let {
+                X5WebviewActivity.loadUrl(
+                    mContext!!,
+                    searchDetialEntity.title,
+                    searchDetialEntity.link
+                )
+            }
+
+        }
+
     }
 
     private fun getHotWord() {
@@ -154,11 +206,23 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                 finish()
             }
             R.id.tv_search_action -> {
+                mPage = 0
+                KeyboradUtil.hideSoftInput(this)
                 val key = et_search.editableText.toString().trim()
                 doSearch(key)
             }
             R.id.iv_search_clear -> {
                 et_search.editableText.clear()
+                if (!layout_hot_word.isShown) {
+                    layout_hot_word.visibility = View.VISIBLE
+                }
+                if (sr_search_result.isShown) {
+                    sr_search_result.visibility = View.GONE
+                }
+
+                if (mSearchResult.isNotEmpty()) {
+                    mSearchResult.clear()
+                }
             }
         }
     }
@@ -169,10 +233,37 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
             return
         }
 
+        if (layout_hot_word.isShown) {
+            layout_hot_word.visibility = View.GONE
+        }
+        if (!sr_search_result.isShown) {
+            sr_search_result.visibility = View.VISIBLE
+        }
+
         val searchLiveData = mSearchViewModel.doSearch(mPage, key)
+
+        mPage += 1
+
         searchLiveData.observe(this, Observer {
 
+            sr_search_result.finishLoadMore()
+
+            val datas = it.datas
+            if (datas != null && datas.isNotEmpty()) {
+                mSearchResult.addAll(datas)
+                mSearchResultAdapter.notifyDataSetChanged()
+            }
+
+
+            if (it.over) {
+                sr_search_result.finishLoadMoreWithNoMoreData()
+            }
         })
 
+    }
+
+    override fun onDestroy() {
+        KeyboradUtil.hideSoftInput(this)
+        super.onDestroy()
     }
 }

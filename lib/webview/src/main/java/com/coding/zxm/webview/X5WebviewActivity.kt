@@ -3,6 +3,7 @@ package com.coding.zxm.webview
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.text.Html
 import android.text.TextUtils
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -41,7 +42,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
     }
 
     override fun initParamsAndValues() {
-        StatusBarCompat.setColor(this, Color.parseColor("#ffffff"))
+        setColorNoTranslucent()
 
         mUrl = intent.getStringExtra(PARAMS_WEBVIEW_URL)
         mTitle = intent.getStringExtra(PARAMS_WEBVIEW_TITLE)
@@ -57,7 +58,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
             finish()
         }
 
-        tv_web_title.text = if (!TextUtils.isEmpty(mTitle)) mTitle else ""
+        tv_web_title.text = if (!TextUtils.isEmpty(mTitle)) Html.fromHtml(mTitle) else ""
 
         x5webview.setWebViewListener(this)
         mIsWebViewAvailable = true

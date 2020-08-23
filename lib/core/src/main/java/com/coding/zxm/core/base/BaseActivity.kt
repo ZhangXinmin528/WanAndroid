@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.coding.zxm.core.R
 import com.zxm.utils.core.bar.StatusBarCompat
@@ -50,8 +51,15 @@ abstract class BaseActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    protected fun setStateBarColor() {
+    protected fun setStatusBarColor() {
         StatusBarCompat.setColor(this, resources.getColor(R.color.color_state_bar))
+    }
+
+    protected fun setColorNoTranslucent() {
+        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorWhite))
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     protected fun jumpActivity(intent: Intent) {
