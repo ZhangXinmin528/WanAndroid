@@ -4,23 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_main_bg"
-    android:padding="@dimen/margin_12dp">
+    android:background="@color/color_main_bg">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_mine_user_bg"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_mine_user"
+        style="@style/MainPageMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/colorWhite"
-        android:padding="@dimen/margin_12dp"
+        android:padding="@dimen/margin_16dp"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_user"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/icon_default_avatar"
-            app:civ_border_color="@color/colorWhite"
+            android:src="@mipmap/icon_blue_user"
+            app:civ_border_color="@color/colorGrayText"
             app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +44,6 @@
             android:textSize="@dimen/textsize_18sp"
             app:layout_constraintStart_toEndOf="@+id/iv_user"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/tv_user_coin"
@@ -69,13 +77,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!--导航&项目&体系-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--签到记录-->
+
+    <!--条目-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_mine_content"
+        style="@style/MainPageMargin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_12dp"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/layout_mine_user">
 
         <TextView
