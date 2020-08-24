@@ -93,6 +93,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                 mLoginViewModel.login(userName, password)
                     .observe(this, Observer {
+
                         SharedPreferencesUtil.put(
                             mContext!!,
                             SharedPreferenceConfig.CONFIG_USER_NAME,
@@ -102,6 +103,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             mContext!!,
                             SharedPreferenceConfig.CONFIG_PASSWORD,
                             it.password
+                        )
+
+                        SharedPreferencesUtil.put(
+                            mContext!!,
+                            SharedPreferenceConfig.CONFIG_STATE_LOGIN,
+                            true
                         )
 
                         jumpActivity(MainActivity::class.java)

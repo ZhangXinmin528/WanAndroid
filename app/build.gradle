@@ -97,7 +97,11 @@ dependencies {
     //flexbox
 //    implementation deps.flexbox
 
+    //fastjson
     implementation deps.fastjson
+
+    //CircleImageView
+    implementation deps.circleImageView
 
     //lib
     implementation project(path: ':lib:core')

@@ -25,11 +25,11 @@
     <item
         android:id="@+id/list"
         android:contentDescription="cd_list"
-        android:icon="@drawable/ic_list"
+        android:icon="@drawable/ic_list_black_24dp"
         android:title="list" />
     <item
-        android:id="@+id/form"
+        android:id="@+id/mine"
         android:contentDescription="cd_form"
-        android:icon="@drawable/ic_feedback"
-        android:title="register" />
+        android:icon="@drawable/icon_nav_mine"
+        android:title="@string/all_nav_mine"/>
 </menu>

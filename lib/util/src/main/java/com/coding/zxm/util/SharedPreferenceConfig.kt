@@ -7,6 +7,7 @@ package com.coding.zxm.util
 object SharedPreferenceConfig {
     const val CONFIG_USER_NAME = "config_user_name"
     const val CONFIG_PASSWORD = "config_password"
+    const val CONFIG_STATE_LOGIN = "config_state_login"
     const val CONFIG_USER_TOKEN = "config_user_token"
     const val CONFIG_DATA_HOT_WORDS = "config_data_hot_words"
     const val CONFIG_WORDS_DATE = "config_words_date"

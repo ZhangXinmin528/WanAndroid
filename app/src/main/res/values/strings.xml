@@ -13,4 +13,14 @@
     <string name="all_guess_what">猜你想搜</string>
     <string name="all_clear_search_history">清除搜索历史</string>
     <string name="all_nav_home">首页</string>
+    <string name="all_not_login">未登录</string>
+    <string name="all_nav_mine">我的</string>
+    <string name="all_sign">签到</string>
+    <string name="all_signed">已签到</string>
+    <string name="all_mine_collection">我的收藏</string>
+    <string name="all_mine_about">关于</string>
+    <string name="all_coin_detial">积分明细>></string>
+    <string name="all_coin_count">积分：%d</string>
+    <string name="all_mine_share">我的分享</string>
+    <string name="all_mine_todo">Todo</string>
 </resources>

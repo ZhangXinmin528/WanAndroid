@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.home.HomeFragment
+import com.coding.zxm.wanandroid.mine.MineFragment
 import com.example.kotlinlearning.HomePageAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,6 +18,8 @@ class MainActivity : BaseActivity() {
     override fun initParamsAndValues() {
         setColorNoTranslucent()
         fragments.add(HomeFragment.newInstance())
+        fragments.add(HomeFragment.newInstance())
+        fragments.add(MineFragment.newInstance())
     }
 
     override fun initViews() {
@@ -40,7 +43,7 @@ class MainActivity : BaseActivity() {
 
                 }
 
-                R.id.form -> {
+                R.id.mine -> {
                 }
             }
             true
