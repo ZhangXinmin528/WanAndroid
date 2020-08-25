@@ -1,11 +1,13 @@
 package com.coding.zxm.wanandroid.mine
 
+import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.util.SharedPreferenceConfig
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.login.LoginActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -68,6 +70,12 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
     }
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+        when (v?.id) {
+            R.id.tv_user_name -> {
+                val intent = Intent(mContext!!, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
     }
 }

@@ -8,8 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/app_color_blue_3">
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -18,11 +17,22 @@
             android:src="@mipmap/icon_mine_user_bg"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_mine_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:layout_marginEnd="@dimen/margin_6dp"
+            android:padding="@dimen/margin_6dp"
+            android:src="@drawable/ic_setting_white_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_mine_user"
             style="@style/MainPageMargin"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"
             android:background="@drawable/shape_white_bg"
             android:padding="@dimen/margin_16dp"
@@ -55,10 +65,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_marginTop="@dimen/margin_6dp"
                 android:text="积分:--"
                 android:textColor="@color/colorGrayText"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_user"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -72,17 +83,49 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_user_coin_detial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
-                android:text="@string/all_coin_detial"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
             <!--导航&项目&体系-->
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_user">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_dashboard_blue_32dp"
+                    android:drawablePadding="@dimen/margin_6dp"
+                    android:gravity="center"
+                    android:text="@string/all_tixi"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/all_navigation"
+                    android:drawablePadding="@dimen/margin_6dp"
+                    android:gravity="center"
+                    android:text="@string/all_navigation"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/all_project"
+                    android:drawablePadding="@dimen/margin_6dp"
+                    android:gravity="center"
+                    android:text="@string/all_project"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,20 +145,23 @@
         <!--条目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_mine_content"
+            style="@style/MainPageMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
+            android:background="@drawable/shape_white_bg"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/layout_sign_record">
 
             <TextView
                 android:id="@+id/tv_mine_collection"
+                style="@style/ListItemPadding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_like_not_gray_24dp"
+                android:drawableStart="@mipmap/icon_collection"
                 android:drawablePadding="@dimen/margin_6dp"
-                android:padding="@dimen/margin_16dp"
+                android:gravity="center_vertical"
                 android:text="@string/all_mine_collection"
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_16sp"
@@ -123,13 +169,14 @@
 
             <TextView
                 android:id="@+id/tv_mine_share"
+                style="@style/ListItemPadding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_1dp"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_action_share_gray_24dp"
+                android:drawableStart="@mipmap/icon_share"
                 android:drawablePadding="@dimen/margin_6dp"
-                android:padding="@dimen/margin_16dp"
+                android:gravity="center_vertical"
                 android:text="@string/all_mine_share"
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_16sp"
@@ -137,13 +184,14 @@
 
             <TextView
                 android:id="@+id/tv_mine_todo"
+                style="@style/ListItemPadding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_1dp"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_todo_gray_24dp"
+                android:drawableStart="@drawable/ic_todo_gray_32dp"
                 android:drawablePadding="@dimen/margin_6dp"
-                android:padding="@dimen/margin_16dp"
+                android:gravity="center_vertical"
                 android:text="@string/all_mine_todo"
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_16sp"
@@ -151,13 +199,14 @@
 
             <TextView
                 android:id="@+id/tv_mine_about"
+                style="@style/ListItemPadding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_1dp"
                 android:background="@color/colorWhite"
-                android:drawableStart="@drawable/ic_about_gray_24dp"
+                android:drawableStart="@drawable/ic_about_us_32dp"
                 android:drawablePadding="@dimen/margin_6dp"
-                android:padding="@dimen/margin_16dp"
+                android:gravity="center_vertical"
                 android:text="@string/all_mine_about"
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_16sp"

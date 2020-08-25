@@ -23,4 +23,7 @@
     <string name="all_coin_count">积分：%d</string>
     <string name="all_mine_share">我的分享</string>
     <string name="all_mine_todo">Todo</string>
+    <string name="all_tixi">体系</string>
+    <string name="all_navigation">导航</string>
+    <string name="all_project">项目</string>
 </resources>
