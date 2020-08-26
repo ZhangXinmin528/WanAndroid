@@ -79,7 +79,8 @@
                 android:background="@drawable/shape_sign_bg"
                 android:text="@string/all_sign"
                 android:textColor="@color/colorWhite"
-                android:visibility="gone"
+                android:textSize="@dimen/textsize_12sp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
