@@ -1,5 +1,9 @@
 package com.coding.zxm.network
 
+import com.coding.zxm.core.base.app.BaseApp
+import com.coding.zxm.network.cookie.PersistentCookieJar
+import com.coding.zxm.network.cookie.cache.SetCookieCache
+import com.coding.zxm.network.cookie.persistence.SharedPrefsCookiePersistor
 import com.coding.zxm.network.interceptor.WanInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,9 +36,15 @@ class RetrofitClient private constructor() {
     }
 
     private fun initOkhttpClient(): OkHttpClient {
+        val cookieJar = PersistentCookieJar(
+            SetCookieCache(),
+            SharedPrefsCookiePersistor(BaseApp.getApplicationContext())
+        )
+
         return OkHttpClient.Builder()
             .addInterceptor(WanInterceptor())
             .addInterceptor(initLogInterceptor())
+            .cookieJar(cookieJar)
             .connectTimeout(30000, TimeUnit.SECONDS)
             .readTimeout(30000, TimeUnit.SECONDS)
             .writeTimeout(30000, TimeUnit.SECONDS)
