@@ -38,6 +38,5 @@ dependencies {
     implementation deps.okhttp_logging_interceptor
 
     implementation deps.coroutines.android
-    implementation project(path: ':lib:core')
 
 }

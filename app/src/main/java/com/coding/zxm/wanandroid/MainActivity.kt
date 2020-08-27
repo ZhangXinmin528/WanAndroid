@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setColorNoTranslucent()
+        setStatusBarColorNoTranslucent()
         fragments.add(HomeFragment.newInstance())
         fragments.add(HomeFragment.newInstance())
         fragments.add(MineFragment.newInstance())

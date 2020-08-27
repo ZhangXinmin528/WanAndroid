@@ -60,32 +60,36 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_user"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_user_coin"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/layout_coin"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12dp"
                 android:layout_marginTop="@dimen/margin_6dp"
-                android:text="积分:--"
-                android:textColor="@color/colorGrayText"
-                app:layout_constraintStart_toEndOf="@+id/iv_user"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/tv_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_sign_bg"
-                android:text="@string/all_sign"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/textsize_12sp"
-                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/iv_user"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name">
+
+                <TextView
+                    android:id="@+id/tv_user_coin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="积分:--"
+                    android:textColor="@color/colorGrayText"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_user_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Level:--"
+                    android:textColor="@color/colorGrayText"
+                    tools:ignore="HardcodedText" />
+
+            </RelativeLayout>
 
             <!--导航&项目&体系-->
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,6 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_user">
 
                 <TextView
+                    android:id="@+id/tv_mine_system"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -131,7 +136,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--签到记录-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_sign_record"
             style="@style/MainPageMargin"
@@ -141,6 +145,18 @@
             android:background="@drawable/shape_white_bg"
             app:layout_constraintTop_toBottomOf="@+id/layout_mine_user">
 
+
+            <TextView
+                android:id="@+id/tv_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_sign_bg"
+                android:text="@string/all_sign"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textsize_12sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!--条目-->

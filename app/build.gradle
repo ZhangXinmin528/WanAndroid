@@ -17,6 +17,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        multiDexEnabled true
+
         //room schema
         javaCompileOptions {
             annotationProcessorOptions {
@@ -64,6 +66,9 @@ dependencies {
     implementation deps.recyclerview
     implementation deps.rvadapterhelper
 
+    //multidex
+    implementation deps.multidex
+
     // Navigation
     implementation deps.navigation.runtime_ktx
     implementation deps.navigation.fragment_ktx
@@ -95,7 +100,7 @@ dependencies {
     implementation deps.smart_footer_classics
 
     //flexbox
-//    implementation deps.flexbox
+    implementation deps.flexbox
 
     //fastjson
     implementation deps.fastjson

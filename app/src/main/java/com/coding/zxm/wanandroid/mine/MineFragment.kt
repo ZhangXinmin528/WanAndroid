@@ -8,6 +8,7 @@ import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.util.SharedPreferenceConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
+import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -32,10 +33,13 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
     }
 
     override fun initParamsAndValues() {
-
+        setStatusBarColorNoTranslucent()
     }
 
     override fun initViews(rootView: View) {
+        tv_user_name.setOnClickListener(this)
+        tv_mine_system.setOnClickListener(this)
+        tv_user_name.setOnClickListener(this)
         tv_user_name.setOnClickListener(this)
 
         getUserInfo()
@@ -64,6 +68,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                     tv_sign.text = getString(R.string.all_signed)
                     tv_user_coin.text =
                         getString(R.string.all_coin_count, userDetialEntity.coinCount)
+                    tv_user_level.text = getString(R.string.all_coin_level, userDetialEntity.level)
                 }
             })
         }
@@ -73,6 +78,10 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         when (v?.id) {
             R.id.tv_user_name -> {
                 val intent = Intent(mContext!!, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.tv_mine_system -> {
+                val intent = Intent(mContext!!, KnowledgeActivity::class.java)
                 startActivity(intent)
             }
 

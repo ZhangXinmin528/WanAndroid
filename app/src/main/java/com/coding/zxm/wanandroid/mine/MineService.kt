@@ -15,4 +15,5 @@ interface MineService {
      */
     @GET("/lg/coin/userinfo/json")
     suspend fun getUserInfo(): CommonResponse<UserDetialEntity>
+
 }

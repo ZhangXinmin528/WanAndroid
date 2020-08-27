@@ -55,7 +55,7 @@ abstract class BaseActivity : AppCompatActivity() {
         StatusBarCompat.setColor(this, resources.getColor(R.color.color_state_bar))
     }
 
-    protected fun setColorNoTranslucent() {
+    protected fun setStatusBarColorNoTranslucent() {
         StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorWhite))
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

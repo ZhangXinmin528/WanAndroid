@@ -1,6 +1,6 @@
 package com.coding.zxm.network
 
-import com.coding.zxm.core.base.app.BaseApp
+import android.content.Context
 import com.coding.zxm.network.cookie.PersistentCookieJar
 import com.coding.zxm.network.cookie.cache.SetCookieCache
 import com.coding.zxm.network.cookie.persistence.SharedPrefsCookiePersistor
@@ -15,14 +15,18 @@ import java.util.concurrent.TimeUnit
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/7/30 . All rights reserved.
  */
-class RetrofitClient private constructor() {
+class RetrofitClient private constructor(private val context: Context) {
 
     companion object {
-        val INSTANCE = RetrofitClientHolder.client
-    }
+        lateinit var INSTANCE: RetrofitClient
 
-    private object RetrofitClientHolder {
-        val client = RetrofitClient()
+        @Synchronized
+        fun getInstance(context: Context): RetrofitClient {
+            if (INSTANCE == null) {
+                INSTANCE = RetrofitClient(context)
+            }
+            return INSTANCE
+        }
     }
 
     private var retrofit: Retrofit
@@ -38,7 +42,7 @@ class RetrofitClient private constructor() {
     private fun initOkhttpClient(): OkHttpClient {
         val cookieJar = PersistentCookieJar(
             SetCookieCache(),
-            SharedPrefsCookiePersistor(BaseApp.getApplicationContext())
+            SharedPrefsCookiePersistor(context)
         )
 
         return OkHttpClient.Builder()

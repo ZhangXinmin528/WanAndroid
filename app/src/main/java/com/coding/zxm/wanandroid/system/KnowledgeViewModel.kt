@@ -1,4 +1,4 @@
-package com.coding.zxm.wanandroid.mine
+package com.coding.zxm.wanandroid.system
 
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -8,21 +8,22 @@ import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
-import com.coding.zxm.wanandroid.mine.model.UserDetialEntity
+import com.coding.zxm.wanandroid.system.model.KnowledgeEntity
 import kotlinx.coroutines.launch
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
- * Copyright (c) 2020/8/24 . All rights reserved.
+ * Copyright (c) 2020/8/27 . All rights reserved.
  */
-class MineViewModel(private val mineRepository: MineRepository) : ViewModel() {
+class KnowledgeViewModel(private val repository: KnowledgeRepository) : ViewModel() {
 
-    fun getUserInfo(): MutableLiveData<UserDetialEntity> {
-        val userLiveData = MutableLiveData<UserDetialEntity>()
+    fun getKnowledgeTree(): MutableLiveData<MutableList<KnowledgeEntity>> {
+        val liveData = MutableLiveData<MutableList<KnowledgeEntity>>()
+
         viewModelScope.launch {
-            val result = mineRepository.getUserInfo()
-            if (result is NetworkResult.NetworkSuccess<UserDetialEntity>) {
-                userLiveData.postValue(result.data)
+            val result = repository.getKnowledgeTree()
+            if (result is NetworkResult.NetworkSuccess<MutableList<KnowledgeEntity>>) {
+                liveData.postValue(result.data)
             } else if (result is NetworkResult.NetworkError) {
                 Toast.makeText(
                     WanApp.getApplicationContext(),
@@ -32,14 +33,14 @@ class MineViewModel(private val mineRepository: MineRepository) : ViewModel() {
                     .show()
             }
         }
-        return userLiveData
+        return liveData
     }
 
-    object MineViewModelFactory : ViewModelProvider.Factory {
+    object KnowledgeViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return MineViewModel(
-                MineRepository(
+            return KnowledgeViewModel(
+                KnowledgeRepository(
                     RetrofitClient.INSTANCE
                 )
             ) as T

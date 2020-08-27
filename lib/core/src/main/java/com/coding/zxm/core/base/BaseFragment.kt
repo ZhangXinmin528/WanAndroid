@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.coding.zxm.core.R
+import com.zxm.utils.core.bar.StatusBarCompat
 
 /**
  * Created by ZhangXinmin on 2020/7/19.
@@ -41,6 +43,19 @@ abstract class BaseFragment() : Fragment() {
         initParamsAndValues()
 
         initViews(rootView)
+    }
+
+    protected fun setStatusBarColorNoTranslucent() {
+        activity?.let {
+            StatusBarCompat.setColorNoTranslucent(
+                activity,
+                resources.getColor(R.color.colorWhite)
+            )
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                activity!!.window.decorView.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+        }
     }
 
     abstract fun initParamsAndValues();

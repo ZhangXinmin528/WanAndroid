@@ -21,6 +21,7 @@
     <string name="all_mine_about">关于</string>
     <string name="all_coin_detial">积分明细>></string>
     <string name="all_coin_count">积分：%d</string>
+    <string name="all_coin_level">Level：%d</string>
     <string name="all_mine_share">我的分享</string>
     <string name="all_mine_todo">Todo</string>
     <string name="all_tixi">体系</string>

@@ -19,18 +19,27 @@
             </intent-filter>
         </activity>
 
+        <!--登录-->
         <activity
             android:name=".login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--主页-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--搜索-->
         <activity
             android:name=".search.SearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <!--知识体系-->
+        <activity
+            android:name=".system.KnowledgeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
