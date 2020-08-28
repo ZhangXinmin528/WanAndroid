@@ -1,4 +1,4 @@
-package com.coding.zxm.wanandroid.system
+package com.coding.zxm.wanandroid.system.viewmodel
 
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.system.repository.KnowledgeRepository
 import com.coding.zxm.wanandroid.system.model.KnowledgeEntity
 import kotlinx.coroutines.launch
 
@@ -41,7 +42,7 @@ class KnowledgeViewModel(private val repository: KnowledgeRepository) : ViewMode
             @Suppress("UNCHECKED_CAST")
             return KnowledgeViewModel(
                 KnowledgeRepository(
-                    RetrofitClient.INSTANCE
+                    RetrofitClient.getInstance(WanApp.getApplicationContext())!!
                 )
             ) as T
         }

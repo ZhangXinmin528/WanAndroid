@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_main_bg">
 
     <include layout="@layout/layout_toolbar" />
 
@@ -14,18 +16,20 @@
         android:background="@color/color_main_bg"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_wan">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_wan"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_knowledge_nav"
             android:layout_width="100dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_knowledge_detial"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_12dp"
+            android:layout_marginStart="@dimen/margin_8dp"
             android:layout_weight="1" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

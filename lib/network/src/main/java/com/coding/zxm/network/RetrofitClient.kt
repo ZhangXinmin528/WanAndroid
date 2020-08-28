@@ -18,10 +18,10 @@ import java.util.concurrent.TimeUnit
 class RetrofitClient private constructor(private val context: Context) {
 
     companion object {
-        lateinit var INSTANCE: RetrofitClient
+        private var INSTANCE: RetrofitClient? = null
 
         @Synchronized
-        fun getInstance(context: Context): RetrofitClient {
+        fun getInstance(context: Context): RetrofitClient? {
             if (INSTANCE == null) {
                 INSTANCE = RetrofitClient(context)
             }

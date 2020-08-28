@@ -59,7 +59,11 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
     object SearchViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return SearchViewModel(SearchRepository(RetrofitClient.INSTANCE)) as T
+            return SearchViewModel(
+                SearchRepository(
+                    RetrofitClient.getInstance(WanApp.getApplicationContext())!!
+                )
+            ) as T
         }
     }
 }

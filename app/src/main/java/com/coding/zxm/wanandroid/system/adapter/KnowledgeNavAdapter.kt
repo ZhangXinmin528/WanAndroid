@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.system.adapter
 
+import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.coding.zxm.wanandroid.R
@@ -17,11 +18,16 @@ class KnowledgeNavAdapter(val dataList: MutableList<NaviKnowledgeEntity>) :
 
     override fun convert(holder: BaseViewHolder, item: NaviKnowledgeEntity) {
 
+        val itemView = holder.getView<TextView>(R.id.tv_know_nav_name)
+
         holder.setText(R.id.tv_know_nav_name, item.naviItem.name)
+
         if (item.selected) {
-            holder.setBackgroundColor(R.id.tv_know_nav_name, R.color.colorWhite)
+            itemView.setBackgroundResource(R.drawable.shape_red_bg)
+            itemView.setTextColor(context.resources.getColor(R.color.colorWhite))
         } else {
-            holder.setBackgroundColor(R.id.tv_know_nav_name, R.color.color_main_bg)
+            itemView.background = null
+            itemView.setTextColor(context.resources.getColor(R.color.colorMainText))
         }
 
     }

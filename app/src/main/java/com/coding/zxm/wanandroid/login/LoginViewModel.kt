@@ -61,7 +61,11 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
     object LoginViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return LoginViewModel(LoginRepository(RetrofitClient.INSTANCE)) as T
+            return LoginViewModel(
+                LoginRepository(
+                    RetrofitClient.getInstance(WanApp.getApplicationContext())!!
+                )
+            ) as T
         }
 
     }

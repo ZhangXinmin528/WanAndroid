@@ -62,7 +62,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
     object HomeViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return HomeViewModel(HomeRepository(RetrofitClient.INSTANCE)) as T
+            return HomeViewModel(HomeRepository(RetrofitClient.getInstance(WanApp.getApplicationContext())!!)) as T
         }
     }
 
