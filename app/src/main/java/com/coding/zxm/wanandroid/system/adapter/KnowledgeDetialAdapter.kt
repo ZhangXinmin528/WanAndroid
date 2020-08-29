@@ -1,6 +1,7 @@
 package com.coding.zxm.wanandroid.system.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -17,6 +18,9 @@ class KnowledgeDetialAdapter(dataList: MutableList<KnowledgeEntity>) :
         layoutResId = R.layout.layout_knowledge_detial_item,
         data = dataList
     ) {
+
+    private lateinit var onSystemTagClickListener: OnSystemTagClickListener
+
     override fun convert(holder: BaseViewHolder, item: KnowledgeEntity) {
         holder.setText(R.id.tv_knowledge_detial_title, item.name)
         val childrenList = item.children
@@ -29,11 +33,26 @@ class KnowledgeDetialAdapter(dataList: MutableList<KnowledgeEntity>) :
                 val nameView = flexItemView.findViewById<TextView>(R.id.tv_knowledge_flex_item_name)
                 nameView.text = it.name
                 childrenLayout.addView(flexItemView)
+
+                flexItemView.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+                        if (onSystemTagClickListener != null) {
+                            onSystemTagClickListener.onTagItemClick(flexItemView, it)
+                        }
+                    }
+
+                })
+
             }
         }
 
-        holder.setText(R.id.tv_knowledge_detial_read, "阅读《${item.name}》文章")
+    }
 
-        addChildClickViewIds(R.id.tv_knowledge_detial_read)
+    fun setSystemTagClicklistener(tagClickListener: OnSystemTagClickListener) {
+        this.onSystemTagClickListener = tagClickListener
+    }
+
+    interface OnSystemTagClickListener {
+        fun onTagItemClick(view: View, knowledgeEntity: KnowledgeEntity)
     }
 }

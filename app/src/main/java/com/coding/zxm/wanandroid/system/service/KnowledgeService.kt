@@ -5,6 +5,7 @@ import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.system.model.KnowledgeEntity
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -21,11 +22,11 @@ interface KnowledgeService {
     /**
      * 获取知识体系下二级目录文章
      * @param page
-     * @param id 二级目录id
+     * @param cid 二级目录id
      */
-    @GET("/article/list/{page}/json?cid={id}}")
+    @GET("/article/list/{page}/json")
     suspend fun getKnowledgeArticles(
         @Path("page") page: Int,
-        @Path("id") id: Int
+        @Query("cid") cid: Int
     ): CommonResponse<NewsEntity>
 }

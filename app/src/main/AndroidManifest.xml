@@ -43,6 +43,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--知识专题文章列表-->
+        <activity
+            android:name=".system.KnowledgeListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

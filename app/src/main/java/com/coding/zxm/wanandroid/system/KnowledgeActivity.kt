@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.system
 
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -38,7 +39,6 @@ class KnowledgeActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent()
 
         mNavAdapter = KnowledgeNavAdapter(mNavDataList)
 
@@ -76,12 +76,17 @@ class KnowledgeActivity : BaseActivity() {
         itemDecoration.setDrawable(divider!!)
         rv_knowledge_detial.addItemDecoration(itemDecoration)
 
+        mDetialAdapter.setSystemTagClicklistener(object :
+            KnowledgeDetialAdapter.OnSystemTagClickListener {
+            override fun onTagItemClick(view: View, knowledgeEntity: KnowledgeEntity) {
+                KnowledgeListActivity.startActicles(
+                    mContext!!,
+                    knowledgeEntity.name,
+                    knowledgeEntity.id
+                )
+            }
 
-        mDetialAdapter.setOnItemChildClickListener { adapter, view, position ->
-            val knowledgeEntity = (adapter as KnowledgeDetialAdapter).getItem(position)
-
-
-        }
+        })
 
         rv_knowledge_detial.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

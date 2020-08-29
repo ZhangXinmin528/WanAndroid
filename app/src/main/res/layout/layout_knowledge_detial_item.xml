@@ -29,18 +29,4 @@
         app:flexWrap="wrap"
         app:justifyContent="flex_start" />
 
-    <include layout="@layout/layout_horizontal_margin_divider" />
-
-    <TextView
-        android:id="@+id/tv_knowledge_detial_read"
-        style="@style/ListItemPadding"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:drawableEnd="@drawable/ic_arrow_right_blue_24dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="@color/colorPrimary"
-        tools:text="查看文章" />
-
 </androidx.appcompat.widget.LinearLayoutCompat>
