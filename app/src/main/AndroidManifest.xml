@@ -49,6 +49,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--导航-->
+        <activity
+            android:name=".navigation.NavigationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

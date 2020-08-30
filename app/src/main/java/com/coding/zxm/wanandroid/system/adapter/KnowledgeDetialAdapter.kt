@@ -2,6 +2,7 @@ package com.coding.zxm.wanandroid.system.adapter
 
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -32,6 +33,13 @@ class KnowledgeDetialAdapter(dataList: MutableList<KnowledgeEntity>) :
                     LayoutInflater.from(context).inflate(R.layout.layout_knowledge_flex_item, null)
                 val nameView = flexItemView.findViewById<TextView>(R.id.tv_knowledge_flex_item_name)
                 nameView.text = it.name
+                val layoutParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                layoutParams.setMargins(10, 10, 10, 10)
+                nameView.layoutParams = layoutParams
+
                 childrenLayout.addView(flexItemView)
 
                 flexItemView.setOnClickListener(object : View.OnClickListener {

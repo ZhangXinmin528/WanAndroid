@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.fragment.app.Fragment
-import com.coding.zxm.core.R
 import com.zxm.utils.core.bar.StatusBarCompat
 
 /**
@@ -45,11 +45,11 @@ abstract class BaseFragment() : Fragment() {
         initViews(rootView)
     }
 
-    protected fun setStatusBarColorNoTranslucent() {
+    protected fun setStatusBarColorNoTranslucent(@ColorRes colorRes: Int) {
         activity?.let {
             StatusBarCompat.setColorNoTranslucent(
                 activity,
-                resources.getColor(R.color.colorWhite)
+                resources.getColor(colorRes)
             )
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 activity!!.window.decorView.systemUiVisibility =

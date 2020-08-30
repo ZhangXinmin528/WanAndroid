@@ -67,7 +67,6 @@ class KnowledgeListActivity : BaseActivity() {
             actionBar.setDisplayShowHomeEnabled(true)
         }
 
-        sr_list_layout
         //是否在刷新的时候禁止列表的操作
         sr_list_layout.setDisableContentWhenRefresh(true)
         //是否在加载的时候禁止列表的操作

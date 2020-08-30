@@ -48,6 +48,7 @@ class HomeFragment private constructor() : BaseFragment() {
 
     override fun initParamsAndValues() {
         mNewsAdapter = HomeNewsAdapter(mNewsList)
+
     }
 
     override fun initViews(rootView: View) {
