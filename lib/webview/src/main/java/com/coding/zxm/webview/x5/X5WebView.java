@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.AbsoluteLayout;
 import android.widget.ProgressBar;
 
+import androidx.annotation.IntRange;
 import androidx.appcompat.app.AlertDialog;
 
 import com.coding.zxm.webview.R;
@@ -111,6 +112,7 @@ public class X5WebView extends WebView {
         initParams();
     }
 
+
     @SuppressLint("SetJavaScriptEnabled")
     private void initParams() {
         WebSettings webSetting = getSettings();
@@ -151,6 +153,20 @@ public class X5WebView extends WebView {
 
             }
         };
+    }
+
+    public WebSettings getWebSetting() {
+        return getWebSetting();
+    }
+
+    /**
+     * 为网页设置字号
+     *
+     * @param percent
+     */
+    public void setWebFontSize(@IntRange(from = 50, to = 150) int percent) {
+        final WebSettings webSettings = getWebSetting();
+        webSettings.setTextZoom(percent);
     }
 
     /**

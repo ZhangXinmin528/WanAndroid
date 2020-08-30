@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
-import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.navigation.model.NaviEntity
 import com.coding.zxm.webview.X5WebviewActivity

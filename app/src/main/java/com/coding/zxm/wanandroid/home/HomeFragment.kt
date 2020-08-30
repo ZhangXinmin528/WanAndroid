@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * Copyright (c) 2020 . All rights reserved.
  * TODO:首页数据逻辑存在问题
  * TODO：功能列表后面做
+ * TODO:Banner随列表滑动
  */
 class HomeFragment private constructor() : BaseFragment() {
 
@@ -52,7 +53,6 @@ class HomeFragment private constructor() : BaseFragment() {
     }
 
     override fun initViews(rootView: View) {
-        Log.d("zxm==", "initViews")
 
         val bannerLiveData = mHomeViewModel.getBannerData()
         bannerLiveData.observe(this, Observer {
@@ -73,6 +73,8 @@ class HomeFragment private constructor() : BaseFragment() {
                 })
 
                 banner_home?.isAutoLoop(true)
+
+                mNewsAdapter.addHeaderView(banner_home)
             }
         })
 
