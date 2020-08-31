@@ -74,7 +74,6 @@ class HomeFragment private constructor() : BaseFragment() {
 
                 banner_home?.isAutoLoop(true)
 
-                mNewsAdapter.addHeaderView(banner_home)
             }
         })
 
