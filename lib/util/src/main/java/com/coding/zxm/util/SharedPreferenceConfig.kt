@@ -11,5 +11,7 @@ object SharedPreferenceConfig {
     const val CONFIG_USER_TOKEN = "config_user_token"
     const val CONFIG_DATA_HOT_WORDS = "config_data_hot_words"
     const val CONFIG_WORDS_DATE = "config_words_date"
+    const val CONFIG_PROJECT_TAGS = "config_project_tags"
+    const val CONFIG_PROJECT_DATE = "config_project_date"
 
 }

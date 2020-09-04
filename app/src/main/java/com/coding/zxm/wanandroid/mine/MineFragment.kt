@@ -9,6 +9,7 @@ import com.coding.zxm.util.SharedPreferenceConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
+import com.coding.zxm.wanandroid.project.ProjectActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -44,6 +45,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         tv_mine_navigation.setOnClickListener(this)
         tv_user_name.setOnClickListener(this)
         tv_mine_about.setOnClickListener(this)
+        tv_mine_project.setOnClickListener(this)
 
         getUserInfo()
     }
@@ -91,6 +93,10 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
             }
             R.id.tv_mine_about -> {
                 val intent = Intent(mContext!!, AboutActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.tv_mine_project -> {
+                val intent = Intent(mContext!!, ProjectActivity::class.java)
                 startActivity(intent)
             }
 

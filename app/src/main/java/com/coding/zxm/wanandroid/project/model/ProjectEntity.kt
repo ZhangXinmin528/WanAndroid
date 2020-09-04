@@ -5,11 +5,11 @@ package com.coding.zxm.wanandroid.project.model
  * Copyright (c) 2020/9/3 . All rights reserved.
  */
 data class ProjectEntity(
-    val courseId: Int,
-    val id: Int,
-    val name: String,
-    val order: Int,
-    val parentChapterId: Int,
-    val userControlSetTop: Boolean,
-    val visible: Int
+    var courseId: Int,
+    var id: Int,
+    var name: String,
+    var order: Int,
+    var parentChapterId: Int,
+    var userControlSetTop: Boolean,
+    var visible: Int
 )

@@ -3,6 +3,7 @@ package com.coding.zxm.wanandroid.project.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.coding.zxm.wanandroid.project.model.ProjectEntity
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter
  */
 class ProjectTabAdapter(
     private val fragments: MutableList<Fragment>,
+    private val tagList: MutableList<ProjectEntity>,
     private val fragmentManager: FragmentManager
 ) :
     FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -25,6 +27,6 @@ class ProjectTabAdapter(
 
     override fun getPageTitle(position: Int): CharSequence? {
 
-        return super.getPageTitle(position)
+        return tagList[position].name
     }
 }
