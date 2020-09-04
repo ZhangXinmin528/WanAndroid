@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.coding.zxm.core.R
 import com.zxm.utils.core.bar.StatusBarCompat
 
@@ -19,12 +20,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected var mContext: Context? = null
 
-    abstract fun setLayoutId(): Int;
+    abstract fun setLayoutId(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(setLayoutId());
+        setContentView(setLayoutId())
 
         mContext = this
 
@@ -59,6 +60,16 @@ abstract class BaseActivity : AppCompatActivity() {
         StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorWhite))
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+
+    protected fun initActionBar(toolbar: Toolbar, titile: String) {
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar?.let {
+            actionBar.title = titile
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setDisplayShowHomeEnabled(true)
         }
     }
 

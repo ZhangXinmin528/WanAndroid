@@ -10,6 +10,7 @@ import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
+import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -42,6 +43,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         tv_mine_system.setOnClickListener(this)
         tv_mine_navigation.setOnClickListener(this)
         tv_user_name.setOnClickListener(this)
+        tv_mine_about.setOnClickListener(this)
 
         getUserInfo()
     }
@@ -85,6 +87,10 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
             }
             R.id.tv_mine_navigation -> {
                 val intent = Intent(mContext!!, NavigationActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.tv_mine_about -> {
+                val intent = Intent(mContext!!, AboutActivity::class.java)
                 startActivity(intent)
             }
 
