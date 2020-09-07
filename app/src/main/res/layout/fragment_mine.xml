@@ -94,10 +94,9 @@
         <!--导航&项目&体系-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/layout_mine_additional"
-            style="@style/MainPageMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_12dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:background="@drawable/shape_white_bg"
             android:orientation="horizontal"
             android:padding="@dimen/margin_16dp"

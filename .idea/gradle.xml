@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/lib/core" />
             <option value="$PROJECT_DIR$/lib/image" />
             <option value="$PROJECT_DIR$/lib/network" />
+            <option value="$PROJECT_DIR$/lib/umeng" />
             <option value="$PROJECT_DIR$/lib/util" />
             <option value="$PROJECT_DIR$/lib/webview" />
           </set>

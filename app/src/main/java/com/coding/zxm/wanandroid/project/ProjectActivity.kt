@@ -42,7 +42,7 @@ class ProjectActivity : BaseActivity() {
                 ""
             ) as String
 
-        if (!TextUtils.isEmpty(time) && !TimeUtil.isToday(time)) {
+        if (!TextUtils.isEmpty(time) && TimeUtil.isToday(time)) {
             val data = SharedPreferencesUtil.get(
                 mContext!!,
                 SharedPreferenceConfig.CONFIG_PROJECT_TAGS,
@@ -50,7 +50,7 @@ class ProjectActivity : BaseActivity() {
             ) as String
 
 
-            if (TextUtils.isEmpty(data)) {
+            if (!TextUtils.isEmpty(data)) {
                 val temp = JSON.parseArray(data, ProjectEntity::class.java)
                 if (temp != null && temp.isNotEmpty()) {
 

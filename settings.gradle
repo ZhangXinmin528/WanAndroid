@@ -1,3 +1,4 @@
+include ':lib:umeng'
 include ':lib:image'
 include ':lib:webview'
 include ':lib:network'

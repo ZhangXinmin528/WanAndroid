@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_wan"
+        app:tabIndicatorColor="@color/colorPrimary"
         app:tabIndicatorFullWidth="false"
         app:tabMode="scrollable" />
 

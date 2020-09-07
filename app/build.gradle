@@ -108,6 +108,11 @@ dependencies {
     //CircleImageView
     implementation deps.circleImageView
 
+    //umeng
+    implementation deps.umsdk_common
+    implementation deps.umsdk_asms
+    implementation deps.umsdk_crash
+
     //lib
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:network')

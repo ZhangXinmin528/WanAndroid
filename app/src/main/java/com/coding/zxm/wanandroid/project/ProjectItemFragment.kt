@@ -115,9 +115,9 @@ class ProjectItemFragment : BaseFragment() {
 
         liveData.observeForever(Observer {
             if (isRefresh) {
-                sr_project_layout.finishRefresh()
+                sr_project_layout?.finishRefresh()
             } else {
-                sr_project_layout.finishLoadMore()
+                sr_project_layout?.finishLoadMore()
             }
 
             val datas = it.datas
