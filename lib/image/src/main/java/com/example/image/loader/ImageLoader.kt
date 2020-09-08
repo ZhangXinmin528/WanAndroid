@@ -4,24 +4,29 @@ import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.image.R
+import com.example.image.model.GlideApp
 
 /**
  * Created by ZhangXinmin on 2020/8/2.
  * Copyright (c) 2020 . All rights reserved.
  */
-class GlideLoader private constructor() {
+class ImageLoader private constructor() {
 
     companion object {
-        val INSTANCE: GlideLoader = Holder.holder
+        val INSTANCE: ImageLoader = Holder.holder
     }
 
     private object Holder {
-        val holder = GlideLoader()
+        val holder = ImageLoader()
     }
 
-    fun loadImage(target: ImageView, bitmap: Bitmap) {
-        Glide.with(target)
+    fun loadBitmap(target: ImageView, bitmap: Bitmap) {
+        GlideApp.with(target)
+            .asBitmap()
             .load(bitmap)
+            .placeholder(R.drawable.icon_image_holder)
             .into(target)
     }
 

@@ -8,6 +8,7 @@ import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.wanandroid.BuildConfig
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
+import com.umeng.socialize.PlatformConfig
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -57,5 +58,19 @@ class WanApp : MultiDexApplication() {
 
         //选择AUTO页面采集模式，统计SDK基础指标无需手动埋点可自动采集。
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+    }
+
+    init {
+        //申请不成功
+        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0")
+        //Sina
+        PlatformConfig.setSinaWeibo(
+            "3039106221",
+            "0e17a8b656e1e17a7f3779579322c029",
+            "http://sns.whalecloud.com"
+        )
+        //
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setDing("dingoalmlnohc0wggfedpk");
     }
 }

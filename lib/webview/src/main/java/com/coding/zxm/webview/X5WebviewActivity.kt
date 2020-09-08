@@ -2,16 +2,18 @@ package com.coding.zxm.webview
 
 import android.content.Context
 import android.content.Intent
-import android.text.Html
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.core.base.constants.RoutePath
+import com.coding.zxm.umeng.ui.ImageShareActivity
 import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIEW_TITLE
 import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIEW_URL
 import com.coding.zxm.webview.x5.X5WebView
 import com.tencent.smtt.sdk.WebView
+import com.zxm.utils.core.image.ImageUtil
 import kotlinx.android.synthetic.main.activity_webview.*
 
 /**
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_webview.*
  * Copyright (c) 2020/7/31 . All rights reserved.
  */
 @Route(path = RoutePath.ROUTE_PATH_WEBVIEW)
-class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
+class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClickListener {
 
     private var mIsWebViewAvailable = false
     private var mUrl: String? = null
@@ -52,14 +54,14 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
     }
 
     override fun initViews() {
-        ib_web_back.setOnClickListener {
-            finish()
-        }
+        ib_web_back.setOnClickListener(this)
 
-        tv_web_title.text = if (!TextUtils.isEmpty(mTitle)) Html.fromHtml(mTitle) else ""
+//        tv_web_title.text = if (!TextUtils.isEmpty(mTitle)) Html.fromHtml(mTitle) else ""
 
         x5webview.setWebViewListener(this)
         mIsWebViewAvailable = true
+
+        iv_web_more.setOnClickListener(this)
     }
 
     override fun onStart() {
@@ -92,6 +94,23 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener {
 
     override fun onPageFinish(view: WebView?) {
         mIsPageFinished = true
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.ib_web_back -> {
+                finish()
+            }
+            R.id.iv_web_more -> {
+                shareScreenShot()
+            }
+        }
+    }
+
+    private fun shareScreenShot() {
+
+        val bitmap = ImageUtil.view2Bitmap(x5webview)
+        ImageShareActivity.doImageShare(mContext!!, bitmap)
     }
 
 }

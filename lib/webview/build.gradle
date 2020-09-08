@@ -41,11 +41,15 @@ dependencies {
     implementation deps.constraint_layout
 
     implementation deps.arouter.api
-    implementation project(path: ':lib:util')
-    kapt deps.arouter.compiler
 
-    implementation project(path: ':lib:core')
+    kapt deps.arouter.compiler
 
     //tbs
     api deps.tbssdk
+
+    implementation project(path: ':lib:core')
+    implementation project(path: ':lib:util')
+
+    api project(path: ':lib:umeng')
+
 }

@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -29,9 +31,10 @@ dependencies {
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
-
+    //compat
     implementation deps.app_compat
 
+    //Glide
     api deps.glide.runtime
-    implementation deps.glide.compiler
+    kapt deps.glide.compiler
 }
