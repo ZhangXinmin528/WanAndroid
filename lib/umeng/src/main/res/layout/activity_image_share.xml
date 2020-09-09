@@ -2,17 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_main_bg">
 
-    <ImageView
-        android:id="@+id/iv_share_screenshot"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/icon_image_holder"
         app:layout_constraintBottom_toTopOf="@+id/layout_share_bottom"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_share_screenshot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter" />
+
+    </androidx.core.widget.NestedScrollView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

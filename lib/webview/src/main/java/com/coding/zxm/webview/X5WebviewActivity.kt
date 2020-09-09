@@ -3,6 +3,7 @@ package com.coding.zxm.webview
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -110,7 +111,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     private fun shareScreenShot() {
 
         val bitmap = ImageUtil.view2Bitmap(x5webview)
-        ImageShareActivity.doImageShare(mContext!!, bitmap)
+        ImageShareActivity.doImageShare(mContext!!, null)
     }
 
 }
