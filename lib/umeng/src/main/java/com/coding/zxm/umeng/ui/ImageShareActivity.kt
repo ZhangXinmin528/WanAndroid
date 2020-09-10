@@ -2,7 +2,8 @@ package com.coding.zxm.umeng.ui
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.coding.zxm.core.base.BaseActivity
@@ -18,20 +19,21 @@ import kotlinx.android.synthetic.main.activity_image_share.*
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/9/7 . All rights reserved.
+ * TODO:优化截图显示效果
  */
 class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener {
 
     companion object {
-        private const val PARAMS_VIEW = "params_view"
+        private const val PARAMS_IMAGE_PATH = "params_view"
 
-        fun doImageShare(context: Context, target: Bitmap) {
+        fun doImageShare(context: Context, path: String) {
             val intent = Intent(context, ImageShareActivity::class.java)
-            intent.putExtra(PARAMS_VIEW, target)
+            intent.putExtra(PARAMS_IMAGE_PATH, path)
             context.startActivity(intent)
         }
     }
 
-    private var mTarget: Bitmap? = null
+    private var mFilePath: String? = null
     private lateinit var mUmImage: UMImage
 
     override fun setLayoutId(): Int {
@@ -40,11 +42,12 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
 
     override fun initParamsAndValues() {
 
+        setStatusBarColorNoTranslucent()
         if (intent != null) {
-            mTarget = intent.getParcelableExtra(PARAMS_VIEW)
+            mFilePath = intent.getStringExtra(PARAMS_IMAGE_PATH)
         }
 
-        if (mTarget == null) {
+        if (TextUtils.isEmpty(mFilePath)) {
             Toast.makeText(mContext, "截图资源不存在", Toast.LENGTH_SHORT).show()
         }
 
@@ -56,10 +59,11 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         tv_share_wxcircle.setOnClickListener(this)
         tv_share_qq.setOnClickListener(this)
 
-        if (mTarget != null) {
-            mUmImage = UMImage(mContext, mTarget)
+        if (!TextUtils.isEmpty(mFilePath)) {
+            val bitmap = BitmapFactory.decodeFile(mFilePath)
+            mUmImage = UMImage(mContext, bitmap)
             mUmImage.compressStyle = UMImage.CompressStyle.QUALITY
-            ImageLoader.INSTANCE.loadBitmap(iv_share_screenshot, mTarget!!)
+            ImageLoader.INSTANCE.loadImageRes(iv_share_screenshot, mFilePath!!)
         }
 
     }
@@ -70,7 +74,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
                 finish()
             }
             R.id.tv_share_wechat -> {
-//                doWechatShare()
+                doWechatShare()
             }
             R.id.tv_share_wxcircle -> {
 

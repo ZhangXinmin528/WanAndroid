@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.image.R
 import com.example.image.model.GlideApp
 
@@ -26,6 +25,14 @@ class ImageLoader private constructor() {
         GlideApp.with(target)
             .asBitmap()
             .load(bitmap)
+            .placeholder(R.drawable.icon_image_holder)
+            .into(target)
+    }
+
+    fun loadImageRes(target: ImageView, filePath: String) {
+        GlideApp.with(target)
+            .asBitmap()
+            .load(filePath)
             .placeholder(R.drawable.icon_image_holder)
             .into(target)
     }

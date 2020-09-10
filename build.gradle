@@ -6,9 +6,10 @@ buildscript {
     }
     addRepos(repositories)
     dependencies {
-        classpath "com.android.tools.build:gradle:${versions.android_gradle_plugin}"
+        classpath deps.android_gradle_plugin
         classpath deps.kotlin.plugin
         classpath deps.arouter.register
+
     }
 }
 

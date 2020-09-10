@@ -44,7 +44,7 @@ versions.room = "2.3.0-alpha01"
 versions.rx_android = "2.0.1"
 versions.rxjava2 = "2.1.3"
 //util
-versions.coreUtil = "3.0.1"
+versions.coreUtil = "3.0.4"
 versions.tbssdk = "43903"
 //umeng
 versions.umsdk_common = "9.1.0"
@@ -157,8 +157,10 @@ deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${ve
 def arouter = [:]
 arouter.api = "com.alibaba:arouter-api:$versions.arouter_api"
 arouter.compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+//classpath
 arouter.register = "com.alibaba:arouter-register:$versions.arouter_register"
 deps.arouter = arouter
+
 //TODO:Lifecycle
 def lifecycle = [:]
 lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"

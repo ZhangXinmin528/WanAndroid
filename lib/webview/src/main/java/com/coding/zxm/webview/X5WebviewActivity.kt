@@ -2,8 +2,8 @@ package com.coding.zxm.webview
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -16,6 +16,7 @@ import com.coding.zxm.webview.x5.X5WebView
 import com.tencent.smtt.sdk.WebView
 import com.zxm.utils.core.image.ImageUtil
 import kotlinx.android.synthetic.main.activity_webview.*
+import java.io.File
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -111,7 +112,13 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     private fun shareScreenShot() {
 
         val bitmap = ImageUtil.view2Bitmap(x5webview)
-        ImageShareActivity.doImageShare(mContext!!, null)
+        val filePath =
+            filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
+        val state = ImageUtil.save(bitmap, filePath, Bitmap.CompressFormat.PNG)
+        if (state) {
+            ImageShareActivity.doImageShare(mContext!!, filePath)
+        }
+
     }
 
 }

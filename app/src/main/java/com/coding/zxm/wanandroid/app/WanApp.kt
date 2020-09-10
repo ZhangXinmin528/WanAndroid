@@ -36,10 +36,11 @@ class WanApp : MultiDexApplication() {
         RetrofitClient.getInstance(this)
 
         initUMeng()
+
     }
 
+
     private fun initUMeng() {
-        //设置LOG开关，默认为false
         //设置LOG开关，默认为false
         UMConfigure.setLogEnabled(BuildConfig.DEBUG)
 
@@ -57,9 +58,10 @@ class WanApp : MultiDexApplication() {
 
 
         //选择AUTO页面采集模式，统计SDK基础指标无需手动埋点可自动采集。
-        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
     }
 
+    //需要重新申请
     init {
         //申请不成功
         PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0")
