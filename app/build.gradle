@@ -34,10 +34,46 @@ android {
         }
     }
 
+    signingConfigs {
+        def filePath = '../sign/keystore.jks'
+        def pwd = '20190101'
+        def alias = 'com.coding.zxm'
+
+        release {
+            storeFile file(filePath)
+            storePassword pwd
+            keyAlias alias
+            keyPassword pwd
+        }
+        debug {
+            keyAlias alias
+            keyPassword pwd
+            storeFile file(filePath)
+            storePassword pwd
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //混淆
+            minifyEnabled true
+            //压缩优化
+            zipAlignEnabled true
+            //资源压缩
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //当前模式
+            buildConfigField 'boolean', 'IS_DEBUG', 'false'
+
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            //当前模式
+            buildConfigField 'boolean', 'IS_DEBUG', 'false'
+
+            signingConfig signingConfigs.release
         }
     }
 
@@ -45,8 +81,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "WanAndroid_${variant.versionName}_${variant.buildType.name}.apk"
+        }
     }
 
 }
