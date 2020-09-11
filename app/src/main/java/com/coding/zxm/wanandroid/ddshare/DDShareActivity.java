@@ -1,4 +1,4 @@
-package com.coding.zxm.umeng.ddshare;
+package com.coding.zxm.wanandroid.ddshare;
 
 
 import com.umeng.socialize.media.DingCallBack;

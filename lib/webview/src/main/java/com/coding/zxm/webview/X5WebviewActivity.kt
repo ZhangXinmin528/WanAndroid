@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -115,6 +116,9 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
         val filePath =
             filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
         val state = ImageUtil.save(bitmap, filePath, Bitmap.CompressFormat.PNG)
+
+        Log.d(TAG, "save state $state .. file path $filePath")
+
         if (state) {
             ImageShareActivity.doImageShare(mContext!!, filePath)
         }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.coding.zxm.core.base.BaseActivity
@@ -15,6 +16,7 @@ import com.umeng.socialize.UMShareListener
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
 import kotlinx.android.synthetic.main.activity_image_share.*
+import java.io.File
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -35,6 +37,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
 
     private var mFilePath: String? = null
     private lateinit var mUmImage: UMImage
+    private lateinit var mImageFile: File
 
     override fun setLayoutId(): Int {
         return R.layout.activity_image_share
@@ -45,10 +48,15 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         setStatusBarColorNoTranslucent()
         if (intent != null) {
             mFilePath = intent.getStringExtra(PARAMS_IMAGE_PATH)
+
         }
+
+
 
         if (TextUtils.isEmpty(mFilePath)) {
             Toast.makeText(mContext, "截图资源不存在", Toast.LENGTH_SHORT).show()
+        } else {
+            mImageFile = File(mFilePath)
         }
 
     }
@@ -59,7 +67,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         tv_share_wxcircle.setOnClickListener(this)
         tv_share_qq.setOnClickListener(this)
 
-        if (!TextUtils.isEmpty(mFilePath)) {
+        if (mImageFile.exists()) {
             val bitmap = BitmapFactory.decodeFile(mFilePath)
             mUmImage = UMImage(mContext, bitmap)
             mUmImage.compressStyle = UMImage.CompressStyle.QUALITY
@@ -80,7 +88,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
 
             }
             R.id.tv_share_qq -> {
-
+                doQQShare()
             }
         }
     }
@@ -89,7 +97,17 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         ShareAction(this)
             .setPlatform(SHARE_MEDIA.WEIXIN)
             .setCallback(this)
-            .withMedia(mUmImage)
+//            .withMedia(mUmImage)
+            .withText("测试一下啊")
+            .share()
+    }
+
+    private fun doQQShare() {
+        ShareAction(this)
+            .setPlatform(SHARE_MEDIA.QQ)
+            .setCallback(this)
+//            .withMedia(mUmImage)
+            .withText("测试一下啊")
             .share()
     }
 
@@ -105,15 +123,19 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     }
 
     override fun onResult(p0: SHARE_MEDIA?) {
+        Log.d(TAG, "share..onResult")
     }
 
     override fun onCancel(p0: SHARE_MEDIA?) {
+        Log.d(TAG, "share..onCancel")
     }
 
     override fun onError(p0: SHARE_MEDIA?, p1: Throwable?) {
+        Log.d(TAG, "share..onError : " + p1?.message)
     }
 
     override fun onStart(p0: SHARE_MEDIA?) {
+        Log.d(TAG, "share..onStart")
     }
 
 

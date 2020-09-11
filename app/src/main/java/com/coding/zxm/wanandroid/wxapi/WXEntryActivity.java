@@ -1,4 +1,4 @@
-package com.coding.zxm.umeng.wxapi;
+package com.coding.zxm.wanandroid.wxapi;
 
 
 
