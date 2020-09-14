@@ -74,6 +74,7 @@ class WanApp : MultiDexApplication() {
         //qq
         PlatformConfig.setQQZone("1110995000", "JLvvTN0zi5w25Rh2")
         PlatformConfig.setQQFileProvider("com.tencent.wanandroid.fileprovider")
-        PlatformConfig.setDing("dingoalmlnohc0wggfedpk");
+        //dingding
+        PlatformConfig.setDing("dingoafgactegaqwn14eih");
     }
 }
