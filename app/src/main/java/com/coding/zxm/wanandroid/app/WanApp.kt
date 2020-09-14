@@ -72,7 +72,7 @@ class WanApp : MultiDexApplication() {
             "http://sns.whalecloud.com"
         )
         //qq
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba")
+        PlatformConfig.setQQZone("1110995000", "JLvvTN0zi5w25Rh2")
         PlatformConfig.setQQFileProvider("com.tencent.wanandroid.fileprovider")
         PlatformConfig.setDing("dingoalmlnohc0wggfedpk");
     }

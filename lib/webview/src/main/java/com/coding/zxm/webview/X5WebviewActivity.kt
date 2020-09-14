@@ -3,6 +3,7 @@ package com.coding.zxm.webview
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -85,11 +86,6 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
         super.onResume()
     }
 
-    override fun onDestroy() {
-        x5webview.destroy()
-        super.onDestroy()
-    }
-
 
     override fun onProgressChange(view: WebView?, newProgress: Int) {
 
@@ -105,8 +101,10 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 finish()
             }
             R.id.iv_web_more -> {
-                shareScreenShot()
+//                shareScreenShot()
+                longScreenShot()
             }
+
         }
     }
 
@@ -123,6 +121,39 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             ImageShareActivity.doImageShare(mContext!!, filePath)
         }
 
+    }
+
+    private fun longScreenShot() {
+        val wholeWidth: Int = x5webview.computeHorizontalScrollRange()
+        var wholeHeight: Int = x5webview.computeVerticalScrollRange()
+        wholeHeight /= 2 //高度截取一半，防止oom，后面可以指定高度，缩放进行换算
+
+        val x5bitmap = Bitmap.createBitmap(wholeWidth, wholeHeight, Bitmap.Config.RGB_565)
+
+        val x5canvas = Canvas(x5bitmap)
+        x5canvas.scale(
+            wholeWidth.toFloat() / x5webview.contentWidth.toFloat(),
+            wholeHeight.toFloat() / (x5webview.contentHeight / 2).toFloat()
+        )
+
+        val x5WebViewExtension = x5webview.x5WebViewExtension
+        x5WebViewExtension?.snapshotWholePage(x5canvas, false, false, Runnable {
+            val filePath =
+                filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
+            val state = ImageUtil.save(x5bitmap, filePath, Bitmap.CompressFormat.PNG)
+
+            Log.d(TAG, "save state $state .. file path $filePath")
+
+            if (state) {
+                ImageShareActivity.doImageShare(mContext!!, filePath)
+            }
+        })
+
+    }
+
+    override fun onDestroy() {
+        x5webview.destroy()
+        super.onDestroy()
     }
 
 }

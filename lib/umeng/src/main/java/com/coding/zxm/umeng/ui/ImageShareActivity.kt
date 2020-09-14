@@ -51,8 +51,6 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
 
         }
 
-
-
         if (TextUtils.isEmpty(mFilePath)) {
             Toast.makeText(mContext, "截图资源不存在", Toast.LENGTH_SHORT).show()
         } else {
@@ -66,6 +64,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         tv_share_wechat.setOnClickListener(this)
         tv_share_wxcircle.setOnClickListener(this)
         tv_share_qq.setOnClickListener(this)
+        tv_share_qzone.setOnClickListener(this)
 
         if (mImageFile.exists()) {
             val bitmap = BitmapFactory.decodeFile(mFilePath)
@@ -90,6 +89,9 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
             R.id.tv_share_qq -> {
                 doQQShare()
             }
+            R.id.tv_share_qzone -> {
+                doQZoneShare()
+            }
         }
     }
 
@@ -106,8 +108,15 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         ShareAction(this)
             .setPlatform(SHARE_MEDIA.QQ)
             .setCallback(this)
-//            .withMedia(mUmImage)
-            .withText("测试一下啊")
+            .withMedia(mUmImage)
+            .share()
+    }
+
+    private fun doQZoneShare() {
+        ShareAction(this)
+            .setPlatform(SHARE_MEDIA.QZONE)
+            .setCallback(this)
+            .withMedia(mUmImage)
             .share()
     }
 
@@ -123,19 +132,24 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     }
 
     override fun onResult(p0: SHARE_MEDIA?) {
-        Log.d(TAG, "share..onResult")
+        Log.d(TAG, "$p0..onResult")
+        if (mImageFile.exists()) {
+            mImageFile.delete()
+        }
+        finish()
     }
 
     override fun onCancel(p0: SHARE_MEDIA?) {
-        Log.d(TAG, "share..onCancel")
+        Log.d(TAG, "$p0..onCancel")
     }
 
     override fun onError(p0: SHARE_MEDIA?, p1: Throwable?) {
-        Log.d(TAG, "share..onError : " + p1?.message)
+        Log.d(TAG, "$p0..onError : " + p1?.message)
+        Toast.makeText(mContext, "${p0}分享失败", Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart(p0: SHARE_MEDIA?) {
-        Log.d(TAG, "share..onStart")
+        Log.d(TAG, "$p0..onStart")
     }
 
 

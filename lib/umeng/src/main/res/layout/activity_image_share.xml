@@ -6,7 +6,6 @@
     android:background="@color/color_main_bg"
     android:orientation="vertical">
 
-
     <ImageView
         android:id="@+id/iv_share_screenshot"
         android:layout_width="match_parent"
@@ -57,7 +56,18 @@
                 android:layout_marginStart="@dimen/margin_12dp"
                 android:drawableTop="@drawable/umeng_socialize_qq"
                 android:gravity="center_horizontal"
-                android:text="@string/all_name_wxcircle"
+                android:text="@string/all_name_qq"
+                android:textColor="@color/colorMainText"
+                android:textSize="@dimen/textsize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_share_qzone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:drawableTop="@drawable/umeng_socialize_qzone"
+                android:gravity="center_horizontal"
+                android:text="@string/all_name_qzone"
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_14sp" />
 
