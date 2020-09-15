@@ -1,8 +1,9 @@
 <resources>
 
+    <string name="all_cancel">取消</string>
     <string name="all_name_wechat">微信</string>
     <string name="all_name_wxcircle">朋友圈</string>
     <string name="all_name_qq">QQ</string>
     <string name="all_name_qzone">QQ空间</string>
-    <string name="all_cancel">取消</string>
+    <string name="all_name_ding">钉钉</string>
 </resources>

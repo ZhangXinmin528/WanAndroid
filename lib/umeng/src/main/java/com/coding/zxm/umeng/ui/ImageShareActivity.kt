@@ -65,6 +65,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
         tv_share_wxcircle.setOnClickListener(this)
         tv_share_qq.setOnClickListener(this)
         tv_share_qzone.setOnClickListener(this)
+        tv_share_ding.setOnClickListener(this)
 
         if (mImageFile.exists()) {
             val bitmap = BitmapFactory.decodeFile(mFilePath)
@@ -92,7 +93,19 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
             R.id.tv_share_qzone -> {
                 doQZoneShare()
             }
+            R.id.tv_share_ding -> {
+                doDingShare()
+            }
         }
+    }
+
+    private fun doDingShare() {
+        ShareAction(this)
+            .setPlatform(SHARE_MEDIA.DINGTALK)
+            .setCallback(this)
+            .withMedia(mUmImage)
+            .share()
+
     }
 
     private fun doWechatShare() {

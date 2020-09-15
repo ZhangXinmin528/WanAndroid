@@ -71,6 +71,17 @@
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_14sp" />
 
+            <TextView
+                android:id="@+id/tv_share_ding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:drawableTop="@drawable/umeng_socialize_ding"
+                android:gravity="center_horizontal"
+                android:text="@string/all_name_ding"
+                android:textColor="@color/colorMainText"
+                android:textSize="@dimen/textsize_14sp" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
