@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.umeng.R
 import com.example.image.loader.ImageLoader
+import com.example.image.model.GlideApp
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareListener
@@ -22,6 +23,7 @@ import java.io.File
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/9/7 . All rights reserved.
  * TODO:优化截图显示效果
+ * TODO:大图显示存在问题，1.截取长图存在不完整问题；2.长图在分享页展示问题；
  */
 class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener {
 
@@ -72,6 +74,16 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
             mUmImage = UMImage(mContext, bitmap)
             mUmImage.compressStyle = UMImage.CompressStyle.QUALITY
             ImageLoader.INSTANCE.loadImageRes(iv_share_screenshot, mFilePath!!)
+//            iv_share_screenshot.setImageBitmap(bitmap)
+            GlideApp
+                .with(mContext!!)
+                .asBitmap()
+                .override(bitmap.width, bitmap.height)
+                .load(bitmap)
+                .into(iv_share_screenshot)
+
+            sv_share_screenshot.scrollTo(0, 0)
+
         }
 
     }

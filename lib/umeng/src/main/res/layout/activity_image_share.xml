@@ -1,88 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_main_bg"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_share_screenshot"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/sv_share_screenshot"
+        android:layout_width="300dp"
         android:layout_height="0dp"
-        android:layout_margin="40dp"
-        android:layout_weight="1"
-        android:src="@drawable/icon_share_image" />
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_share_screenshot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_share_image" />
+
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_share_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <HorizontalScrollView
             android:id="@+id/layout_share_selection"
-            style="@style/ListItemPadding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_share_selection_bg"
-            android:orientation="horizontal"
+            android:scrollbars="none"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_share_wechat"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                style="@style/ListItemPadding"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/umeng_socialize_wechat"
-                android:gravity="center_horizontal"
-                android:text="@string/all_name_wechat"
-                android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_14sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_share_wxcircle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
-                android:drawableTop="@drawable/umeng_socialize_wxcircle"
-                android:gravity="center_horizontal"
-                android:text="@string/all_name_wxcircle"
-                android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_14sp" />
+                <TextView
+                    android:id="@+id/tv_share_wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/umeng_socialize_wechat"
+                    android:gravity="center_horizontal"
+                    android:text="@string/all_name_wechat"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_14sp" />
 
-            <TextView
-                android:id="@+id/tv_share_qq"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
-                android:drawableTop="@drawable/umeng_socialize_qq"
-                android:gravity="center_horizontal"
-                android:text="@string/all_name_qq"
-                android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_14sp" />
+                <TextView
+                    android:id="@+id/tv_share_wxcircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:drawableTop="@drawable/umeng_socialize_wxcircle"
+                    android:gravity="center_horizontal"
+                    android:text="@string/all_name_wxcircle"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_14sp" />
 
-            <TextView
-                android:id="@+id/tv_share_qzone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
-                android:drawableTop="@drawable/umeng_socialize_qzone"
-                android:gravity="center_horizontal"
-                android:text="@string/all_name_qzone"
-                android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_14sp" />
+                <TextView
+                    android:id="@+id/tv_share_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:drawableTop="@drawable/umeng_socialize_qq"
+                    android:gravity="center_horizontal"
+                    android:text="@string/all_name_qq"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_14sp" />
 
-            <TextView
-                android:id="@+id/tv_share_ding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
-                android:drawableTop="@drawable/umeng_socialize_ding"
-                android:gravity="center_horizontal"
-                android:text="@string/all_name_ding"
-                android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_14sp" />
+                <TextView
+                    android:id="@+id/tv_share_qzone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:drawableTop="@drawable/umeng_socialize_qzone"
+                    android:gravity="center_horizontal"
+                    android:text="@string/all_name_qzone"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_14sp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                <TextView
+                    android:id="@+id/tv_share_ding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:drawableTop="@drawable/umeng_socialize_ding"
+                    android:gravity="center_horizontal"
+                    android:text="@string/all_name_ding"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_14sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/tv_share_cancel"
@@ -96,5 +112,4 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_share_selection" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>
