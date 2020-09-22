@@ -63,18 +63,18 @@ class WanApp : MultiDexApplication() {
 
     //需要重新申请
     init {
-        //申请不成功
-        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0")
+        //微信申请不成功
+//        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0")
         //Sina
-        PlatformConfig.setSinaWeibo(
-            "3039106221",
-            "0e17a8b656e1e17a7f3779579322c029",
-            "http://sns.whalecloud.com"
-        )
+//        PlatformConfig.setSinaWeibo(
+//            "3039106221",
+//            "0e17a8b656e1e17a7f3779579322c029",
+//            "http://sns.whalecloud.com"
+//        )
         //qq
         PlatformConfig.setQQZone("1110995000", "JLvvTN0zi5w25Rh2")
         PlatformConfig.setQQFileProvider("com.tencent.wanandroid.fileprovider")
         //dingding
-        PlatformConfig.setDing("dingoafgactegaqwn14eih");
+        PlatformConfig.setDing("dingoafgactegaqwn14eih")
     }
 }

@@ -2,13 +2,18 @@ package com.coding.zxm.core.base
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.coding.zxm.core.R
+import com.coding.zxm.util.SharedPreferenceConfig
 import com.zxm.utils.core.bar.StatusBarCompat
+import com.zxm.utils.core.sp.SharedPreferencesUtil
 
 /**
  * Created by ZhangXinmin on 2020/7/19.
@@ -31,12 +36,46 @@ abstract class BaseActivity : AppCompatActivity() {
 
         initParamsAndValues()
 
-
     }
 
     override fun onStart() {
         super.onStart()
         initViews()
+    }
+
+    override fun getResources(): Resources {
+        val res = super.getResources()
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
+            val config: Configuration = res.configuration
+            config.fontScale =
+                SharedPreferencesUtil.get(
+                    this,
+                    SharedPreferenceConfig.CONFIG_FONT_SCALE,
+                    1.0f
+                ) as Float
+            res.updateConfiguration(config, res.displayMetrics)
+        }
+        return res
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+            val res = newBase?.resources
+            val configuration = res?.configuration
+            configuration?.let {
+
+                it.fontScale = SharedPreferencesUtil.get(
+                    this,
+                    SharedPreferenceConfig.CONFIG_FONT_SCALE,
+                    1.0f
+                ) as Float
+
+                val newContext = newBase.createConfigurationContext(configuration)
+                super.attachBaseContext(newContext)
+            }
+        } else {
+            super.attachBaseContext(newBase)
+        }
     }
 
     abstract fun initParamsAndValues()

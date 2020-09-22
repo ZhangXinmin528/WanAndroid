@@ -63,8 +63,8 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
 
     override fun initViews() {
         tv_share_cancel.setOnClickListener(this)
-        tv_share_wechat.setOnClickListener(this)
-        tv_share_wxcircle.setOnClickListener(this)
+//        tv_share_wechat.setOnClickListener(this)
+//        tv_share_wxcircle.setOnClickListener(this)
         tv_share_qq.setOnClickListener(this)
         tv_share_qzone.setOnClickListener(this)
         tv_share_ding.setOnClickListener(this)
@@ -82,7 +82,6 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
                 .load(bitmap)
                 .into(iv_share_screenshot)
 
-            sv_share_screenshot.scrollTo(0, 0)
 
         }
 
@@ -93,12 +92,12 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
             R.id.tv_share_cancel -> {
                 finish()
             }
-            R.id.tv_share_wechat -> {
-                doWechatShare()
-            }
-            R.id.tv_share_wxcircle -> {
-
-            }
+//            R.id.tv_share_wechat -> {
+//                doWechatShare()
+//            }
+//            R.id.tv_share_wxcircle -> {
+//
+//            }
             R.id.tv_share_qq -> {
                 doQQShare()
             }

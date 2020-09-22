@@ -13,5 +13,6 @@ object SharedPreferenceConfig {
     const val CONFIG_WORDS_DATE = "config_words_date"
     const val CONFIG_PROJECT_TAGS = "config_project_tags"
     const val CONFIG_PROJECT_DATE = "config_project_date"
+    const val CONFIG_FONT_SCALE = "config_font_scale"
 
 }
