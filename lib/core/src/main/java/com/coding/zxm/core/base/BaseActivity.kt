@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun getResources(): Resources {
         val res = super.getResources()
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
+            Log.d(TAG, "getResources()~")
             val config: Configuration = res.configuration
             config.fontScale =
                 SharedPreferencesUtil.get(
@@ -58,19 +60,21 @@ abstract class BaseActivity : AppCompatActivity() {
         return res
     }
 
-    override fun attachBaseContext(newBase: Context?) {
+    override fun attachBaseContext(newBase: Context) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-            val res = newBase?.resources
-            val configuration = res?.configuration
-            configuration?.let {
+            val res = newBase.resources
+            val configuration = res.configuration
+
+            Log.d(TAG, "attachBaseContext()~")
+            configuration.let {
 
                 it.fontScale = SharedPreferencesUtil.get(
-                    this,
+                    newBase,
                     SharedPreferenceConfig.CONFIG_FONT_SCALE,
                     1.0f
                 ) as Float
 
-                val newContext = newBase.createConfigurationContext(configuration)
+                val newContext = newBase.createConfigurationContext(it)
                 super.attachBaseContext(newContext)
             }
         } else {
