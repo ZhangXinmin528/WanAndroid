@@ -1,3 +1,9 @@
 <resources>
 
+    <declare-styleable name="FontSeekbarStyleable">
+        <attr name="font_line_color" format="color|reference" />
+        <attr name="font_line_width" format="dimension" />
+        <attr name="font_textsize_normal" format="dimension" />
+        <attr name="font_text_color" format="color|reference" />
+    </declare-styleable>
 </resources>

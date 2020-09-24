@@ -12,6 +12,7 @@ import com.coding.zxm.wanandroid.navigation.NavigationActivity
 import com.coding.zxm.wanandroid.project.ProjectActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
+import com.coding.zxm.wanandroid.ui.activity.FontScaleActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -46,6 +47,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         tv_user_name.setOnClickListener(this)
         tv_mine_about.setOnClickListener(this)
         tv_mine_project.setOnClickListener(this)
+        iv_mine_setting.setOnClickListener(this)
 
         getUserInfo()
     }
@@ -98,6 +100,10 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
             R.id.tv_mine_project -> {
                 val intent = Intent(mContext!!, ProjectActivity::class.java)
                 startActivity(intent)
+            }
+            R.id.iv_mine_setting -> {
+                val setting = Intent(mContext!!, FontScaleActivity::class.java)
+                startActivity(setting)
             }
 
         }

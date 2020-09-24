@@ -95,7 +95,14 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <!--分享功能：必须声明-->
+        <!--设置字体大小-->
+        <activity
+            android:name=".ui.activity.FontScaleActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+
+        <!--TODO:分享功能：必须声明-->
         <!--weixin-->
         <activity
             android:name="com.coding.zxm.wanandroid.wxapi.WXEntryActivity"

@@ -10,7 +10,6 @@
     <dimen name="textsize_24sp">24sp</dimen>
     <dimen name="textsize_28sp">28sp</dimen>
 
-
     <dimen name="margin_0_5dp">0.5dp</dimen>
     <dimen name="margin_1dp">1dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
@@ -22,4 +21,8 @@
     <dimen name="margin_16dp">16dp</dimen>
     <dimen name="margin_18dp">18dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
+
+    <dimen name="dp_0.5">0.5dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+
 </resources>

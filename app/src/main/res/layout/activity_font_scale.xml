@@ -6,6 +6,7 @@
     android:background="@color/color_main_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_font_scale"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorWhite"
@@ -30,8 +31,8 @@
             android:gravity="center_vertical"
             android:paddingStart="@dimen/margin_4dp"
             android:text="@string/all_font_scale_title"
-            android:textSize="@dimen/textsize_18sp"
             android:textColor="@color/colorMainText"
+            android:textSize="@dimen/textsize_20sp"
             app:layout_constraintEnd_toStartOf="@+id/tv_font_confirm"
             app:layout_constraintStart_toEndOf="@+id/iv_font_back" />
 
@@ -40,9 +41,38 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:padding="@dimen/margin_6dp"
             android:text="@string/all_confirm"
+            android:textColor="@color/colorMainText"
+            android:textSize="@dimen/textsize_16sp"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/app_color_blue_3"
+        android:padding="@dimen/margin_12dp"
+        app:layout_constraintBottom_toTopOf="@+id/font_seekbar"
+        app:layout_constraintTop_toBottomOf="@+id/layout_font_scale">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6dp"
+            android:text="@string/all_font_scale_example"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_16sp" />
+
+    </ScrollView>
+
+    <com.coding.zxm.wanandroid.ui.widget.FontSeekbar
+        android:id="@+id/font_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        app:font_line_color="@color/colorMainText"
+        app:font_line_width="@dimen/dp_1"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
