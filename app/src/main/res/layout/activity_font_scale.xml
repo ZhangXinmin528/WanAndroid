@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorWhite"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="paren00t">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_font_back"
@@ -70,9 +70,11 @@
     <com.coding.zxm.wanandroid.ui.widget.FontSeekbar
         android:id="@+id/font_seekbar"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         app:font_line_color="@color/colorMainText"
         app:font_line_width="@dimen/dp_1"
+        app:font_text_color="@color/colorMainText"
+        app:font_textsize_normal="@dimen/textsize_14sp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
