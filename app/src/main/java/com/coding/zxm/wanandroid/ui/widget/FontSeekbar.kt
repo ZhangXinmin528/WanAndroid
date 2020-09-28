@@ -74,6 +74,7 @@ class FontSeekbar :
 
     private var dp16: Int = 0
     private var dp12: Int = 0
+    private var dp8: Int = 0
     private var dp6: Int = 0
     private var dp4: Int = 0
 
@@ -150,6 +151,7 @@ class FontSeekbar :
 
         dp16 = dp2px(mContext, 16f)
         dp12 = dp2px(mContext, 12f)
+        dp8 = dp2px(mContext, 8f)
         dp6 = dp2px(mContext, 6f)
         dp4 = dp2px(mContext, 4f)
 
@@ -162,12 +164,11 @@ class FontSeekbar :
                     e?.let {
                         val x = it.x
                         val y = it.y
-                        if (y >= mScaleLineStartY - mTouchSlop && y <= mScaleLineStartY + mTouchSlop) {
-
-                            Log.d("zxm==", "点击位置：x:${x}..y:${y}")
+                        if (y >= mScaleLineStartY - 2 * mTouchSlop && y <= mScaleLineStartY + 2 * mTouchSlop) {
+                            mScaleIndex = ((x - dp16) / mScaleUnit).toInt()
+//                            Log.d("zxm==", "点击位置：x:${x}..y:${y}..position:${mScaleIndex}")
+                            postInvalidate()
                         }
-
-
                     }
                     return super.onSingleTapUp(e)
                 }
@@ -187,7 +188,6 @@ class FontSeekbar :
 
     private fun drawScale(canvas: Canvas) {
 
-        canvas.save()
         canvas.translate(dp16.toFloat(), dp16.toFloat())
 
         //big label
@@ -209,7 +209,6 @@ class FontSeekbar :
         //Small
         mTextPaint.textSize = mTextSizeNormal * (0.8f)
         canvas.drawText(mSmallLabel, 0f, baseLineY, mTextPaint)
-        canvas.restore()
 
         mScaleUnit = (mWidth - mBigLabelWight / 2.0f) / mScaleCount
 
@@ -218,6 +217,7 @@ class FontSeekbar :
 
         canvas.translate(mSmallLabelWight / 2.0f, mScaleLineStartY)
 
+        mLinePaint.color = mLineColor
         canvas.drawLine(0f, dp4 / 2.0f, mWidth - mBigLabelWight / 2.0f, dp4 / 2.0f, mLinePaint)
 
         for (index in 0..mScaleCount) {
@@ -233,7 +233,8 @@ class FontSeekbar :
         //绘制圆点
         if (mScaleIndex < 0 || mScaleIndex > 4) return
 
-        canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp6.toFloat(), mShapePaint)
+        canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp8.toFloat(), mShapePaint)
+        mLinePaint.color = Color.LTGRAY
         canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp6.toFloat(), mLinePaint)
 
     }
