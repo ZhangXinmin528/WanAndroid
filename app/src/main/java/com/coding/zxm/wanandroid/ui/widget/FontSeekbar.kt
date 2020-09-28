@@ -6,7 +6,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.annotation.FloatRange
 import com.coding.zxm.wanandroid.R
 
@@ -16,7 +20,7 @@ import com.coding.zxm.wanandroid.R
  * 用于设置文字缩放大小
  */
 class FontSeekbar :
-    View {
+    View, View.OnTouchListener {
 
     constructor(context: Context?) : this(context, null, 0)
 
@@ -66,6 +70,8 @@ class FontSeekbar :
     private var mSmallLabelHeight: Float = 0f
     private var mSmallLabelWight: Float = 0f
 
+    private var mScaleLineStartY: Float = 0f
+
     private var dp16: Int = 0
     private var dp12: Int = 0
     private var dp6: Int = 0
@@ -73,6 +79,9 @@ class FontSeekbar :
 
     //刻度索引:默认为标准
     private var mScaleIndex: Int = 2
+
+    private lateinit var mGestureDetector: GestureDetector
+    private var mTouchSlop: Int = 0
 
     @SuppressLint("CustomViewStyleable")
     private fun initParams(context: Context?, attrs: AttributeSet?) {
@@ -106,6 +115,8 @@ class FontSeekbar :
 
                 typedArray.recycle()
             }
+
+            mTouchSlop = ViewConfiguration.get(mContext).scaledTouchSlop
 
         }
 
@@ -142,6 +153,25 @@ class FontSeekbar :
         dp6 = dp2px(mContext, 6f)
         dp4 = dp2px(mContext, 4f)
 
+        setOnTouchListener(this)
+
+        mGestureDetector =
+            GestureDetector(mContext, object : GestureDetector.SimpleOnGestureListener() {
+
+                override fun onSingleTapUp(e: MotionEvent?): Boolean {
+                    e?.let {
+                        val x = it.x
+                        val y = it.y
+                        if (y >= mScaleLineStartY - mTouchSlop && y <= mScaleLineStartY + mTouchSlop) {
+
+                            Log.d("zxm==", "点击位置：x:${x}..y:${y}")
+                        }
+
+
+                    }
+                    return super.onSingleTapUp(e)
+                }
+            })
     }
 
     override fun draw(canvas: Canvas?) {
@@ -157,6 +187,7 @@ class FontSeekbar :
 
     private fun drawScale(canvas: Canvas) {
 
+        canvas.save()
         canvas.translate(dp16.toFloat(), dp16.toFloat())
 
         //big label
@@ -178,13 +209,14 @@ class FontSeekbar :
         //Small
         mTextPaint.textSize = mTextSizeNormal * (0.8f)
         canvas.drawText(mSmallLabel, 0f, baseLineY, mTextPaint)
+        canvas.restore()
 
         mScaleUnit = (mWidth - mBigLabelWight / 2.0f) / mScaleCount
 
-        val scaleLineStartY =
+        mScaleLineStartY =
             (mBigLabelHeight + dp16.toFloat() * 2.0f) + (mHeight - (mBigLabelHeight + dp16.toFloat() * 2.0f)) / 2.0f
 
-        canvas.translate(mSmallLabelWight / 2.0f, scaleLineStartY)
+        canvas.translate(mSmallLabelWight / 2.0f, mScaleLineStartY)
 
         canvas.drawLine(0f, dp4 / 2.0f, mWidth - mBigLabelWight / 2.0f, dp4 / 2.0f, mLinePaint)
 
@@ -201,7 +233,8 @@ class FontSeekbar :
         //绘制圆点
         if (mScaleIndex < 0 || mScaleIndex > 4) return
 
-//        canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp4.toFloat(),)
+        canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp6.toFloat(), mShapePaint)
+        canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp6.toFloat(), mLinePaint)
 
     }
 
@@ -234,18 +267,8 @@ class FontSeekbar :
         return (dpValue * scale + 0.5f).toInt()
     }
 
-    /**
-     * Value of sp to value of px.
-     *
-     * @param context context
-     * @param spValue The value of sp.
-     * @return value of px
-     */
-    private fun sp2px(
-        context: Context,
-        @FloatRange(from = 0.0) spValue: Float
-    ): Int {
-        val fontScale = context.resources.displayMetrics.scaledDensity
-        return (spValue * fontScale + 0.5f).toInt()
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        mGestureDetector.onTouchEvent(event)
+        return true
     }
 }
