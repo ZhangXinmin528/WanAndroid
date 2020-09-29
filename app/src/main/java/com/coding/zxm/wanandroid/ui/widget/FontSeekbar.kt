@@ -83,6 +83,7 @@ class FontSeekbar :
 
     private lateinit var mGestureDetector: GestureDetector
     private var mTouchSlop: Int = 0
+    private lateinit var mOnScaleCallback: OnScaleCallback
 
     @SuppressLint("CustomViewStyleable")
     private fun initParams(context: Context?, attrs: AttributeSet?) {
@@ -166,8 +167,11 @@ class FontSeekbar :
                         val y = it.y
                         if (y >= mScaleLineStartY - 2 * mTouchSlop && y <= mScaleLineStartY + 2 * mTouchSlop) {
                             mScaleIndex = ((x - dp16) / mScaleUnit).toInt()
-//                            Log.d("zxm==", "点击位置：x:${x}..y:${y}..position:${mScaleIndex}")
+                            Log.d("zxm==", "点击位置：x:${x}..y:${y}..position:${mScaleIndex}")
                             postInvalidate()
+                            if (mOnScaleCallback != null) {
+                                mOnScaleCallback.onScale(getScaleValue())
+                            }
                         }
                     }
                     return super.onSingleTapUp(e)
@@ -257,6 +261,17 @@ class FontSeekbar :
         postInvalidate()
     }
 
+    fun getScaleValue(): Float {
+        return 1 + (mScaleIndex - 2) * 0.1f
+    }
+
+    /**
+     * 设置缩放回调
+     */
+    fun setOnScaleCallback(onScaleCallback: OnScaleCallback) {
+        mOnScaleCallback = onScaleCallback
+    }
+
     /**
      * dp to px
      */
@@ -271,5 +286,9 @@ class FontSeekbar :
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         mGestureDetector.onTouchEvent(event)
         return true
+    }
+
+    interface OnScaleCallback {
+        fun onScale(scale: Float)
     }
 }
