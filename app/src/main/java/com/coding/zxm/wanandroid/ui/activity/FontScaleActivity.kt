@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.ui.activity
 
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import com.coding.zxm.core.base.BaseActivity
@@ -35,9 +36,12 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
                 1.0f
             ) as Float
 
+        Log.d("zxm==", "初始化：$scale")
+
         font_seekbar.setScaleValue(scale = scale)
         font_seekbar.setOnScaleCallback(object : FontSeekbar.OnScaleCallback {
             override fun onScale(scale: Float) {
+                Log.d("zxm==", "设置：$scale")
                 tv_font_example.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14 * scale)
             }
         })

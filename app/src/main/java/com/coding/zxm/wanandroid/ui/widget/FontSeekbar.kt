@@ -216,12 +216,13 @@ class FontSeekbar :
 
         mScaleUnit = (mWidth - mBigLabelWight / 2.0f) / mScaleCount
 
+        mLinePaint.color = mLineColor
+
         mScaleLineStartY =
             (mBigLabelHeight + dp16.toFloat() * 2.0f) + (mHeight - (mBigLabelHeight + dp16.toFloat() * 2.0f)) / 2.0f
 
         canvas.translate(mSmallLabelWight / 2.0f, mScaleLineStartY)
 
-        mLinePaint.color = mLineColor
         canvas.drawLine(0f, dp4 / 2.0f, mWidth - mBigLabelWight / 2.0f, dp4 / 2.0f, mLinePaint)
 
         for (index in 0..mScaleCount) {
@@ -236,6 +237,8 @@ class FontSeekbar :
 
         //绘制圆点
         if (mScaleIndex < 0 || mScaleIndex > 4) return
+
+        Log.d("zxm==", "onDraw()..mScaleIndex:$mScaleIndex")
 
         canvas.drawCircle(mScaleIndex * mScaleUnit, dp4 / 2.0f, dp8.toFloat(), mShapePaint)
         mLinePaint.color = Color.LTGRAY
@@ -257,7 +260,8 @@ class FontSeekbar :
      * 设置缩放刻度
      */
     fun setScaleValue(@FloatRange(from = 0.8, to = 1.2) scale: Float) {
-        mScaleIndex = 2 + ((scale - 1.0f) * 10).toInt()
+        mScaleIndex = (2.0f + (scale - 1.0f) / 0.1f).toInt()
+        Log.d("zxm==", "setScaleValue..scale:$scale..mScaleIndex:$mScaleIndex")
         postInvalidate()
     }
 
