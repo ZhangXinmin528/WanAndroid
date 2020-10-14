@@ -1,11 +1,13 @@
 package com.coding.zxm.wanandroid
 
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
 import com.example.kotlinlearning.HomePageAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -36,17 +38,19 @@ class MainActivity : BaseActivity() {
         bottom_nav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.vp_home -> {
-
+                    vp_home.currentItem = 0
                 }
 
                 R.id.list -> {
-
+                    vp_home.currentItem = 1
                 }
 
                 R.id.mine -> {
+                    vp_home.currentItem = 2
+
                 }
             }
-            true
+            false
         }
     }
 }
