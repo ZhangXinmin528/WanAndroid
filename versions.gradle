@@ -4,6 +4,8 @@ def versions = [:]
 versions.android_gradle_plugin = '4.0.0'
 versions.kotlin = "1.3.72"
 versions.arouter_register = "1.0.2"
+versions.bugly_tinker_support = "1.1.5"
+
 //base
 versions.appcompat = "1.2.0-alpha02"
 versions.annotations = "1.0.0"
@@ -64,6 +66,8 @@ versions.umsdk_oaid_mi = "1.0.0"
 versions.umsdk_oaid_oppo = "1.0.4"
 versions.umsdk_oaid_vivo = "1.0.0.1"
 
+//Tinker
+versions.tinker_android_lib = "1.9.9"
 
 versions.apache_commons = "2.5"
 
@@ -88,6 +92,8 @@ def deps = [:]
 
 //TODO:classpath&plugin
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+
+deps.bugly_tinker_support = "com.tencent.bugly:tinker-support:$versions.bugly_tinker_support"
 
 //TODO:base
 deps.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
@@ -217,6 +223,9 @@ deps.umsdk_oaid_lenovo = "com.umeng.umsdk:oaid_lenovo:$versions.umsdk_oaid_lenov
 deps.umsdk_oaid_mi = "com.umeng.umsdk:oaid_mi:$versions.umsdk_oaid_mi"
 deps.umsdk_oaid_oppo = "com.umeng.umsdk:oaid_oppo:1.0.4:$versions.umsdk_oaid_oppo"
 deps.umsdk_oaid_vivo = "com.umeng.umsdk:oaid_vivo:$versions.umsdk_oaid_vivo"
+
+//TODO:Tinker
+deps.tinker_android_lib = "com.tencent.tinker:tinker-android-lib:$versions.tinker_android_lib"
 
 def arch_core = [:]
 arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"

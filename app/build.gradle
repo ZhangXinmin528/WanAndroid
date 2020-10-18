@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.alibaba.arouter'
 
+
 android {
     compileSdkVersion build_versions.compile_sdk
     buildToolsVersion build_versions.build_tools
@@ -31,6 +32,11 @@ android {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
             }
+        }
+
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
 
@@ -156,6 +162,9 @@ dependencies {
     implementation deps.umsdk_asms
     implementation deps.umsdk_crash
 
+    //Tinker
+    implementation deps.tinker_android_lib
+
     //lib
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:network')
@@ -163,3 +172,5 @@ dependencies {
     implementation project(path: ':lib:webview')
     implementation project(path: ':lib:image')
 }
+
+//apply from: 'tinker-support.gradle'
