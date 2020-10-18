@@ -17,18 +17,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <item
-        android:id="@+id/home"
+        android:id="@+id/action_home"
         android:contentDescription="cd_home"
         android:icon="@drawable/ic_home"
         android:title="@string/all_nav_home"
         tools:ignore="HardcodedText" />
     <item
-        android:id="@+id/list"
+        android:id="@+id/action_list"
         android:contentDescription="cd_list"
         android:icon="@drawable/ic_list_black_24dp"
         android:title="list" />
     <item
-        android:id="@+id/mine"
+        android:id="@+id/action_mine"
         android:contentDescription="cd_form"
         android:icon="@drawable/icon_nav_mine"
         android:title="@string/all_nav_mine"/>

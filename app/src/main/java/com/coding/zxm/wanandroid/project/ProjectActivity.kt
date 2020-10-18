@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.SharedPreferenceConfig
+import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.project.adapter.ProjectTabAdapter
 import com.coding.zxm.wanandroid.project.model.ProjectEntity
@@ -38,14 +38,14 @@ class ProjectActivity : BaseActivity() {
         val time =
             SharedPreferencesUtil.get(
                 mContext!!,
-                SharedPreferenceConfig.CONFIG_PROJECT_DATE,
+                SPConfig.CONFIG_PROJECT_DATE,
                 ""
             ) as String
 
         if (!TextUtils.isEmpty(time) && TimeUtil.isToday(time)) {
             val data = SharedPreferencesUtil.get(
                 mContext!!,
-                SharedPreferenceConfig.CONFIG_PROJECT_TAGS,
+                SPConfig.CONFIG_PROJECT_TAGS,
                 ""
             ) as String
 
@@ -76,13 +76,13 @@ class ProjectActivity : BaseActivity() {
 
                 SharedPreferencesUtil.put(
                     mContext!!,
-                    SharedPreferenceConfig.CONFIG_PROJECT_TAGS,
+                    SPConfig.CONFIG_PROJECT_TAGS,
                     JSON.toJSONString(it)
                 )
 
                 SharedPreferencesUtil.put(
                     mContext!!,
-                    SharedPreferenceConfig.CONFIG_PROJECT_DATE,
+                    SPConfig.CONFIG_PROJECT_DATE,
                     TimeUtil.getNowString()
                 )
             })

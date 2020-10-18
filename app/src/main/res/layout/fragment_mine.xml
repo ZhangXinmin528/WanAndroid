@@ -107,12 +107,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_dashboard_blue_32dp"
                 android:drawablePadding="@dimen/margin_6dp"
                 android:gravity="center"
                 android:text="@string/all_tixi"
                 android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_16sp" />
+                android:textSize="@dimen/textsize_16sp"
+                app:drawableTopCompat="@drawable/ic_dashboard_blue_32dp" />
 
             <include layout="@layout/layout_vertical_divider" />
 
@@ -121,12 +121,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@mipmap/icon_navigation"
                 android:drawablePadding="@dimen/margin_6dp"
                 android:gravity="center"
                 android:text="@string/all_navigation"
                 android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_16sp" />
+                android:textSize="@dimen/textsize_16sp"
+                app:drawableTopCompat="@mipmap/icon_navigation" />
 
             <include layout="@layout/layout_vertical_divider" />
 
@@ -135,12 +135,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@mipmap/icon_project"
                 android:drawablePadding="@dimen/margin_6dp"
                 android:gravity="center"
                 android:text="@string/all_project"
                 android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_16sp" />
+                android:textSize="@dimen/textsize_16sp"
+                app:drawableTopCompat="@mipmap/icon_project" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!--条目-->
@@ -160,14 +160,14 @@
                 android:id="@+id/tv_mine_collection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_arrow_right_gray_24dp"
                 android:gravity="center_vertical"
                 android:paddingTop="@dimen/margin_16dp"
                 android:paddingBottom="@dimen/margin_16dp"
                 android:text="@string/all_mine_collection"
                 android:textColor="@color/colorMainText"
                 android:textSize="@dimen/textsize_16sp"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
             <include layout="@layout/layout_horizontal_divider" />
 

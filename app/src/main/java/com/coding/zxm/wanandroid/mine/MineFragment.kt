@@ -5,14 +5,14 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseFragment
-import com.coding.zxm.util.SharedPreferenceConfig
+import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
 import com.coding.zxm.wanandroid.project.ProjectActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
-import com.coding.zxm.wanandroid.ui.activity.FontScaleActivity
+import com.coding.zxm.wanandroid.setting.SettingActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -55,7 +55,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
     private fun getUserInfo() {
         val loginState = SharedPreferencesUtil.get(
             mContext!!,
-            SharedPreferenceConfig.CONFIG_STATE_LOGIN,
+            SPConfig.CONFIG_STATE_LOGIN,
             false
         ) as Boolean
 
@@ -66,7 +66,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                 userDetialEntity?.let {
                     val userName = SharedPreferencesUtil.get(
                         mContext!!,
-                        SharedPreferenceConfig.CONFIG_USER_NAME,
+                        SPConfig.CONFIG_USER_NAME,
                         ""
                     ) as String
 
@@ -102,7 +102,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                 startActivity(intent)
             }
             R.id.iv_mine_setting -> {
-                val setting = Intent(mContext!!, FontScaleActivity::class.java)
+                val setting = Intent(mContext!!, SettingActivity::class.java)
                 startActivity(setting)
             }
 

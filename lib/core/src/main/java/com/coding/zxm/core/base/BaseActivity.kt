@@ -12,7 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.coding.zxm.core.R
-import com.coding.zxm.util.SharedPreferenceConfig
+import com.coding.zxm.util.SPConfig
 import com.zxm.utils.core.bar.StatusBarCompat
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 
@@ -52,7 +52,7 @@ abstract class BaseActivity : AppCompatActivity() {
             config.fontScale =
                 SharedPreferencesUtil.get(
                     this,
-                    SharedPreferenceConfig.CONFIG_FONT_SCALE,
+                    SPConfig.CONFIG_FONT_SCALE,
                     1.0f
                 ) as Float
             res.updateConfiguration(config, res.displayMetrics)
@@ -70,7 +70,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
                 it.fontScale = SharedPreferencesUtil.get(
                     newBase,
-                    SharedPreferenceConfig.CONFIG_FONT_SCALE,
+                    SPConfig.CONFIG_FONT_SCALE,
                     1.0f
                 ) as Float
 

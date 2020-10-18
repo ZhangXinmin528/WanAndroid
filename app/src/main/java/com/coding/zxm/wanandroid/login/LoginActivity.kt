@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.SharedPreferenceConfig
+import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -67,7 +67,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         val userName: String =
             SharedPreferencesUtil.get(
                 mContext!!,
-                SharedPreferenceConfig.CONFIG_USER_NAME,
+                SPConfig.CONFIG_USER_NAME,
                 ""
             ) as String
         if (!TextUtils.isEmpty(userName)) {
@@ -96,18 +96,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                         SharedPreferencesUtil.put(
                             mContext!!,
-                            SharedPreferenceConfig.CONFIG_USER_NAME,
+                            SPConfig.CONFIG_USER_NAME,
                             it.username
-                        )
-                        SharedPreferencesUtil.put(
-                            mContext!!,
-                            SharedPreferenceConfig.CONFIG_PASSWORD,
-                            it.password
                         )
 
                         SharedPreferencesUtil.put(
                             mContext!!,
-                            SharedPreferenceConfig.CONFIG_STATE_LOGIN,
+                            SPConfig.CONFIG_STATE_LOGIN,
                             true
                         )
 

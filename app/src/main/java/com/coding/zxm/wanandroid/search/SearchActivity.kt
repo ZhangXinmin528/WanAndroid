@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.SharedPreferenceConfig
+import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.search.adapter.HotWordAdapter
 import com.coding.zxm.wanandroid.search.adapter.SearchResultAdapter
@@ -150,7 +150,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     private fun getHotWord() {
         val time = SharedPreferencesUtil.get(
             mContext!!,
-            SharedPreferenceConfig.CONFIG_WORDS_DATE,
+            SPConfig.CONFIG_WORDS_DATE,
             ""
         ) as String
 
@@ -166,13 +166,13 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                     val data = JSON.toJSONString(it)
                     SharedPreferencesUtil.put(
                         mContext!!,
-                        SharedPreferenceConfig.CONFIG_DATA_HOT_WORDS,
+                        SPConfig.CONFIG_DATA_HOT_WORDS,
                         data
                     )
 
                     SharedPreferencesUtil.put(
                         mContext!!,
-                        SharedPreferenceConfig.CONFIG_WORDS_DATE,
+                        SPConfig.CONFIG_WORDS_DATE,
                         "${TimeUtil.getNowMills()}"
                     )
                     mSearchList.addAll(it)
@@ -182,7 +182,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         } else {
             val dataArray = SharedPreferencesUtil.get(
                 mContext!!,
-                SharedPreferenceConfig.CONFIG_DATA_HOT_WORDS,
+                SPConfig.CONFIG_DATA_HOT_WORDS,
                 ""
             ) as String
             if (!TextUtils.isEmpty(dataArray)) {

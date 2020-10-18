@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WanAndroidLite</string>
+    <string name="app_name">WanAndroid</string>
     <string name="welcome_to_wanandroid">Welcome to \'WanAndroid\'~</string>
     <string name="all_user_name">用户名</string>
     <string name="all_password">密码</string>
@@ -30,4 +30,9 @@
     <string name="all_confirm">确定</string>
     <string name="all_font_scale_title">字体大小</string>
     <string name="all_font_scale_example">本项目是基于开放API进行开发，主要功能是为广大Android开发人员提供阅读技术文章的平台，同时项目中主要使用kotlin作为开发语言，利用jetpack中的livedata和viewmode等进行开发。</string>
+    <string name="all_setting">设置</string>
+    <string name="all_setting_font_size">字体大小</string>
+    <string name="all_setting_clear_cache">清除缓存</string>
+    <string name="all_setting_logout">退出登录</string>
+    <string name="all_logout_succeess">退出登陆成功</string>
 </resources>

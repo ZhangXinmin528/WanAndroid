@@ -89,6 +89,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <!--设置-->
+        <activity
+            android:name=".setting.SettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <!--关于-->
         <activity
             android:name=".ui.activity.AboutActivity"
@@ -97,7 +103,7 @@
 
         <!--设置字体大小-->
         <activity
-            android:name=".ui.activity.FontScaleActivity"
+            android:name=".setting.FontScaleActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

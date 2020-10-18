@@ -1,10 +1,10 @@
-package com.coding.zxm.wanandroid.ui.activity
+package com.coding.zxm.wanandroid.setting
 
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.SharedPreferenceConfig
+import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.ui.widget.FontSeekbar
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -32,7 +32,7 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
         val scale =
             SharedPreferencesUtil.get(
                 mContext!!,
-                SharedPreferenceConfig.CONFIG_FONT_SCALE,
+                SPConfig.CONFIG_FONT_SCALE,
                 1.0f
             ) as Float
 
@@ -55,7 +55,7 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_font_confirm -> {
                 SharedPreferencesUtil.put(
                     mContext!!,
-                    SharedPreferenceConfig.CONFIG_FONT_SCALE,
+                    SPConfig.CONFIG_FONT_SCALE,
                     font_seekbar.getScaleValue()
                 )
                 finish()
