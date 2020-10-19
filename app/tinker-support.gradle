@@ -5,7 +5,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0208-15-10-00"
+def baseApkDir = "app-1019-21-50-00"
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -17,6 +17,10 @@ tinkerSupport {
 
     // 指定归档目录，默认值当前module的子目录tinker
     autoBackupApkDir = "${bakPath}"
+
+    //建议设置true,用户就不用再自己管理tinkerId的命名,插件会为每一次构建的base包自动生成唯一的tinkerId，默认命名规则是versionname.versioncode_时间戳
+    //具体参考https://github.com/BuglyDevTeam/Bugly-Android-Demo/wiki/Tinker-ID%E8%AF%A5%E6%80%8E%E4%B9%88%E8%AE%BE%E7%BD%AE
+    autoGenerateTinkerId = true
 
     // 是否启用覆盖tinkerPatch配置功能，默认值false
     // 开启后tinkerPatch配置不生效，即无需添加tinkerPatch
@@ -33,14 +37,14 @@ tinkerSupport {
     // 对应tinker插件applyResourceMapping
     baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
 
-    // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性
-    tinkerId = "base-1.0.1"
+    //TODO: 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性
+    tinkerId = "base-1.0.0"
 
     // 构建多渠道补丁时使用
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
 
     // 是否启用加固模式，默认为false.(tinker-spport 1.0.7起支持）
-    // isProtectedApp = true
+     isProtectedApp = true
 
     // 是否开启反射Application模式
     enableProxyApplication = false
