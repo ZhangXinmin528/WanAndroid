@@ -32,7 +32,7 @@
             android:textColor="@color/colorMainText"
             app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
-        <include layout="@layout/layout_horizontal_margin_divider" />
+        <include layout="@layout/layout_horizontal_divider" />
 
         <RelativeLayout
             android:id="@+id/layout_clear_cache"
@@ -59,7 +59,7 @@
                 tools:text="0KB" />
         </RelativeLayout>
 
-        <include layout="@layout/layout_horizontal_margin_divider" />
+        <include layout="@layout/layout_horizontal_divider" />
 
         <TextView
             android:id="@+id/tv_setting_logout"
@@ -71,7 +71,7 @@
             android:textColor="@color/colorMainText"
             app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
-        <include layout="@layout/layout_horizontal_margin_divider" />
+        <include layout="@layout/layout_horizontal_divider" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
