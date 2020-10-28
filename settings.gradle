@@ -1,3 +1,4 @@
+include ':lib:weather'
 include ':lib:umeng'
 include ':lib:image'
 include ':lib:webview'

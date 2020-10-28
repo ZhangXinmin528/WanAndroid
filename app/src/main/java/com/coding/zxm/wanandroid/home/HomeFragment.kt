@@ -102,7 +102,7 @@ class HomeFragment private constructor() : BaseFragment() {
         sr_home_layout.setDisableContentWhenLoading(true)
 
         //延迟400毫秒后自动刷新
-        sr_home_layout.autoRefresh(400)
+        sr_home_layout.autoRefresh(600)
 
         sr_home_layout.setOnRefreshListener {
             requestNewsData(true)

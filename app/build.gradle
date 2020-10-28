@@ -129,6 +129,7 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.viewmodel_ktx
     implementation deps.lifecycle.extensions
+
 //    implementation deps.lifecycle.livedata_ktx
     annotationProcessor deps.lifecycle.compiler
 
@@ -171,6 +172,7 @@ dependencies {
     implementation project(path: ':lib:util')
     implementation project(path: ':lib:webview')
     implementation project(path: ':lib:image')
+    implementation project(path: ':lib:weather')
 }
 
 //apply from: 'tinker-support.gradle'

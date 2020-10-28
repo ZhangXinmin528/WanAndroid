@@ -6,6 +6,7 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.wanandroid.BuildConfig
+import com.coding.zxm.weather.WeatherManager
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.socialize.PlatformConfig
@@ -37,6 +38,11 @@ class WanApp : MultiDexApplication() {
 
         initUMeng()
 
+        initWeather()
+    }
+
+    private fun initWeather() {
+        WeatherManager.INSTANCE.init()
     }
 
 
