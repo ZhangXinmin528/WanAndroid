@@ -138,9 +138,9 @@ class HomeFragment private constructor() : BaseFragment() {
 
         newsLiveData.observeForever(Observer {
             if (isRefresh) {
-                sr_home_layout.finishRefresh()
+                sr_home_layout?.finishRefresh()
             } else {
-                sr_home_layout.finishLoadMore()
+                sr_home_layout?.finishLoadMore()
             }
 
             val datas = it.datas

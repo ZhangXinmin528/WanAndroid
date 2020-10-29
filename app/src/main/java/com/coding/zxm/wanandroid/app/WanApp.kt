@@ -10,6 +10,7 @@ import com.coding.zxm.weather.WeatherManager
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.socialize.PlatformConfig
+import com.zxm.utils.core.log.MLogger
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -39,6 +40,13 @@ class WanApp : MultiDexApplication() {
         initUMeng()
 
         initWeather()
+
+        initLogger()
+    }
+
+    private fun initLogger() {
+
+        MLogger.setLogEnable(this, BuildConfig.DEBUG)
     }
 
     private fun initWeather() {

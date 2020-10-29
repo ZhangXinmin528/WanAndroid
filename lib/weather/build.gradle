@@ -31,6 +31,10 @@ dependencies {
     implementation deps.core_ktx
     //androidx
     implementation deps.app_compat
+
+    implementation deps.fastjson
+
     implementation project(path: ':lib:core')
+    implementation project(path: ':lib:util')
 
 }

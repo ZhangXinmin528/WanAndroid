@@ -10,9 +10,12 @@ import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
 import com.coding.zxm.wanandroid.project.ProjectActivity
+import com.coding.zxm.wanandroid.setting.SettingActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
-import com.coding.zxm.wanandroid.setting.SettingActivity
+import com.coding.zxm.weather.OnWeatherResultListener
+import com.coding.zxm.weather.WeatherManager
+import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -48,6 +51,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         tv_mine_about.setOnClickListener(this)
         tv_mine_project.setOnClickListener(this)
         iv_mine_setting.setOnClickListener(this)
+        tv_mine_collection.setOnClickListener(this)
 
         getUserInfo()
     }
@@ -105,7 +109,21 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                 val setting = Intent(mContext!!, SettingActivity::class.java)
                 startActivity(setting)
             }
+            R.id.tv_mine_collection -> {
+                WeatherManager.INSTANCE.getWeatherNow(
+                    mContext!!,
+                    "101011600",
+                    object : OnWeatherResultListener {
+                        override fun onError(throwable: Throwable?) {
+                            MLogger.d(TAG, "getWeatherNow()..onError")
+                        }
 
+                        override fun onSuccess(result: String) {
+                            MLogger.d(TAG, "getWeatherNow()..${result}")
+                        }
+
+                    })
+            }
         }
     }
 }
