@@ -13,9 +13,7 @@ import com.coding.zxm.wanandroid.project.ProjectActivity
 import com.coding.zxm.wanandroid.setting.SettingActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
-import com.coding.zxm.weather.OnWeatherResultListener
-import com.coding.zxm.weather.WeatherManager
-import com.zxm.utils.core.log.MLogger
+import com.coding.zxm.wanandroid.weather.WeatherActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -110,19 +108,8 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                 startActivity(setting)
             }
             R.id.tv_mine_collection -> {
-                WeatherManager.INSTANCE.getWeatherNow(
-                    mContext!!,
-                    "101011600",
-                    object : OnWeatherResultListener {
-                        override fun onError(throwable: Throwable?) {
-                            MLogger.d(TAG, "getWeatherNow()..onError")
-                        }
-
-                        override fun onSuccess(result: String) {
-                            MLogger.d(TAG, "getWeatherNow()..${result}")
-                        }
-
-                    })
+                val weather = Intent(mContext!!, WeatherActivity::class.java)
+                startActivity(weather)
             }
         }
     }

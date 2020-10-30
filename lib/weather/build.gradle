@@ -29,8 +29,13 @@ dependencies {
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
+
     //androidx
     implementation deps.app_compat
+    implementation deps.material
+    implementation deps.constraint_layout
+    implementation deps.recyclerview
+    implementation deps.rvadapterhelper
 
     implementation deps.fastjson
 
