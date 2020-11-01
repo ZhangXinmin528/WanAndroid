@@ -39,6 +39,8 @@ dependencies {
 
     implementation deps.fastjson
 
+    implementation 'joda-time:joda-time:2.10.8'
+
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:util')
 

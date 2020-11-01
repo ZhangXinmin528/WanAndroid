@@ -24,7 +24,6 @@ class WeatherManager private constructor() {
     }
 
     fun init() {
-        //测试
         HeConfig.init("HE2010261719461230", "bd86df080cef4ac98128e443afea4306")
         HeConfig.switchToDevService()
     }

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="line_back_dark">#3f8DA0BA</color>
+    <color name="line_color">#919191</color>
+    <color name="back_white">#f7f8fa</color>
+    <color name="search_light_un_color">#666666</color>
+    <color name="slategray">#708090</color><!--灰石色 -->
 </resources>
