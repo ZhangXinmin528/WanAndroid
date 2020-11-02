@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.qweather.sdk.bean.weather.WeatherHourlyBean;
+import com.zxm.utils.core.log.MLogger;
 import com.zxm.utils.core.screen.ScreenUtil;
 
 import java.util.ArrayList;
@@ -260,6 +261,7 @@ public class HourlyForecastView extends View implements ScrollWatcher {
             mHeight = defHeightPixel + paddingT + paddingB;
         }
 
+        MLogger.d("onMeasure..mWidth:" + mWidth + "..mHeight:" + mHeight);
         //设置视图的大小
         setMeasuredDimension(mWidth, mHeight);
 

@@ -5,7 +5,7 @@
     android:id="@+id/srl_weather"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_main_bg"
+    android:background="#330099FF"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -20,10 +20,11 @@
                 android:id="@+id/iv_weather_back"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitStart"
+                android:scaleType="fitXY"
                 android:src="@mipmap/back_100d"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--实况天气-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_weather_now"
                 android:layout_width="200dp"
@@ -87,6 +88,7 @@
 
             <!--24H预报-->
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_weather_24hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_16dp"
@@ -120,7 +122,7 @@
                     android:id="@+id/tv_24h_low_temp"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_12dp"
+                    android:layout_marginBottom="@dimen/margin_4dp"
                     android:gravity="center"
                     android:textColor="@color/colorGrayText"
                     android:textSize="@dimen/textsize_12sp"
@@ -128,22 +130,54 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="2°" />
 
-                <com.coding.zxm.weather.IndexHorizontalScrollView
-                    android:id="@+id/ihsv_hour"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
                     android:layout_height="98dp"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_24h_high_temp"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_24h">
 
-                    <com.coding.zxm.weather.HourlyForecastView
-                        android:id="@+id/hour_view"
+                    <com.coding.zxm.weather.IndexHorizontalScrollView
+                        android:id="@+id/ihsv_hourly"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </com.coding.zxm.weather.IndexHorizontalScrollView>
+                        android:layout_height="match_parent">
+
+                        <com.coding.zxm.weather.HourlyForecastView
+                            android:id="@+id/hourly_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </com.coding.zxm.weather.IndexHorizontalScrollView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--未来7天天气-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_weather_7d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16dp"
+                android:background="@drawable/shape_white_bg"
+                android:padding="@dimen/margin_16dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_weather_24hour">
 
+                <TextView
+                    android:id="@+id/tv_title_7d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_title_7d"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_weather_7d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_7d" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
