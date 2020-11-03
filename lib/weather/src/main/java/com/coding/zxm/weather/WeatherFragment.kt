@@ -1,17 +1,22 @@
 package com.coding.zxm.weather
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.os.Build
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseFragment
+import com.qweather.sdk.bean.air.AirNowBean
 import com.qweather.sdk.bean.weather.WeatherDailyBean
 import com.qweather.sdk.bean.weather.WeatherHourlyBean
 import com.qweather.sdk.bean.weather.WeatherNowBean
 import com.qweather.sdk.view.QWeather
+import com.zxm.utils.core.log.MLogger
+import com.zxm.utils.core.time.TimeUtil
 import kotlinx.android.synthetic.main.fragment_weather.*
-import org.joda.time.DateTime
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -20,6 +25,9 @@ import org.joda.time.DateTime
 class WeatherFragment : BaseFragment(), ScrollWatched {
 
     companion object {
+        private val DEFAULT_FORMAT: DateFormat =
+            SimpleDateFormat("HH:mm", Locale.getDefault())
+
         fun newInstance(): WeatherFragment {
             return WeatherFragment()
         }
@@ -36,27 +44,14 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     }
 
     override fun initViews(rootView: View) {
-        srl_weather.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED)
-
-        srl_weather.setOnRefreshListener {
-            getWeatherNow()
-        }
-
-        addWatcher(hourly_view)
-
-        ihsv_hourly.setToday24HourView(hourly_view)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ihsv_hourly.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                notifyWatcher(scrollX)
-            }
-        }
 
         getWeatherNow()
 
         getWeather7D()
-
-        getWeather24Hourly()
+//
+//        getWeather24Hourly()
+//
+//        getAirNow()
     }
 
     /**
@@ -66,17 +61,31 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
         QWeather.getWeatherNow(mContext, "101010100", object : QWeather.OnResultWeatherNowListener {
             @SuppressLint("SetTextI18n")
             override fun onSuccess(p0: WeatherNowBean?) {
-                srl_weather.isRefreshing = false
+
+//                MLogger.d(TAG, "getWeatherNow${JSON.toJSONString(p0)}")
+
                 if (p0 != null && p0.code == "200") {
 
                     tv_weather_temp.text = "${p0.now.temp}°"
+
                     tv_weather_text.text = p0.now.text
-                    tv_weather_humidity.text = " | 湿度 ${p0.now.humidity}%"
+
+                    val iconId = IconUtils.getWeatherIcon(p0.now.icon)
+                    if (iconId != -1) {
+                        iv_weather_now_icon.setImageResource(iconId)
+                    }
+
+                    tv_weather_humidity.text = "湿度 ${p0.now.humidity}%"
+
                     tv_weather_wind.text = "${p0.now.windDir} ${p0.now.windSpeed}级"
 
-                    val nowTime = DateTime.now()
-                    val hour = nowTime.hourOfDay
-                    if (hour in 6..19) {
+                    tv_weather_pressure.text = "气压 ${p0.now.pressure} 百帕"
+
+                    tv_weather_time.text = "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
+
+                    val hourOfDay = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
+                    if (hourOfDay in 6..17) {
                         iv_weather_back.setImageResource(IconUtils.getDayBack(p0.now.icon))
                     } else {
                         iv_weather_back.setImageResource(IconUtils.getNightBack(p0.now.icon))
@@ -85,7 +94,6 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
             }
 
             override fun onError(p0: Throwable?) {
-                srl_weather.isRefreshing = false
             }
 
         })
@@ -160,14 +168,14 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                 maxTmp = Math.max(tmp, maxTmp)
             }
             //设置当天的最高最低温度
-            hourly_view.setHighestTemp(maxTmp)
-            hourly_view.setLowestTemp(minTmp)
-            if (maxTmp == minTmp) {
-                hourly_view.setLowestTemp(minTmp - 1)
-            }
-            hourly_view.initData(data)
-            tv_24h_high_temp.text = "$maxTmp°"
-            tv_24h_low_temp.text = "$minTmp°"
+//            hourly_view.setHighestTemp(maxTmp)
+//            hourly_view.setLowestTemp(minTmp)
+//            if (maxTmp == minTmp) {
+//                hourly_view.setLowestTemp(minTmp - 1)
+//            }
+//            hourly_view.initData(data)
+//            tv_24h_high_temp.text = "$maxTmp°"
+//            tv_24h_low_temp.text = "$minTmp°"
 
         }
     }
@@ -182,11 +190,10 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
             object : QWeather.OnResultWeatherDailyListener {
 
                 override fun onError(p0: Throwable?) {
-                    srl_weather.isRefreshing = false
                 }
 
                 override fun onSuccess(p0: WeatherDailyBean?) {
-//                    MLogger.d(TAG, "getWeather7D${JSON.toJSONString(p0)}")
+                    MLogger.d(TAG, "getWeather7D${JSON.toJSONString(p0)}")
                     p0?.let {
                         if (it.code == "200") {
                             rv_weather_7d.adapter = Weather7DayAdapter(it.daily)
@@ -195,6 +202,27 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         }
                     }
                 }
+
+            })
+    }
+
+    /**
+     * 获取今天的空气质量实况
+     */
+    private fun getAirNow() {
+        QWeather.getAirNow(
+            mContext,
+            "101010100",
+            null,
+            object : QWeather.OnResultAirNowListener {
+                override fun onSuccess(p0: AirNowBean?) {
+
+                    MLogger.d(TAG, "getAirNow${JSON.toJSONString(p0)}")
+                }
+
+                override fun onError(p0: Throwable?) {
+                }
+
 
             })
     }

@@ -261,7 +261,6 @@ public class HourlyForecastView extends View implements ScrollWatcher {
             mHeight = defHeightPixel + paddingT + paddingB;
         }
 
-        MLogger.d("onMeasure..mWidth:" + mWidth + "..mHeight:" + mHeight);
         //设置视图的大小
         setMeasuredDimension(mWidth, mHeight);
 
@@ -343,16 +342,16 @@ public class HourlyForecastView extends View implements ScrollWatcher {
 
 
             String code = hourlyWeatherList.get(dashLineList.get(i)).getIcon();
-            BitmapDrawable bd;
+            BitmapDrawable bd = null;
 
 
             if (code.contains("d")) {
-                bd = (BitmapDrawable) mContext.getResources().getDrawable(IconUtils.getDayIconDark(code.replace("d", "")));
+//                bd = (BitmapDrawable) mContext.getResources().getDrawable(IconUtils.getDayIconDark(code.replace("d", "")));
             } else {
-                bd = (BitmapDrawable) mContext.getResources().getDrawable(IconUtils.getNightIconDark(code.replace("n", "")));
+//                bd = (BitmapDrawable) mContext.getResources().getDrawable(IconUtils.getNightIconDark(code.replace("n", "")));
             }
 
-            assert bd != null;
+//            assert bd != null;
             Bitmap bitmap = bitmapResize(bd.getBitmap(),
                     ScreenUtil.dp2px(mContext, bitmapXY), ScreenUtil.dp2px(mContext, bitmapXY));
 

@@ -36,10 +36,9 @@ dependencies {
     implementation deps.constraint_layout
     implementation deps.recyclerview
     implementation deps.rvadapterhelper
+    implementation deps.flexbox
 
     implementation deps.fastjson
-
-    implementation 'joda-time:joda-time:2.10.8'
 
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:util')

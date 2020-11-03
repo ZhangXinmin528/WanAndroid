@@ -67,5 +67,6 @@
     <string name="powered">Powered By heweather.com</string>
     <string name="all_title_24hour">24小时预报</string>
     <string name="all_title_7d">7天预报</string>
+    <string name="all_title_air_now">空气质量</string>
 
 </resources>

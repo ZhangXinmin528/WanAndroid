@@ -9,7 +9,7 @@
     <dimen name="textsize_20sp">20sp</dimen>
     <dimen name="textsize_24sp">24sp</dimen>
     <dimen name="textsize_28sp">28sp</dimen>
-    <dimen name="textsize_60sp">60sp</dimen>
+    <dimen name="textsize_80sp">80sp</dimen>
 
     <dimen name="margin_0_5dp">0.5dp</dimen>
     <dimen name="margin_1dp">1dp</dimen>
