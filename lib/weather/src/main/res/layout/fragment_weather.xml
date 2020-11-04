@@ -224,6 +224,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.coding.zxm.weather.view.AQIView
+                    android:id="@+id/aqiview"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_aqi_now" />
+
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/layout_air_container"
                     android:layout_width="wrap_content"
@@ -235,7 +244,7 @@
                     app:justifyContent="flex_start"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_aqi_now" />
+                    app:layout_constraintTop_toBottomOf="@+id/aqiview" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
