@@ -7,12 +7,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
         <ImageView
             android:id="@+id/iv_weather_back"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="520dp"
             android:scaleType="fitXY"
             android:src="@mipmap/back_100d"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,6 +55,7 @@
                 android:id="@+id/tv_weather_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:textColor="@color/colorWhite"
@@ -86,14 +88,27 @@
                     android:id="@+id/tv_weather_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_12dp"
-                    android:layout_marginTop="@dimen/margin_2dp"
+                    android:layout_marginStart="@dimen/margin_6dp"
+                    android:layout_marginTop="@dimen/margin_4dp"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/textsize_18sp"
                     app:layout_constraintStart_toEndOf="@+id/iv_weather_now_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="晴" />
 
+                <TextView
+                    android:id="@+id/tv_aqi_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:layout_marginTop="@dimen/margin_6dp"
+                    android:background="@drawable/shape_aqi_excellent"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textsize_14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_weather_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="AQI 优" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,16 +120,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_weahther_text">
-                <!--风力-->
+
+                <!--体感温度-->
                 <TextView
-                    android:id="@+id/tv_weather_wind"
+                    android:id="@+id/tv_weather_feellike_temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/textsize_14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="西南风 3级" />
+                    tools:text="体感温度 14" />
 
                 <!--湿度-->
                 <TextView
@@ -124,7 +140,7 @@
                     android:layout_marginStart="@dimen/margin_12dp"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/textsize_14sp"
-                    app:layout_constraintStart_toEndOf="@+id/tv_weather_wind"
+                    app:layout_constraintStart_toEndOf="@+id/tv_weather_feellike_temp"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="湿度 40%" />
 
@@ -144,31 +160,209 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--未来7天天气-->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/layout_weather_7d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:layout_margin="@dimen/margin_12dp"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="@dimen/margin_6dp"
             app:layout_constraintTop_toBottomOf="@+id/iv_weather_back">
 
-            <TextView
-                android:id="@+id/tv_title_7d"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_title_7d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_16dp"
+                    android:text="@string/all_title_7d"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_7d_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/shape_horizontal_gray_divider"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_7d" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_weather_7d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_7d_divider" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--空气质量实况-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_aqi_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_12dp"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="@dimen/margin_6dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout_weather_7d">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_16dp"
-                android:text="@string/all_title_7d"
-                android:textColor="@color/colorMainText"
-                android:textSize="@dimen/textsize_16sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="@dimen/margin_16dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_weather_7d"
+                <TextView
+                    android:id="@+id/tv_title_aqi_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_title_air_now"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/layout_air_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    app:alignContent="space_around"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:justifyContent="flex_start"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_aqi_now" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--生活指数-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_weather_indices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_12dp"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="@dimen/margin_6dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout_aqi_now">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title_7d" />
+                android:padding="@dimen/margin_16dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_title_indices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_title_indices"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/layout_indices_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    app:alignContent="space_around"
+                    app:flexDirection="row"
+                    app:flexWrap="wrap"
+                    app:justifyContent="flex_start"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_indices" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--风力风向-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_weather_wind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_12dp"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="@dimen/margin_6dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout_weather_indices">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_16dp">
+
+                <TextView
+                    android:id="@+id/tv_title_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_title_wind"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie_wind"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_wind"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="21312-wind-farm.json"
+                    app:lottie_loop="true" />
+
+                <TextView
+                    android:id="@+id/tv_wind_dir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_50dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textSize="@dimen/textsize_14sp"
+                    app:layout_constraintStart_toEndOf="@+id/lottie_wind"
+                    app:layout_constraintTop_toTopOf="@+id/lottie_wind"
+                    tools:text="风向" />
+
+                <TextView
+                    android:id="@+id/tv_wind_scale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textSize="@dimen/textsize_14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_wind_dir"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_wind_dir"
+                    tools:text="风力" />
+
+                <TextView
+                    android:id="@+id/tv_wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12dp"
+                    android:textColor="@color/colorGrayText"
+                    android:textSize="@dimen/textsize_14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_wind_dir"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_wind_scale"
+                    tools:text="风速" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--Footer-->
+        <TextView
+            android:id="@+id/tv_weather_footer"
+            style="@style/ListItemPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/all_weather_data_resource"
+            android:textColor="@color/colorMainText"
+            app:layout_constraintTop_toBottomOf="@+id/layout_weather_wind" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

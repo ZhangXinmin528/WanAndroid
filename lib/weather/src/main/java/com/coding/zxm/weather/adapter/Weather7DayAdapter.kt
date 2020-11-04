@@ -1,7 +1,9 @@
-package com.coding.zxm.weather
+package com.coding.zxm.weather.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.coding.zxm.weather.R
+import com.coding.zxm.weather.util.IconUtils
 import com.qweather.sdk.bean.weather.WeatherDailyBean
 import com.zxm.utils.core.time.TimeUtil
 import java.text.DateFormat

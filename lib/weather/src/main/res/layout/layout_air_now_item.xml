@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_12dp">
+
+    <TextView
+        android:id="@+id/tv_air_now_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textsize_18sp"
+        android:textColor="@color/colorMainText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="29" />
+
+    <TextView
+        android:id="@+id/tv_aqi_indicator"
+        android:layout_width="@dimen/margin_20dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="@dimen/margin_4dp"
+        android:background="@drawable/shape_aqi_excellent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_air_now_value" />
+
+    <TextView
+        android:id="@+id/tv_air_now_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4dp"
+        android:textSize="@dimen/textsize_12sp"
+        android:textColor="@color/colorMainText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_aqi_indicator"
+        tools:text="PM2.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

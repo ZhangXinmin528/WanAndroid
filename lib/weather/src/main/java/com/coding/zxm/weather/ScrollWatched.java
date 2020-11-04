@@ -6,6 +6,8 @@ package com.coding.zxm.weather;
 
 public interface ScrollWatched {
     void addWatcher(ScrollWatcher watcher);
+
     void removeWatcher(ScrollWatcher watcher);
+
     void notifyWatcher(int x);
 }

@@ -1,5 +1,7 @@
-package com.coding.zxm.weather;
+package com.coding.zxm.weather.util;
 
+
+import com.coding.zxm.weather.R;
 
 public class IconUtils {
 

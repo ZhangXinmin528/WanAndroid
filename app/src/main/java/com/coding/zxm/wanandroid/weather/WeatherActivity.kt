@@ -2,7 +2,7 @@ package com.coding.zxm.wanandroid.weather
 
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
-import com.coding.zxm.weather.WeatherFragment
+import com.coding.zxm.weather.ui.fragment.WeatherFragment
 
 /**
  * Created by ZhangXinmin on 2020/7/26.

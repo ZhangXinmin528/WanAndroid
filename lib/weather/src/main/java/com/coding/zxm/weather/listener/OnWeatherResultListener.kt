@@ -1,4 +1,4 @@
-package com.coding.zxm.weather
+package com.coding.zxm.weather.listener
 
 /**
  * Created by ZhangXinmin on 2020/7/26.

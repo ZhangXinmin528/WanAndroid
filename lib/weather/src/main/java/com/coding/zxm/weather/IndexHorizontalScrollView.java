@@ -31,12 +31,12 @@ public class IndexHorizontalScrollView extends HorizontalScrollView {
         super.onDraw(canvas);
         int offset = computeHorizontalScrollOffset();
         int maxOffset = computeHorizontalScrollRange() - ScreenUtil.getScreenWidth(getContext());
-        if(hourlyForecastView != null){
+        if (hourlyForecastView != null) {
             hourlyForecastView.setScrollOffset(offset, maxOffset);
         }
     }
 
-    public void setToday24HourView(HourlyForecastView today24HourView){
+    public void setToday24HourView(HourlyForecastView today24HourView) {
         this.hourlyForecastView = today24HourView;
     }
 }

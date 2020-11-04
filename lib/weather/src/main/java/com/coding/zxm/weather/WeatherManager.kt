@@ -2,6 +2,7 @@ package com.coding.zxm.weather
 
 import android.content.Context
 import com.alibaba.fastjson.JSON
+import com.coding.zxm.weather.listener.OnWeatherResultListener
 import com.qweather.sdk.bean.base.Type
 import com.qweather.sdk.bean.geo.GeoBean
 import com.qweather.sdk.bean.geo.GeoPoiBean

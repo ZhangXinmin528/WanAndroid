@@ -40,6 +40,9 @@ dependencies {
 
     implementation deps.fastjson
 
+    //lottie
+    implementation deps.lottie
+
     implementation project(path: ':lib:core')
     implementation project(path: ':lib:util')
 

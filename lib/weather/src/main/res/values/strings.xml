@@ -68,5 +68,8 @@
     <string name="all_title_24hour">24小时预报</string>
     <string name="all_title_7d">7天预报</string>
     <string name="all_title_air_now">空气质量</string>
+    <string name="all_title_indices">生活指数</string>
+    <string name="all_title_wind">风力风向</string>
+    <string name="all_weather_data_resource">数据来源：和风天气</string>
 
 </resources>
