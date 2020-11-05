@@ -9,15 +9,15 @@
     <!--空气质量-->
     <!--一级-->
     <color name="color_air_excellent">#95B359</color>
-   <!-- 二级-->
+    <!-- 二级-->
     <color name="color_air_good">#D9D459</color>
     <!--三级-->
     <color name="color_air_low">#E0991D</color>
-   <!-- 四级-->
+    <!-- 四级-->
     <color name="color_air_mid">#D96161</color>
     <!--五级-->
     <color name="color_air_bad">#CB90F0</color>
-   <!-- 六级-->
+    <!-- 六级-->
     <color name="color_air_serious">#D9416F</color>
-    
+
 </resources>

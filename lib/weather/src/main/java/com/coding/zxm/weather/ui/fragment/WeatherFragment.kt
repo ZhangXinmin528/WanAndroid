@@ -229,7 +229,8 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                                 mContext,
                                 DividerItemDecoration.VERTICAL
                             )
-                            ContextCompat.getDrawable(context!!,
+                            ContextCompat.getDrawable(
+                                context!!,
                                 R.mipmap.icon_search_divider
                             )
                                 ?.let {
@@ -285,6 +286,8 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                             }
                         }
 
+                        aqiview.setAQIData(p0)
+
                         val layoutInflater = LayoutInflater.from(mContext)
 
                         //空气质量指标
@@ -293,7 +296,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         pm2_5.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.pm2p5
                         pm2_5.findViewById<TextView>(R.id.tv_air_now_type).text = "PM2.5"
                         pm2_5.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawable(nowBean.pm2p5))
+                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.pm2p5))
 
                         layout_air_container.addView(pm2_5)
 
@@ -302,7 +305,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         pm10.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.pm10
                         pm10.findViewById<TextView>(R.id.tv_air_now_type).text = "PM10"
                         pm10.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawable(nowBean.pm10))
+                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.pm10))
 
                         layout_air_container.addView(pm10)
 
@@ -311,7 +314,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         o3.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.o3
                         o3.findViewById<TextView>(R.id.tv_air_now_type).text = "O3"
                         o3.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawable(nowBean.o3))
+                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.o3))
 
                         layout_air_container.addView(o3)
 
@@ -320,7 +323,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         co.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.co
                         co.findViewById<TextView>(R.id.tv_air_now_type).text = "CO"
                         co.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawable(nowBean.co))
+                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.co))
 
                         layout_air_container.addView(co)
 
@@ -329,7 +332,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         so2.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.so2
                         so2.findViewById<TextView>(R.id.tv_air_now_type).text = "SO2"
                         so2.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawable(nowBean.so2))
+                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.so2))
 
                         layout_air_container.addView(so2)
 
@@ -338,7 +341,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                         no2.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.no2
                         no2.findViewById<TextView>(R.id.tv_air_now_type).text = "No2"
                         no2.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawable(nowBean.no2))
+                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.no2))
 
                         layout_air_container.addView(no2)
                     }

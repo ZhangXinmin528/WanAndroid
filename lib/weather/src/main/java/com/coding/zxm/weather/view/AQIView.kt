@@ -1,18 +1,27 @@
 package com.coding.zxm.weather.view
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.BounceInterpolator
 import androidx.annotation.FloatRange
 import com.coding.zxm.weather.R
+import com.coding.zxm.weather.util.WeatherUtil
+import com.qweather.sdk.bean.air.AirNowBean
+import com.zxm.utils.core.log.MLogger
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/11/4 . All rights reserved.
  * 空气质量指数
+ * <p>
+ *     View 尺寸最小120dp
  */
 class AQIView : View {
 
@@ -31,12 +40,12 @@ class AQIView : View {
     private lateinit var mContext: Context
 
     //背景圆弧
-    private lateinit var mLinePaint: Paint
+    private lateinit var mBgArcPaint: Paint
     private var mColorBgArc: Int = Color.parseColor("#EDEDED")
     private var mWidthBgArc: Float = 10.0f
 
     //指数圆弧
-    private lateinit var mIndicatorPaint: Paint
+    private lateinit var mIndicArcPaint: Paint
     private var mColorIndicatorArc: Int = Color.WHITE
 
     //文本
@@ -50,11 +59,21 @@ class AQIView : View {
     private var mViewWidth: Float = 0.0f
     private var mViewHeight: Float = 0.0f
 
+    //AQI
+    private var mAQIValueHeight: Float = 0.0f
+
     private var mCenterX: Float = 0.0f
     private var mCenterY: Float = 0.0f
     private var mRadius: Float = 0.0f
+    private var mRectF: RectF? = null
+
+    private var mAqi: String = ""
+    private var mAqiValue: Int = 0
+
+    private var mCategory: String = ""
 
     private fun initParams(context: Context?, attrs: AttributeSet?) {
+
         context?.let { mContext = it }
 
         attrs?.let {
@@ -74,7 +93,7 @@ class AQIView : View {
                 //指示圆弧
                 mColorIndicatorArc = typedArray.getColor(
                     R.styleable.StyleAQIView_color_aqi_arc_line,
-                    Color.parseColor("#95B359")
+                    Color.WHITE
                 )
 
                 //文本颜色
@@ -89,22 +108,28 @@ class AQIView : View {
         }
 
         //paint
-        mLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mLinePaint.setColor(mColorBgArc)
-        mLinePaint.style = Paint.Style.STROKE
-        mLinePaint.strokeWidth = mWidthBgArc / 2.0f
+        mBgArcPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        mBgArcPaint.color = mColorBgArc
+        mBgArcPaint.style = Paint.Style.STROKE
+        mBgArcPaint.strokeCap = Paint.Cap.ROUND
+        mBgArcPaint.strokeWidth = mWidthBgArc / 2.0f
 
-        mIndicatorPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mIndicatorPaint.setColor(mColorIndicatorArc)
-        mIndicatorPaint.style = Paint.Style.STROKE
-        mIndicatorPaint.strokeWidth = mWidthBgArc
+        mIndicArcPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        mIndicArcPaint.color = mColorIndicatorArc
+        mIndicArcPaint.style = Paint.Style.STROKE
+        mIndicArcPaint.strokeCap = Paint.Cap.ROUND
+        mIndicArcPaint.strokeWidth = mWidthBgArc
 
         mTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mTextPaint.setColor(mColorText)
+        mTextPaint.color = mColorText
         mTextPaint.style = Paint.Style.FILL
         mTextPaint.textSize = mTextSize
 
-        mDefaultSize = dp2px(mContext, 100f)
+        //AQI value
+        val fontMetrics = mTextPaint.fontMetrics
+        mAQIValueHeight = (fontMetrics.bottom - fontMetrics.top) / 2.0f - fontMetrics.bottom
+
+        mDefaultSize = dp2px(mContext, 120f)
         mDefaultPadding = dp2px(mContext, 6f)
     }
 
@@ -119,11 +144,23 @@ class AQIView : View {
             mDefaultSize
         }
 
+        mViewWidth = if (mViewWidth < mDefaultSize) {
+            mDefaultSize
+        } else {
+            mViewWidth
+        }
+
         //高度
         mViewHeight = if (heightMode == MeasureSpec.EXACTLY) {//match_parent or 具体数值
             MeasureSpec.getSize(heightMeasureSpec).toFloat()
         } else {//指定尺寸
             mDefaultSize
+        }
+
+        mViewHeight = if (mViewHeight < mDefaultSize) {
+            mDefaultSize
+        } else {
+            mViewHeight
         }
 
         mCenterX = mViewWidth / 2.0f
@@ -132,16 +169,127 @@ class AQIView : View {
         mRadius = if (mViewHeight > mViewWidth) (mViewWidth - mDefaultPadding * 2) / 2.0f else
             (mViewHeight - mDefaultPadding * 2) / 2.0f
 
-        super.onMeasure(mViewWidth.toInt(), mViewHeight.toInt())
+        if (mRectF == null && mRadius != 0f) {
+            mRectF = RectF(
+                mCenterX - mRadius,
+                mCenterY - mRadius,
+                mCenterX + mRadius,
+                mCenterY + mRadius
+            )
+
+        }
+//        MLogger.d(
+//            "AQIView",
+//            "onMeasure..widthMode:$widthMode..heightMode:$heightMode..mViewWidth:$mViewWidth..mViewHeight:$mViewHeight"
+//        )
+
+        setMeasuredDimension(mViewWidth.toInt(), mViewHeight.toInt())
     }
 
     override fun onDraw(canvas: Canvas?) {
+        canvas?.let {
+            //绘制封闭圆环
+            mBgArcPaint.color = mColorBgArc
+            mBgArcPaint.strokeWidth = mWidthBgArc / 2.0f
 
-        //绘制封闭圆环
-        canvas?.drawCircle(100f, 100f, 100f, mLinePaint)
+            it.drawCircle(mCenterX, mCenterY, mRadius, mBgArcPaint)
 
+            //绘制文本
+            if (!TextUtils.isEmpty(mAqi) && !TextUtils.isEmpty(mCategory)) {
+
+                //绘制指示圆弧
+                mIndicArcPaint.color = mColorIndicatorArc
+                mIndicArcPaint.strokeWidth = mWidthBgArc
+
+                val aqiValue = if (mAqiValue >= 500) {
+                    500
+                } else {
+                    mAqiValue
+                }
+
+                mRectF?.let { rectF ->
+                    it.drawArc(rectF, -247.5f, 315f * aqiValue / 500, false, mIndicArcPaint)
+                }
+
+                //绘制AQI value
+                mTextPaint.textSize = mTextSize
+                mTextPaint.color = mColorIndicatorArc
+                val contentWidth = mTextPaint.measureText(mAqi)
+                it.drawText(
+                    mAqi,
+                    mCenterX - contentWidth / 2.0f,
+                    mCenterY + mAQIValueHeight,
+                    mTextPaint
+                )
+
+                //绘制 AQI category
+                mTextPaint.textSize = mTextSize / 2.0f
+
+                val category = if (mCategory.length == 4) {
+                    mCategory.substring(0, 2)
+                } else {
+                    mCategory
+                }
+                val categoryWidth = mTextPaint.measureText(category)
+
+                val fontMetrics = mTextPaint.fontMetrics
+                val categoryHeight =
+                    (fontMetrics.bottom - fontMetrics.top) / 2.0f - fontMetrics.bottom
+
+                it.drawText(
+                    category,
+                    mCenterX - categoryWidth / 2.0f,
+                    mCenterY + mRadius * 0.5f + categoryHeight,
+                    mTextPaint
+                )
+
+                //绘制 AQI
+                mTextPaint.color = mColorText
+                val aqiWidth = mTextPaint.measureText("AQI")
+
+                it.drawText(
+                    "AQI",
+                    mCenterX - aqiWidth / 2.0f,
+                    mCenterY - mAQIValueHeight - mDefaultPadding - categoryHeight,
+                    mTextPaint
+                )
+
+            }
+        }
 
     }
+
+    fun setAQIData(airNowBean: AirNowBean) {
+        if (airNowBean != null) {
+            try {
+                mAqi = airNowBean.now.aqi
+                mCategory = airNowBean.now.category
+
+                if (TextUtils.isEmpty(mAqi) || TextUtils.isEmpty(mCategory)) {
+                    return
+                }
+
+                mColorIndicatorArc =
+                    mContext.resources.getColor(WeatherUtil.getAQIColorRes(airNowBean.now.level))
+
+                val aqiAnimator = ValueAnimator.ofInt(mAqi.toInt())
+                aqiAnimator.repeatCount = 0
+                aqiAnimator.duration = 2500
+                aqiAnimator.interpolator = BounceInterpolator(mContext, null)
+
+                aqiAnimator.addUpdateListener {
+                    mAqiValue = it.animatedValue as Int
+                    postInvalidate()
+                }
+                aqiAnimator.start()
+
+            } catch (exception: NumberFormatException) {
+                MLogger.d("AQIView", exception.toString())
+            }
+
+        }
+    }
+
 
     /**
      * Value of sp to value of px.

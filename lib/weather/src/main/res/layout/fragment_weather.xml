@@ -226,12 +226,16 @@
 
                 <com.coding.zxm.weather.view.AQIView
                     android:id="@+id/aqiview"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="@dimen/margin_16dp"
+                    app:color_aqi_text="@color/colorGrayText"
+                    app:color_bg_arc_line="@color/color_main_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_aqi_now" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_aqi_now"
+                    app:textsize_aqi_text="@dimen/textsize_28sp"
+                    app:width_bg_arc_line="@dimen/width_bg_arc_line" />
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/layout_air_container"

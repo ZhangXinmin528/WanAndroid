@@ -21,26 +21,27 @@ class WeatherUtil private constructor() {
         }
 
         /**
-         * 获取空气适量AQI对应级别颜色
+         * 获取空气适量AQI对应级别颜色资源
          */
-        fun getAQIColor(value: String): Int {
-            when {
-                value.toFloat() in 0.0..50.0 -> {
+        fun getAQIColorRes(level: String): Int {
+
+            when (level) {
+                "1" -> {
                     return R.color.color_air_excellent
                 }
-                value.toFloat() in 51.0..100.0 -> {
+                "2" -> {
                     return R.color.color_air_good
                 }
-                value.toFloat() in 101.0..150.0 -> {
+                "3" -> {
                     return R.color.color_air_low
                 }
-                value.toFloat() in 151.0..200.0 -> {
+                "4" -> {
                     return R.color.color_air_mid
                 }
-                value.toFloat() in 201.0..300.0 -> {
+                "5" -> {
                     return R.color.color_air_bad
                 }
-                value.toFloat() > 300.0 -> {
+                "6" -> {
                     return R.color.color_air_serious
                 }
                 else -> {
@@ -52,7 +53,7 @@ class WeatherUtil private constructor() {
         /**
          * 获取空气适量AQI对应级别背景
          */
-        fun getAQIDrawable(value: String): Int {
+        fun getAQIDrawableRes(value: String): Int {
             when {
                 value.toFloat() in 0.0..50.0 -> {
                     return R.drawable.shape_aqi_excellent
