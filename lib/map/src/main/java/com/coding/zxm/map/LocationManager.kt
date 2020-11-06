@@ -69,11 +69,10 @@ class LocationManager private constructor() : AMapLocationListener {
      * Start location
      */
     fun startLocation(onLocationListener: OnLocationListener) {
-        mLocationClient?.let {
-            if (!it.isStarted) {
-                it.startLocation()
-                mLocationListener = onLocationListener
-            }
+        if (mLocationClient != null) {
+            Log.d(TAG, "startLocation()")
+            mLocationClient?.startLocation()
+            mLocationListener = onLocationListener
         }
 
     }
@@ -84,6 +83,7 @@ class LocationManager private constructor() : AMapLocationListener {
     fun stopLocation() {
         if (mLocationClient != null) {
             if (mLocationClient!!.isStarted) {
+                Log.d(TAG, "stopLocation()")
                 mLocationClient!!.stopLocation()
             }
         }
@@ -93,6 +93,7 @@ class LocationManager private constructor() : AMapLocationListener {
     fun OnDestory() {
         mLocationClient?.let {
             it.onDestroy()
+            Log.d(TAG, "OnDestory()")
             mLocationClient = null
             mLocationOption = null
         }

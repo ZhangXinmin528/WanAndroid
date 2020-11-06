@@ -15,8 +15,6 @@ import com.coding.zxm.weather.ui.fragment.WeatherFragment
  */
 class WeatherActivity : BaseActivity() {
 
-    private var mWeatherFragment: WeatherFragment? = null
-
     override fun setLayoutId(): Int {
         return R.layout.activity_weather
     }
@@ -28,16 +26,17 @@ class WeatherActivity : BaseActivity() {
             .startLocation(object : OnLocationListener {
 
                 override fun onLocationSuccess(location: AMapLocation) {
-                    mWeatherFragment = WeatherFragment.newInstance(
-                        lon = location.longitude,
-                        lat = location.latitude,
-                        locationName = "${location.city} ${location.district}"
-                    )
-                    mWeatherFragment?.let {
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.container_weather, it)
-                            .commitAllowingStateLoss()
-                    }
+                    supportFragmentManager.beginTransaction()
+                        .replace(
+                            R.id.container_weather, WeatherFragment.newInstance(
+                                lon = location.longitude,
+                                lat = location.latitude,
+                                locationName = "${location.city} ${location.district}"
+                            )
+                        )
+                        .commitAllowingStateLoss()
+
+                    LocationManager.INSTANCE.stopLocation()
                 }
 
                 override fun onLicationFailure(errorCode: Int, errorMsg: String) {
@@ -51,4 +50,5 @@ class WeatherActivity : BaseActivity() {
 
 
     }
+
 }
