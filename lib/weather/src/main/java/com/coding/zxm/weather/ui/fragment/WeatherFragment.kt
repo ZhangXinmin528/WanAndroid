@@ -1,6 +1,7 @@
 package com.coding.zxm.weather.ui.fragment
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -37,17 +38,34 @@ import kotlin.collections.ArrayList
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/10/26 . All rights reserved.
+ * 传入经度（Longitude）和纬度（Latitude）获取天气信息
  */
 class WeatherFragment : BaseFragment(), ScrollWatched {
 
     companion object {
         private val DEFAULT_FORMAT: DateFormat =
-            SimpleDateFormat("HH:mm", Locale.getDefault())
+            SimpleDateFormat("HH:mm", Locale.CHINA)
 
-        fun newInstance(): WeatherFragment {
-            return WeatherFragment()
+        private const val PARAMS_LON = "params_longitude"
+        private const val PARAMS_LAT = "params_latitude"
+        private const val PARAMS_LOCATION_NAME = "params_location_name"
+
+        fun newInstance(lon: Double, lat: Double, locationName: String): WeatherFragment {
+            val fragment = WeatherFragment()
+            var args = Bundle()
+            args.putDouble(PARAMS_LON, lon)
+            args.putDouble(PARAMS_LAT, lat)
+            args.putString(PARAMS_LOCATION_NAME, locationName)
+            fragment.arguments = args
+            return fragment
         }
     }
+
+
+    private lateinit var mLocationName: String
+
+    private var mLatitude: Double = 0.0
+    private var mLongitude: Double = 0.0
 
     override fun setLayoutId(): Int {
         return R.layout.fragment_weather
@@ -60,6 +78,12 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
             StatusBarCompat.setTranslucentForImageViewInFragment(activity, iv_weather_back)
         }
 
+        mLocationName = arguments?.getString(PARAMS_LOCATION_NAME, "") as String
+
+        mLatitude = arguments?.getDouble(PARAMS_LAT, 0.0) as Double
+        mLongitude = arguments?.getDouble(PARAMS_LON, 0.0) as Double
+
+        tv_weather_location.text = mLocationName
     }
 
     override fun initViews(rootView: View) {
@@ -80,48 +104,51 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
      * 请求实况天气
      */
     private fun getWeatherNow() {
-        QWeather.getWeatherNow(mContext, "101010100", object : QWeather.OnResultWeatherNowListener {
-            @SuppressLint("SetTextI18n")
-            override fun onSuccess(p0: WeatherNowBean?) {
+        QWeather.getWeatherNow(
+            mContext,
+            "$mLongitude,$mLatitude",
+            object : QWeather.OnResultWeatherNowListener {
+                @SuppressLint("SetTextI18n")
+                override fun onSuccess(p0: WeatherNowBean?) {
 
-//                MLogger.d(TAG, "getWeatherNow${JSON.toJSONString(p0)}")
+                    MLogger.d(TAG, "getWeatherNow${JSON.toJSONString(p0)}")
 
-                if (p0 != null && p0.code == "200") {
+                    if (p0 != null && p0.code == "200") {
 
-                    tv_weather_temp.text = "${p0.now.temp}°"
+                        tv_weather_temp.text = "${p0.now.temp}°"
 
-                    tv_weather_text.text = p0.now.text
+                        tv_weather_text.text = p0.now.text
 
-                    val iconId = IconUtils.getWeatherIcon(p0.now.icon)
-                    if (iconId != -1) {
-                        iv_weather_now_icon.setImageResource(iconId)
+                        val iconId = IconUtils.getWeatherIcon(p0.now.icon)
+                        if (iconId != -1) {
+                            iv_weather_now_icon.setImageResource(iconId)
+                        }
+
+                        tv_weather_humidity.text = "湿度 ${p0.now.humidity}%"
+
+                        tv_weather_feellike_temp.text = "体感温度 ${p0.now.feelsLike}°"
+
+                        tv_weather_pressure.text = "气压 ${p0.now.pressure} 百帕"
+
+                        tv_weather_time.text = "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
+
+                        if (WeatherUtil.isInDayOrNight()) {
+                            iv_weather_back.setImageResource(IconUtils.getDayBack(p0.now.icon))
+                        } else {
+                            iv_weather_back.setImageResource(IconUtils.getNightBack(p0.now.icon))
+                        }
+
+                        //风力风向
+                        tv_wind_dir.text = "风向：${p0.now.windDir}"
+                        tv_wind_scale.text = "风力： ${p0.now.windScale}级"
+                        tv_wind_speed.text = "风速： ${p0.now.windSpeed}公里/小时"
                     }
-
-                    tv_weather_humidity.text = "湿度 ${p0.now.humidity}%"
-
-                    tv_weather_feellike_temp.text = "体感温度 ${p0.now.feelsLike}°"
-
-                    tv_weather_pressure.text = "气压 ${p0.now.pressure} 百帕"
-
-                    tv_weather_time.text = "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
-
-                    if (WeatherUtil.isInDayOrNight()) {
-                        iv_weather_back.setImageResource(IconUtils.getDayBack(p0.now.icon))
-                    } else {
-                        iv_weather_back.setImageResource(IconUtils.getNightBack(p0.now.icon))
-                    }
-
-                    //风力风向
-                    tv_wind_dir.text = "风向：${p0.now.windDir}"
-                    tv_wind_scale.text = "风力： ${p0.now.windScale}级"
-                    tv_wind_speed.text = "风速： ${p0.now.windSpeed}公里/小时"
                 }
-            }
 
-            override fun onError(p0: Throwable?) {
-            }
+                override fun onError(p0: Throwable?) {
+                }
 
-        })
+            })
     }
 
     /**
@@ -210,7 +237,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private fun getWeather7D() {
         QWeather.getWeather7D(
             mContext,
-            "101010100",
+            "$mLongitude,$mLatitude",
             object : QWeather.OnResultWeatherDailyListener {
 
                 override fun onError(p0: Throwable?) {
@@ -252,13 +279,13 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private fun getAirNow() {
         QWeather.getAirNow(
             mContext,
-            "101010100",
+            "$mLongitude,$mLatitude",
             null,
             object : QWeather.OnResultAirNowListener {
                 @SuppressLint("SetTextI18n")
                 override fun onSuccess(p0: AirNowBean?) {
 
-                    MLogger.d(TAG, "getAirNow${JSON.toJSONString(p0)}")
+//                    MLogger.d(TAG, "getAirNow${JSON.toJSONString(p0)}")
 
                     if (p0 != null && p0.code == "200") {
 
@@ -361,7 +388,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private fun getIndices1D() {
         QWeather.getIndices1D(
             mContext,
-            "101010100",
+            "$mLongitude,$mLatitude",
             Lang.ZH_HANS,
             WeatherUtil.getDefaultIndicesTypeList(),
             object : QWeather.OnResultIndicesListener {

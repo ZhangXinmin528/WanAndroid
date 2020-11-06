@@ -30,22 +30,8 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
 
-    //androidx
-    implementation deps.app_compat
-    implementation deps.material
-    implementation deps.constraint_layout
-    implementation deps.recyclerview
-    implementation deps.rvadapterhelper
-    implementation deps.flexbox
-
-    implementation deps.fastjson
-
-    //lottie
-    implementation deps.lottie
-
-    implementation project(path: ':lib:core')
-
-    implementation project(path: ':lib:util')
-
-
+    implementation deps.amap_3dmap
+//    implementation deps.amap_map2d
+    implementation deps.amap_search
+    api deps.amap_location
 }

@@ -178,6 +178,8 @@ dependencies {
     implementation project(path: ':lib:webview')
     implementation project(path: ':lib:image')
     implementation project(path: ':lib:weather')
+
+    implementation project(path: ':lib:map')
 }
 
 //apply from: 'tinker-support.gradle'
