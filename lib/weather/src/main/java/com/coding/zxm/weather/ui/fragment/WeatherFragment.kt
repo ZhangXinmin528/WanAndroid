@@ -1,6 +1,8 @@
 package com.coding.zxm.weather.ui.fragment
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -9,9 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.weather.R
 import com.coding.zxm.weather.ScrollWatched
@@ -27,7 +29,6 @@ import com.qweather.sdk.bean.weather.WeatherHourlyBean
 import com.qweather.sdk.bean.weather.WeatherNowBean
 import com.qweather.sdk.view.QWeather
 import com.zxm.utils.core.bar.StatusBarCompat
-import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.time.TimeUtil
 import kotlinx.android.synthetic.main.fragment_weather.*
 import java.text.DateFormat
@@ -74,9 +75,9 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private val mWatcherList: MutableList<ScrollWatcher> = ArrayList()
 
     override fun initParamsAndValues() {
-        activity?.let {
-            StatusBarCompat.setTranslucentForImageViewInFragment(activity, iv_weather_back)
-        }
+//        activity?.let {
+//            StatusBarCompat.setTranslucentForImageViewInFragment(activity, iv_weather_back)
+//        }
 
         mLocationName = arguments?.getString(PARAMS_LOCATION_NAME, "") as String
 
@@ -111,7 +112,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                 @SuppressLint("SetTextI18n")
                 override fun onSuccess(p0: WeatherNowBean?) {
 
-                    MLogger.d(TAG, "getWeatherNow${JSON.toJSONString(p0)}")
+//                    MLogger.d(TAG, "getWeatherNow${JSON.toJSONString(p0)}")
 
                     if (p0 != null && p0.code == "200") {
 
@@ -132,10 +133,34 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
 
                         tv_weather_time.text = "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
 
+                        var backBitmap: Bitmap
                         if (WeatherUtil.isInDayOrNight()) {
-                            iv_weather_back.setImageResource(IconUtils.getDayBack(p0.now.icon))
+                            backBitmap = BitmapFactory.decodeResource(
+                                resources,
+                                IconUtils.getDayBack(p0.now.icon)
+                            )
                         } else {
-                            iv_weather_back.setImageResource(IconUtils.getNightBack(p0.now.icon))
+                            backBitmap = BitmapFactory.decodeResource(
+                                resources,
+                                IconUtils.getNightBack(p0.now.icon)
+                            )
+                        }
+
+                        if (backBitmap != null) {
+                            iv_weather_back.setImageBitmap(backBitmap)
+                            Palette.from(backBitmap).generate {
+                                it.let {
+                                    val swatch = it?.lightVibrantSwatch
+                                    if (swatch != null) {
+                                        val bgColor = swatch.rgb
+                                        StatusBarCompat.setColorNoTranslucent(activity, bgColor)
+
+                                        if (!backBitmap.isRecycled) {
+                                            backBitmap.recycle()
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         //风力风向
@@ -157,7 +182,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private fun getWeather24Hourly() {
         QWeather.getWeather24Hourly(
             mContext,
-            "101010100",
+            "$mLongitude,$mLatitude",
             object : QWeather.OnResultWeatherHourlyListener {
 
                 override fun onError(p0: Throwable?) {
@@ -247,11 +272,11 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
 //                    MLogger.d(TAG, "getWeather7D${JSON.toJSONString(p0)}")
                     p0?.let {
                         if (it.code == "200") {
-                            rv_weather_7d.adapter =
+                            rv_weather_7d?.adapter =
                                 Weather7DayAdapter(
                                     it.daily
                                 )
-                            rv_weather_7d.layoutManager = LinearLayoutManager(mContext)
+                            rv_weather_7d?.layoutManager = LinearLayoutManager(mContext)
                             val itemDecoration = DividerItemDecoration(
                                 mContext,
                                 DividerItemDecoration.VERTICAL
@@ -265,7 +290,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                                         it
                                     )
                                 }
-                            rv_weather_7d.addItemDecoration(itemDecoration)
+                            rv_weather_7d?.addItemDecoration(itemDecoration)
                         }
                     }
                 }

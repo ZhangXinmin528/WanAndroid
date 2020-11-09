@@ -79,9 +79,9 @@
                     android:id="@+id/iv_weather_now_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/icon100"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@mipmap/icon100" />
 
                 <!--天气描述-->
                 <TextView
@@ -102,12 +102,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_20dp"
                     android:layout_marginTop="@dimen/margin_6dp"
-                    android:background="@drawable/shape_aqi_excellent"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/textsize_14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_weather_text"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:background="@drawable/shape_aqi_excellent"
                     tools:text="AQI 优" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -318,17 +318,6 @@
                     android:textSize="@dimen/textsize_16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottie_wind"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="@dimen/margin_16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_wind"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="21312-wind-farm.json"
-                    app:lottie_loop="true" />
 
                 <TextView
                     android:id="@+id/tv_wind_dir"

@@ -37,7 +37,7 @@ dependencies {
     implementation deps.recyclerview
     implementation deps.rvadapterhelper
     implementation deps.flexbox
-//    implementation 'androidx.palette:palette:1.0.0'
+    implementation deps.palette
 
     implementation deps.fastjson
 

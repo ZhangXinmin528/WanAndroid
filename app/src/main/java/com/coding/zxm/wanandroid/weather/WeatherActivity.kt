@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.weather
 
+import android.util.Log
 import android.widget.Toast
 import com.amap.api.location.AMapLocation
 import com.coding.zxm.core.base.BaseActivity
@@ -20,7 +21,7 @@ class WeatherActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-
+        Log.d(TAG, "initParamsAndValues")
         LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
             .setOnceLocationOption()
             .startLocation(object : OnLocationListener {
@@ -36,7 +37,6 @@ class WeatherActivity : BaseActivity() {
                         )
                         .commitAllowingStateLoss()
 
-                    LocationManager.INSTANCE.stopLocation()
                 }
 
                 override fun onLicationFailure(errorCode: Int, errorMsg: String) {
@@ -50,5 +50,6 @@ class WeatherActivity : BaseActivity() {
 
 
     }
+
 
 }

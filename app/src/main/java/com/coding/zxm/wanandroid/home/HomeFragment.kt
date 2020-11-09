@@ -1,21 +1,32 @@
 package com.coding.zxm.wanandroid.home
 
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.fastjson.JSON
+import com.amap.api.location.AMapLocation
 import com.coding.zxm.core.base.BaseFragment
+import com.coding.zxm.map.LocationManager
+import com.coding.zxm.map.location.listener.OnLocationListener
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.search.SearchActivity
+import com.coding.zxm.weather.WeatherManager
+import com.coding.zxm.weather.entity.WeatherNowEntity
+import com.coding.zxm.weather.listener.OnWeatherResultListener
 import com.coding.zxm.webview.X5WebviewActivity
+import com.sunfusheng.marqueeview.MarqueeView
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -30,12 +41,12 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment private constructor() : BaseFragment() {
 
     private val mHomeViewModel: HomeViewModel by viewModels { HomeViewModel.HomeViewModelFactory }
-
     private val mNewsList: MutableList<NewsDetialEntity> = ArrayList()
-
     private var mCurrentPage: Int = 0
-
     private lateinit var mNewsAdapter: HomeNewsAdapter
+
+    private val mMarqueeList: MutableList<String> = ArrayList()
+    private var mMarqueeView: MarqueeView<String>? = null
 
     companion object {
 
@@ -50,9 +61,29 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun initParamsAndValues() {
         mNewsAdapter = HomeNewsAdapter(mNewsList)
 
+
     }
 
     override fun initViews(rootView: View) {
+        mMarqueeView = view?.findViewById(R.id.marquee_weather)
+
+        LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
+            .setOnceLocationOption()
+            .startLocation(object : OnLocationListener {
+
+                override fun onLocationSuccess(location: AMapLocation) {
+                    tv_location_city.text = location.city
+                    getWeatherNow(location.longitude, location.latitude)
+                }
+
+                override fun onLicationFailure(errorCode: Int, errorMsg: String) {
+                    Toast.makeText(
+                        mContext,
+                        "${getString(R.string.all_location_failed_reason)}$errorMsg",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
 
         val bannerLiveData = mHomeViewModel.getBannerData()
         bannerLiveData.observe(this, Observer {
@@ -158,14 +189,52 @@ class HomeFragment private constructor() : BaseFragment() {
 
     }
 
+    private fun getWeatherNow(longitude: Double, latitude: Double) {
+        WeatherManager.INSTANCE
+            .getWeatherNow(longitude, latitude, object : OnWeatherResultListener {
+                override fun onError(throwable: Throwable?) {
+                    Toast.makeText(
+                        mContext,
+                        getString(
+                            R.string.all_weather_failed_reason,
+                            if (throwable != null) throwable.message else ""
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                override fun onSuccess(result: String) {
+                    if (TextUtils.isEmpty(result))
+                        return
+
+                    val weatherEntity = JSON.parseObject(result, WeatherNowEntity::class.java)
+                    if (weatherEntity != null) {
+                        if (weatherEntity.code == "200") {
+                            val nowBaseBean = weatherEntity.now
+                            if (nowBaseBean != null) {
+                                mMarqueeList.add("${nowBaseBean.text!!} ${nowBaseBean.temp!!}°")
+                                mMarqueeList.add("${nowBaseBean.windDir}${nowBaseBean.windScale}级")
+
+                                mMarqueeView?.startWithList(mMarqueeList)
+                            }
+
+                        }
+                    }
+                }
+
+            })
+    }
+
     override fun onStart() {
         banner_home?.start()
+//        mMarqueeView?.startFlipping()
         super.onStart()
     }
 
     override fun onStop() {
-        super.onStop()
         banner_home?.stop()
+        mMarqueeView?.stopFlipping()
+        super.onStop()
     }
 
     override fun onDestroyView() {

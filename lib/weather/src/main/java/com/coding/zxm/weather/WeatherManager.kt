@@ -24,57 +24,77 @@ class WeatherManager private constructor() {
         val holder = WeatherManager()
     }
 
-    fun init() {
+    private lateinit var mContext: Context
+
+    fun init(context: Context) {
+        mContext = context
         HeConfig.init("HE2010261719461230", "bd86df080cef4ac98128e443afea4306")
         HeConfig.switchToDevService()
+    }
+
+    /**
+     * 通过经纬度获取实时天气数据
+     */
+    fun getWeatherNow(
+        longitude: Double,
+        latitude: Double,
+        onWeatherResultListener: OnWeatherResultListener
+    ) {
+        getWeatherNow("$longitude,$latitude", onWeatherResultListener)
     }
 
     /**
      * 获取实时天气数据
      * @param location 需要查询地区的LocationID或以逗号分隔的经度/纬度坐标（十进制），LocationID可通过城市搜索服务获取。
      * 例如： location=101010100 或 location=116.41,39.92
+     *
      */
     fun getWeatherNow(
-        context: Context,
         location: String,
         onWeatherResultListener: OnWeatherResultListener
     ) {
-        QWeather.getWeatherNow(context, location, object : QWeather.OnResultWeatherNowListener {
-            override fun onSuccess(p0: WeatherNowBean?) {
-                if (p0 == null) {
-                    onWeatherResultListener.onError(NullPointerException("天气数据为空！"))
-                } else {
-                    onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
-                }
-            }
+        if (mContext != null) {
+            QWeather.getWeatherNow(
+                mContext,
+                location,
+                object : QWeather.OnResultWeatherNowListener {
+                    override fun onSuccess(p0: WeatherNowBean?) {
+                        if (p0 == null) {
+                            onWeatherResultListener.onError(NullPointerException("天气数据为空！"))
+                        } else {
+                            onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+                        }
+                    }
 
-            override fun onError(p0: Throwable?) {
-                onWeatherResultListener.onError(p0)
-            }
+                    override fun onError(p0: Throwable?) {
+                        onWeatherResultListener.onError(p0)
+                    }
 
-        })
-
+                })
+        }
     }
 
     /**
      * 获取热门10个城市
      */
-    fun getGeoTopCity(context: Context, onWeatherResultListener: OnWeatherResultListener) {
+    fun getGeoTopCity(onWeatherResultListener: OnWeatherResultListener) {
 
-        QWeather.getGeoTopCity(context, object : QWeather.OnResultGeoListener {
-            override fun onSuccess(p0: GeoBean?) {
-                if (p0 == null) {
-                    onWeatherResultListener.onError(NullPointerException("热门城市数据为空！"))
-                } else {
-                    onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+        if (mContext != null) {
+            QWeather.getGeoTopCity(mContext, object : QWeather.OnResultGeoListener {
+                override fun onSuccess(p0: GeoBean?) {
+                    if (p0 == null) {
+                        onWeatherResultListener.onError(NullPointerException("热门城市数据为空！"))
+                    } else {
+                        onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+                    }
                 }
-            }
 
-            override fun onError(p0: Throwable?) {
-                onWeatherResultListener.onError(p0)
-            }
+                override fun onError(p0: Throwable?) {
+                    onWeatherResultListener.onError(p0)
+                }
 
-        })
+            })
+        }
     }
 
     /**
@@ -83,25 +103,27 @@ class WeatherManager private constructor() {
      * ADCode（仅限中国城市）。例如location=beijing， location=116.4,39.1
      */
     fun getGeoCityLookup(
-        context: Context,
         location: String,
         onWeatherResultListener: OnWeatherResultListener
     ) {
 
-        QWeather.getGeoCityLookup(context, location, object : QWeather.OnResultGeoListener {
-            override fun onSuccess(p0: GeoBean?) {
-                if (p0 == null) {
-                    onWeatherResultListener.onError(NullPointerException("城市信息搜索数据为空！"))
-                } else {
-                    onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+        if (mContext != null) {
+            QWeather.getGeoCityLookup(mContext, location, object : QWeather.OnResultGeoListener {
+                override fun onSuccess(p0: GeoBean?) {
+                    if (p0 == null) {
+                        onWeatherResultListener.onError(NullPointerException("城市信息搜索数据为空！"))
+                    } else {
+                        onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+                    }
                 }
-            }
 
-            override fun onError(p0: Throwable?) {
-                onWeatherResultListener.onError(p0)
-            }
+                override fun onError(p0: Throwable?) {
+                    onWeatherResultListener.onError(p0)
+                }
 
-        })
+            })
+        }
+
     }
 
     /**
@@ -113,29 +135,30 @@ class WeatherManager private constructor() {
      */
 
     fun getGeoPoiLookup(
-        context: Context,
         location: String,
         onWeatherResultListener: OnWeatherResultListener
     ) {
 
-        QWeather.getGeoPoiLookup(
-            context,
-            location,
-            Type.SCENIC,
-            object : QWeather.OnResultGeoPoiListener {
+        if (mContext != null) {
+            QWeather.getGeoPoiLookup(
+                mContext,
+                location,
+                Type.SCENIC,
+                object : QWeather.OnResultGeoPoiListener {
 
-                override fun onSuccess(p0: GeoPoiBean?) {
-                    if (p0 == null) {
-                        onWeatherResultListener.onError(NullPointerException("POI信息搜索数据为空！"))
-                    } else {
-                        onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+                    override fun onSuccess(p0: GeoPoiBean?) {
+                        if (p0 == null) {
+                            onWeatherResultListener.onError(NullPointerException("POI信息搜索数据为空！"))
+                        } else {
+                            onWeatherResultListener.onSuccess(JSON.toJSONString(p0))
+                        }
                     }
-                }
 
-                override fun onError(p0: Throwable?) {
-                    onWeatherResultListener.onError(p0)
-                }
+                    override fun onError(p0: Throwable?) {
+                        onWeatherResultListener.onError(p0)
+                    }
 
-            })
+                })
+        }
     }
 }

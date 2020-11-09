@@ -50,7 +50,7 @@ class WanApp : MultiDexApplication() {
     }
 
     private fun initWeather() {
-        WeatherManager.INSTANCE.init()
+        WeatherManager.INSTANCE.init(this)
     }
 
 

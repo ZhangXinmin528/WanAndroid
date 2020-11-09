@@ -22,13 +22,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initViews() {
-
         vp_home.adapter = HomePageAdapter(fragments, supportFragmentManager)
+
         vp_home.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 bottom_nav.menu.getItem(position).isChecked = true
             }
         })
+        vp_home.offscreenPageLimit = 2
 
         bottom_nav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -50,5 +51,9 @@ class MainActivity : BaseActivity() {
                 else -> false
             }
         }
+        bottom_nav.selectedItemId = R.id.action_home
+
     }
+
+
 }

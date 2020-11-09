@@ -162,5 +162,6 @@ class WeatherUtil private constructor() {
             }
             return logoId
         }
+
     }
 }

@@ -143,6 +143,9 @@ dependencies {
     //banner
     implementation deps.banner
 
+    //Marquee
+    implementation 'com.sunfusheng:MarqueeView:1.4.1'
+
     //smart refresh
     implementation deps.smart_layout
     implementation deps.smart_header_classics
@@ -156,6 +159,8 @@ dependencies {
 
     //CircleImageView
     implementation deps.circleImageView
+    //lottie
+//    implementation deps.lottie
 
     //umeng
     implementation deps.umsdk_common
@@ -177,7 +182,7 @@ dependencies {
     implementation project(path: ':lib:util')
     implementation project(path: ':lib:webview')
     implementation project(path: ':lib:image')
-    implementation project(path: ':lib:weather')
+    api project(path: ':lib:weather')
 
     implementation project(path: ':lib:map')
 }

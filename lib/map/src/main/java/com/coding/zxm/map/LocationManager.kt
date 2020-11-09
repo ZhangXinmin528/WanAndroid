@@ -35,6 +35,7 @@ class LocationManager private constructor() : AMapLocationListener {
     private var mLocationClient: AMapLocationClient? = null
     private var mLocationOption: AMapLocationClientOption? = null
     private var mLocationListener: OnLocationListener? = null
+    private var mIsOnceLocation: Boolean = false
 
     /**
      * Use application context
@@ -57,6 +58,7 @@ class LocationManager private constructor() : AMapLocationListener {
         if (mLocationOption != null) {
             mLocationClient = null
         }
+        mIsOnceLocation = true
         mLocationOption = AMapLocationClientOption()
         mLocationOption?.isNeedAddress = true
         mLocationOption?.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
@@ -107,6 +109,10 @@ class LocationManager private constructor() : AMapLocationListener {
                     mLocationListener?.onLocationSuccess(aMapLocation)
                 }
                 Log.d(TAG, "定位成功：[Info]=${aMapLocation.toJson(1).toString()}")
+                if (mIsOnceLocation) {
+                    stopLocation()
+                    OnDestory()
+                }
             } else {
                 if (mLocationListener != null) {
                     mLocationListener?.onLicationFailure(

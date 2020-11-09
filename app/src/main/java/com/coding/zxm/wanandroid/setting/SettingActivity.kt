@@ -30,6 +30,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     override fun initViews() {
         iv_toolbar_back.setOnClickListener(this)
+        tv_setting_switch_language.setOnClickListener(this)
         tv_setting_font.setOnClickListener(this)
         layout_clear_cache.setOnClickListener(this)
         tv_setting_logout.setOnClickListener(this)
@@ -52,6 +53,9 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.tv_setting_switch_language -> {
+                Toast.makeText(mContext, "开发小伙伴正加紧开发中...", Toast.LENGTH_SHORT).show()
+            }
             R.id.iv_toolbar_back -> {
                 finish()
             }
