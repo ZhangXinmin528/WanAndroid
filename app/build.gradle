@@ -159,6 +159,8 @@ dependencies {
 
     //CircleImageView
     implementation deps.circleImageView
+    //图片缩放
+    implementation deps.scale_image_view
     //lottie
 //    implementation deps.lottie
 

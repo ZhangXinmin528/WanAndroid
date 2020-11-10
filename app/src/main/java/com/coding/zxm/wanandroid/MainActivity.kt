@@ -1,9 +1,9 @@
 package com.coding.zxm.wanandroid
 
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.home.HomeFragment
+import com.coding.zxm.wanandroid.gallery.ImageDisplayFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,18 +17,20 @@ class MainActivity : BaseActivity() {
     override fun initParamsAndValues() {
         setStatusBarColorNoTranslucent()
         fragments.add(HomeFragment.newInstance())
-        fragments.add(Fragment())
+        fragments.add(ImageDisplayFragment.newInstance())
         fragments.add(MineFragment.newInstance())
     }
 
     override fun initViews() {
         vp_home.adapter = HomePageAdapter(fragments, supportFragmentManager)
 
-        vp_home.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                bottom_nav.menu.getItem(position).isChecked = true
-            }
-        })
+        //TODO:已禁用Viewpager的横向滑动
+//        vp_home.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+//            override fun onPageSelected(position: Int) {
+//                bottom_nav.menu.getItem(position).isChecked = true
+//            }
+//        })
+
         vp_home.offscreenPageLimit = 2
 
         bottom_nav.setOnNavigationItemSelectedListener {
@@ -38,7 +40,7 @@ class MainActivity : BaseActivity() {
                     true
                 }
 
-                R.id.action_list -> {
+                R.id.action_gallery -> {
                     vp_home.currentItem = 1
                     true
                 }

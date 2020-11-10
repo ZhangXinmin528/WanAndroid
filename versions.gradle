@@ -22,6 +22,7 @@ versions.flexbox = "2.0.1"
 versions.circleImageView = "3.1.0"
 versions.lottie = "3.4.4"
 versions.palette = "1.0.0"
+versions.scale_image_view = "3.10.0"
 
 //kotlin
 versions.core_ktx = "1.1.0"
@@ -122,6 +123,7 @@ deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 deps.circleImageView = "de.hdodenhof:circleimageview:$versions.circleImageView"
 deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
 deps.palette = "androidx.palette:palette:$versions.palette"
+deps.scale_image_view = "com.davemorrissey.labs:subsampling-scale-image-view-androidx:$versions.scale_image_view"
 
 //TODO:Recycleview
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"

@@ -7,7 +7,7 @@
     android:background="@color/color_main_bg"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
+    <com.coding.zxm.wanandroid.ui.widget.CustomViewPager
         android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"

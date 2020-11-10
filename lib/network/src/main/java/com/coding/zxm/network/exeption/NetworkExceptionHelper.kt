@@ -1,7 +1,6 @@
-package comcodingzxmnetworkexeption
+package com.coding.zxm.network.exeption
 
 import android.net.ParseException
-import com.coding.zxm.network.exeption.NetworkException
 import com.google.gson.JsonParseException
 import org.json.JSONException
 import retrofit2.HttpException

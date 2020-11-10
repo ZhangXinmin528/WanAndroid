@@ -44,6 +44,7 @@ class WanApp : MultiDexApplication() {
         initLogger()
     }
 
+
     private fun initLogger() {
 
         MLogger.setLogEnable(this, BuildConfig.DEBUG)
