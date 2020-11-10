@@ -319,6 +319,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie_wind"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_wind"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="21312-wind-farm.json"
+                    app:lottie_loop="true" />
+
                 <TextView
                     android:id="@+id/tv_wind_dir"
                     android:layout_width="wrap_content"

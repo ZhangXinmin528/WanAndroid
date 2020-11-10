@@ -57,7 +57,7 @@ class RetrofitClient private constructor(private val context: Context) {
 
     private fun initLogInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
-        if (true) {
+        if (BuildConfig.DEBUG) {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         } else {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
