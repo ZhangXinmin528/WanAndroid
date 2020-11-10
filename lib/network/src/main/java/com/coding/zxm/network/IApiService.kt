@@ -6,6 +6,6 @@ package com.coding.zxm.network
  */
 interface IApiService {
     companion object {
-         const val BASE_URL = "https://www.wanandroid.com"
+        const val BASE_URL = "https://www.wanandroid.com"
     }
 }
