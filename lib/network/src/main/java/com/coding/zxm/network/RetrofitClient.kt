@@ -34,7 +34,7 @@ class RetrofitClient private constructor(private val context: Context) {
     init {
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(IApiService.BASE_URL)
+            .baseUrl(APIConstants.BASE_URL)
             .client(initOkhttpClient())
             .build()
     }
