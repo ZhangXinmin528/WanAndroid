@@ -1,13 +1,12 @@
 package com.coding.zxm.wanandroid.login
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
 
 /**
@@ -17,45 +16,57 @@ import kotlinx.coroutines.launch
 
 open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() {
 
-    private val mLoginLiveData = MutableLiveData<UserEntity>()
 
     /**
      * User login
      */
     fun login(userName: String, passWord: String): MutableLiveData<UserEntity> {
+
+        val liveData = MutableLiveData<UserEntity>()
+
         viewModelScope.launch {
             val result = loginRepo.login(userName, passWord)
-            if (result is NetworkResult.NetworkSuccess<UserEntity>) {
-                mLoginLiveData.postValue(result.data)
-            } else if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (result != null) {
+                if (result.errorCode == 0) {
+                    liveData.postValue(result.data)
+                } else {
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(null)
+                }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(null)
             }
         }
-        return mLoginLiveData
+        return liveData
     }
 
     /**
      * User register
      */
-    fun register(userName: String, passWord: String, repassword: String) {
+    fun register(
+        userName: String,
+        passWord: String,
+        repassword: String
+    ): MutableLiveData<UserEntity> {
+        val liveData = MutableLiveData<UserEntity>()
         viewModelScope.launch {
             val result = loginRepo.register(userName, passWord, repassword)
-            if (result is NetworkResult.NetworkSuccess<UserEntity>) {
-                mLoginLiveData.postValue(result.data)
-            } else if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (result != null) {
+                if (result.errorCode == 0) {
+                    liveData.postValue(result.data)
+                } else {
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(null)
+                }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(null)
             }
         }
+        return liveData
     }
 
     object LoginViewModelFactory : ViewModelProvider.Factory {

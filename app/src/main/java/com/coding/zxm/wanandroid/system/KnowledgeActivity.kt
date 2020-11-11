@@ -119,6 +119,9 @@ class KnowledgeActivity : BaseActivity() {
         val liveData = knowledgeViewModel.getKnowledgeTree()
         liveData.observe(this, Observer {
 
+            if (it == null)
+                return@Observer
+
             if (mDetialList.isNotEmpty()) {
                 mDetialList.clear()
             }

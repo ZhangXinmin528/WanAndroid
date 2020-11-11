@@ -1,13 +1,12 @@
 package com.coding.zxm.wanandroid.setting
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
 
 /**
@@ -17,27 +16,24 @@ import kotlinx.coroutines.launch
 class LogoutViewModel(private val logoutRepo: LogoutRepository) : ViewModel() {
 
     fun logout(): MutableLiveData<Int> {
-        val logoutLivedata = MutableLiveData<Int>()
+        val liveData = MutableLiveData<Int>()
 
         viewModelScope.launch {
             val result = logoutRepo.logout()
-            if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-                logoutLivedata.postValue(-1)
-            } else if (result is NetworkResult.NetworkSuccess<Any>) {
-                if (result.data == null) {
-                    logoutLivedata.postValue(0)
+            if (result != null) {
+                if (result.errorCode == 0 && result.data == null) {
+                    liveData.postValue(0)
                 } else {
-                    logoutLivedata.postValue(-1)
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(-1)
                 }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(-1)
             }
         }
-        return logoutLivedata
+        return liveData
     }
 
     object LogoutViewModelFactory : ViewModelProvider.Factory {

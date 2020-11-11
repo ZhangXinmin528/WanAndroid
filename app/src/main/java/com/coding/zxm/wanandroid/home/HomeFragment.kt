@@ -104,7 +104,6 @@ class HomeFragment private constructor() : BaseFragment() {
                 })
 
                 banner_home?.isAutoLoop(true)
-
             }
         })
 
@@ -168,6 +167,9 @@ class HomeFragment private constructor() : BaseFragment() {
         mCurrentPage += 1
 
         newsLiveData.observeForever(Observer {
+            if (it == null)
+                return@Observer
+
             if (isRefresh) {
                 sr_home_layout?.finishRefresh()
             } else {

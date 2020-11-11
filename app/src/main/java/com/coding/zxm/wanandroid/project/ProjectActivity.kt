@@ -67,6 +67,8 @@ class ProjectActivity : BaseActivity() {
             val liveData = mViewModel.getProjectTree()
             liveData.observe(this, Observer {
 
+                if (it == null)
+                    return@Observer
                 if (mTagList.isNotEmpty()) {
                     mTagList.clear()
                 }

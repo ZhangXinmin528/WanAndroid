@@ -114,6 +114,9 @@ class ProjectItemFragment : BaseFragment() {
         mCurrentPage += 1
 
         liveData.observeForever(Observer {
+            if (it == null)
+                return@Observer
+
             if (isRefresh) {
                 sr_project_layout?.finishRefresh()
             } else {
@@ -128,7 +131,7 @@ class ProjectItemFragment : BaseFragment() {
 
             //没有更多数据
             if (it.over) {
-                sr_project_layout.finishLoadMoreWithNoMoreData()
+                sr_project_layout?.finishLoadMoreWithNoMoreData()
             }
         })
 

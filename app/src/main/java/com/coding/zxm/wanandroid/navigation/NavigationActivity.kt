@@ -78,6 +78,9 @@ class NavigationActivity : BaseActivity() {
 
         liveData.observe(this, Observer {
             sr_navi_layout.finishRefresh()
+            if (it == null)
+                return@Observer
+
             if (it != null && it.isNotEmpty()) {
                 if (mDataList.isNotEmpty()) {
                     mDataList.clear()

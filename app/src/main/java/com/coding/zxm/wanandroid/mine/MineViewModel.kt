@@ -1,14 +1,13 @@
 package com.coding.zxm.wanandroid.mine
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.mine.model.UserDetialEntity
+import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
 
 /**
@@ -18,21 +17,23 @@ import kotlinx.coroutines.launch
 class MineViewModel(private val mineRepository: MineRepository) : ViewModel() {
 
     fun getUserInfo(): MutableLiveData<UserDetialEntity> {
-        val userLiveData = MutableLiveData<UserDetialEntity>()
+        val liveData = MutableLiveData<UserDetialEntity>()
         viewModelScope.launch {
             val result = mineRepository.getUserInfo()
-            if (result is NetworkResult.NetworkSuccess<UserDetialEntity>) {
-                userLiveData.postValue(result.data)
-            } else if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (result != null) {
+                if (result.errorCode == 0) {
+                    liveData.postValue(result.data)
+                } else {
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(null)
+                }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(null)
             }
         }
-        return userLiveData
+        return liveData
     }
 
     object MineViewModelFactory : ViewModelProvider.Factory {

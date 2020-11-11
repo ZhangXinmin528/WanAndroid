@@ -123,6 +123,8 @@ class KnowledgeListActivity : BaseActivity() {
                     sr_list_layout.finishLoadMore()
                 }
 
+                if (it == null) return@Observer
+
                 val datas = it.datas
                 if (datas.isNotEmpty()) {
                     mArticleList.addAll(datas)

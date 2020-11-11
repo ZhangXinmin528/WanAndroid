@@ -10,6 +10,7 @@ import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.system.repository.KnowledgeRepository
 import com.coding.zxm.wanandroid.system.model.KnowledgeEntity
+import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
 
 /**
@@ -23,15 +24,17 @@ class KnowledgeViewModel(private val repository: KnowledgeRepository) : ViewMode
 
         viewModelScope.launch {
             val result = repository.getKnowledgeTree()
-            if (result is NetworkResult.NetworkSuccess<MutableList<KnowledgeEntity>>) {
-                liveData.postValue(result.data)
-            } else if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (result != null) {
+                if (result.errorCode == 0) {
+                    liveData.postValue(result.data)
+                } else {
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(null)
+                }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(null)
             }
         }
         return liveData

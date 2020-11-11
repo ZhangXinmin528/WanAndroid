@@ -1,15 +1,14 @@
 package com.coding.zxm.wanandroid.search
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.callback.NetworkResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
 import com.coding.zxm.wanandroid.search.model.SearchEntity
+import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
 
 /**
@@ -18,42 +17,45 @@ import kotlinx.coroutines.launch
  */
 class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
-    private val mHotwordLiveData = MutableLiveData<MutableList<HotWordEntity>>()
-
     fun getHotWord(): MutableLiveData<MutableList<HotWordEntity>> {
+        val liveData = MutableLiveData<MutableList<HotWordEntity>>()
         viewModelScope.launch {
             val result = searchRepository.getHotWord()
-            if (result is NetworkResult.NetworkSuccess<MutableList<HotWordEntity>>) {
-                mHotwordLiveData.postValue(result.data)
-            } else if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (result != null) {
+                if (result.errorCode == 0) {
+                    liveData.postValue(result.data)
+                } else {
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(null)
+                }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(null)
             }
         }
-        return mHotwordLiveData
+        return liveData
     }
 
     fun doSearch(page: Int, key: String): MutableLiveData<SearchEntity> {
-        val searchLiveData = MutableLiveData<SearchEntity>()
+        val liveData = MutableLiveData<SearchEntity>()
 
         viewModelScope.launch {
             val result = searchRepository.doSearch(page, key)
-            if (result is NetworkResult.NetworkSuccess<SearchEntity>) {
-                searchLiveData.postValue(result.data)
-            } else if (result is NetworkResult.NetworkError) {
-                Toast.makeText(
-                    WanApp.getApplicationContext(),
-                    result.error?.errorMsg,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (result != null) {
+                if (result.errorCode == 0) {
+                    liveData.postValue(result.data)
+                } else {
+                    ToastUtil.showToast(result.errorMsg)
+
+                    liveData.postValue(null)
+                }
+            } else {
+                ToastUtil.showUnKnownError()
+                liveData.postValue(null)
             }
         }
-        return searchLiveData
+        return liveData
     }
 
     object SearchViewModelFactory : ViewModelProvider.Factory {

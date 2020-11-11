@@ -64,6 +64,9 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         if (loginState) {
             val userLiveData = mMineViewModel.getUserInfo()
             userLiveData.observe(this, Observer {
+                if (it == null)
+                    return@Observer
+
                 val userDetialEntity = userLiveData.value
                 userDetialEntity?.let {
                     val userName = SharedPreferencesUtil.get(

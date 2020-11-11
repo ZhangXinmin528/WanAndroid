@@ -13,14 +13,14 @@ interface LoginService {
 
     @FormUrlEncoded
     @POST("/user/login")
-   suspend fun login(
+    suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String
     ): CommonResponse<UserEntity>
 
     @FormUrlEncoded
     @POST("/user/register")
-   suspend fun register(
+    suspend fun register(
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("repassword") repassword: String

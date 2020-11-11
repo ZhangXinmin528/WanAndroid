@@ -79,7 +79,6 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         val liveData = mLogoutViewModel.logout()
         liveData.observe(this, Observer {
             if (it == 0) {
-
                 Toast.makeText(
                     mContext,
                     getString(R.string.all_logout_succeess),
@@ -91,6 +90,8 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
                     SPConfig.CONFIG_STATE_LOGIN,
                     false
                 )
+
+                finish()
             }
         })
     }

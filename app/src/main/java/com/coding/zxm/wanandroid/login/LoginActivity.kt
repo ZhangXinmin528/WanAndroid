@@ -93,21 +93,22 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                 mLoginViewModel.login(userName, password)
                     .observe(this, Observer {
+                        if (it != null) {
+                            SharedPreferencesUtil.put(
+                                mContext!!,
+                                SPConfig.CONFIG_USER_NAME,
+                                it.username
+                            )
 
-                        SharedPreferencesUtil.put(
-                            mContext!!,
-                            SPConfig.CONFIG_USER_NAME,
-                            it.username
-                        )
+                            SharedPreferencesUtil.put(
+                                mContext!!,
+                                SPConfig.CONFIG_STATE_LOGIN,
+                                true
+                            )
 
-                        SharedPreferencesUtil.put(
-                            mContext!!,
-                            SPConfig.CONFIG_STATE_LOGIN,
-                            true
-                        )
-
-                        jumpActivity(MainActivity::class.java)
-                        finish()
+                            jumpActivity(MainActivity::class.java)
+                            finish()
+                        }
                     })
             }
         }

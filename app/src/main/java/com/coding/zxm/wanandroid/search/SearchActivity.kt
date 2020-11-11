@@ -157,6 +157,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         if (time.isEmpty() || !TimeUtil.isToday(time)) {
             val hotWordLiveData = mSearchViewModel.getHotWord()
             hotWordLiveData.observe(this, Observer {
+
                 it?.let {
 
                     if (mSearchList.isNotEmpty()) {
@@ -247,6 +248,8 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         searchLiveData.observe(this, Observer {
 
             sr_search_result.finishLoadMore()
+            if (it == null)
+                return@Observer
 
             val datas = it.datas
             if (datas != null && datas.isNotEmpty()) {
