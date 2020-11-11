@@ -60,8 +60,6 @@ class HomeFragment private constructor() : BaseFragment() {
 
     override fun initParamsAndValues() {
         mNewsAdapter = HomeNewsAdapter(mNewsList)
-
-
     }
 
     override fun initViews(rootView: View) {
@@ -167,14 +165,15 @@ class HomeFragment private constructor() : BaseFragment() {
         mCurrentPage += 1
 
         newsLiveData.observeForever(Observer {
-            if (it == null)
-                return@Observer
 
             if (isRefresh) {
                 sr_home_layout?.finishRefresh()
             } else {
                 sr_home_layout?.finishLoadMore()
             }
+
+            if (it == null)
+                return@Observer
 
             val datas = it.datas
             Log.d("zxm==", "requestNewsData..observe..it.curPage : ${it.curPage}")

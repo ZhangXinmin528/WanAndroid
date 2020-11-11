@@ -35,13 +35,19 @@ class WanApp : MultiDexApplication() {
         super.onCreate()
         context = this
 
-        RetrofitClient.getInstance(this)
+        initRetrofit()
 
         initUMeng()
 
         initWeather()
 
         initLogger()
+    }
+
+    private fun initRetrofit() {
+        RetrofitClient.getInstance(this)
+        //添加其余BaseUrl
+        RetrofitClient.putDoman()
     }
 
 

@@ -5,6 +5,7 @@ import com.coding.zxm.network.cookie.PersistentCookieJar
 import com.coding.zxm.network.cookie.cache.SetCookieCache
 import com.coding.zxm.network.cookie.persistence.SharedPrefsCookiePersistor
 import com.coding.zxm.network.interceptor.WanInterceptor
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,6 +28,14 @@ class RetrofitClient private constructor(private val context: Context) {
             }
             return INSTANCE
         }
+
+        /**
+         * 添加其他BaseUrl
+         */
+        fun putDoman() {
+            RetrofitUrlManager.getInstance()
+                .putDomain(APIConstants.DOMAN_BING, APIConstants.BING_URL)
+        }
     }
 
     private var retrofit: Retrofit
@@ -37,6 +46,8 @@ class RetrofitClient private constructor(private val context: Context) {
             .baseUrl(APIConstants.BASE_URL)
             .client(initOkhttpClient())
             .build()
+
+        RetrofitUrlManager.getInstance().setDebug(true)
     }
 
     private fun initOkhttpClient(): OkHttpClient {
@@ -45,13 +56,16 @@ class RetrofitClient private constructor(private val context: Context) {
             SharedPrefsCookiePersistor(context)
         )
 
-        return OkHttpClient.Builder()
+        val builder = OkHttpClient.Builder()
             .addInterceptor(WanInterceptor())
             .addInterceptor(initLogInterceptor())
             .cookieJar(cookieJar)
             .connectTimeout(30000, TimeUnit.SECONDS)
             .readTimeout(30000, TimeUnit.SECONDS)
             .writeTimeout(30000, TimeUnit.SECONDS)
+
+        return RetrofitUrlManager.getInstance()
+            .with(builder)
             .build()
     }
 

@@ -68,6 +68,8 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private var mLatitude: Double = 0.0
     private var mLongitude: Double = 0.0
 
+    private var mBackBitmap: Bitmap? = null
+
     override fun setLayoutId(): Int {
         return R.layout.fragment_weather
     }
@@ -75,9 +77,6 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     private val mWatcherList: MutableList<ScrollWatcher> = ArrayList()
 
     override fun initParamsAndValues() {
-//        activity?.let {
-//            StatusBarCompat.setTranslucentForImageViewInFragment(activity, iv_weather_back)
-//        }
 
         mLocationName = arguments?.getString(PARAMS_LOCATION_NAME, "") as String
 
@@ -133,31 +132,26 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
 
                         tv_weather_time.text = "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
 
-                        var backBitmap: Bitmap
                         if (WeatherUtil.isInDayOrNight()) {
-                            backBitmap = BitmapFactory.decodeResource(
+                            mBackBitmap = BitmapFactory.decodeResource(
                                 resources,
                                 IconUtils.getDayBack(p0.now.icon)
                             )
                         } else {
-                            backBitmap = BitmapFactory.decodeResource(
+                            mBackBitmap = BitmapFactory.decodeResource(
                                 resources,
                                 IconUtils.getNightBack(p0.now.icon)
                             )
                         }
 
-                        if (backBitmap != null) {
-                            iv_weather_back.setImageBitmap(backBitmap)
-                            Palette.from(backBitmap).generate {
-                                it.let {
-                                    val swatch = it?.lightVibrantSwatch
+                        mBackBitmap?.let {
+                            iv_weather_back.setImageBitmap(it)
+                            Palette.from(it).generate { palette ->
+                                palette.let {
+                                    val swatch = palette?.lightVibrantSwatch
                                     if (swatch != null) {
                                         val bgColor = swatch.rgb
                                         StatusBarCompat.setColorNoTranslucent(activity, bgColor)
-
-                                        if (!backBitmap.isRecycled) {
-                                            backBitmap.recycle()
-                                        }
                                     }
                                 }
                             }
@@ -471,5 +465,12 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
         }
     }
 
-
+    override fun onDestroy() {
+        mBackBitmap?.let {
+            if (!it.isRecycled) {
+                it.recycle()
+            }
+        }
+        super.onDestroy()
+    }
 }
