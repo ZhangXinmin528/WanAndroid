@@ -6,7 +6,7 @@ import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.wanandroid.R
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-import kotlinx.android.synthetic.main.fragment_image_display.*
+import kotlinx.android.synthetic.main.activity_image_preview.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -21,7 +21,7 @@ class ImageDisplayFragment : BaseFragment() {
     }
 
     override fun setLayoutId(): Int {
-        return R.layout.fragment_image_display
+        return R.layout.activity_image_preview
     }
 
     override fun initParamsAndValues() {
@@ -45,6 +45,7 @@ class ImageDisplayFragment : BaseFragment() {
                     ?.withInterruptible(false)?.start()
             }
         }
+
 
     }
 }

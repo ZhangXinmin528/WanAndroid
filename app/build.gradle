@@ -130,11 +130,11 @@ dependencies {
     implementation deps.lifecycle.extensions
 
 //    implementation deps.lifecycle.livedata_ktx
-    annotationProcessor deps.lifecycle.compiler
+    kapt deps.lifecycle.compiler
 
     //room
     implementation deps.room.runtime
-    annotationProcessor deps.room.compiler
+    kapt deps.room.compiler
 
     //arouter
     implementation deps.arouter.api
@@ -150,6 +150,7 @@ dependencies {
     implementation deps.smart_layout
     implementation deps.smart_header_classics
     implementation deps.smart_footer_classics
+    implementation deps.smart_header_material
 
     //flexbox
     implementation deps.flexbox

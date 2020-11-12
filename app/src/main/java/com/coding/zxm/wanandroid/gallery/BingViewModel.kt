@@ -1,6 +1,5 @@
 package com.coding.zxm.wanandroid.gallery
 
-import androidx.annotation.IntRange
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -20,14 +19,11 @@ class BingViewModel(var repo: BingRepository) : ViewModel() {
     /**
      *获取bing壁纸图片
      */
-    suspend fun getBingPicList(
-        @IntRange(from = 0) pageIndex: Int,
-        @IntRange(from = 1) pageSize: Int
-    ): MutableLiveData<MutableList<BingImageEntity>> {
+    fun getBingPicList(): MutableLiveData<MutableList<BingImageEntity>> {
         val liveData = MutableLiveData<MutableList<BingImageEntity>>()
 
         viewModelScope.launch {
-            val result = repo.getBingPicList(pageIndex, pageSize)
+            val result = repo.getBingPicList()
             if (result != null) {
                 if (result.images != null && result.images.isNotEmpty()) {
                     liveData.postValue(result.images)

@@ -59,6 +59,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".gallery.ImagePreviewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <!--搜索-->
         <activity
             android:name=".search.SearchActivity"

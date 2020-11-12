@@ -119,6 +119,7 @@ deps.banner = "com.youth.banner:banner:$versions.banner"
 deps.smart_layout = "com.scwang.smart:refresh-layout-kernel:$versions.smartRefresh"
 deps.smart_header_classics = "com.scwang.smart:refresh-header-classics:$versions.smartRefresh"
 deps.smart_footer_classics = "com.scwang.smart:refresh-footer-classics:$versions.smartRefresh"
+deps.smart_header_material = "com.scwang.smart:refresh-header-material:$versions.smartRefresh"
 //flexbox
 deps.flexbox = "com.google.android:flexbox:$versions.flexbox"
 deps.circleImageView = "de.hdodenhof:circleimageview:$versions.circleImageView"

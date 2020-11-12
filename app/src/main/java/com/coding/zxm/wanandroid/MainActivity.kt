@@ -2,6 +2,7 @@ package com.coding.zxm.wanandroid
 
 import androidx.fragment.app.Fragment
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.gallery.ImageDisplayFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
@@ -17,7 +18,7 @@ class MainActivity : BaseActivity() {
     override fun initParamsAndValues() {
         setStatusBarColorNoTranslucent()
         fragments.add(HomeFragment.newInstance())
-        fragments.add(ImageDisplayFragment.newInstance())
+        fragments.add(BingWallpapersFragment.newInstance())
         fragments.add(MineFragment.newInstance())
     }
 
