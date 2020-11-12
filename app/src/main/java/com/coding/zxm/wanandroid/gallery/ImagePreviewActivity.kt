@@ -15,6 +15,7 @@ import com.coding.zxm.wanandroid.util.ToastUtil
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.example.image.model.GlideApp
+import com.zxm.utils.core.screen.ScreenUtil
 import kotlinx.android.synthetic.main.activity_image_preview.*
 
 /**
@@ -67,9 +68,8 @@ class ImagePreviewActivity : BaseActivity() {
                 ) {
                     ssiv_image.setImage(ImageSource.bitmap(resource))
                     if (ssiv_image.isReady) {
-                        val maxScale: Float = ssiv_image.maxScale
-                        val minScale: Float = ssiv_image.minScale
-                        val scale: Float = 0.5f * (maxScale - minScale) + minScale
+                        val scale: Float =
+                            ScreenUtil.getScreenHeight(mContext) / ssiv_image.sHeight.toFloat()
                         val center =
                             PointF(0.5f * ssiv_image.sWidth, 0.5f * ssiv_image.sHeight)
                         val animationBuilder = ssiv_image.animateScaleAndCenter(scale, center)

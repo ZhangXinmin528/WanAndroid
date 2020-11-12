@@ -25,8 +25,8 @@
     <item
         android:id="@+id/action_gallery"
         android:contentDescription="cd_gallery"
-        android:icon="@drawable/ic_feed_list_photo"
-        android:title="@string/all_nav_gallery"
+        android:icon="@drawable/icon_nav_find"
+        android:title="@string/all_nav_find"
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/action_mine"
