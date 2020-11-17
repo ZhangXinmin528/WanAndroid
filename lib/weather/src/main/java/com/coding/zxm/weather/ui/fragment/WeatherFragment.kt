@@ -148,7 +148,7 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                             iv_weather_back.setImageBitmap(it)
                             Palette.from(it).generate { palette ->
                                 palette.let {
-                                    val swatch = palette?.lightVibrantSwatch
+                                    val swatch = palette?.vibrantSwatch
                                     if (swatch != null) {
                                         val bgColor = swatch.rgb
                                         StatusBarCompat.setColorNoTranslucent(activity, bgColor)

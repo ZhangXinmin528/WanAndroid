@@ -10,6 +10,7 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.BounceInterpolator
+import android.view.animation.DecelerateInterpolator
 import androidx.annotation.FloatRange
 import com.coding.zxm.weather.R
 import com.coding.zxm.weather.util.WeatherUtil
@@ -274,8 +275,8 @@ class AQIView : View {
 
                 val aqiAnimator = ValueAnimator.ofInt(mAqi.toInt())
                 aqiAnimator.repeatCount = 0
-                aqiAnimator.duration = 2500
-                aqiAnimator.interpolator = BounceInterpolator(mContext, null)
+                aqiAnimator.duration = 3000
+                aqiAnimator.interpolator = DecelerateInterpolator(mContext, null)
 
                 aqiAnimator.addUpdateListener {
                     mAqiValue = it.animatedValue as Int
