@@ -56,13 +56,15 @@
         <!--主页-->
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!--图片预览-->
+        <activity
+            android:name=".gallery.ImagePreviewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".gallery.ImagePreviewActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
         <!--搜索-->
         <activity
             android:name=".search.SearchActivity"
@@ -72,37 +74,31 @@
         <!--知识体系-->
         <activity
             android:name=".system.KnowledgeActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!--知识专题文章列表-->
         <activity
             android:name=".system.KnowledgeListActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!--导航-->
         <activity
             android:name=".navigation.NavigationActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!--导航-->
         <activity
             android:name=".project.ProjectActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!--设置-->
         <activity
             android:name=".setting.SettingActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!--关于-->
         <activity
             android:name=".ui.activity.AboutActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <!--天气-->
