@@ -38,7 +38,11 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent(R.color.colorWhite)
+//        setStatusBarColorNoTranslucent(R.color.colorPrimary)
+//        activity?.let {
+//            StatusBarCompat.setLightMode(it)
+//        }
+
     }
 
     override fun initViews(rootView: View) {

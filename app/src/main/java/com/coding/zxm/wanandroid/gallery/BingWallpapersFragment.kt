@@ -8,6 +8,7 @@ import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
+import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
 
 /**
@@ -32,6 +33,10 @@ class BingWallpapersFragment : BaseFragment() {
     }
 
     override fun initParamsAndValues() {
+//        setStatusBarColorNoTranslucent(R.color.colorWhite)
+//        activity?.let {
+//            StatusBarCompat.setDarkMode(it)
+//        }
         mAdapter = BingWallpapersAdapter(mDataList)
 
     }

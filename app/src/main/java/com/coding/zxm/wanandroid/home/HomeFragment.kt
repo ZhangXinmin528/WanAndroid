@@ -59,6 +59,12 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun setLayoutId(): Int = R.layout.fragment_home
 
     override fun initParamsAndValues() {
+        //存在问题
+//        setStatusBarColorNoTranslucent(R.color.colorWhite)
+//        activity?.let {
+//            StatusBarCompat.setDarkMode(it)
+//        }
+
         mNewsAdapter = HomeNewsAdapter(mNewsList)
     }
 

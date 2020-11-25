@@ -51,10 +51,7 @@ abstract class BaseFragment() : Fragment() {
                 activity,
                 resources.getColor(colorRes)
             )
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                activity!!.window.decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            }
+//            StatusBarCompat.setDarkMode(it)
         }
     }
 
