@@ -1,7 +1,6 @@
 package com.coding.zxm.wanandroid.home
 
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -29,14 +28,13 @@ import com.coding.zxm.webview.X5WebviewActivity
 import com.sunfusheng.marqueeview.MarqueeView
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
+import com.zxm.utils.core.log.MLogger
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020 . All rights reserved.
- * TODO:首页数据逻辑存在问题
- * TODO：功能列表后面做
- * TODO:Banner随列表滑动
+ * TODO：功能列表后面做？？
  */
 class HomeFragment private constructor() : BaseFragment() {
 
@@ -164,8 +162,6 @@ class HomeFragment private constructor() : BaseFragment() {
             }
         }
 
-        Log.d("zxm==", "requestNewsData..page : $mCurrentPage")
-
         val newsLiveData: MutableLiveData<NewsEntity> = mHomeViewModel.getNewsData(mCurrentPage)
 
         mCurrentPage += 1
@@ -182,7 +178,7 @@ class HomeFragment private constructor() : BaseFragment() {
                 return@Observer
 
             val datas = it.datas
-            Log.d("zxm==", "requestNewsData..observe..it.curPage : ${it.curPage}")
+            MLogger.d(TAG, "requestNewsData..observe..it.curPage : ${it.curPage}")
             if (datas.isNotEmpty()) {
                 mNewsList.addAll(datas)
                 mNewsAdapter.notifyDataSetChanged()

@@ -9,6 +9,7 @@ import com.coding.zxm.map.location.listener.OnLocationListener
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.weather.ui.fragment.WeatherFragment
+import com.zxm.utils.core.log.MLogger
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -21,7 +22,6 @@ class WeatherActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        Log.d(TAG, "initParamsAndValues")
         LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
             .setOnceLocationOption()
             .startLocation(object : OnLocationListener {
@@ -48,8 +48,6 @@ class WeatherActivity : BaseActivity() {
 
     override fun initViews() {
 
-
     }
-
 
 }

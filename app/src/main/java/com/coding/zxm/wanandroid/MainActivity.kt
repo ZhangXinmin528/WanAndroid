@@ -6,6 +6,7 @@ import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.gallery.ImageDisplayFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
+import com.zxm.utils.core.log.MLogger
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -54,9 +55,16 @@ class MainActivity : BaseActivity() {
                 else -> false
             }
         }
-        bottom_nav.selectedItemId = R.id.action_home
-
     }
 
+    override fun onStart() {
+        MLogger.d(TAG,"onStart..hashcode:${this.hashCode()}")
+        super.onStart()
+    }
+
+    override fun onDestroy() {
+        MLogger.d(TAG,"onDestroy")
+        super.onDestroy()
+    }
 
 }

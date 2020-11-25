@@ -30,7 +30,7 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
 
-    implementation deps.amap_3dmap
+//    implementation deps.amap_3dmap
 //    implementation deps.amap_map2d
     implementation deps.amap_search
     api deps.amap_location
