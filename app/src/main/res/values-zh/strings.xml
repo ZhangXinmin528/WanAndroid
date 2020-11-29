@@ -19,6 +19,8 @@
     <string name="all_nav_find">发现</string>
     <string name="all_nav_mine">我的</string>
 
+    <string name="all_article_author">作者</string>
+    <string name="all_article_sharer">分享者</string>
     <string name="all_location_failed_reason">定位失败,原因：</string>
     <string name="all_weather_failed_reason">天气请求失败,原因：%1$s</string>
     <string name="all_not_login">未登录</string>

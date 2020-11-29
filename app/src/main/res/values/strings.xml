@@ -19,6 +19,8 @@
     <string name="all_nav_find">Find</string>
     <string name="all_nav_mine">Mine</string>
 
+    <string name="all_article_author">Author</string>
+    <string name="all_article_sharer">Sharer</string>
     <string name="all_location_failed_reason">Location failure: cause:</string>
     <string name="all_weather_failed_reason">Weather request failed, reason:%1$s</string>
     <string name="all_not_login">Not logged in</string>

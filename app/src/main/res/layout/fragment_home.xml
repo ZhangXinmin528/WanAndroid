@@ -7,7 +7,7 @@
     android:background="@color/color_main_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_home_search"
+        android:id="@+id/layout_home_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorWhite"
@@ -46,6 +46,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_home_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_6dp"
@@ -86,7 +87,7 @@
         android:layout_marginTop="@dimen/margin_0_5dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_home_search">
+        app:layout_constraintTop_toBottomOf="@+id/layout_home_title">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"

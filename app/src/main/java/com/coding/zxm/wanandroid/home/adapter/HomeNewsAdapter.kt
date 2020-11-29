@@ -26,10 +26,10 @@ class HomeNewsAdapter(dataList: MutableList<NewsDetialEntity>) :
         val shareUser = item.shareUser
 
         if (!TextUtils.isEmpty(author)) {
-            holder.setText(R.id.tv_user_sort_logo, "作者")
+            holder.setText(R.id.tv_user_sort_logo, context.getString(R.string.all_article_author))
             holder.setText(R.id.tv_persion_name, author)
         } else if (!TextUtils.isEmpty(shareUser)) {
-            holder.setText(R.id.tv_user_sort_logo, "分享者")
+            holder.setText(R.id.tv_user_sort_logo, context.getString(R.string.all_article_sharer))
             holder.setText(R.id.tv_persion_name, shareUser)
         }
 

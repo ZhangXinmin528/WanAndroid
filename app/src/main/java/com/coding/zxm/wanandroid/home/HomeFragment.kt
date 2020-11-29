@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.home
 
+import android.content.Intent
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
@@ -21,6 +22,7 @@ import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.search.SearchActivity
+import com.coding.zxm.wanandroid.weather.WeatherActivity
 import com.coding.zxm.weather.WeatherManager
 import com.coding.zxm.weather.entity.WeatherNowEntity
 import com.coding.zxm.weather.listener.OnWeatherResultListener
@@ -149,6 +151,11 @@ class HomeFragment private constructor() : BaseFragment() {
                 SearchActivity.startSearch(mContext!!)
             }
 
+        }
+
+        layout_home_weather.setOnClickListener {
+            val weather = Intent(mContext!!, WeatherActivity::class.java)
+            startActivity(weather)
         }
 
     }
