@@ -1,8 +1,13 @@
 package com.coding.zxm.weather.util
 
+import android.content.Context
 import android.graphics.Color
+import android.text.TextUtils
+import com.coding.zxm.util.SPConfig
 import com.coding.zxm.weather.R
 import com.qweather.sdk.bean.base.IndicesType
+import com.qweather.sdk.bean.base.Lang
+import com.zxm.utils.core.sp.SharedPreferencesUtil
 import java.util.*
 
 /**
@@ -18,6 +23,28 @@ class WeatherUtil private constructor() {
          */
         fun isInDayOrNight(): Boolean {
             return Calendar.getInstance().get(Calendar.HOUR_OF_DAY) in 6..18
+        }
+
+        /**
+         * 获取和风天气对用语言参数
+         */
+        fun getQWeatherLanCode(context: Context): Lang {
+            val language =
+                SharedPreferencesUtil.get(context, SPConfig.CONFIG_APP_LANGUAGE, "") as String
+            if (TextUtils.isEmpty(language))
+                return Lang.ZH_HANS
+
+            return when (language) {
+                "zh" -> {
+                    Lang.ZH_HANS
+                }
+                "en" -> {
+                    Lang.EN
+                }
+                else -> {
+                    Lang.ZH_HANS
+                }
+            }
         }
 
         /**

@@ -3,7 +3,9 @@ package com.coding.zxm.weather
 import android.content.Context
 import com.alibaba.fastjson.JSON
 import com.coding.zxm.weather.listener.OnWeatherResultListener
+import com.coding.zxm.weather.util.WeatherUtil
 import com.qweather.sdk.bean.base.Type
+import com.qweather.sdk.bean.base.Unit
 import com.qweather.sdk.bean.geo.GeoBean
 import com.qweather.sdk.bean.geo.GeoPoiBean
 import com.qweather.sdk.bean.weather.WeatherNowBean
@@ -13,6 +15,7 @@ import com.qweather.sdk.view.QWeather
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/10/26 . All rights reserved.
+ * TODO:需要适配多语言
  */
 class WeatherManager private constructor() {
 
@@ -57,6 +60,8 @@ class WeatherManager private constructor() {
             QWeather.getWeatherNow(
                 mContext,
                 location,
+                WeatherUtil.getQWeatherLanCode(mContext),
+                Unit.METRIC,
                 object : QWeather.OnResultWeatherNowListener {
                     override fun onSuccess(p0: WeatherNowBean?) {
                         if (p0 == null) {

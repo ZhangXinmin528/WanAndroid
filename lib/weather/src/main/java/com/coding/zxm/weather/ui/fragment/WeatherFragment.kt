@@ -21,7 +21,7 @@ import com.coding.zxm.weather.util.IconUtils
 import com.coding.zxm.weather.util.WeatherUtil
 import com.qweather.sdk.bean.IndicesBean
 import com.qweather.sdk.bean.air.AirNowBean
-import com.qweather.sdk.bean.base.Lang
+import com.qweather.sdk.bean.base.Unit
 import com.qweather.sdk.bean.weather.WeatherDailyBean
 import com.qweather.sdk.bean.weather.WeatherHourlyBean
 import com.qweather.sdk.bean.weather.WeatherNowBean
@@ -38,6 +38,7 @@ import kotlin.collections.ArrayList
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/10/26 . All rights reserved.
  * 传入经度（Longitude）和纬度（Latitude）获取天气信息
+ * TODO:需要适配多语言
  */
 class WeatherFragment : BaseFragment() {
 
@@ -103,6 +104,8 @@ class WeatherFragment : BaseFragment() {
         QWeather.getWeatherNow(
             mContext,
             "$mLongitude,$mLatitude",
+            mContext?.let { WeatherUtil.getQWeatherLanCode(it) },
+            Unit.METRIC,
             object : QWeather.OnResultWeatherNowListener {
                 @SuppressLint("SetTextI18n")
                 override fun onSuccess(p0: WeatherNowBean?) {
@@ -253,6 +256,8 @@ class WeatherFragment : BaseFragment() {
         QWeather.getWeather7D(
             mContext,
             "$mLongitude,$mLatitude",
+            mContext?.let { WeatherUtil.getQWeatherLanCode(it) },
+            Unit.METRIC,
             object : QWeather.OnResultWeatherDailyListener {
 
                 override fun onError(p0: Throwable?) {
@@ -295,7 +300,7 @@ class WeatherFragment : BaseFragment() {
         QWeather.getAirNow(
             mContext,
             "$mLongitude,$mLatitude",
-            null,
+            mContext?.let { WeatherUtil.getQWeatherLanCode(it) },
             object : QWeather.OnResultAirNowListener {
                 @SuppressLint("SetTextI18n")
                 override fun onSuccess(p0: AirNowBean?) {
@@ -404,7 +409,7 @@ class WeatherFragment : BaseFragment() {
         QWeather.getIndices1D(
             mContext,
             "$mLongitude,$mLatitude",
-            Lang.ZH_HANS,
+            mContext?.let { WeatherUtil.getQWeatherLanCode(it) },
             WeatherUtil.getDefaultIndicesTypeList(),
             object : QWeather.OnResultIndicesListener {
 

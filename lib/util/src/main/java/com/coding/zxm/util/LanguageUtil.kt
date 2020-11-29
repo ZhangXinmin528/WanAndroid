@@ -12,6 +12,14 @@ import java.util.*
 class LanguageUtil private constructor() {
 
     companion object {
+
+        /**
+         * 获取和风天气语言环境配置
+         */
+        fun getLanguageConfig(context: Context): String {
+            return SharedPreferencesUtil.get(context, SPConfig.CONFIG_APP_LANGUAGE, "") as String
+        }
+
         /**
          * 为页面设置语言
          */

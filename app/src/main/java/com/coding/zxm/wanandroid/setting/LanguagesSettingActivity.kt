@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.setting.model.LanguageEntity
-import com.coding.zxm.util.LanguageUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_languages_setting.*
 import kotlinx.android.synthetic.main.layout_toolbar_back.*
@@ -103,12 +103,15 @@ class LanguagesSettingActivity : BaseActivity(), View.OnClickListener {
         mContext?.let {
             val config = resources.configuration
             var locale: Locale? = null
-            when (language.language) {
+            locale = when (language.language) {
                 "cn" -> {
-                    locale = Locale.SIMPLIFIED_CHINESE
+                    Locale.SIMPLIFIED_CHINESE
                 }
                 "en" -> {
-                    locale = Locale.ENGLISH
+                    Locale.ENGLISH
+                }
+                else -> {
+                    Locale.getDefault()
                 }
             }
             if (locale != null) {
