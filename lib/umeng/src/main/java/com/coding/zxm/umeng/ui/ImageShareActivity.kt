@@ -47,7 +47,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
 
     override fun initParamsAndValues() {
 
-        setStatusBarColorNoTranslucent()
+        setStatusBarColorWhite()
         if (intent != null) {
             mFilePath = intent.getStringExtra(PARAMS_IMAGE_PATH)
 

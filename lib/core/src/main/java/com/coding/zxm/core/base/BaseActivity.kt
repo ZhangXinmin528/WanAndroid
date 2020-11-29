@@ -12,6 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.coding.zxm.core.R
+import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.zxm.utils.core.bar.StatusBarCompat
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -35,12 +36,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
         mContext = this
 
+        LanguageUtil.setLanguageConfig(mContext!!)
+
         initParamsAndValues()
 
-    }
-
-    override fun onStart() {
-        super.onStart()
         initViews()
     }
 
@@ -99,7 +98,7 @@ abstract class BaseActivity : AppCompatActivity() {
         StatusBarCompat.setColor(this, resources.getColor(R.color.color_state_bar))
     }
 
-    protected fun setStatusBarColorNoTranslucent() {
+    protected fun setStatusBarColorWhite() {
         StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorWhite))
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

@@ -23,7 +23,7 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent()
+        setStatusBarColorWhite()
     }
 
     override fun initViews() {

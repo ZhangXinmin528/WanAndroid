@@ -96,6 +96,11 @@
             android:name=".setting.SettingActivity"
             android:screenOrientation="portrait" />
 
+        <!--多语言-->
+        <activity
+            android:name=".setting.LanguagesSettingActivity"
+            android:screenOrientation="portrait" />
+
         <!--关于-->
         <activity
             android:name=".ui.activity.AboutActivity"

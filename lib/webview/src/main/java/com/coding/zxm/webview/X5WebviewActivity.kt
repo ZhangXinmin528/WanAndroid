@@ -46,7 +46,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent()
+        setStatusBarColorWhite()
 
         mUrl = intent.getStringExtra(PARAMS_WEBVIEW_URL)
         mTitle = intent.getStringExtra(PARAMS_WEBVIEW_TITLE)

@@ -33,7 +33,7 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent()
+        setStatusBarColorWhite()
     }
 
     override fun initViews() {

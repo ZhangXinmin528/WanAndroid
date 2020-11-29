@@ -36,6 +36,11 @@
     <string name="all_confirm">确定</string>
     <string name="all_font_scale_title">字体大小</string>
     <string name="all_font_scale_example">本项目是基于开放API进行开发，主要功能是为广大Android开发人员提供阅读技术文章的平台，同时项目中主要使用kotlin作为开发语言，利用jetpack中的livedata和viewmode等进行开发。</string>
+
+    <!--关于-->
+    <string name="all_title_abount">关于</string>
+    <string name="all_abount_version">版本：</string>
+
     <!--设置页面-->
     <string name="all_setting">设置</string>
 

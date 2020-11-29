@@ -56,7 +56,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent()
+        setStatusBarColorWhite()
 
         mHotWordAdapter = HotWordAdapter(mSearchList)
 

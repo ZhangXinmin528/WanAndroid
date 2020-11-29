@@ -23,12 +23,14 @@ class AboutActivity : BaseActivity() {
         setSupportActionBar(toolbar_wan)
         val actionBar = supportActionBar
         actionBar?.let {
-            actionBar.title = "关于"
+            actionBar.title = getString(R.string.all_title_abount)
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setDisplayShowHomeEnabled(true)
         }
 
         val versionCode = AppUtils.getAppVersionCode(mContext!!)
-        tv_about_version.text = if (versionCode == -1) "版本：${versionCode}" else "版本：1.0.0"
+
+        tv_about_version.text =
+            if (versionCode == -1) "${getString(R.string.all_abount_version)}${versionCode}" else "版本：1.0.0"
     }
 }

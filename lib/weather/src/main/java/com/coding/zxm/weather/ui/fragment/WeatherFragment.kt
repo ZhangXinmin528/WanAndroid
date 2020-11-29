@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.weather.R
-import com.coding.zxm.weather.ScrollWatched
-import com.coding.zxm.weather.ScrollWatcher
 import com.coding.zxm.weather.adapter.Weather7DayAdapter
 import com.coding.zxm.weather.util.IconUtils
 import com.coding.zxm.weather.util.WeatherUtil
@@ -41,7 +39,7 @@ import kotlin.collections.ArrayList
  * Copyright (c) 2020/10/26 . All rights reserved.
  * 传入经度（Longitude）和纬度（Latitude）获取天气信息
  */
-class WeatherFragment : BaseFragment(), ScrollWatched {
+class WeatherFragment : BaseFragment() {
 
     companion object {
         private val DEFAULT_FORMAT: DateFormat =
@@ -73,8 +71,6 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
     override fun setLayoutId(): Int {
         return R.layout.fragment_weather
     }
-
-    private val mWatcherList: MutableList<ScrollWatcher> = ArrayList()
 
     override fun initParamsAndValues() {
 
@@ -447,22 +443,6 @@ class WeatherFragment : BaseFragment(), ScrollWatched {
                 }
 
             })
-    }
-
-    override fun notifyWatcher(x: Int) {
-        mWatcherList.forEach {
-            it.update(x)
-        }
-    }
-
-    override fun addWatcher(watcher: ScrollWatcher?) {
-        watcher?.let { mWatcherList.add(it) }
-    }
-
-    override fun removeWatcher(watcher: ScrollWatcher?) {
-        watcher?.let {
-            mWatcherList.remove(watcher)
-        }
     }
 
     override fun onDestroy() {

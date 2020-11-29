@@ -4,9 +4,7 @@ import androidx.fragment.app.Fragment
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
-import com.coding.zxm.wanandroid.gallery.ImageDisplayFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
-import com.zxm.utils.core.log.MLogger
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -17,7 +15,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorNoTranslucent()
+        setStatusBarColorWhite()
         fragments.add(HomeFragment.newInstance())
         fragments.add(BingWallpapersFragment.newInstance())
         fragments.add(MineFragment.newInstance())
@@ -57,14 +55,5 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onStart() {
-        MLogger.d(TAG,"onStart..hashcode:${this.hashCode()}")
-        super.onStart()
-    }
-
-    override fun onDestroy() {
-        MLogger.d(TAG,"onDestroy")
-        super.onDestroy()
-    }
 
 }
