@@ -29,6 +29,13 @@
         <item name="android:padding">12dp</item>
     </style>
 
+    <style name="StyleTagPadding">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+    </style>
+
     <style name="MainPagePadding">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
