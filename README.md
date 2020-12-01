@@ -20,7 +20,7 @@ ScreenShots
 
 数据来源
 ------
-- Android知识类文章数据主要来源于[WanANdroid](https://www.wanandroid.com/blog/show/2)
+- Android知识类文章数据主要来源于[WanAndroid](https://www.wanandroid.com/blog/show/2)
 - 壁纸数据来源于[Bing](https://cn.bing.com/)
 - 天气数据来源于[和风天气](https://dev.qweather.com/)
 
