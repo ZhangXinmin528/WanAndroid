@@ -1,10 +1,12 @@
 package com.coding.zxm.wanandroid.setting
 
+import android.content.Intent
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SPConfig
+import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.ui.widget.FontSeekbar
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -14,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_font_scale.*
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/9/22 . All rights reserved.
  * 设置字体大小
- * TODO:存在bug
+ * TODO:自定义控件点击不太灵敏
  */
 class FontScaleActivity : BaseActivity(), View.OnClickListener {
 
@@ -59,6 +61,10 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
                     font_seekbar.getScaleValue()
                 )
                 finish()
+
+                val intent = Intent(mContext, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }

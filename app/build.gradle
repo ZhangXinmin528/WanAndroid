@@ -39,10 +39,14 @@ android {
         }
     }
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
     signingConfigs {
+
         def filePath = '../sign/keystore.jks'
-        def pwd = '20190101'
-        def alias = 'com.coding.zxm'
+        def pwd = properties.getProperty("sign.pwd")
+        def alias = properties.getProperty("sign.alias")
 
         release {
             storeFile file(filePath)

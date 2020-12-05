@@ -33,7 +33,7 @@
             android:paddingStart="@dimen/margin_4dp"
             android:text="@string/all_font_scale_title"
             android:textColor="@color/colorMainText"
-            android:textSize="@dimen/textsize_20sp"
+            android:textSize="@dimen/textsize_16sp"
             app:layout_constraintEnd_toStartOf="@+id/tv_font_confirm"
             app:layout_constraintStart_toEndOf="@+id/iv_font_back" />
 
@@ -45,7 +45,7 @@
             android:padding="@dimen/margin_6dp"
             android:text="@string/all_confirm"
             android:textColor="@color/colorMainText"
-            android:textSize="@dimen/textsize_16sp"
+            android:textSize="@dimen/textsize_14sp"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

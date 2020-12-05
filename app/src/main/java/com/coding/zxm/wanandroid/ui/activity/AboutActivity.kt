@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.ui.activity
 
+import android.text.TextUtils
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.AppUtils
 import com.coding.zxm.wanandroid.R
@@ -28,9 +29,9 @@ class AboutActivity : BaseActivity() {
             actionBar.setDisplayShowHomeEnabled(true)
         }
 
-        val versionCode = AppUtils.getAppVersionCode(mContext!!)
+        val versionName = AppUtils.getAppVersionName(mContext!!)
 
         tv_about_version.text =
-            if (versionCode == -1) "${getString(R.string.all_abount_version)}${versionCode}" else "版本：1.0.0"
+            if (!TextUtils.isEmpty(versionName)) "${getString(R.string.all_abount_version)}${versionName}" else "版本：1.0.0"
     }
 }
