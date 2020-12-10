@@ -76,8 +76,11 @@ versions.umsdk_oaid_mi = "1.0.0"
 versions.umsdk_oaid_oppo = "1.0.4"
 versions.umsdk_oaid_vivo = "1.0.0.1"
 
-//Tinker
-versions.tinker_android_lib = "1.9.9"
+//Tinker & Bugly
+versions.tinker_android_lib = "1.9.14.3"
+versions.bugly_nativecrashreport = "3.7.471"
+versions.bugly_crashreport_upgrade = "1.4.5"
+versions.bugly_crashreport = "3.2.3"
 
 versions.apache_commons = "2.5"
 
@@ -239,8 +242,12 @@ deps.umsdk_oaid_mi = "com.umeng.umsdk:oaid_mi:$versions.umsdk_oaid_mi"
 deps.umsdk_oaid_oppo = "com.umeng.umsdk:oaid_oppo:1.0.4:$versions.umsdk_oaid_oppo"
 deps.umsdk_oaid_vivo = "com.umeng.umsdk:oaid_vivo:$versions.umsdk_oaid_vivo"
 
-//TODO:Tinker
+//TODO:Tinker&Bugly
 deps.tinker_android_lib = "com.tencent.tinker:tinker-android-lib:$versions.tinker_android_lib"
+deps.bugly_crashreport_upgrade = "com.tencent.bugly:crashreport_upgrade:$versions.bugly_crashreport_upgrade"
+
+deps.bugly_nativecrashreport = "com.tencent.bugly:nativecrashreport:$versions.bugly_nativecrashreport"
+deps.bugly_crashreport = "com.tencent.bugly:crashreport:$versions.bugly_crashreport"
 
 //TODO:AMAP
 deps.amap_3dmap = "com.amap.api:3dmap:$versions.amap_3dmap"
