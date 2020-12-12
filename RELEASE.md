@@ -8,6 +8,7 @@
 2.分享功能完善
 
 3.更新接入蒲公英；
+http://api.bq04.com/apps/5fd2db28b2eb462419f80455/download_token?api_token=911a59ee1bfdd702ccdd1935bde1fe30
 
 4.我的收藏
 
