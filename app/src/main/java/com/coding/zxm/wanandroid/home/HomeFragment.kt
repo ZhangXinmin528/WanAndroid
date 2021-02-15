@@ -2,6 +2,7 @@ package com.coding.zxm.wanandroid.home
 
 import android.content.Intent
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -70,17 +71,19 @@ class HomeFragment private constructor() : BaseFragment() {
 
     override fun initViews(rootView: View) {
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
-
+        MLogger.d(TAG, "startLocation()~")
         LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
             .setOnceLocationOption()
             .startLocation(object : OnLocationListener {
 
                 override fun onLocationSuccess(location: AMapLocation) {
+                    MLogger.d(TAG, "onLocationSuccess : ${location.address}")
                     tv_location_city.text = location.city
                     getWeatherNow(location.longitude, location.latitude)
                 }
 
-                override fun onLicationFailure(errorCode: Int, errorMsg: String) {
+                override fun onLocationFailure(errorCode: Int, errorMsg: String) {
+                    MLogger.d(TAG, "onLicationFailure..errorCode: $errorCode..errorMsg:$errorMsg")
                     Toast.makeText(
                         mContext,
                         "${getString(R.string.all_location_failed_reason)}$errorMsg",
@@ -185,7 +188,7 @@ class HomeFragment private constructor() : BaseFragment() {
                 return@Observer
 
             val datas = it.datas
-            MLogger.d(TAG, "requestNewsData..observe..it.curPage : ${it.curPage}")
+//            MLogger.d(TAG, "requestNewsData..observe..it.curPage : ${it.curPage}")
             if (datas.isNotEmpty()) {
                 mNewsList.addAll(datas)
                 mNewsAdapter.notifyDataSetChanged()

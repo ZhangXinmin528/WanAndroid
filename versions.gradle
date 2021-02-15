@@ -50,10 +50,10 @@ versions.room = "2.3.0-alpha01"
 versions.rx_android = "2.0.1"
 versions.rxjava2 = "2.1.3"
 //AMap
-versions.amap_3dmap = "7.6.0"
+versions.amap_3dmap = "7.8.0"
 versions.amap_map2d = "6.0.0"
-versions.amap_search = "7.6.0"
-versions.amap_location = "4.2.0"
+versions.amap_search = "7.7.0"
+versions.amap_location = "5.2.0"
 
 //util
 versions.coreUtil = "3.0.4"
