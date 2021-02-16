@@ -2,7 +2,6 @@ package com.coding.zxm.wanandroid.home
 
 import android.content.Intent
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -71,26 +70,6 @@ class HomeFragment private constructor() : BaseFragment() {
 
     override fun initViews(rootView: View) {
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
-        MLogger.d(TAG, "startLocation()~")
-        LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
-            .setOnceLocationOption()
-            .startLocation(object : OnLocationListener {
-
-                override fun onLocationSuccess(location: AMapLocation) {
-                    MLogger.d(TAG, "onLocationSuccess : ${location.address}")
-                    tv_location_city.text = location.city
-                    getWeatherNow(location.longitude, location.latitude)
-                }
-
-                override fun onLocationFailure(errorCode: Int, errorMsg: String) {
-                    MLogger.d(TAG, "onLicationFailure..errorCode: $errorCode..errorMsg:$errorMsg")
-                    Toast.makeText(
-                        mContext,
-                        "${getString(R.string.all_location_failed_reason)}$errorMsg",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
 
         val bannerLiveData = mHomeViewModel.getBannerData()
         bannerLiveData.observe(this, Observer {
@@ -142,6 +121,7 @@ class HomeFragment private constructor() : BaseFragment() {
         sr_home_layout.autoRefresh(600)
 
         sr_home_layout.setOnRefreshListener {
+            refreshLocationAndWeather()
             requestNewsData(true)
         }
 
@@ -161,6 +141,26 @@ class HomeFragment private constructor() : BaseFragment() {
             startActivity(weather)
         }
 
+    }
+
+    private fun refreshLocationAndWeather() {
+        LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
+            .setOnceLocationOption()
+            .startLocation(object : OnLocationListener {
+
+                override fun onLocationSuccess(location: AMapLocation) {
+                    tv_location_city.text = location.city
+                    getWeatherNow(location.longitude, location.latitude)
+                }
+
+                override fun onLicationFailure(errorCode: Int, errorMsg: String) {
+                    Toast.makeText(
+                        mContext,
+                        "${getString(R.string.all_location_failed_reason)}$errorMsg",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
     }
 
     private fun requestNewsData(isRefresh: Boolean) {
@@ -188,7 +188,7 @@ class HomeFragment private constructor() : BaseFragment() {
                 return@Observer
 
             val datas = it.datas
-//            MLogger.d(TAG, "requestNewsData..observe..it.curPage : ${it.curPage}")
+            MLogger.d(TAG, "requestNewsData..observe..it.curPage : ${it.curPage}")
             if (datas.isNotEmpty()) {
                 mNewsList.addAll(datas)
                 mNewsAdapter.notifyDataSetChanged()
@@ -225,6 +225,9 @@ class HomeFragment private constructor() : BaseFragment() {
                         if (weatherEntity.code == "200") {
                             val nowBaseBean = weatherEntity.now
                             if (nowBaseBean != null) {
+                                if (mMarqueeList.isNotEmpty()) {
+                                    mMarqueeList.clear()
+                                }
                                 mMarqueeList.add("${nowBaseBean.text!!} ${nowBaseBean.temp!!}°")
                                 mMarqueeList.add("${nowBaseBean.windDir}${nowBaseBean.windScale}级")
 

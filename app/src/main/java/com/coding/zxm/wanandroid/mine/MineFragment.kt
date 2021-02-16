@@ -14,7 +14,6 @@ import com.coding.zxm.wanandroid.setting.SettingActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.coding.zxm.wanandroid.util.ToastUtil
-import com.coding.zxm.wanandroid.weather.WeatherActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -55,6 +54,8 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         tv_mine_project.setOnClickListener(this)
         iv_mine_setting.setOnClickListener(this)
         tv_mine_collection.setOnClickListener(this)
+        tv_mine_share.setOnClickListener(this)
+        tv_mine_todo.setOnClickListener(this)
 
         getUserInfo()
     }
@@ -116,7 +117,13 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                 startActivity(setting)
             }
             R.id.tv_mine_collection -> {
-               ToastUtil.showToast("开发小伙伴正紧张开发中")
+                ToastUtil.showToast("开发小伙伴正紧张开发中")
+            }
+            R.id.tv_mine_share -> {
+                ToastUtil.showToast("开发小伙伴正紧张开发中")
+            }
+            R.id.tv_mine_todo -> {
+                ToastUtil.showToast("开发小伙伴正紧张开发中")
             }
         }
     }

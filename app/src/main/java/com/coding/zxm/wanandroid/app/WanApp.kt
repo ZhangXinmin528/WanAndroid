@@ -7,6 +7,7 @@ import androidx.multidex.MultiDexApplication
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.wanandroid.BuildConfig
 import com.coding.zxm.weather.WeatherManager
+import com.tencent.bugly.crashreport.CrashReport
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.socialize.PlatformConfig
@@ -42,6 +43,12 @@ class WanApp : MultiDexApplication() {
         initWeather()
 
         initLogger()
+
+        initBugly()
+    }
+
+    private fun initBugly() {
+        CrashReport.initCrashReport(this, "c61c145a8e", false)
     }
 
     private fun initRetrofit() {
@@ -60,7 +67,6 @@ class WanApp : MultiDexApplication() {
         WeatherManager.INSTANCE.init(this)
     }
 
-
     private fun initUMeng() {
         //设置LOG开关，默认为false
         UMConfigure.setLogEnabled(BuildConfig.DEBUG)
@@ -76,7 +82,6 @@ class WanApp : MultiDexApplication() {
 
         //统计SDK是否支持采集在子进程中打点的自定义事件，默认不支持
         UMConfigure.setProcessEvent(true) //支持多进程打点
-
 
         //选择AUTO页面采集模式，统计SDK基础指标无需手动埋点可自动采集。
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
