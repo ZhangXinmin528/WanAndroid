@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -102,7 +103,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun setStatusBarColorWhite() {
-        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorWhite))
+        StatusBarCompat.setColorNoTranslucent(this, Color.WHITE)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }

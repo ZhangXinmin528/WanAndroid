@@ -9,14 +9,14 @@ import android.text.TextUtils
 class DisplayUtil private constructor() {
 
     companion object {
-
-    }
-
-    fun isEmpty(value: String): String {
-        return if (!TextUtils.isEmpty(value)) {
-            value
-        } else {
-            ""
+        fun isEmpty(value: String): String {
+            return if (!TextUtils.isEmpty(value)) {
+                value
+            } else {
+                ""
+            }
         }
     }
+
+
 }
