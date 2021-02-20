@@ -16,5 +16,5 @@ interface OnLocationListener {
     /**
      * 定位失败
      */
-    fun onLicationFailure(errorCode: Int, errorMsg: String)
+    fun onLocationFailure(errorCode: Int, errorMsg: String)
 }

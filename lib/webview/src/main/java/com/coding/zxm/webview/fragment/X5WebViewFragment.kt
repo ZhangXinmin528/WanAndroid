@@ -52,7 +52,7 @@ class X5WebViewFragment : Fragment(), WebViewListener {
             if (activity != null) {
                 val fm =
                     (activity as FragmentActivity).supportFragmentManager
-                fm?.popBackStack()
+                fm.popBackStack()
             }
         }
         mIsPageFinished = false

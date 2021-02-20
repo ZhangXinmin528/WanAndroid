@@ -3,6 +3,7 @@ package com.coding.zxm.wanandroid.home
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -28,9 +29,11 @@ import com.coding.zxm.weather.entity.WeatherNowEntity
 import com.coding.zxm.weather.listener.OnWeatherResultListener
 import com.coding.zxm.webview.X5WebviewActivity
 import com.sunfusheng.marqueeview.MarqueeView
+import com.youth.banner.Banner
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
 import com.zxm.utils.core.log.MLogger
+import com.zxm.utils.core.screen.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -47,6 +50,8 @@ class HomeFragment private constructor() : BaseFragment() {
 
     private val mMarqueeList: MutableList<String> = ArrayList()
     private var mMarqueeView: MarqueeView<String>? = null
+
+    private lateinit var mBanner: Banner<*, *>
 
     companion object {
 
@@ -71,15 +76,24 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun initViews(rootView: View) {
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
 
+        mBanner = layoutInflater.inflate(
+            R.layout.layout_home_banner,
+            null
+        ) as Banner<*, *>
+        mBanner.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            ScreenUtil.dp2px(mContext!!, 180f)
+        )
+
         val bannerLiveData = mHomeViewModel.getBannerData()
         bannerLiveData.observe(this, Observer {
             it?.let {
                 val bannerAdapter = BannerImageAdapter(it)
-                banner_home?.addBannerLifecycleObserver(this)
-                banner_home?.indicator = RectangleIndicator(mContext)
-                banner_home?.setBannerRound(20f)
-                banner_home?.adapter = bannerAdapter
-                banner_home?.setOnBannerListener(object : OnBannerListener<BannerEntity> {
+                mBanner.addBannerLifecycleObserver(this)
+                mBanner.indicator = RectangleIndicator(mContext)
+                mBanner.setBannerRound(20f)
+                mBanner.adapter = bannerAdapter
+                mBanner.setOnBannerListener(object : OnBannerListener<BannerEntity> {
                     override fun OnBannerClick(data: BannerEntity?, position: Int) {
                         data?.let {
 
@@ -89,10 +103,11 @@ class HomeFragment private constructor() : BaseFragment() {
 
                 })
 
-                banner_home?.isAutoLoop(true)
+                mBanner.isAutoLoop(true)
             }
         })
 
+        mNewsAdapter.addHeaderView(mBanner)
         rv_fragment_home.layoutManager = LinearLayoutManager(mContext)
         rv_fragment_home.adapter = mNewsAdapter
         val itemDecoration = DividerItemDecoration(
@@ -153,7 +168,7 @@ class HomeFragment private constructor() : BaseFragment() {
                     getWeatherNow(location.longitude, location.latitude)
                 }
 
-                override fun onLicationFailure(errorCode: Int, errorMsg: String) {
+                override fun onLocationFailure(errorCode: Int, errorMsg: String) {
                     Toast.makeText(
                         mContext,
                         "${getString(R.string.all_location_failed_reason)}$errorMsg",
@@ -242,19 +257,19 @@ class HomeFragment private constructor() : BaseFragment() {
     }
 
     override fun onStart() {
-        banner_home?.start()
+        mBanner.start()
 //        mMarqueeView?.startFlipping()
         super.onStart()
     }
 
     override fun onStop() {
-        banner_home?.stop()
+        mBanner.stop()
         mMarqueeView?.stopFlipping()
         super.onStop()
     }
 
     override fun onDestroyView() {
-        banner_home?.destroy()
+        mBanner.destroy()
         super.onDestroyView()
     }
 }

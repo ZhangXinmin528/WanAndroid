@@ -39,7 +39,7 @@ class WeatherActivity : BaseActivity() {
 
                 }
 
-                override fun onLicationFailure(errorCode: Int, errorMsg: String) {
+                override fun onLocationFailure(errorCode: Int, errorMsg: String) {
                     Toast.makeText(mContext, "定位失败：$errorMsg", Toast.LENGTH_SHORT).show()
                 }
             })

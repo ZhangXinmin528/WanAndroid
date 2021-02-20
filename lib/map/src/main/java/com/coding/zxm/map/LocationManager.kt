@@ -71,6 +71,7 @@ class LocationManager private constructor() : AMapLocationListener {
      * Start location
      */
     fun startLocation(onLocationListener: OnLocationListener) {
+//        Log.d(TAG, "startLocation()..before")
         if (mLocationClient != null) {
             Log.d(TAG, "startLocation()")
             mLocationClient?.startLocation()
@@ -102,7 +103,7 @@ class LocationManager private constructor() : AMapLocationListener {
     }
 
     override fun onLocationChanged(aMapLocation: AMapLocation?) {
-
+        Log.d(TAG, "onLocationChanged()~")
         if (aMapLocation != null) {
             if (aMapLocation.errorCode == 0) {//定位成功
                 if (mLocationListener != null) {
@@ -115,7 +116,7 @@ class LocationManager private constructor() : AMapLocationListener {
                 }
             } else {
                 if (mLocationListener != null) {
-                    mLocationListener?.onLicationFailure(
+                    mLocationListener?.onLocationFailure(
                         aMapLocation.errorCode,
                         aMapLocation.errorInfo
                     )
