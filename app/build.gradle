@@ -192,6 +192,7 @@ dependencies {
     api project(path: ':lib:weather')
 
     implementation project(path: ':lib:map')
+
 }
 
 //apply from: 'tinker-support.gradle'

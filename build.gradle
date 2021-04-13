@@ -5,6 +5,7 @@ buildscript {
         kotlin_version = '1.3.72'
     }
     addRepos(repositories)
+
     dependencies {
         classpath deps.android_gradle_plugin
         classpath deps.kotlin.plugin
