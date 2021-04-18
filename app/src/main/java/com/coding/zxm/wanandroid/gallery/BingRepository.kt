@@ -17,15 +17,15 @@ class BingRepository(client: RetrofitClient) : BaseRepository(client = client) {
     /**
      * 获取Bing壁纸数据
      */
-    suspend fun getBingPicList(): BingResponse<MutableList<BingImageEntity>> {
-        return creatService(BingService::class.java).getBingPicList()
+    suspend fun getBingPicList(): CommonResult<MutableList<BingImageEntity>> {
+        return onCall { requestBingPicList() }
     }
 
-    private suspend fun requestBingPicList(): BingResponse {
+    private suspend fun requestBingPicList(): CommonResult<MutableList<BingImageEntity>> {
         return excuteBingResponse(creatService(BingService::class.java).getBingPicList())
     }
 
-    suspend fun <T : Any> excuteBingResponse(
+    private suspend fun <T : Any> excuteBingResponse(
         response: BingResponse<T>,
         successBlock: (suspend CoroutineScope.() -> Unit)? = null,
         errorBlock: (suspend CoroutineScope.() -> Unit)? = null
@@ -33,7 +33,7 @@ class BingRepository(client: RetrofitClient) : BaseRepository(client = client) {
         return coroutineScope {
             if (response == null) {
                 errorBlock?.let { it() }
-                CommonResult.Error()
+                CommonResult.Error(Exception("网络请求异常"))
             } else {
                 successBlock?.let { it() }
                 CommonResult.Success(response.images)

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
 import com.coding.zxm.wanandroid.util.ToastUtil
@@ -24,16 +25,10 @@ class BingViewModel(var repo: BingRepository) : ViewModel() {
 
         viewModelScope.launch {
             val result = repo.getBingPicList()
-            if (result != null) {
-                if (result.images != null && result.images.isNotEmpty()) {
-                    liveData.postValue(result.images)
-                } else {
-//                    ToastUtil.showToast()
-
-                    liveData.postValue(null)
-                }
-            } else {
-                ToastUtil.showUnKnownError()
+            if (result is CommonResult.Success) {
+                liveData.postValue(result.data)
+            } else if (result is CommonResult.Error) {
+                ToastUtil.showToast(result.exception.message)
                 liveData.postValue(null)
             }
         }

@@ -8,7 +8,6 @@ import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
-import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
 
 /**
@@ -73,14 +72,13 @@ class BingWallpapersFragment : BaseFragment() {
 
         mBingViewModel.getBingPicList()
             .observe(this, Observer {
+                sr_bing_layout.finishRefresh()
                 if (it == null)
                     return@Observer
                 if (it != null && it.isNotEmpty()) {
                     mDataList.addAll(it)
                     mAdapter.notifyDataSetChanged()
                 }
-
-                sr_bing_layout.finishRefresh()
             })
     }
 
