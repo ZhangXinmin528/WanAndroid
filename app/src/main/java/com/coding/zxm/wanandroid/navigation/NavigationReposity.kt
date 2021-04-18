@@ -2,7 +2,7 @@ package com.coding.zxm.wanandroid.navigation
 
 import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.common.CommonResponse
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.navigation.model.NaviEntity
 
 /**
@@ -14,8 +14,11 @@ class NavigationReposity(client: RetrofitClient) : BaseRepository(client = clien
     /**
      * 获取导航数据
      */
-    suspend fun getNavigationData(): CommonResponse<MutableList<NaviEntity>> {
-        return creatService(NavigationService::class.java).getNavigationData()
+    suspend fun getNavigationData(): CommonResult<MutableList<NaviEntity>> {
+        return onCall { requestNavigationData() }
     }
 
+    private suspend fun requestNavigationData(): CommonResult<MutableList<NaviEntity>> {
+        return excuteResponse(creatService(NavigationService::class.java).getNavigationData())
+    }
 }

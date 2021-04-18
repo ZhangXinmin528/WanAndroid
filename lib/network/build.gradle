@@ -40,4 +40,6 @@ dependencies {
 
     implementation deps.coroutines.android
 
+    implementation project(path: ':lib:util')
+
 }

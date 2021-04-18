@@ -3,7 +3,7 @@ package com.coding.zxm.wanandroid.search
 import androidx.annotation.IntRange
 import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.common.CommonResponse
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
 import com.coding.zxm.wanandroid.search.model.SearchEntity
 
@@ -16,8 +16,12 @@ class SearchRepository(client: RetrofitClient) : BaseRepository(client = client)
     /**
      * Request hot words
      */
-    suspend fun getHotWord(): CommonResponse<MutableList<HotWordEntity>> {
-        return creatService(SearchService::class.java).getHotWord()
+    suspend fun getHotWord(): CommonResult<MutableList<HotWordEntity>> {
+        return onCall { requestHotWord() }
+    }
+
+    private suspend fun requestHotWord(): CommonResult<MutableList<HotWordEntity>> {
+        return excuteResponse(creatService(SearchService::class.java).getHotWord())
     }
 
     /**
@@ -26,8 +30,15 @@ class SearchRepository(client: RetrofitClient) : BaseRepository(client = client)
     suspend fun doSearch(
         @IntRange(from = 0) page: Int,
         key: String
-    ): CommonResponse<SearchEntity> {
-        return creatService(SearchService::class.java).doSearch(page, key)
+    ): CommonResult<SearchEntity> {
+        return onCall { requestSearch(page, key) }
+    }
+
+    private suspend fun requestSearch(
+        @IntRange(from = 0) page: Int,
+        key: String
+    ): CommonResult<SearchEntity> {
+        return excuteResponse(creatService(SearchService::class.java).doSearch(page, key))
     }
 
 }

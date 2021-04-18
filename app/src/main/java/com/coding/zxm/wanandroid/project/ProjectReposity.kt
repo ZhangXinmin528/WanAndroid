@@ -3,7 +3,7 @@ package com.coding.zxm.wanandroid.project
 import androidx.annotation.IntRange
 import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.common.CommonResponse
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.project.model.ProjectEntity
 
@@ -16,10 +16,13 @@ class ProjectReposity(client: RetrofitClient) : BaseRepository(client = client) 
     /**
      * Request project tree.
      */
-    suspend fun getProjectTree(): CommonResponse<MutableList<ProjectEntity>> {
-        return creatService(ProjectService::class.java).getProjectTree()
+    suspend fun getProjectTree(): CommonResult<MutableList<ProjectEntity>> {
+        return onCall { requestProjectTree() }
     }
 
+    private suspend fun requestProjectTree(): CommonResult<MutableList<ProjectEntity>> {
+        return excuteResponse(creatService(ProjectService::class.java).getProjectTree())
+    }
 
     /**
      * 请求指定标签下的项目数据
@@ -27,8 +30,20 @@ class ProjectReposity(client: RetrofitClient) : BaseRepository(client = client) 
     suspend fun getProjectList(
         @IntRange(from = 0) pageIndex: Int,
         cid: Int
-    ): CommonResponse<NewsEntity> {
-        return creatService(ProjectService::class.java).getProjectList(pageIndex, cid)
+    ): CommonResult<NewsEntity> {
+        return onCall { requestProjectList(pageIndex, cid) }
+    }
+
+    private suspend fun requestProjectList(
+        @IntRange(from = 0) pageIndex: Int,
+        cid: Int
+    ): CommonResult<NewsEntity> {
+        return excuteResponse(
+            creatService(ProjectService::class.java).getProjectList(
+                pageIndex,
+                cid
+            )
+        )
     }
 
 }

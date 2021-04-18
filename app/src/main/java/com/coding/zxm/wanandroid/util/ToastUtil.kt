@@ -14,7 +14,7 @@ class ToastUtil private constructor() {
         /**
          * Toast
          */
-        fun showToast(msg: String) {
+        fun showToast(msg: String?) {
             if (!TextUtils.isEmpty(msg)) {
                 Toast.makeText(WanApp.getApplicationContext(), msg, Toast.LENGTH_SHORT).show()
             }
@@ -24,8 +24,11 @@ class ToastUtil private constructor() {
          * Toast
          */
         fun showUnKnownError() {
-            Toast.makeText(WanApp.getApplicationContext(), WanApp.getApplicationContext().getString(
-                R.string.all_exception_unknown), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                WanApp.getApplicationContext(), WanApp.getApplicationContext().getString(
+                    R.string.all_exception_unknown
+                ), Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

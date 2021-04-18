@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.text.TextUtils
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -149,6 +150,14 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             }
         })
 
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK && x5webview.canGoBack()) {
+            x5webview.goBack()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun onDestroy() {

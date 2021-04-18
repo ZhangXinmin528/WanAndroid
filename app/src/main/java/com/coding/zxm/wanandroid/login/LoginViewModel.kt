@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
@@ -26,16 +27,10 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
 
         viewModelScope.launch {
             val result = loginRepo.login(userName, passWord)
-            if (result != null) {
-                if (result.errorCode == 0) {
-                    liveData.postValue(result.data)
-                } else {
-                    ToastUtil.showToast(result.errorMsg)
-
-                    liveData.postValue(null)
-                }
-            } else {
-                ToastUtil.showUnKnownError()
+            if (result is CommonResult.Success) {
+                liveData.postValue(result.data)
+            } else if (result is CommonResult.Error) {
+                ToastUtil.showToast(result.exception.message)
                 liveData.postValue(null)
             }
         }
@@ -53,16 +48,10 @@ open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() 
         val liveData = MutableLiveData<UserEntity>()
         viewModelScope.launch {
             val result = loginRepo.register(userName, passWord, repassword)
-            if (result != null) {
-                if (result.errorCode == 0) {
-                    liveData.postValue(result.data)
-                } else {
-                    ToastUtil.showToast(result.errorMsg)
-
-                    liveData.postValue(null)
-                }
-            } else {
-                ToastUtil.showUnKnownError()
+            if (result is CommonResult.Success) {
+                liveData.postValue(result.data)
+            } else if (result is CommonResult.Error) {
+                ToastUtil.showToast(result.exception.message)
                 liveData.postValue(null)
             }
         }

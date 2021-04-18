@@ -37,81 +37,81 @@ class NetworkExceptionHelper {
         const val SIGN_ERROR = "1007"
         const val SSL_ERROR = 3001
 
-    }
-
-
-    fun handlerException(t: Throwable): NetworkException {
-        val ex: NetworkException
-        if (t is NetworkException) {
-            ex = t
-        } else if (t is HttpException) {
-            ex = when (t.code()) {
-                UNAUTHORIZED,
-                FORBIDDEN,
-                    //权限错误，需要实现
-                NOT_FOUND -> NetworkException(
-                    t.code(),
-                    "网络错误"
+        fun handleException(t: Throwable): NetworkException {
+            val ex: NetworkException
+            if (t is NetworkException) {
+                ex = t
+            } else if (t is HttpException) {
+                ex = when (t.code()) {
+                    UNAUTHORIZED,
+                    FORBIDDEN,
+                        //权限错误，需要实现
+                    NOT_FOUND -> NetworkException(
+                        t.code(),
+                        "网络错误"
+                    )
+                    REQUEST_TIMEOUT,
+                    GATEWAY_TIMEOUT -> NetworkException(
+                        t.code(),
+                        "网络连接超时"
+                    )
+                    INTERNAL_SERVER_ERROR,
+                    BAD_GATEWAY,
+                    SERVICE_UNAVAILABLE -> NetworkException(
+                        t.code(),
+                        "服务器错误"
+                    )
+                    else -> NetworkException(t.code(), "网络错误")
+                }
+            } else if (t is JsonParseException
+                || t is JSONException
+                || t is ParseException
+            ) {
+                ex = NetworkException(
+                    PARSE_ERROR,
+                    "解析错误"
                 )
-                REQUEST_TIMEOUT,
-                GATEWAY_TIMEOUT -> NetworkException(
-                    t.code(),
+            } else if (t is SocketException) {
+                ex = NetworkException(
+                    REQUEST_TIMEOUT,
+                    "网络连接错误，请重试"
+                )
+            } else if (t is SocketTimeoutException) {
+                ex = NetworkException(
+                    REQUEST_TIMEOUT,
                     "网络连接超时"
                 )
-                INTERNAL_SERVER_ERROR,
-                BAD_GATEWAY,
-                SERVICE_UNAVAILABLE -> NetworkException(
-                    t.code(),
-                    "服务器错误"
+            } else if (t is SSLHandshakeException) {
+                ex = NetworkException(
+                    SSL_ERROR,
+                    "证书验证失败"
                 )
-                else -> NetworkException(t.code(), "网络错误")
+                return ex
+            } else if (t is UnknownHostException) {
+                ex = NetworkException(
+                    UNKNOW_HOST,
+                    "网络错误，请切换网络重试"
+                )
+                return ex
+            } else if (t is UnknownServiceException) {
+                ex = NetworkException(
+                    UNKNOW_HOST,
+                    "网络错误，请切换网络重试"
+                )
+            } else if (t is NumberFormatException) {
+                ex = NetworkException(
+                    UNKNOW_HOST,
+                    "数字格式化异常"
+                )
+            } else {
+                ex = NetworkException(
+                    UNKNOWN,
+                    "未知错误"
+                )
             }
-        } else if (t is JsonParseException
-            || t is JSONException
-            || t is ParseException
-        ) {
-            ex = NetworkException(
-                PARSE_ERROR,
-                "解析错误"
-            )
-        } else if (t is SocketException) {
-            ex = NetworkException(
-                REQUEST_TIMEOUT,
-                "网络连接错误，请重试"
-            )
-        } else if (t is SocketTimeoutException) {
-            ex = NetworkException(
-                REQUEST_TIMEOUT,
-                "网络连接超时"
-            )
-        } else if (t is SSLHandshakeException) {
-            ex = NetworkException(
-                SSL_ERROR,
-                "证书验证失败"
-            )
             return ex
-        } else if (t is UnknownHostException) {
-            ex = NetworkException(
-                UNKNOW_HOST,
-                "网络错误，请切换网络重试"
-            )
-            return ex
-        } else if (t is UnknownServiceException) {
-            ex = NetworkException(
-                UNKNOW_HOST,
-                "网络错误，请切换网络重试"
-            )
-        } else if (t is NumberFormatException) {
-            ex = NetworkException(
-                UNKNOW_HOST,
-                "数字格式化异常"
-            )
-        } else {
-            ex = NetworkException(
-                UNKNOWN,
-                "未知错误"
-            )
         }
-        return ex
+
     }
+
 }

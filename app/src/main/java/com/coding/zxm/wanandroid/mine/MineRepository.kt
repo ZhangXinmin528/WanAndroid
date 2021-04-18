@@ -2,7 +2,7 @@ package com.coding.zxm.wanandroid.mine
 
 import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.common.CommonResponse
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.mine.model.UserDetialEntity
 
 /**
@@ -11,7 +11,11 @@ import com.coding.zxm.wanandroid.mine.model.UserDetialEntity
  */
 class MineRepository(client: RetrofitClient) : BaseRepository(client = client) {
 
-    suspend fun getUserInfo(): CommonResponse<UserDetialEntity> {
-        return creatService(MineService::class.java).getUserInfo()
+    suspend fun getUserInfo(): CommonResult<UserDetialEntity> {
+        return onCall { requestUserInfo() }
+    }
+
+    private suspend fun requestUserInfo(): CommonResult<UserDetialEntity> {
+        return excuteResponse(creatService(MineService::class.java).getUserInfo())
     }
 }

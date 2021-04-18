@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
 import com.coding.zxm.wanandroid.search.model.SearchEntity
@@ -21,16 +22,10 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         val liveData = MutableLiveData<MutableList<HotWordEntity>>()
         viewModelScope.launch {
             val result = searchRepository.getHotWord()
-            if (result != null) {
-                if (result.errorCode == 0) {
-                    liveData.postValue(result.data)
-                } else {
-                    ToastUtil.showToast(result.errorMsg)
-
-                    liveData.postValue(null)
-                }
-            } else {
-                ToastUtil.showUnKnownError()
+            if (result is CommonResult.Success) {
+                liveData.postValue(result.data)
+            } else if (result is CommonResult.Error) {
+                ToastUtil.showToast(result.exception.message)
                 liveData.postValue(null)
             }
         }
@@ -42,16 +37,10 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
         viewModelScope.launch {
             val result = searchRepository.doSearch(page, key)
-            if (result != null) {
-                if (result.errorCode == 0) {
-                    liveData.postValue(result.data)
-                } else {
-                    ToastUtil.showToast(result.errorMsg)
-
-                    liveData.postValue(null)
-                }
-            } else {
-                ToastUtil.showUnKnownError()
+            if (result is CommonResult.Success) {
+                liveData.postValue(result.data)
+            } else if (result is CommonResult.Error) {
+                ToastUtil.showToast(result.exception.message)
                 liveData.postValue(null)
             }
         }

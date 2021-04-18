@@ -74,6 +74,15 @@ class X5WebViewFragment : Fragment(), WebViewListener {
         return mWebView
     }
 
+    /**
+     * 处理回退事件
+     */
+    fun onKeyDown() {
+        if (mWebView != null && mWebView!!.canGoBack()) {
+            mWebView!!.goBack()
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         if (mIsWebViewAvailable && mWebView != null && !TextUtils.isEmpty(mUrl)
@@ -97,6 +106,7 @@ class X5WebViewFragment : Fragment(), WebViewListener {
         mWebView!!.onResume()
         super.onResume()
     }
+
 
     /**
      * Called when the WebView has been detached from the fragment.

@@ -4,12 +4,15 @@ import android.content.Context
 import com.coding.zxm.network.cookie.PersistentCookieJar
 import com.coding.zxm.network.cookie.cache.SetCookieCache
 import com.coding.zxm.network.cookie.persistence.SharedPrefsCookiePersistor
+import com.coding.zxm.network.interceptor.NetworkInterceptor
 import com.coding.zxm.network.interceptor.WanInterceptor
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 /**
@@ -51,14 +54,20 @@ class RetrofitClient private constructor(private val context: Context) {
     }
 
     private fun initOkhttpClient(): OkHttpClient {
+        val httpCacheDirectory = File(context.cacheDir, "responses")
+        val cacheSize = 5 * 1024 * 1024L // 5 MiB
+        val cache = Cache(httpCacheDirectory, cacheSize)
+
         val cookieJar = PersistentCookieJar(
             SetCookieCache(),
             SharedPrefsCookiePersistor(context)
         )
 
         val builder = OkHttpClient.Builder()
+            .cache(cache)
             .addInterceptor(WanInterceptor())
             .addInterceptor(initLogInterceptor())
+            .addInterceptor(NetworkInterceptor(context))
             .cookieJar(cookieJar)
             .connectTimeout(30000, TimeUnit.SECONDS)
             .readTimeout(30000, TimeUnit.SECONDS)

@@ -3,7 +3,7 @@ package com.coding.zxm.wanandroid.system.repository
 import androidx.annotation.IntRange
 import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
-import com.coding.zxm.network.common.CommonResponse
+import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.system.model.KnowledgeEntity
 import com.coding.zxm.wanandroid.system.service.KnowledgeService
@@ -17,8 +17,12 @@ class KnowledgeRepository(client: RetrofitClient) : BaseRepository(client = clie
     /**
      * Request knowledge tree data.
      */
-    suspend fun getKnowledgeTree(): CommonResponse<MutableList<KnowledgeEntity>> {
-        return creatService(KnowledgeService::class.java).getKnowledgeTree()
+    suspend fun getKnowledgeTree(): CommonResult<MutableList<KnowledgeEntity>> {
+        return onCall { requestknowledgeTree() }
+    }
+
+    private suspend fun requestknowledgeTree(): CommonResult<MutableList<KnowledgeEntity>> {
+        return excuteResponse(creatService(KnowledgeService::class.java).getKnowledgeTree())
     }
 
     /**
@@ -27,8 +31,19 @@ class KnowledgeRepository(client: RetrofitClient) : BaseRepository(client = clie
     suspend fun getKnowledgeArticles(
         @IntRange(from = 0) pageIndex: Int,
         id: Int
-    ): CommonResponse<NewsEntity> {
-        return creatService(KnowledgeService::class.java).getKnowledgeArticles(pageIndex, id)
+    ): CommonResult<NewsEntity> {
+        return requestKnowledgeArticles(pageIndex, id)
     }
 
+    private suspend fun requestKnowledgeArticles(
+        @IntRange(from = 0) pageIndex: Int,
+        id: Int
+    ): CommonResult<NewsEntity> {
+        return excuteResponse(
+            creatService(KnowledgeService::class.java).getKnowledgeArticles(
+                pageIndex,
+                id
+            )
+        )
+    }
 }
