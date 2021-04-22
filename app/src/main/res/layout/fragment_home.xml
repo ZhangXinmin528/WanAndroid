@@ -10,7 +10,7 @@
         android:id="@+id/layout_home_title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorWhite"
+        android:background="@color/color_state_bar"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/textsize_14sp"
                 tools:text="北京市" />
 
@@ -40,7 +40,7 @@
                 app:mvGravity="center"
                 app:mvInterval="3000"
                 app:mvSingleLine="true"
-                app:mvTextColor="@color/colorMainText"
+                app:mvTextColor="@color/colorWhite"
                 app:mvTextSize="@dimen/textsize_12sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

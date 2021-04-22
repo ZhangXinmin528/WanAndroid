@@ -109,8 +109,7 @@
         <!--天气-->
         <activity
             android:name=".weather.WeatherActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTop" />
 
         <!--设置字体大小-->
         <activity

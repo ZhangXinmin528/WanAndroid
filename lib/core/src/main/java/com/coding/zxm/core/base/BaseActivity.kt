@@ -99,7 +99,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun setStatusBarColor() {
-        StatusBarCompat.setColor(this, resources.getColor(R.color.color_state_bar))
+        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.color_state_bar))
     }
 
     protected fun setStatusBarColorWhite() {

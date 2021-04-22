@@ -39,7 +39,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020 . All rights reserved.
- * TODO：功能列表后面做？？
+ * TODO：功能列表后面做
  */
 class HomeFragment private constructor() : BaseFragment() {
 
@@ -64,11 +64,6 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun setLayoutId(): Int = R.layout.fragment_home
 
     override fun initParamsAndValues() {
-        //存在问题
-//        setStatusBarColorNoTranslucent(R.color.colorWhite)
-//        activity?.let {
-//            StatusBarCompat.setDarkMode(it)
-//        }
 
         mNewsAdapter = HomeNewsAdapter(mNewsList)
     }

@@ -15,7 +15,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColor()
         fragments.add(HomeFragment.newInstance())
         fragments.add(BingWallpapersFragment.newInstance())
         fragments.add(MineFragment.newInstance())
