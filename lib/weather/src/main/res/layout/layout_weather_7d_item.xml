@@ -2,10 +2,10 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ListItemPadding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    style="@style/ListItemPadding">
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tv_date_7d"
@@ -13,16 +13,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/textsize_14sp"
         tools:text="今天" />
 
     <ImageView
         android:id="@+id/iv_day_icon_7d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_16dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/icon100" />
 
     <TextView
@@ -32,25 +33,27 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_6dp"
         android:text="/"
+        android:textColor="@color/colorWhite"
         tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/iv_night_icon_7d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_6dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/icon150"
         app:layout_goneMarginStart="@dimen/margin_6dp" />
 
     <TextView
         android:id="@+id/tv_temp_range_7d"
-        android:layout_width="wrap_content"
+        android:layout_width="65dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_20dp"
-        android:gravity="center"
-        android:textColor="@color/colorMainText"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/textsize_14sp"
         tools:text="14" />
 

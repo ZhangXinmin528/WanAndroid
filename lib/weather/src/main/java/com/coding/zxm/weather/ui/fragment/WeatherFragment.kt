@@ -10,10 +10,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.weather.R
 import com.coding.zxm.weather.adapter.Weather7DayAdapter
@@ -27,6 +26,7 @@ import com.qweather.sdk.bean.weather.WeatherHourlyBean
 import com.qweather.sdk.bean.weather.WeatherNowBean
 import com.qweather.sdk.view.QWeather
 import com.zxm.utils.core.bar.StatusBarCompat
+import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.time.TimeUtil
 import kotlinx.android.synthetic.main.fragment_weather.*
 import java.text.DateFormat
@@ -147,9 +147,13 @@ class WeatherFragment : BaseFragment() {
                             iv_weather_back.setImageBitmap(it)
                             Palette.from(it).generate { palette ->
                                 palette.let {
-                                    val swatch = palette?.vibrantSwatch
+                                    val muteSwatch = palette?.mutedSwatch
+                                    val swatch =
+                                        if (palette?.vibrantSwatch == null) muteSwatch else palette?.vibrantSwatch
+
                                     if (swatch != null) {
                                         val bgColor = swatch.rgb
+                                        layout_weather_content.setBackgroundColor(bgColor)
                                         StatusBarCompat.setColorNoTranslucent(activity, bgColor)
                                     }
                                 }
@@ -272,20 +276,20 @@ class WeatherFragment : BaseFragment() {
                                     it.daily
                                 )
                             rv_weather_7d?.layoutManager = LinearLayoutManager(mContext)
-                            val itemDecoration = DividerItemDecoration(
-                                mContext,
-                                DividerItemDecoration.VERTICAL
-                            )
-                            ContextCompat.getDrawable(
-                                context!!,
-                                R.mipmap.icon_search_divider
-                            )
-                                ?.let {
-                                    itemDecoration.setDrawable(
-                                        it
-                                    )
-                                }
-                            rv_weather_7d?.addItemDecoration(itemDecoration)
+//                            val itemDecoration = DividerItemDecoration(
+//                                mContext,
+//                                DividerItemDecoration.VERTICAL
+//                            )
+//                            ContextCompat.getDrawable(
+//                                context!!,
+//                                R.mipmap.icon_search_divider
+//                            )
+//                                ?.let {
+//                                    itemDecoration.setDrawable(
+//                                        it
+//                                    )
+//                                }
+//                            rv_weather_7d?.addItemDecoration(itemDecoration)
                         }
                     }
                 }
@@ -305,7 +309,7 @@ class WeatherFragment : BaseFragment() {
                 @SuppressLint("SetTextI18n")
                 override fun onSuccess(p0: AirNowBean?) {
 
-//                    MLogger.d(TAG, "getAirNow${JSON.toJSONString(p0)}")
+                    MLogger.d(TAG, "getAirNow${JSON.toJSONString(p0)}")
 
                     if (p0 != null && p0.code == "200") {
 
@@ -343,7 +347,7 @@ class WeatherFragment : BaseFragment() {
                         pm2_5.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.pm2p5
                         pm2_5.findViewById<TextView>(R.id.tv_air_now_type).text = "PM2.5"
                         pm2_5.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.pm2p5))
+                            .setBackgroundResource(WeatherUtil.getAQIPM2_5DrawableRes(nowBean.pm2p5))
 
                         layout_air_container.addView(pm2_5)
 
@@ -352,7 +356,7 @@ class WeatherFragment : BaseFragment() {
                         pm10.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.pm10
                         pm10.findViewById<TextView>(R.id.tv_air_now_type).text = "PM10"
                         pm10.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.pm10))
+                            .setBackgroundResource(WeatherUtil.getAQIPM10DrawableRes(nowBean.pm10))
 
                         layout_air_container.addView(pm10)
 
@@ -361,7 +365,7 @@ class WeatherFragment : BaseFragment() {
                         o3.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.o3
                         o3.findViewById<TextView>(R.id.tv_air_now_type).text = "O3"
                         o3.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.o3))
+                            .setBackgroundResource(WeatherUtil.getAQIO3DrawableRes(nowBean.o3))
 
                         layout_air_container.addView(o3)
 
@@ -370,7 +374,7 @@ class WeatherFragment : BaseFragment() {
                         co.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.co
                         co.findViewById<TextView>(R.id.tv_air_now_type).text = "CO"
                         co.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.co))
+                            .setBackgroundResource(WeatherUtil.getAQICODrawableRes(nowBean.co))
 
                         layout_air_container.addView(co)
 
@@ -379,16 +383,16 @@ class WeatherFragment : BaseFragment() {
                         so2.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.so2
                         so2.findViewById<TextView>(R.id.tv_air_now_type).text = "SO2"
                         so2.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.so2))
+                            .setBackgroundResource(WeatherUtil.getAQISO2DrawableRes(nowBean.so2))
 
                         layout_air_container.addView(so2)
 
                         //no2
                         val no2 = layoutInflater.inflate(R.layout.layout_air_now_item, null)
                         no2.findViewById<TextView>(R.id.tv_air_now_value).text = nowBean.no2
-                        no2.findViewById<TextView>(R.id.tv_air_now_type).text = "No2"
+                        no2.findViewById<TextView>(R.id.tv_air_now_type).text = "NO2"
                         no2.findViewById<TextView>(R.id.tv_aqi_indicator)
-                            .setBackgroundResource(WeatherUtil.getAQIDrawableRes(nowBean.no2))
+                            .setBackgroundResource(WeatherUtil.getAQINO2DrawableRes(nowBean.no2))
 
                         layout_air_container.addView(no2)
                     }

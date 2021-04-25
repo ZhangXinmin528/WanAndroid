@@ -78,26 +78,171 @@ class WeatherUtil private constructor() {
         }
 
         /**
-         * 获取空气适量AQI对应级别背景
+         * 获取空气适量AQI-PM2.5对应级别背景
          */
-        fun getAQIDrawableRes(value: String): Int {
+        fun getAQIPM2_5DrawableRes(value: String): Int {
+            when {
+                value.toFloat() in 0.0..35.0 -> {
+                    return R.drawable.shape_aqi_excellent
+                }
+                value.toFloat() in 36.0..75.0 -> {
+                    return R.drawable.shape_aqi_good
+                }
+                value.toFloat() in 76.0..115.0 -> {
+                    return R.drawable.shape_aqi_low
+                }
+                value.toFloat() in 116.0..150.0 -> {
+                    return R.drawable.shape_aqi_mid
+                }
+                value.toFloat() in 151.0..250.0 -> {
+                    return R.drawable.shape_aqi_bad
+                }
+                value.toFloat() > 251.0 -> {
+                    return R.drawable.shape_aqi_serious
+                }
+                else -> {
+                    return -1
+                }
+            }
+        }
+
+        /**
+         * 获取空气适量AQI-PM10对应级别背景
+         */
+        fun getAQIPM10DrawableRes(value: String): Int {
             when {
                 value.toFloat() in 0.0..50.0 -> {
                     return R.drawable.shape_aqi_excellent
                 }
-                value.toFloat() in 51.0..100.0 -> {
+                value.toFloat() in 51.0..150.0 -> {
                     return R.drawable.shape_aqi_good
                 }
-                value.toFloat() in 101.0..150.0 -> {
+                value.toFloat() in 151.0..250.0 -> {
                     return R.drawable.shape_aqi_low
                 }
-                value.toFloat() in 151.0..200.0 -> {
+                value.toFloat() in 251.0..350.0 -> {
                     return R.drawable.shape_aqi_mid
                 }
-                value.toFloat() in 201.0..300.0 -> {
+                value.toFloat() in 351.0..420.0 -> {
                     return R.drawable.shape_aqi_bad
                 }
-                value.toFloat() > 300.0 -> {
+                value.toFloat() > 421.0 -> {
+                    return R.drawable.shape_aqi_serious
+                }
+                else -> {
+                    return -1
+                }
+            }
+        }
+
+        /**
+         * 获取空气适量AQI-SO2对应级别背景
+         */
+        fun getAQISO2DrawableRes(value: String): Int {
+            when {
+                value.toFloat() in 0.0..150.0 -> {
+                    return R.drawable.shape_aqi_excellent
+                }
+                value.toFloat() in 151.0..500.0 -> {
+                    return R.drawable.shape_aqi_good
+                }
+                value.toFloat() in 501.0..650.0 -> {
+                    return R.drawable.shape_aqi_low
+                }
+                value.toFloat() in 651.0..800.0 -> {
+                    return R.drawable.shape_aqi_mid
+                }
+                value.toFloat() in 801.0..1600.0 -> {
+                    return R.drawable.shape_aqi_bad
+                }
+                value.toFloat() > 1601.0 -> {
+                    return R.drawable.shape_aqi_serious
+                }
+                else -> {
+                    return -1
+                }
+            }
+        }
+
+        /**
+         * 获取空气适量AQI-O3对应级别背景
+         */
+        fun getAQIO3DrawableRes(value: String): Int {
+            when {
+                value.toFloat() in 0.0..160.0 -> {
+                    return R.drawable.shape_aqi_excellent
+                }
+                value.toFloat() in 161.0..200.0 -> {
+                    return R.drawable.shape_aqi_good
+                }
+                value.toFloat() in 201.0..300.0 -> {
+                    return R.drawable.shape_aqi_low
+                }
+                value.toFloat() in 301.0..400.0 -> {
+                    return R.drawable.shape_aqi_mid
+                }
+                value.toFloat() in 401.0..800.0 -> {
+                    return R.drawable.shape_aqi_bad
+                }
+                value.toFloat() > 801.0 -> {
+                    return R.drawable.shape_aqi_serious
+                }
+                else -> {
+                    return -1
+                }
+            }
+        }
+
+        /**
+         * 获取空气适量AQI-CO对应级别背景
+         */
+        fun getAQICODrawableRes(value: String): Int {
+            when {
+                value.toFloat() in 0.0..5.0 -> {
+                    return R.drawable.shape_aqi_excellent
+                }
+                value.toFloat() in 6.0..10.0 -> {
+                    return R.drawable.shape_aqi_good
+                }
+                value.toFloat() in 11.0..35.0 -> {
+                    return R.drawable.shape_aqi_low
+                }
+                value.toFloat() in 36.0..60.0 -> {
+                    return R.drawable.shape_aqi_mid
+                }
+                value.toFloat() in 61.0..90.0 -> {
+                    return R.drawable.shape_aqi_bad
+                }
+                value.toFloat() > 91.0 -> {
+                    return R.drawable.shape_aqi_serious
+                }
+                else -> {
+                    return -1
+                }
+            }
+        }
+
+        /**
+         * 获取空气适量AQI-NO2对应级别背景
+         */
+        fun getAQINO2DrawableRes(value: String): Int {
+            when {
+                value.toFloat() in 0.0..100.0 -> {
+                    return R.drawable.shape_aqi_excellent
+                }
+                value.toFloat() in 101.0..200.0 -> {
+                    return R.drawable.shape_aqi_good
+                }
+                value.toFloat() in 201.0..700.0 -> {
+                    return R.drawable.shape_aqi_low
+                }
+                value.toFloat() in 701.0..1200.0 -> {
+                    return R.drawable.shape_aqi_mid
+                }
+                value.toFloat() in 1201.0..2340.0 -> {
+                    return R.drawable.shape_aqi_bad
+                }
+                value.toFloat() > 2341.0 -> {
                     return R.drawable.shape_aqi_serious
                 }
                 else -> {
