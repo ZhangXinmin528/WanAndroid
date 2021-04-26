@@ -18,9 +18,10 @@
 
         <activity
             android:name=".ui.ImageShareActivity"
-            android:launchMode="singleTop"
             android:hardwareAccelerated="false"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/ScreenshotTheme" />
 
         <!--必须声明-->
         <!--weixin：主工程-->

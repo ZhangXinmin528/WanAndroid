@@ -4,6 +4,7 @@
     android:id="@+id/toolbar_wan"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     android:theme="@style/Theme.AppCompat"
+    app:navigationIcon="@mipmap/icon_white_back"
     app:title="@string/app_name" />

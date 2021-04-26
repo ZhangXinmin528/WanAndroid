@@ -28,8 +28,8 @@
     <string name="all_signed">Signed in</string>
     <string name="all_mine_collection">Collections</string>
     <string name="all_mine_about">About</string>
-    <string name="all_coin_count">Coin：%d</string>
-    <string name="all_coin_level">Level：%d</string>
+    <string name="all_coin_count">Coin：%s</string>
+    <string name="all_coin_level">Level：%s</string>
     <string name="all_mine_share">Share</string>
     <string name="all_mine_todo">Todo</string>
     <string name="all_tixi">System</string>

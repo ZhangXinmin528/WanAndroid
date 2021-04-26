@@ -19,6 +19,42 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <!--Activity用作Dialog-->
+    <style name="DialogTheme" parent="Base.Theme.AppCompat.Dialog">
+        <!--去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--悬浮-->
+        <item name="android:windowIsFloating">true</item>
+        <!--半透明-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--去除标题-->
+        <item name="windowNoTitle">true</item>
+        <!--背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--允许模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--全屏幕-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--截图分享-->
+    <style name="ScreenshotTheme" parent="Base.Theme.AppCompat.Dialog">
+        <!--去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--悬浮-->
+        <item name="android:windowIsFloating">false</item>
+        <!--半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--去除标题-->
+        <item name="windowNoTitle">true</item>
+        <!--背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--允许模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--全屏幕-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -28,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/all_setting_switch_language"
-                android:textSize="@dimen/textsize_16sp"
-                android:textColor="@color/colorMainText" />
+                android:textColor="@color/colorMainText"
+                android:textSize="@dimen/textsize_16sp" />
 
             <TextView
                 android:id="@+id/tv_setting_switch_language"
@@ -41,8 +41,8 @@
                 android:paddingTop="@dimen/margin_12dp"
                 android:paddingBottom="@dimen/margin_12dp"
                 android:text="@string/all_setting_language_following_system"
-                android:textSize="@dimen/textsize_16sp"
                 android:textColor="@color/colorGrayText"
+                android:textSize="@dimen/textsize_16sp"
                 app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
         </RelativeLayout>
@@ -58,8 +58,8 @@
             android:paddingTop="@dimen/margin_12dp"
             android:paddingBottom="@dimen/margin_12dp"
             android:text="@string/all_setting_font_size"
-            android:textSize="@dimen/textsize_16sp"
             android:textColor="@color/colorMainText"
+            android:textSize="@dimen/textsize_16sp"
             app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
 
@@ -77,8 +77,8 @@
                 android:paddingTop="@dimen/margin_12dp"
                 android:paddingBottom="@dimen/margin_12dp"
                 android:text="@string/all_setting_clear_cache"
-                android:textSize="@dimen/textsize_16sp"
-                android:textColor="@color/colorMainText" />
+                android:textColor="@color/colorMainText"
+                android:textSize="@dimen/textsize_16sp" />
 
             <TextView
                 android:id="@+id/tv_setting_cache_size"
@@ -87,8 +87,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorMainText"
-                tools:ignore="RelativeOverlap"
                 android:textSize="@dimen/textsize_16sp"
+                tools:ignore="RelativeOverlap"
                 tools:text="0KB" />
         </RelativeLayout>
 
@@ -101,8 +101,8 @@
             android:paddingTop="@dimen/margin_12dp"
             android:paddingBottom="@dimen/margin_12dp"
             android:text="@string/all_setting_logout"
-            android:textSize="@dimen/textsize_16sp"
             android:textColor="@color/colorMainText"
+            android:textSize="@dimen/textsize_16sp"
             app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
         <include layout="@layout/layout_horizontal_divider" />

@@ -2,7 +2,6 @@ package com.coding.zxm.network
 
 import com.coding.zxm.network.common.CommonResponse
 import com.coding.zxm.network.common.CommonResult
-import com.coding.zxm.network.exeption.NetworkException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 
@@ -29,7 +28,7 @@ open class BaseRepository(val client: RetrofitClient) {
         return coroutineScope {
             if (response.errorCode == -1) {
                 errorBlock?.let { it() }
-                CommonResult.Error(NetworkException(response.errorCode, response.errorMsg))
+                CommonResult.Error(Exception(response.errorMsg))
             } else {
                 successBlock?.let { it() }
                 CommonResult.Success(response.data)

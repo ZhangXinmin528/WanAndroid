@@ -11,6 +11,7 @@ import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.ui.widget.FontSeekbar
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_font_scale.*
+import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -29,8 +30,11 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViews() {
-        iv_font_back.setOnClickListener(this)
-        tv_font_confirm.setOnClickListener(this)
+        iv_toolbar_back.setOnClickListener(this)
+        tv_toolbar_confirm.setOnClickListener(this)
+        tv_toolbar_confirm.visibility = View.VISIBLE
+
+        tv_toolbar_title.text = "字体大小"
         val scale =
             SharedPreferencesUtil.get(
                 mContext!!,
@@ -51,10 +55,10 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.iv_font_back -> {
+            R.id.iv_toolbar_back -> {
                 finish()
             }
-            R.id.tv_font_confirm -> {
+            R.id.tv_toolbar_confirm -> {
                 SharedPreferencesUtil.put(
                     mContext!!,
                     SPConfig.CONFIG_FONT_SCALE,

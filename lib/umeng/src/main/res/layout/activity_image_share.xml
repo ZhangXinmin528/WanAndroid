@@ -3,26 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A000000"
     android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/sv_share_screenshot"
+
+    <ImageView
+        android:id="@+id/iv_share_screenshot"
         android:layout_width="300dp"
         android:layout_height="0dp"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:src="@drawable/icon_share_image" />
 
-        <ImageView
-            android:id="@+id/iv_share_screenshot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_share_image" />
-
-    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_share_bottom"
@@ -52,7 +45,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/all_name_qq"
                     android:textColor="@color/colorMainText"
-                    android:textSize="@dimen/textsize_14sp" />
+                    android:textSize="@dimen/textsize_12sp" />
 
                 <TextView
                     android:id="@+id/tv_share_qzone"
@@ -63,7 +56,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/all_name_qzone"
                     android:textColor="@color/colorMainText"
-                    android:textSize="@dimen/textsize_14sp" />
+                    android:textSize="@dimen/textsize_12sp" />
 
                 <TextView
                     android:id="@+id/tv_share_ding"
@@ -74,7 +67,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/all_name_ding"
                     android:textColor="@color/colorMainText"
-                    android:textSize="@dimen/textsize_14sp" />
+                    android:textSize="@dimen/textsize_12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </HorizontalScrollView>

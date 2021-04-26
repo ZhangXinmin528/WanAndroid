@@ -13,7 +13,7 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -63,6 +63,7 @@ android {
     }
 
     buildTypes {
+        //TODO:release包存在问题
         release {
             //混淆
             minifyEnabled true
@@ -179,7 +180,8 @@ dependencies {
 //    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.5'
 //    implementation 'com.tencent.tinker:tinker-android-lib:1.9.14.3'
 
-    implementation deps.bugly_crashreport
+    implementation deps.bugly_crashreport_upgrade
+//    implementation deps.bugly_crashreport
 
     implementation deps.bugly_nativecrashreport
 

@@ -102,13 +102,16 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 finish()
             }
             R.id.iv_web_more -> {
-//                shareScreenShot()
-                longScreenShot()
+                shareScreenShot()
+//                longScreenShot()
             }
 
         }
     }
 
+    /**
+     * 屏幕截图
+     */
     private fun shareScreenShot() {
 
         val bitmap = ImageUtil.view2Bitmap(x5webview)
@@ -124,6 +127,11 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
 
     }
 
+    /**
+     * 截取屏幕长图
+     * 存在问题，不建议使用
+     */
+    @Deprecated(message = "存在问题")
     private fun longScreenShot() {
         val wholeWidth: Int = x5webview.computeHorizontalScrollRange()
         var wholeHeight: Int = x5webview.computeVerticalScrollRange()

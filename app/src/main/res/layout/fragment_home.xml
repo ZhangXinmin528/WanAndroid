@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 app:mvAnimDuration="1000"
                 app:mvDirection="bottom_to_top"
+                android:layout_marginTop="@dimen/margin_2dp"
                 app:mvGravity="center"
                 app:mvInterval="3000"
                 app:mvSingleLine="true"

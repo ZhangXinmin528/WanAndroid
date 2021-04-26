@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.login
 
+import android.app.Activity
 import android.text.TextPaint
 import android.text.TextUtils
 import android.text.style.ClickableSpan
@@ -15,7 +16,6 @@ import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.text.ClickableMovementMethod
 import com.zxm.utils.core.text.SpanUtils
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
 
 /**
  * Created by ZhangXinmin on 2020/8/2.
@@ -35,14 +35,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViews() {
-
-        toolbar_wan?.title = "登录"
-//        setSupportActionBar(toolbar_wan)
-//        val actionBar = supportActionBar
-//        actionBar?.setDisplayHomeAsUpEnabled(true)
-//        actionBar?.setDisplayShowHomeEnabled(true)
+        setStatusBarDark()
 
         tv_login.setOnClickListener(this)
+        iv_login_close.setOnClickListener(this)
 
         val spannableStringBuilder =
             SpanUtils.getBuilder(mContext!!, getString(R.string.all_tips_not_register), false)
@@ -106,10 +102,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                                 true
                             )
 
-                            jumpActivity(MainActivity::class.java)
+                            setResult(Activity.RESULT_OK, intent)
                             finish()
                         }
                     })
+            }
+            R.id.iv_login_close -> {
+                jumpActivity(MainActivity::class.java)
+                finish()
             }
         }
     }

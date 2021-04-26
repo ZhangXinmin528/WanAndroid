@@ -5,6 +5,7 @@ import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
+import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -15,6 +16,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
+
         setStatusBarColor()
         fragments.add(HomeFragment.newInstance())
         fragments.add(BingWallpapersFragment.newInstance())
@@ -23,13 +25,6 @@ class MainActivity : BaseActivity() {
 
     override fun initViews() {
         vp_home.adapter = HomePageAdapter(fragments, supportFragmentManager)
-
-        //TODO:已禁用Viewpager的横向滑动
-//        vp_home.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-//            override fun onPageSelected(position: Int) {
-//                bottom_nav.menu.getItem(position).isChecked = true
-//            }
-//        })
 
         vp_home.offscreenPageLimit = 2
 

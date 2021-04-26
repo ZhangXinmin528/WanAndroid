@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.mine
 
+import android.app.Activity
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -27,6 +28,8 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
 
     companion object {
 
+        private const val REQUEST_CODE_LOGIN = 1001
+
         fun newInstance(): MineFragment {
             return MineFragment()
         }
@@ -38,10 +41,6 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
     }
 
     override fun initParamsAndValues() {
-//        setStatusBarColorNoTranslucent(R.color.colorPrimary)
-//        activity?.let {
-//            StatusBarCompat.setLightMode(it)
-//        }
 
     }
 
@@ -83,10 +82,15 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
 
                     tv_user_name.text = userName
                     tv_user_coin.text =
-                        getString(R.string.all_coin_count, userDetialEntity.coinCount)
-                    tv_user_level.text = getString(R.string.all_coin_level, userDetialEntity.level)
+                        getString(R.string.all_coin_count, userDetialEntity.coinCount.toString())
+                    tv_user_level.text =
+                        getString(R.string.all_coin_level, userDetialEntity.level.toString())
                 }
             })
+        } else {
+            tv_user_name.text = getString(R.string.all_not_login)
+            tv_user_coin.text = getString(R.string.all_coin_count, "--")
+            tv_user_level.text = getString(R.string.all_coin_level, "--")
         }
     }
 
@@ -94,7 +98,7 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
         when (v?.id) {
             R.id.tv_user_name -> {
                 val intent = Intent(mContext!!, LoginActivity::class.java)
-                startActivity(intent)
+                startActivityForResult(intent, REQUEST_CODE_LOGIN)
             }
             R.id.tv_mine_system -> {
                 val intent = Intent(mContext!!, KnowledgeActivity::class.java)
@@ -126,5 +130,16 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
                 ToastUtil.showToast("开发小伙伴正紧张开发中")
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQUEST_CODE_LOGIN -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    getUserInfo()
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

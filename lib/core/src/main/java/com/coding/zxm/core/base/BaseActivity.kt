@@ -109,6 +109,10 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    protected fun setStatusBarDark() {
+        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorDark))
+    }
+
     protected fun initActionBar(toolbar: Toolbar, titile: String) {
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
