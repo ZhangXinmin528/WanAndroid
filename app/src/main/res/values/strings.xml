@@ -56,4 +56,6 @@
     <string name="all_setting_logout">Logout</string>
     <string name="all_logout_succeess">Log out successfully</string>
 
+    <!--Behavior-->
+    <string name="behavior_app_toolbar">com.coding.zxm.wanandroid.home.AppToolbarBehavior</string>
 </resources>

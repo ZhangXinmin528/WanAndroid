@@ -198,7 +198,7 @@
                     android:id="@+id/tv_7d_divider"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/colorWhite"
+                    android:background="@color/color_divider_line"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_7d" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -212,7 +212,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/color_main_bg" />
+                android:background="@color/color_divider_line" />
 
             <!--空气质量实况-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -263,7 +263,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/color_main_bg" />
+                android:background="@color/color_divider_line" />
 
             <!--生活指数-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -301,7 +301,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/color_main_bg" />
+                android:background="@color/color_divider_line" />
 
             <!--风力风向-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -370,7 +370,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/color_main_bg" />
+                android:background="@color/color_divider_line" />
 
             <!--Footer-->
             <TextView

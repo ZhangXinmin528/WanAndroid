@@ -18,11 +18,7 @@ class BannerImageAdapter(datas: MutableList<BannerEntity>?) :
     BannerAdapter<BannerEntity, BannerImageAdapter.ImageHolder>(datas) {
 
     class ImageHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var imageView: ImageView
-
-        init {
-            imageView = view as ImageView
-        }
+        var imageView: ImageView = view as ImageView
     }
 
     override fun onCreateHolder(parent: ViewGroup?, viewType: Int): ImageHolder {
@@ -34,9 +30,9 @@ class BannerImageAdapter(datas: MutableList<BannerEntity>?) :
         imageView.layoutParams = params
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         //通过裁剪实现圆角
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            BannerUtils.setBannerRound(imageView, 20f)
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            BannerUtils.setBannerRound(imageView, 20f)
+//        }
         return ImageHolder(imageView)
     }
 

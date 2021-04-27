@@ -15,6 +15,7 @@
     <color name="colorMainText">#606060</color>
 
     <color name="color_state_bar">@color/colorPrimaryDark</color>
+    <color name="color_divider_line">#4DFFFFFF</color>
 
     <color name="color_btn_pressed">@color/colorPrimary</color>
     <color name="color_btn_disabled">@color/colorPrimaryDark</color>

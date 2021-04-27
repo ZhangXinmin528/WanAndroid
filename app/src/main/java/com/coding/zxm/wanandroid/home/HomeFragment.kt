@@ -61,7 +61,7 @@ class HomeFragment private constructor() : BaseFragment() {
 
     }
 
-    override fun setLayoutId(): Int = R.layout.fragment_home
+    override fun setLayoutId(): Int = R.layout.fragment_home_behavior
 
     override fun initParamsAndValues() {
 
@@ -69,6 +69,8 @@ class HomeFragment private constructor() : BaseFragment() {
     }
 
     override fun initViews(rootView: View) {
+        layout_home_title.background.alpha = 10
+
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
 
         mBanner = layoutInflater.inflate(
