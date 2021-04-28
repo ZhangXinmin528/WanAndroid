@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.util.SPConfig
+import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_mine.*
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/8/24 . All rights reserved.
  */
-class MineFragment private constructor() : BaseFragment(), View.OnClickListener {
+class MineFragment private constructor() : BaseStatusBarFragment(), View.OnClickListener {
 
     private val mMineViewModel: MineViewModel by viewModels { MineViewModel.MineViewModelFactory }
 
@@ -41,7 +42,6 @@ class MineFragment private constructor() : BaseFragment(), View.OnClickListener 
     }
 
     override fun initParamsAndValues() {
-
     }
 
     override fun initViews(rootView: View) {

@@ -33,19 +33,27 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_home_title"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_state_bar"
+        android:layout_height="wrap_content"
+        android:background="@color/color_tool_bar_primary"
         app:layout_behavior="@string/behavior_app_toolbar"
         app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/fake_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/statusbar_view_height"
+            android:background="@color/color_tool_bar_primary"
+            tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/layout_home_weather"
             android:layout_width="70dp"
-            android:layout_height="match_parent"
+            android:layout_height="?attr/actionBarSize"
             android:layout_marginStart="@dimen/margin_8dp"
             android:orientation="vertical"
             android:padding="4dp"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fake_status_bar">
 
             <TextView
                 android:id="@+id/tv_location_city"
@@ -82,7 +90,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/layout_home_weather"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/fake_status_bar">
 
             <ImageView
                 android:layout_width="wrap_content"

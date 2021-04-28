@@ -1,11 +1,12 @@
 package com.coding.zxm.wanandroid
 
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
-import com.tencent.bugly.beta.Beta
+import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -16,8 +17,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
+        StatusBarCompat.setTranslucentForImageViewInFragment(this, 0, null)
 
-        setStatusBarColor()
         fragments.add(HomeFragment.newInstance())
         fragments.add(BingWallpapersFragment.newInstance())
         fragments.add(MineFragment.newInstance())
@@ -48,6 +49,30 @@ class MainActivity : BaseActivity() {
                 else -> false
             }
         }
+
+        vp_home.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                val fragment = fragments.get(position) as BaseStatusBarFragment
+                if (position == 2) {
+                    fragment.setFakeStatusColor(R.color.color_tool_bar_primary)
+                }
+
+            }
+
+        })
     }
 
 

@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_wan"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
-    android:background="@color/colorPrimaryDark"
-    android:theme="@style/Theme.AppCompat"
-    app:navigationIcon="@mipmap/icon_white_back"
+    android:background="@color/color_tool_bar_white"
+    android:theme="@style/Theme.AppCompat.DayNight"
+    app:navigationIcon="@mipmap/icon_dark_back"
     app:title="@string/app_name" />

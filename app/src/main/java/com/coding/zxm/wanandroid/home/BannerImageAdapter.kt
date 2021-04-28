@@ -1,6 +1,5 @@
 package com.coding.zxm.wanandroid.home
 
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.youth.banner.adapter.BannerAdapter
-import com.youth.banner.util.BannerUtils
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -28,11 +26,7 @@ class BannerImageAdapter(datas: MutableList<BannerEntity>?) :
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         imageView.layoutParams = params
-        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        //通过裁剪实现圆角
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            BannerUtils.setBannerRound(imageView, 20f)
-//        }
+        imageView.scaleType = ImageView.ScaleType.FIT_XY
         return ImageHolder(imageView)
     }
 

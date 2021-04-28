@@ -4,7 +4,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.coding.zxm.core.base.BaseFragment
+import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
  * Copyright (c) 2020/11/12 . All rights reserved.
  * Bing 壁纸列表页面
  */
-class BingWallpapersFragment : BaseFragment() {
+class BingWallpapersFragment : BaseStatusBarFragment() {
     private val mBingViewModel: BingViewModel by viewModels { BingViewModel.BingViewModelFactory }
 
     companion object {
@@ -32,10 +32,6 @@ class BingWallpapersFragment : BaseFragment() {
     }
 
     override fun initParamsAndValues() {
-//        setStatusBarColorNoTranslucent(R.color.colorWhite)
-//        activity?.let {
-//            StatusBarCompat.setDarkMode(it)
-//        }
         mAdapter = BingWallpapersAdapter(mDataList)
 
     }

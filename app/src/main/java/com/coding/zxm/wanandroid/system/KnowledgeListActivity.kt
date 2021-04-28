@@ -49,6 +49,7 @@ class KnowledgeListActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
+        setStatusBarColorWhite()
         if (intent != null) {
             mTitle = intent.getStringExtra(PARAMAS_TITLE)
             mCid = intent.getIntExtra(PARAMAS_CID, 0)

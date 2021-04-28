@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.fastjson.JSON
 import com.amap.api.location.AMapLocation
-import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.map.LocationManager
 import com.coding.zxm.map.location.listener.OnLocationListener
+import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
@@ -30,18 +30,18 @@ import com.coding.zxm.weather.listener.OnWeatherResultListener
 import com.coding.zxm.webview.X5WebviewActivity
 import com.sunfusheng.marqueeview.MarqueeView
 import com.youth.banner.Banner
-import com.youth.banner.indicator.RectangleIndicator
+import com.youth.banner.indicator.RoundLinesIndicator
 import com.youth.banner.listener.OnBannerListener
 import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.screen.ScreenUtil
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home_behavior.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020 . All rights reserved.
  * TODO：功能列表后面做
  */
-class HomeFragment private constructor() : BaseFragment() {
+class HomeFragment private constructor() : BaseStatusBarFragment() {
 
     private val mHomeViewModel: HomeViewModel by viewModels { HomeViewModel.HomeViewModelFactory }
     private val mNewsList: MutableList<NewsDetialEntity> = ArrayList()
@@ -64,12 +64,11 @@ class HomeFragment private constructor() : BaseFragment() {
     override fun setLayoutId(): Int = R.layout.fragment_home_behavior
 
     override fun initParamsAndValues() {
-
         mNewsAdapter = HomeNewsAdapter(mNewsList)
     }
 
     override fun initViews(rootView: View) {
-        layout_home_title.background.alpha = 10
+        layout_home_title.background.alpha = 0
 
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
 
@@ -87,8 +86,7 @@ class HomeFragment private constructor() : BaseFragment() {
             it?.let {
                 val bannerAdapter = BannerImageAdapter(it)
                 mBanner.addBannerLifecycleObserver(this)
-                mBanner.indicator = RectangleIndicator(mContext)
-                mBanner.setBannerRound(20f)
+                mBanner.indicator = RoundLinesIndicator(mContext)
                 mBanner.adapter = bannerAdapter
                 mBanner.setOnBannerListener(object : OnBannerListener<BannerEntity> {
                     override fun OnBannerClick(data: BannerEntity?, position: Int) {

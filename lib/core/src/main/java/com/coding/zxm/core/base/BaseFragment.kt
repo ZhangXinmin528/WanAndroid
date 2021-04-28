@@ -45,13 +45,13 @@ abstract class BaseFragment() : Fragment() {
         initViews(rootView)
     }
 
-    protected fun setStatusBarColorNoTranslucent(@ColorRes colorRes: Int) {
+    fun setStatusbarColor(@ColorRes colorRes: Int) {
         activity?.let {
-            StatusBarCompat.setColorNoTranslucent(
+            StatusBarCompat.setColor(
                 activity,
-                resources.getColor(colorRes)
+                resources.getColor(colorRes),
+                0
             )
-//            StatusBarCompat.setDarkMode(it)
         }
     }
 

@@ -13,6 +13,7 @@ import kotlin.math.roundToInt
  * Created by ZhangXinmin on 2021/04/27.
  * Copyright (c) 4/27/21 . All rights reserved.
  * 首页搜索栏的行为
+ * 注意：该行为会导致该颜色alpha发生变化，其他页面如果使用的为同一种颜色也会发生变化，原因未知！！
  */
 class AppToolbarBehavior : CoordinatorLayout.Behavior<ConstraintLayout> {
 
@@ -24,6 +25,7 @@ class AppToolbarBehavior : CoordinatorLayout.Behavior<ConstraintLayout> {
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         context?.let { targetHeight = ScreenUtil.dp2px(it, 180f) }
+
     }
 
 

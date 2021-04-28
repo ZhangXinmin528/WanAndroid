@@ -39,7 +39,7 @@ class KnowledgeActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-
+        setStatusBarColorWhite()
         mNavAdapter = KnowledgeNavAdapter(mNavDataList)
 
         mDetialAdapter = KnowledgeDetialAdapter(mDetialList)
@@ -47,7 +47,6 @@ class KnowledgeActivity : BaseActivity() {
     }
 
     override fun initViews() {
-
         setSupportActionBar(toolbar_wan)
         val actionBar = supportActionBar
         actionBar?.let {
