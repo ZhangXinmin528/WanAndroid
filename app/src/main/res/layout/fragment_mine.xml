@@ -10,11 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/fake_status_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/statusbar_view_height"
-            android:background="@color/color_tool_bar_primary" />
+        <include layout="@layout/layout_fake_status_bar"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

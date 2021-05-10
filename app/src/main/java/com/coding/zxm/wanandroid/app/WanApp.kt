@@ -2,18 +2,27 @@ package com.coding.zxm.wanandroid.app
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.wanandroid.BuildConfig
 import com.coding.zxm.wanandroid.MainActivity
+import com.coding.zxm.wanandroid.ui.activity.SplashActivity
 import com.coding.zxm.weather.WeatherManager
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.socialize.PlatformConfig
+import com.zxm.utils.core.constant.TimeConstants
 import com.zxm.utils.core.log.MLogger
+import com.zxm.utils.core.time.TimeUtil
+import kotlin.math.abs
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -21,8 +30,28 @@ import com.zxm.utils.core.log.MLogger
  */
 class WanApp : MultiDexApplication() {
 
+    //需要重新申请
+    init {
+        //微信申请不成功
+//        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0")
+        //Sina
+//        PlatformConfig.setSinaWeibo(
+//            "3039106221",
+//            "0e17a8b656e1e17a7f3779579322c029",
+//            "http://sns.whalecloud.com"
+//        )
+        //qq
+        PlatformConfig.setQQZone("1110995000", "JLvvTN0zi5w25Rh2")
+        PlatformConfig.setQQFileProvider("com.tencent.wanandroid.fileprovider")
+        //dingding
+        PlatformConfig.setDing("dingoafgactegaqwn14eih")
+    }
+
+
     companion object {
         lateinit var context: Application
+        private const val TAG = "WanApp"
+        private var mLastBackgroundTime: Long = 0
 
         fun getApplicationContext(): Context {
             return context
@@ -38,6 +67,8 @@ class WanApp : MultiDexApplication() {
         super.onCreate()
         context = this
 
+        addAppLifecycleObserver()
+
         initRetrofit()
 
         initUMeng()
@@ -52,7 +83,7 @@ class WanApp : MultiDexApplication() {
     private fun initBugly() {
 //        CrashReport.initCrashReport(this, "c61c145a8e", false)
         //延迟初始化
-        Beta.initDelay = 5 * 60 * 1000
+        Beta.initDelay = 2 * 60 * 1000
         //打断策略
         Beta.showInterruptedStrategy = true
         //只在该页面进行
@@ -67,6 +98,8 @@ class WanApp : MultiDexApplication() {
         RetrofitClient.getInstance(this)
         //添加其余BaseUrl
         RetrofitClient.putDoman()
+        //是否开启调试模式
+        RetrofitClient.setDebugMode(BuildConfig.DEBUG)
     }
 
 
@@ -99,20 +132,47 @@ class WanApp : MultiDexApplication() {
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
     }
 
-    //需要重新申请
-    init {
-        //微信申请不成功
-//        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0")
-        //Sina
-//        PlatformConfig.setSinaWeibo(
-//            "3039106221",
-//            "0e17a8b656e1e17a7f3779579322c029",
-//            "http://sns.whalecloud.com"
-//        )
-        //qq
-        PlatformConfig.setQQZone("1110995000", "JLvvTN0zi5w25Rh2")
-        PlatformConfig.setQQFileProvider("com.tencent.wanandroid.fileprovider")
-        //dingding
-        PlatformConfig.setDing("dingoafgactegaqwn14eih")
+    /**
+     * App生命周期
+     */
+    private fun addAppLifecycleObserver() {
+
+        ProcessLifecycleOwner.get().lifecycle.addObserver(AppLifecycleObserver())
     }
+
+    class AppLifecycleObserver : LifecycleObserver {
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        fun onCreate() {
+            MLogger.d(TAG, "Application..onCreate()")
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_START)
+        fun onStart() {
+            MLogger.d(TAG, "Application..onStart()")
+            val span = TimeUtil.getTimeSpanByNow(mLastBackgroundTime, TimeConstants.MIN)
+            if (abs(span) > 5 && mLastBackgroundTime != 0L) {
+                val intent = Intent(context, SplashActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                context.startActivity(intent)
+            }
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        fun onResume() {
+            MLogger.d(TAG, "Application..onResume()")
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        fun onStop() {
+            MLogger.d(TAG, "Application..onStop()")
+            mLastBackgroundTime = System.currentTimeMillis()
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        fun onDestory() {
+            MLogger.d(TAG, "Application..onDestory()")
+        }
+    }
+
 }

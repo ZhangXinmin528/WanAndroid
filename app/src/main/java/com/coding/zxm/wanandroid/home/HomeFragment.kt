@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid.home
 
+import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
@@ -35,6 +36,7 @@ import com.youth.banner.listener.OnBannerListener
 import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.screen.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_home_behavior.*
+import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -69,6 +71,10 @@ class HomeFragment private constructor() : BaseStatusBarFragment() {
 
     override fun initViews(rootView: View) {
         layout_home_title.background.alpha = 0
+
+        val layoutParams = fake_status_bar.layoutParams
+        layoutParams.height = getStatusBarHeight(mContext!!)
+        fake_status_bar.layoutParams = layoutParams
 
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
 
@@ -261,6 +267,19 @@ class HomeFragment private constructor() : BaseStatusBarFragment() {
         mBanner.stop()
         mMarqueeView?.stopFlipping()
         super.onStop()
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @param context context
+     * @return 状态栏高度
+     */
+    private fun getStatusBarHeight(context: Context): Int {
+        // 获得状态栏高度
+        val resourceId =
+            context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        return context.resources.getDimensionPixelSize(resourceId)
     }
 
     override fun onDestroyView() {

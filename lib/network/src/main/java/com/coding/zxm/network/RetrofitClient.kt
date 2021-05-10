@@ -23,6 +23,7 @@ class RetrofitClient private constructor(private val context: Context) {
 
     companion object {
         private var INSTANCE: RetrofitClient? = null
+        private var sDEBUG: Boolean = true
 
         @Synchronized
         fun getInstance(context: Context): RetrofitClient? {
@@ -39,6 +40,14 @@ class RetrofitClient private constructor(private val context: Context) {
             RetrofitUrlManager.getInstance()
                 .putDomain(APIConstants.DOMAN_BING, APIConstants.BING_URL)
         }
+
+        /**
+         * 设置调试模式
+         */
+        fun setDebugMode(debug: Boolean) {
+            sDEBUG = debug
+        }
+
     }
 
     private var retrofit: Retrofit
@@ -80,7 +89,7 @@ class RetrofitClient private constructor(private val context: Context) {
 
     private fun initLogInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
+        if (sDEBUG) {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         } else {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE

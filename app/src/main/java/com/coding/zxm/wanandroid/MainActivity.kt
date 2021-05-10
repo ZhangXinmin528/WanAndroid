@@ -1,5 +1,6 @@
 package com.coding.zxm.wanandroid
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
@@ -7,16 +8,19 @@ import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
 import com.zxm.utils.core.bar.StatusBarCompat
+import com.zxm.utils.core.log.MLogger
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     private val fragments = ArrayList<Fragment>()
+    private var mLastReturnTime: Long = 0
 
     override fun setLayoutId(): Int {
         return R.layout.activity_main
     }
 
     override fun initParamsAndValues() {
+        MLogger.d("MainActivity..initParamsAndValues()")
         StatusBarCompat.setTranslucentForImageViewInFragment(this, 0, null)
 
         fragments.add(HomeFragment.newInstance())
@@ -75,5 +79,15 @@ class MainActivity : BaseActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - mLastReturnTime > 5 * 1000L) {
+            mLastReturnTime = currentTime
+            Toast.makeText(this, getString(R.string.all_exit_tips), Toast.LENGTH_SHORT).show()
+        } else {
+            super.onBackPressed()
+        }
+
+    }
 
 }

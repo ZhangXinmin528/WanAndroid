@@ -99,7 +99,10 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun setStatusBarColor() {
-        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.color_tool_bar_primary))
+        StatusBarCompat.setColorNoTranslucent(
+            this,
+            resources.getColor(R.color.color_tool_bar_primary)
+        )
     }
 
     protected fun setStatusBarColorWhite() {
@@ -137,6 +140,10 @@ abstract class BaseActivity : AppCompatActivity() {
         val intent = Intent(mContext, clazz)
         intent.putExtras(bundle)
         jumpActivity(intent)
+    }
+
+    override fun overridePendingTransition(enterAnim: Int, exitAnim: Int) {
+        super.overridePendingTransition(enterAnim, exitAnim)
     }
 
 }

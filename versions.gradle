@@ -57,7 +57,7 @@ versions.amap_location = "5.2.0"
 
 //util
 versions.coreUtil = "3.0.4"
-versions.tbssdk = "43903"
+versions.tbssdk = "43939"
 //umeng
 versions.umsdk_common = "9.1.0"
 versions.umsdk_asms = "1.1.3"

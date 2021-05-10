@@ -9,6 +9,7 @@ import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
 import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
+import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -37,6 +38,7 @@ class BingWallpapersFragment : BaseStatusBarFragment() {
     }
 
     override fun initViews(rootView: View) {
+        fake_status_bar.setBackgroundColor(resources.getColor(R.color.color_tool_bar_white))
 
         //是否在刷新的时候禁止列表的操作
         sr_bing_layout.setDisableContentWhenRefresh(true)

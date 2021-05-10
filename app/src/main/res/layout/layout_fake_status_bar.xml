@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fake_status_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/statusbar_view_height"
+    android:background="@color/color_tool_bar_primary"
+    tools:ignore="MissingConstraints" />
