@@ -20,7 +20,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        MLogger.d("MainActivity..initParamsAndValues()")
         StatusBarCompat.setTranslucentForImageViewInFragment(this, 0, null)
 
         fragments.add(HomeFragment.newInstance())

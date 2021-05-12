@@ -16,6 +16,7 @@ import com.coding.zxm.wanandroid.setting.SettingActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.coding.zxm.wanandroid.util.ToastUtil
+import com.coding.zxm.webview.FileReaderActivity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -121,7 +122,9 @@ class MineFragment private constructor() : BaseStatusBarFragment(), View.OnClick
                 startActivity(setting)
             }
             R.id.tv_mine_collection -> {
-                ToastUtil.showToast("开发小伙伴正紧张开发中")
+                val setting = Intent(mContext!!, FileReaderActivity::class.java)
+                startActivity(setting)
+//                ToastUtil.showToast("开发小伙伴正紧张开发中")
             }
             R.id.tv_mine_share -> {
                 ToastUtil.showToast("开发小伙伴正紧张开发中")

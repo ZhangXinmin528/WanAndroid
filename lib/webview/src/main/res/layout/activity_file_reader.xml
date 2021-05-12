@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:visibility="gone"
             android:src="@mipmap/icon_dark_more"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +51,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.coding.zxm.webview.x5.X5WebView
-        android:id="@+id/x5webview"
+    <FrameLayout
+        android:id="@+id/container_reader"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_1dp"

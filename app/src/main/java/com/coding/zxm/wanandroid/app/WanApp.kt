@@ -14,6 +14,7 @@ import com.coding.zxm.wanandroid.BuildConfig
 import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.ui.activity.SplashActivity
 import com.coding.zxm.weather.WeatherManager
+import com.coding.zxm.webview.TbsManager
 import com.tencent.bugly.Bugly
 import com.tencent.bugly.beta.Beta
 import com.umeng.analytics.MobclickAgent
@@ -71,6 +72,8 @@ class WanApp : MultiDexApplication() {
 
         initRetrofit()
 
+        initTBS()
+
         initUMeng()
 
         initWeather()
@@ -78,6 +81,10 @@ class WanApp : MultiDexApplication() {
         initLogger()
 
         initBugly()
+    }
+
+    private fun initTBS() {
+        TbsManager.getInstance(this)?.initTBS()
     }
 
     private fun initBugly() {
