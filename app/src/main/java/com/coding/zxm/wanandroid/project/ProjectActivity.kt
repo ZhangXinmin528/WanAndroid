@@ -10,7 +10,6 @@ import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.project.adapter.ProjectTabAdapter
 import com.coding.zxm.wanandroid.project.model.ProjectEntity
-import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.time.TimeUtil
 import kotlinx.android.synthetic.main.activity_project.*

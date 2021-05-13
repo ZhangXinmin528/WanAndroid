@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -15,12 +14,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
     }
 
     buildTypes {
@@ -32,24 +25,27 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api fileTree(dir: "libs", include: ["*.jar"])
+
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
 
+    //androidx
     implementation deps.app_compat
+    implementation deps.material
     implementation deps.constraint_layout
 
-    implementation deps.arouter.api
+    //umeng
+//    implementation deps.umsdk_share_qq
+//    implementation deps.umsdk_share_wx
+//    implementation deps.umsdk_share_sina
+//    implementation deps.umsdk_share_dingding
 
-    kapt deps.arouter.compiler
+    //module
+    implementation project(path: ':base:core')
+    implementation project(path: ':component:image')
+    implementation project(path: ':base:util')
 
-    //tbs
-    api deps.tbssdk
-
-    implementation project(path: ':lib:core')
-    implementation project(path: ':lib:util')
-
-    api project(path: ':lib:umeng')
 
 }

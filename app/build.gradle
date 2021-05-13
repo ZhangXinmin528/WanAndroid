@@ -183,14 +183,14 @@ dependencies {
     implementation deps.bugly_nativecrashreport
 
     //lib
-    implementation project(path: ':lib:core')
-    implementation project(path: ':lib:network')
-    implementation project(path: ':lib:util')
-    implementation project(path: ':lib:webview')
-    implementation project(path: ':lib:image')
-    api project(path: ':lib:weather')
+    implementation project(path: ':base:core')
+    implementation project(path: ':base:network')
+    implementation project(path: ':base:util')
+    implementation project(path: ':component:webview')
+    implementation project(path: ':component:image')
+    api project(path: ':component:weather')
 
-    implementation project(path: ':lib:map')
+    implementation project(path: ':component:map')
 
 }
 

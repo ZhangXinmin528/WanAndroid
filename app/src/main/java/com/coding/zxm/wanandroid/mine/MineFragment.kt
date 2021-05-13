@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R

@@ -1,10 +1,13 @@
-include ':lib:map'
-include ':lib:weather'
-include ':lib:umeng'
-include ':lib:image'
-include ':lib:webview'
-include ':lib:network'
-include ':lib:util'
-include ':lib:core'
 include ':app'
+
+include ':base:util'
+include ':base:core'
+include ':base:network'
+
+include ':component:map'
+include ':component:weather'
+include ':component:umeng'
+include ':component:image'
+include ':component:webview'
+
 rootProject.name = "WanAndroid"

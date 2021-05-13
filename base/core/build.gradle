@@ -10,7 +10,7 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -29,24 +29,16 @@ dependencies {
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
-
     //androidx
     implementation deps.app_compat
-    implementation deps.material
-    implementation deps.constraint_layout
-    implementation deps.recyclerview
-    implementation deps.rvadapterhelper
-    implementation deps.flexbox
-    implementation deps.palette
-
-    implementation deps.fastjson
-
-    //lottie
-    implementation deps.lottie
-
-    implementation project(path: ':lib:core')
-
-    implementation project(path: ':lib:util')
+    implementation deps.activity.activity_ktx
 
 
+    //lifecycle
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.viewmodel_ktx
+//    implementation deps.lifecycle.livedata_ktx
+    annotationProcessor deps.lifecycle.compiler
+
+    implementation project(path: ':base:util')
 }

@@ -10,7 +10,7 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -25,8 +25,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: "libs", include: ["*.jar"])
-
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
@@ -35,17 +34,19 @@ dependencies {
     implementation deps.app_compat
     implementation deps.material
     implementation deps.constraint_layout
+    implementation deps.recyclerview
+    implementation deps.rvadapterhelper
+    implementation deps.flexbox
+    implementation deps.palette
 
-    //umeng
-//    implementation deps.umsdk_share_qq
-//    implementation deps.umsdk_share_wx
-//    implementation deps.umsdk_share_sina
-//    implementation deps.umsdk_share_dingding
+    implementation deps.fastjson
 
-    //module
-    implementation project(path: ':lib:core')
-    implementation project(path: ':lib:image')
-    implementation project(path: ':lib:util')
+    //lottie
+    implementation deps.lottie
+
+    implementation project(path: ':base:core')
+
+    implementation project(path: ':base:util')
 
 
 }

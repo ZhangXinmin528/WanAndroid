@@ -5,6 +5,7 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="testRunner" value="PLATFORM" />
+        <option name="disableWrapperSourceDistributionNotification" value="true" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="1.8" />
@@ -12,15 +13,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/lib" />
-            <option value="$PROJECT_DIR$/lib/core" />
-            <option value="$PROJECT_DIR$/lib/image" />
-            <option value="$PROJECT_DIR$/lib/map" />
-            <option value="$PROJECT_DIR$/lib/network" />
-            <option value="$PROJECT_DIR$/lib/umeng" />
-            <option value="$PROJECT_DIR$/lib/util" />
-            <option value="$PROJECT_DIR$/lib/weather" />
-            <option value="$PROJECT_DIR$/lib/webview" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base/core" />
+            <option value="$PROJECT_DIR$/base/network" />
+            <option value="$PROJECT_DIR$/base/util" />
+            <option value="$PROJECT_DIR$/component" />
+            <option value="$PROJECT_DIR$/component/image" />
+            <option value="$PROJECT_DIR$/component/map" />
+            <option value="$PROJECT_DIR$/component/umeng" />
+            <option value="$PROJECT_DIR$/component/weather" />
+            <option value="$PROJECT_DIR$/component/webview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

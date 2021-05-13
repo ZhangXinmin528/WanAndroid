@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -14,6 +15,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -31,15 +38,18 @@ dependencies {
     implementation deps.core_ktx
 
     implementation deps.app_compat
+    implementation deps.constraint_layout
 
-    //retrofit
-    api deps.retrofit.retrofit2
-    api deps.retrofit_url_manager
-    implementation deps.retrofit.gsonConverter
-    implementation deps.okhttp_logging_interceptor
+    implementation deps.arouter.api
 
-    implementation deps.coroutines.android
+    kapt deps.arouter.compiler
 
-    implementation project(path: ':lib:util')
+    //tbs
+    api deps.tbssdk
+
+    implementation project(path: ':base:core')
+    implementation project(path: ':base:util')
+
+    api project(path: ':component:umeng')
 
 }

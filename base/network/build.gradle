@@ -29,16 +29,17 @@ dependencies {
     //Kotlin
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
-    //androidx
+
     implementation deps.app_compat
-    implementation deps.activity.activity_ktx
 
+    //retrofit
+    api deps.retrofit.retrofit2
+    api deps.retrofit_url_manager
+    implementation deps.retrofit.gsonConverter
+    implementation deps.okhttp_logging_interceptor
 
-    //lifecycle
-    implementation deps.lifecycle.runtime
-    implementation deps.lifecycle.viewmodel_ktx
-//    implementation deps.lifecycle.livedata_ktx
-    annotationProcessor deps.lifecycle.compiler
+    implementation deps.coroutines.android
 
-    implementation project(path: ':lib:util')
+    implementation project(path: ':base:util')
+
 }
