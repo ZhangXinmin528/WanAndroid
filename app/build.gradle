@@ -107,21 +107,11 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    //Kotlin
-    implementation deps.kotlin.stdlib
-    implementation deps.core_ktx
-
-//    implementation deps.activity.activity_ktx
-
     //androidx
-    implementation deps.app_compat
     implementation deps.material
     implementation deps.constraint_layout
     implementation deps.recyclerview
     implementation deps.rvadapterhelper
-
-    //multidex
-    implementation deps.multidex
 
     // Navigation
     implementation deps.navigation.runtime_ktx
@@ -133,6 +123,7 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.viewmodel_ktx
     implementation deps.lifecycle.extensions
+    implementation project(path: ':component:upgrade')
 
 //    implementation deps.lifecycle.livedata_ktx
     kapt deps.lifecycle.compiler

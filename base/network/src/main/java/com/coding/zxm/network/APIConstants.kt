@@ -14,4 +14,8 @@ object APIConstants {
     const val BING_URL = "https://bing.com"
     const val DOMAN_BING = "bing"
 
+    //fir.im 应用更新
+    const val UPGRADE_URL = "http://api.bq04.com/apps"
+    const val DOMAIN_UPGRADE = "fir.im"
+
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.coding.zxm.upgrade.TestActivty
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
@@ -121,7 +122,7 @@ class MineFragment private constructor() : BaseStatusBarFragment(), View.OnClick
                 startActivity(setting)
             }
             R.id.tv_mine_collection -> {
-                val setting = Intent(mContext!!, FileReaderActivity::class.java)
+                val setting = Intent(mContext!!, TestActivty::class.java)
                 startActivity(setting)
 //                ToastUtil.showToast("开发小伙伴正紧张开发中")
             }

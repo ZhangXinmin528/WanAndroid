@@ -1,14 +1,12 @@
 package com.coding.zxm.wanandroid.app
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.multidex.MultiDex
-import androidx.multidex.MultiDexApplication
+import com.coding.zxm.core.base.BaseApp
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.wanandroid.BuildConfig
 import com.coding.zxm.wanandroid.MainActivity
@@ -29,7 +27,7 @@ import kotlin.math.abs
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/7/29 . All rights reserved.
  */
-class WanApp : MultiDexApplication() {
+class WanApp : BaseApp() {
 
     //需要重新申请
     init {
@@ -50,7 +48,6 @@ class WanApp : MultiDexApplication() {
 
 
     companion object {
-        lateinit var context: Application
         private const val TAG = "WanApp"
         private var mLastBackgroundTime: Long = 0
 
@@ -59,14 +56,9 @@ class WanApp : MultiDexApplication() {
         }
     }
 
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
-    }
 
     override fun onCreate() {
         super.onCreate()
-        context = this
 
         addAppLifecycleObserver()
 

@@ -39,6 +39,9 @@ class RetrofitClient private constructor(private val context: Context) {
         fun putDoman() {
             RetrofitUrlManager.getInstance()
                 .putDomain(APIConstants.DOMAN_BING, APIConstants.BING_URL)
+
+            RetrofitUrlManager.getInstance()
+                .putDomain(APIConstants.DOMAIN_UPGRADE, APIConstants.UPGRADE_URL)
         }
 
         /**

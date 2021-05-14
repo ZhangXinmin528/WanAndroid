@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_file_reader.*
 /**
  * Created by ZhangXinmin on 2021/05/11.
  * Copyright (c) 5/11/21 . All rights reserved.
+ * 常见格式文档查看
  */
 class FileReaderActivity : BaseActivity(), View.OnClickListener {
 

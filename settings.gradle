@@ -1,3 +1,4 @@
+include ':component:upgrade'
 include ':app'
 
 include ':base:util'

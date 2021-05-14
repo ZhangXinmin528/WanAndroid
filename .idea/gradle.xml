@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/component/image" />
             <option value="$PROJECT_DIR$/component/map" />
             <option value="$PROJECT_DIR$/component/umeng" />
+            <option value="$PROJECT_DIR$/component/upgrade" />
             <option value="$PROJECT_DIR$/component/weather" />
             <option value="$PROJECT_DIR$/component/webview" />
           </set>

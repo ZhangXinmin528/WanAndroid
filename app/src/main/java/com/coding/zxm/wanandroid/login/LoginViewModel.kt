@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.coding.zxm.core.base.BaseApp
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.app.WanApp
@@ -16,7 +17,6 @@ import kotlinx.coroutines.launch
  */
 
 open class LoginViewModel(private val loginRepo: LoginRepository) : ViewModel() {
-
 
     /**
      * User login

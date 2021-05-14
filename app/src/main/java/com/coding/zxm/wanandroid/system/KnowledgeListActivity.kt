@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
-import com.coding.zxm.wanandroid.app.WanApp.Companion.context
 import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.system.viewmodel.KnowledgeListViewModel
@@ -90,7 +89,7 @@ class KnowledgeListActivity : BaseActivity() {
             mContext,
             DividerItemDecoration.VERTICAL
         )
-        ContextCompat.getDrawable(context, R.drawable.icon_search_divider)?.let {
+        ContextCompat.getDrawable(mContext!!, R.drawable.icon_search_divider)?.let {
             itemDecoration.setDrawable(
                 it
             )

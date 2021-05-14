@@ -10,9 +10,12 @@
 1.首页实现渐变式状态栏
 2.解决首页不同fragment切换不同状态栏颜色问题；
 
+###v1.0.3
+1.支持doc,docx,xls,xlsx,ppt,pptx,pdf,txt,epub格式文档阅读功能；
+2.应用更新模块，对接fir.im进行应用更新升级；
 
-3.更新接入蒲公英；
-http://api.bq04.com/apps/5fd2db28b2eb462419f80455/download_token?api_token=911a59ee1bfdd702ccdd1935bde1fe30
+3.更新接入fir.im；
+http://api.bq04.com/apps/latest/5fd2db28b2eb462419f80455?api_token=911a59ee1bfdd702ccdd1935bde1fe30
 
 4.我的收藏
 
