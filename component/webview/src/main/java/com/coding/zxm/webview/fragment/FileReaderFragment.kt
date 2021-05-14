@@ -21,6 +21,7 @@ import java.io.File
  * Created by ZhangXinmin on 2021/05/10.
  * Copyright (c) 5/10/21 . All rights reserved.
  * 文件预览功能
+ * 支持的文档格式：doc、docx、ppt、pptx、xls、xlsx、pdf、txt、epub
  */
 class FileReaderFragment : Fragment(), TbsReaderView.ReaderCallback {
 
@@ -112,14 +113,10 @@ class FileReaderFragment : Fragment(), TbsReaderView.ReaderCallback {
         bundle.putString("filePath", filePath)
         bundle.putString("tempPath", mTbsTempPath)
         val result: Boolean = mTbsReaderView.preOpen(getFileType(fileName), false)
-        Log.d("print", "查看文档---$result")
         if (result) {
             mTbsReaderView.post {
                 mTbsReaderView.openFile(bundle)
             }
-
-            //使用QQ浏览器打开
-//            QbSdk.openFileWithQB(mContext, filePath, fileName)
         }
     }
 

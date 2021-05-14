@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.coding.zxm.webview">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,8 +19,34 @@
         <!--文件预览-->
         <activity
             android:name=".FileReaderActivity"
+            android:label="文档查看"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <!--pdf-->
+                <data android:mimeType="application/pdf" />
+                <!--ppt-->
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <!--pptx-->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+                <!--xls-->
+                <data android:mimeType="application/vnd.ms-excel" />
+                <!--xlsx-->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <!--doc-->
+                <data android:mimeType="application/msword" />
+                <!--docx-->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                <!--txt-->
+                <data android:mimeType="text/plain" />
+                <!--epub-->
+                <data android:mimeType="application/epub+zip" />
+
+            </intent-filter>
+        </activity>
 
         <!--在TBS内核首次Dex加载时触发并执行dex2oat任务，任务完成后自动结束。-->
         <service
