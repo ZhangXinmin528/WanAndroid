@@ -5,11 +5,15 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.upgrade.UpgradeManager
 import com.coding.zxm.upgrade.UpgradeViewModel
+import com.coding.zxm.util.AppUtils
 import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.app.WanApp
+import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_toolbar_back.*
@@ -58,8 +62,18 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             tv_setting_logout.visibility = View.GONE
         }
 
+        tv_setting_curr_version.text = AppUtils.getAppVersionName(mContext!!)
 
+        checkUpgrade()
 
+    }
+
+    private fun checkUpgrade() {
+        UpgradeManager.getInstance(WanApp.getApplicationContext())
+            ?.checkUpgrade("911a59ee1bfdd702ccdd1935bde1fe30")
+            ?.observe(this, Observer {
+                MLogger.d(it.install_url)
+            })
     }
 
     override fun onClick(v: View?) {
@@ -81,7 +95,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
             }
             R.id.tv_setting_new_version -> {
-
+                checkUpgrade()
             }
             R.id.tv_setting_logout -> {
                 logout()
