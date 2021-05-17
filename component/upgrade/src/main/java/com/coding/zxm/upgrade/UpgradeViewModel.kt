@@ -28,7 +28,7 @@ class UpgradeViewModel(private val repo: UpgradeRepository) : ViewModel() {
         return liveData
     }
 
-    object LoginViewModelFactory : ViewModelProvider.Factory {
+    object UpgradeViewModelFactory : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
             return UpgradeViewModel(

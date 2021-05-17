@@ -54,6 +54,7 @@
     <string name="all_setting_font_size">字体大小</string>
 
     <string name="all_setting_clear_cache">清除缓存</string>
+    <string name="all_setting_new_version">检查新版本</string>
     <string name="all_setting_logout">退出登录</string>
     <string name="all_logout_succeess">退出登陆成功</string>
 </resources>

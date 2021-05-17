@@ -4,6 +4,8 @@ import androidx.annotation.NonNull
 import com.coding.zxm.network.BaseRepository
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.common.CommonResult
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 
 /**
  * Created by ZhangXinmin on 2021/05/14.
@@ -19,6 +21,23 @@ class UpgradeRepository(client: RetrofitClient) : BaseRepository(client) {
     }
 
     private suspend fun checkUpdateInfo(token: String): CommonResult<UpdateEntity> {
-        return excuteResponse(creatService(UpgradeService::class.java).checkUpdate(token))
+        return excuteUpgradeResponse(creatService(UpgradeService::class.java).checkUpdate(token))
+    }
+
+    private suspend fun excuteUpgradeResponse(
+        response: UpdateEntity,
+        successBlock: (suspend CoroutineScope.() -> Unit)? = null,
+        errorBlock: (suspend CoroutineScope.() -> Unit)? = null
+    ): CommonResult<UpdateEntity> {
+        return coroutineScope {
+            if (response == null) {
+                errorBlock?.let { it() }
+                CommonResult.Error(Exception("网络请求异常"))
+            } else {
+                successBlock?.let { it() }
+                CommonResult.Success(response)
+            }
+        }
+
     }
 }

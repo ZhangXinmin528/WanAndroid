@@ -5,10 +5,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.upgrade.UpgradeViewModel
 import com.coding.zxm.util.CacheUtil
+import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
-import com.coding.zxm.util.LanguageUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_toolbar_back.*
@@ -21,6 +22,9 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     private val mLogoutViewModel: LogoutViewModel by viewModels { LogoutViewModel.LogoutViewModelFactory }
 
+    private val mUpgradeViewModel: UpgradeViewModel by viewModels { UpgradeViewModel.UpgradeViewModelFactory }
+
+
     override fun setLayoutId(): Int {
         return R.layout.activity_setting
     }
@@ -30,6 +34,9 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViews() {
+
+        tv_toolbar_title.setText(R.string.all_setting)
+
         iv_toolbar_back.setOnClickListener(this)
         tv_setting_switch_language.setOnClickListener(this)
         tv_setting_switch_language.text = LanguageUtil.getSettingLanguageName(mContext!!)
@@ -37,6 +44,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         tv_setting_font.setOnClickListener(this)
         layout_clear_cache.setOnClickListener(this)
         tv_setting_logout.setOnClickListener(this)
+        tv_setting_new_version.setOnClickListener(this)
 
         tv_setting_cache_size.text = mContext?.let { CacheUtil.getAppCacheSize(it) }
 
@@ -50,7 +58,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             tv_setting_logout.visibility = View.GONE
         }
 
-        tv_toolbar_title.setText(R.string.all_setting)
+
 
     }
 
@@ -70,6 +78,9 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
                     CacheUtil.clearAppCache(it)
                     tv_setting_cache_size.text = CacheUtil.getAppCacheSize(it)
                 }
+
+            }
+            R.id.tv_setting_new_version -> {
 
             }
             R.id.tv_setting_logout -> {

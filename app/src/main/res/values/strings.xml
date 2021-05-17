@@ -53,6 +53,7 @@
     <string name="all_setting_font_size">Font scale</string>
 
     <string name="all_setting_clear_cache">Clear cache</string>
+    <string name="all_setting_new_version">New Version</string>
     <string name="all_setting_logout">Logout</string>
     <string name="all_logout_succeess">Log out successfully</string>
 
