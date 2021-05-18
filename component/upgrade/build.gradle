@@ -33,14 +33,24 @@ android {
 }
 
 dependencies {
+    implementation deps.kotlin.stdlib
+    implementation deps.core_ktx
+
+    implementation deps.app_compat
+
     implementation deps.constraint_layout
+
+    //retrofit
+    implementation deps.retrofit.retrofit2
+    implementation deps.retrofit.gsonConverter
+    implementation deps.okhttp_logging_interceptor
 
 //    implementation deps.arouter.api
 //
 //    kapt deps.arouter.compiler
 
-    implementation project(path: ':base:core')
-
-    implementation project(path: ':base:util')
-    implementation project(path: ':base:network')
+//    implementation project(path: ':base:core')
+//
+//    implementation project(path: ':base:util')
+//    implementation project(path: ':base:network')
 }

@@ -6,9 +6,6 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.upgrade.UpgradeManager
-import com.coding.zxm.upgrade.UpgradeViewModel
-import com.coding.zxm.upgrade.library.UpdateAppManager
-import com.coding.zxm.upgrade.library.listener.ExceptionHandler
 import com.coding.zxm.util.AppUtils
 import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
