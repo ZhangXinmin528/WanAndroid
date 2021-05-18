@@ -1,6 +1,8 @@
 package com.coding.zxm.upgrade
 
 import android.content.Context
+import android.text.TextUtils
+import androidx.annotation.NonNull
 import androidx.lifecycle.MutableLiveData
 import com.coding.zxm.network.RetrofitClient
 import retrofit2.Call
@@ -16,6 +18,7 @@ class UpgradeManager private constructor(val context: Context) {
 
     companion object {
         private var sInstance: UpgradeManager? = null
+        private var mUpgradeLivedata: MutableLiveData<UpdateEntity> = MutableLiveData()
 
         @Synchronized
         fun getInstance(context: Context): UpgradeManager? {
@@ -30,8 +33,7 @@ class UpgradeManager private constructor(val context: Context) {
      * 检测版本更新
      * @param
      */
-    fun checkUpgrade(version: String): MutableLiveData<UpdateEntity> {
-        val liveData: MutableLiveData<UpdateEntity> = MutableLiveData()
+    fun checkUpgrade() {
 
         val call = RetrofitClient.getInstance(context)?.create(UpgradeService::class.java)
             ?.checkUpdate2("911a59ee1bfdd702ccdd1935bde1fe30")
@@ -39,7 +41,8 @@ class UpgradeManager private constructor(val context: Context) {
         call?.let {
             it.enqueue(object : Callback<UpdateEntity> {
                 override fun onFailure(call: Call<UpdateEntity>, t: Throwable) {
-                    liveData.postValue(null)
+                    mUpgradeLivedata.postValue(null)
+                    //TODO:检查更新失败
                 }
 
                 override fun onResponse(
@@ -48,20 +51,49 @@ class UpgradeManager private constructor(val context: Context) {
                 ) {
                     if (response.isSuccessful) {
                         val entity = response.body()
-                        liveData.postValue(entity)
+                        mUpgradeLivedata.postValue(entity)
+                        if (hasNewVersion(mUpgradeLivedata)) {
+
+                        } else {
+                            //TODO：没有新版本
+                        }
+                    } else {
+                        //TODO:检查更新失败
+                        mUpgradeLivedata.postValue(null)
                     }
                 }
 
             })
 
         }
-        return liveData
+
+    }
+
+    fun downloadApk(downurl: String) {
+
+    }
+
+    /**
+     * 是否存在新版本
+     */
+    private fun hasNewVersion(@NonNull liveData: MutableLiveData<UpdateEntity>): Boolean {
+        if (liveData.value != null) {
+            val entity = liveData.value
+            if (entity != null) {
+                val currVersion = getAppVersionCode(context)
+                val newVersion = entity.version
+                if (!TextUtils.isEmpty(newVersion) && currVersion != -1) {
+                    return newVersion!!.toInt() > currVersion
+                }
+            }
+        }
+        return false
     }
 
     /**
      * Get app version code
      */
-    fun getAppVersionCode(context: Context): Int {
+    private fun getAppVersionCode(context: Context): Int {
         val packageManager = context.packageManager
         if (packageManager != null) {
             val packageInfo = packageManager.getPackageInfo(context.packageName, 0)

@@ -7,13 +7,13 @@ import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.upgrade.UpgradeManager
 import com.coding.zxm.upgrade.UpgradeViewModel
+import com.coding.zxm.upgrade.library.UpdateAppManager
+import com.coding.zxm.upgrade.library.listener.ExceptionHandler
 import com.coding.zxm.util.AppUtils
 import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
-import com.coding.zxm.wanandroid.app.WanApp
-import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_toolbar_back.*
@@ -69,11 +69,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun checkUpgrade() {
-        UpgradeManager.getInstance(WanApp.getApplicationContext())
-            ?.checkUpgrade("911a59ee1bfdd702ccdd1935bde1fe30")
-            ?.observe(this, Observer {
-                MLogger.d(it.install_url)
-            })
+        UpgradeManager.getInstance(this)?.checkUpgrade()
     }
 
     override fun onClick(v: View?) {

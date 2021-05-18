@@ -18,4 +18,9 @@ object APIConstants {
     const val UPGRADE_URL = "http://api.bq04.com/apps"
     const val DOMAIN_UPGRADE = "fir.im"
 
+    //    https://download.jappstore.com/apps/5fd2db28b2eb462419f80455/install?download_token=6cafefad766eb63fcc965b656c7026b2\u0026source=update
+//    https://download.jappstore.com/apps/5fd2db28b2eb462419f80455/install?download_token=6cafefad766eb63fcc965b656c7026b2&&source=update
+    const val DOWNLOAD_URL = "https://download.jappstore.com/apps/"
+    const val DOMAIN_DOWNLOAD = "fir.download"
+
 }
