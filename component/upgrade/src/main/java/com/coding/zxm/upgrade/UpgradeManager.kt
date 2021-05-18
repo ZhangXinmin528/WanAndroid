@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.content.FileProvider
 import androidx.lifecycle.MutableLiveData
-import com.zxm.utils.core.log.MLogger
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -174,12 +173,12 @@ class UpgradeManager private constructor(val context: Context) {
                             if (response.body() != null) {
                                 val body = response.body()
                                 body?.let {
-                                    var inputStream: InputStream?
-                                    var fileOutputStream: FileOutputStream?
-                                    var bufferedInputStream: BufferedInputStream?
+                                    val inputStream: InputStream?
+                                    val fileOutputStream: FileOutputStream?
+                                    val bufferedInputStream: BufferedInputStream?
 
-                                    var apkFile: File
-                                    var apkPathDir: String
+                                    val apkFile: File
+                                    val apkPathDir: String
                                     try {
                                         inputStream = it.byteStream()
 
