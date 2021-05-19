@@ -23,9 +23,6 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     private val mLogoutViewModel: LogoutViewModel by viewModels { LogoutViewModel.LogoutViewModelFactory }
 
-    private val mUpgradeViewModel: UpgradeViewModel by viewModels { UpgradeViewModel.UpgradeViewModelFactory }
-
-
     override fun setLayoutId(): Int {
         return R.layout.activity_setting
     }
@@ -66,7 +63,11 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun checkUpgrade() {
-        UpgradeManager.getInstance(this)?.checkUpgrade()
+        UpgradeManager.UpgradeBuilder()
+            .setActivity(this)
+            .setUpgradeToken("911a59ee1bfdd702ccdd1935bde1fe30")
+            .build()
+            .checkUpgrade()
     }
 
     override fun onClick(v: View?) {

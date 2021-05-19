@@ -37,6 +37,7 @@ dependencies {
     implementation deps.core_ktx
 
     implementation deps.app_compat
+    implementation deps.fragment.runtime
 
     implementation deps.constraint_layout
 
@@ -51,6 +52,6 @@ dependencies {
 
 //    implementation project(path: ':base:core')
 //
-//    implementation project(path: ':base:util')
+    implementation project(path: ':base:util')
 //    implementation project(path: ':base:network')
 }

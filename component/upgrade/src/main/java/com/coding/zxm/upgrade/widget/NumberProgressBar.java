@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade.library.view;
+package com.coding.zxm.upgrade.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.coding.zxm.upgrade.R;
+
 
 /**
  * Created by daimajia on 14-4-30.

@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade.library.utils;
+package com.coding.zxm.upgrade.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

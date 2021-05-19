@@ -9,10 +9,9 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application>
-        <service android:name=".library.service.DownloadService" />
 
         <provider
-            android:name=".library.UpdateFileProvider"
+            android:name=".UpgradeFileProvider"
             android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade.library.utils;
+package com.coding.zxm.upgrade.utils;
 
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -7,8 +7,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.widget.TextView;
 
-import static com.coding.zxm.upgrade.library.utils.ColorUtil.getColorStateList;
-import static com.coding.zxm.upgrade.library.utils.ColorUtil.getRandomColor;
+import static com.coding.zxm.upgrade.utils.ColorUtil.getColorStateList;
+import static com.coding.zxm.upgrade.utils.ColorUtil.getRandomColor;
 
 /**
  * Created by Vector

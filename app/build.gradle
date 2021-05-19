@@ -12,7 +12,7 @@ android {
         applicationId "com.coding.zxm.wanandroid"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 3
+        versionCode 1
         versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

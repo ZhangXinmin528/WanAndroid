@@ -1,25 +1,43 @@
 package com.coding.zxm.upgrade
 
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Url
+import android.app.NotificationManager
+import android.app.Service
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
+import android.os.Binder
+import android.os.IBinder
 
 /**
- * Created by ZhangXinmin on 2021/05/14.
- * Copyright (c) 5/14/21 . All rights reserved.
+ * Created by ZhangXinmin on 2021/05/19.
+ * Copyright (c) 5/19/21 . All rights reserved.
+ * 用户控制更新包的下载
  */
-interface UpgradeService {
+class UpgradeService : Service() {
 
-    /**
-     * 检查版本更新
-     */
-    @GET
-    fun checkUpdate(): Call<UpdateEntity>
+    private var mNotificationManager: NotificationManager? = null
 
-    /**
-     * 下载更新APK
-     */
-    @GET
-    fun downloadApk(@Url downloadUrl: String): Call<ResponseBody>
+    override fun onCreate() {
+        super.onCreate()
+
+        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return UpgradeBinder()
+    }
+
+    override fun unbindService(conn: ServiceConnection) {
+        super.unbindService(conn)
+    }
+
+    override fun onDestroy() {
+        mNotificationManager = null
+        super.onDestroy()
+    }
+
+    class UpgradeBinder : Binder() {
+
+    }
 }
