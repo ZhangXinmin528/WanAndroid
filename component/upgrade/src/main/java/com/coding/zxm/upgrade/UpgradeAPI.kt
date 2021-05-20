@@ -1,5 +1,6 @@
 package com.coding.zxm.upgrade
 
+import com.coding.zxm.upgrade.entity.UpdateEntity
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET

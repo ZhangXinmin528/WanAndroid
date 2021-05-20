@@ -10,6 +10,7 @@
 
     <application>
 
+        <service android:name=".UpgradeService" />
         <provider
             android:name=".UpgradeFileProvider"
             android:authorities="${applicationId}.fileProvider"

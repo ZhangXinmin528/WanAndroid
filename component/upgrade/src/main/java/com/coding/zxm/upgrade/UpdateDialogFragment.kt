@@ -1,10 +1,13 @@
 package com.coding.zxm.upgrade
 
 import android.Manifest
+import android.content.ComponentName
 import android.content.Context
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.os.IBinder
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,6 +17,9 @@ import android.widget.*
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import com.coding.zxm.upgrade.entity.UpdateEntity
+import com.coding.zxm.upgrade.provider.IUpgradeProvider
 import com.coding.zxm.upgrade.utils.ColorUtil
 import com.coding.zxm.upgrade.utils.DrawableUtil
 import com.coding.zxm.upgrade.widget.NumberProgressBar
@@ -26,8 +32,6 @@ import java.util.*
  * TODO:1.强制更新功能；2.忽略此版本；
  */
 class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
-
-    private lateinit var mEntity: UpdateEntity
 
     private var mContentTextView: TextView? = null
     private var mUpdateOkButton: Button? = null
@@ -42,6 +46,10 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
     private val mDefaultPicResId = R.mipmap.lib_update_app_top_bg
     private var mTopIv: ImageView? = null
     private var mIgnore: TextView? = null
+
+    //参数
+    private lateinit var mEntity: UpdateEntity
+    private lateinit var mProvider: IUpgradeProvider
 
     companion object {
         private const val PARAMS_UPDATE_INFO = "params_update_info"
@@ -172,29 +180,29 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
     private fun byte2FitMemorySize(byteNum: Long): String? {
         return if (byteNum < 0) {
             "shouldn't be less than zero!"
-        } else if (byteNum < 1024) {
+        } else if (byteNum < 1000) {
             String.format(
                 Locale.getDefault(),
                 "%.3fB",
                 byteNum.toDouble()
             )
-        } else if (byteNum < 1048576) {
+        } else if (byteNum < 1000000) {
             String.format(
                 Locale.getDefault(),
                 "%.3fKB",
-                byteNum.toDouble() / 1024
+                byteNum.toDouble() / 1000
             )
-        } else if (byteNum < 1073741824) {
+        } else if (byteNum < 1000000000) {
             String.format(
                 Locale.getDefault(),
                 "%.3fMB",
-                byteNum.toDouble() / 1048576
+                byteNum.toDouble() / 1000000
             )
         } else {
             String.format(
                 Locale.getDefault(),
                 "%.3fGB",
-                byteNum.toDouble() / 1073741824
+                byteNum.toDouble() / 1000000000
             )
         }
     }
@@ -239,6 +247,17 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
         mUpdateOkButton!!.setTextColor(if (ColorUtil.isTextColorDark(color)) Color.BLACK else Color.WHITE)
     }
 
+    /**
+     * 展示弹窗
+     */
+    fun showUpgradeDialog(
+        @NonNull manager: FragmentManager,
+        @NonNull provider: IUpgradeProvider
+    ) {
+        mProvider = provider
+        show(manager, "dialog")
+    }
+
     private fun dip2px(dip: Int, context: Context): Int {
         return (dip * context.resources.displayMetrics.density + 0.5f).toInt()
     }
@@ -269,12 +288,34 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
                     }
 
                 } else {
-
+                    upgradeApp()
                 }
             }
             R.id.iv_close -> {
                 dismiss()
             }
+        }
+    }
+
+    /**
+     * APK下载&&升级
+     */
+    private fun upgradeApp() {
+        if (mProvider != null) {
+            UpgradeService.bindService(context!!, object : ServiceConnection {
+                override fun onServiceDisconnected(name: ComponentName?) {
+
+                }
+
+                override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                    (service as UpgradeService.UpgradeBinder).downloadApk(
+                        mEntity.installUrl,
+                        mProvider
+                    )
+                }
+
+            })
+            dismiss()
         }
     }
 
@@ -288,8 +329,7 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
             if (grantResults.isNotEmpty()
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
             ) {
-                //TODO:升级App
-
+                upgradeApp()
             } else {
                 Toast.makeText(
                     context,

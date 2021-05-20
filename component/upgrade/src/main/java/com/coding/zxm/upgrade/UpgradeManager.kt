@@ -1,29 +1,22 @@
 package com.coding.zxm.upgrade
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.IBinder
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
-import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.*
-import java.security.cert.X509Certificate
-import java.util.concurrent.TimeUnit
-import javax.net.ssl.X509TrustManager
+import com.coding.zxm.upgrade.entity.UpdateEntity
+import com.coding.zxm.upgrade.provider.IUpgradeProvider
+import java.io.File
 
 
 /**
@@ -38,90 +31,26 @@ class UpgradeManager private constructor(val builder: UpgradeBuilder) {
 
         private var mUpgradeLivedata: MutableLiveData<UpdateEntity> = MutableLiveData()
 
-        private var mApkName: String = ""
     }
 
     /**
      * 检测版本更新
-     * @param token
      */
     fun checkUpgrade() {
-        val trustAllCert = object : X509TrustManager {
-            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+
+        UpgradeService.bindService(builder.activity!!, object : ServiceConnection {
+            override fun onServiceDisconnected(name: ComponentName?) {
 
             }
 
-            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                (service as UpgradeService.UpgradeBinder).checkUpgrade(
+                    builder.upgradeProvider,
+                    builder.upgradeToken,
+                    builder.apkName
+                )
             }
-
-            override fun getAcceptedIssuers(): Array<X509Certificate> {
-                return arrayOf<X509Certificate>()
-            }
-
-        }
-
-        val sslSocketFactory = SSLSocketFactoryCompat(trustAllCert)
-
-        val loggingInterceptor =
-            HttpLoggingInterceptor { message -> Log.d(TAG, "checkUpgrade()..msg:$message") }
-
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .sslSocketFactory(sslSocketFactory, trustAllCert)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://api.bq04.com/apps/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-
-        retrofit.create(UpgradeAPI::class.java).checkUpdate(builder.upgradeToken)
-            .enqueue(object : Callback<UpdateEntity> {
-                override fun onFailure(call: Call<UpdateEntity>, t: Throwable) {
-                    mUpgradeLivedata.postValue(null)
-                    //TODO:检查更新失败
-                }
-
-                override fun onResponse(
-                    call: Call<UpdateEntity>,
-                    response: Response<UpdateEntity>
-                ) {
-                    if (response.isSuccessful) {
-                        val entity = response.body()
-                        mUpgradeLivedata.postValue(entity)
-                        if (hasNewVersion(entity)) {
-                            mApkName =
-                                if (TextUtils.isEmpty(entity?.name)) builder.activity.applicationInfo.name else entity?.name!!
-
-                            showUpgradeDialog(entity)
-//                            downloadApk(entity?.installUrl)
-                        } else {
-                            Toast.makeText(builder.activity, "已是最新版本", Toast.LENGTH_SHORT).show()
-                            //TODO：没有新版本
-                        }
-                    } else {
-                        //TODO:检查更新失败
-                        mUpgradeLivedata.postValue(null)
-                    }
-                }
-
-            })
-
-    }
-
-    /**
-     * 更新提示Dialog
-     */
-    private fun showUpgradeDialog(entity: UpdateEntity?) {
-        if (entity != null) {
-            val fragmentManager = builder.activity.supportFragmentManager
-            UpdateDialogFragment.newInstance(entity)
-                .show(fragmentManager, "dialog")
-        }
+        })
 
     }
 
@@ -129,122 +58,19 @@ class UpgradeManager private constructor(val builder: UpgradeBuilder) {
      * 下载新版本Apk
      */
     fun downloadApk(downloadUrl: String?) {
-        if (!TextUtils.isDigitsOnly(downloadUrl)) {
-            val trustAllCert = object : X509TrustManager {
-                override fun checkClientTrusted(
-                    chain: Array<out X509Certificate>?,
-                    authType: String?
-                ) {
-                }
-
-                override fun checkServerTrusted(
-                    chain: Array<out X509Certificate>?,
-                    authType: String?
-                ) {
-                }
-
-                override fun getAcceptedIssuers(): Array<X509Certificate> {
-                    return arrayOf<X509Certificate>()
-                }
+        UpgradeService.bindService(builder.activity!!, object : ServiceConnection {
+            override fun onServiceDisconnected(name: ComponentName?) {
 
             }
 
-            val sslSocketFactory = SSLSocketFactoryCompat(trustAllCert)
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                (service as UpgradeService.UpgradeBinder).downloadApk(
+                    downloadUrl,
+                    builder.upgradeProvider
+                )
+            }
 
-            val loggingInterceptor =
-                HttpLoggingInterceptor { message -> Log.d(TAG, "checkUpgrade()..msg:$message") }
-
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .sslSocketFactory(sslSocketFactory, trustAllCert)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true)
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://download.jappstore.com/apps/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-
-            retrofit.create(UpgradeAPI::class.java).downloadApk(downloadUrl!!)
-                .enqueue(object : Callback<ResponseBody> {
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>
-                    ) {
-                        if (response.isSuccessful) {
-                            if (response.body() != null) {
-                                val body = response.body()
-                                body?.let {
-
-                                    var inputStream: InputStream? = null
-                                    var fileOutputStream: FileOutputStream? = null
-                                    var bufferedInputStream: BufferedInputStream? = null
-
-                                    var apkFile: File? = null
-                                    val apkPathDir: String
-
-                                    try {
-                                        inputStream = it.byteStream()
-
-                                        apkPathDir = if (isExternalStorageWritable()) {
-                                            Environment.getExternalStoragePublicDirectory(
-                                                Environment.DIRECTORY_DOWNLOADS
-                                            ).absolutePath
-                                        } else {
-                                            builder.activity.filesDir.absolutePath
-                                        }
-
-                                        apkFile = File(apkPathDir, "$mApkName.apk")
-
-                                        fileOutputStream = FileOutputStream(apkFile)
-                                        bufferedInputStream = BufferedInputStream(inputStream)
-
-                                        bufferedInputStream.available()
-                                        val byte = ByteArray(1024)
-
-                                        var length: Int
-
-                                        while (bufferedInputStream.read(byte)
-                                                .also { l -> length = l } != -1
-                                        ) {
-                                            fileOutputStream.write(byte, 0, length)
-                                            fileOutputStream.flush()
-                                        }
-
-                                    } catch (e: IOException) {
-                                        e.printStackTrace()
-                                    } finally {
-                                        try {
-                                            fileOutputStream?.close()
-                                            bufferedInputStream?.close()
-                                            inputStream?.close()
-
-                                            //TODO:进行安装
-                                            apkFile?.let {
-                                                installNewApkWithNoRoot(builder.activity, it)
-                                            }
-
-                                        } catch (e: IOException) {
-                                            e.printStackTrace()
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            //TODO:下载失败
-                        }
-                    }
-
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        //TODO:下载失败
-                    }
-                })
-
-        } else {
-            //TODO:下载失败
-        }
+        })
     }
 
     /**
@@ -291,8 +117,8 @@ class UpgradeManager private constructor(val builder: UpgradeBuilder) {
     /**
      * Get app version code
      */
-    private fun getAppVersionCode(context: Context): Int {
-        val packageManager = context.packageManager
+    private fun getAppVersionCode(context: Context?): Int {
+        val packageManager = context?.packageManager
         if (packageManager != null) {
             val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
             return packageInfo.versionCode
@@ -310,8 +136,10 @@ class UpgradeManager private constructor(val builder: UpgradeBuilder) {
     }
 
     class UpgradeBuilder {
-        lateinit var activity: FragmentActivity
-        lateinit var upgradeToken: String
+        var activity: FragmentActivity? = null
+        var upgradeToken: String? = null
+        var upgradeProvider: IUpgradeProvider? = null
+        var apkName: String? = null
 
         fun setActivity(activity: FragmentActivity): UpgradeBuilder {
             this.activity = activity
@@ -323,8 +151,20 @@ class UpgradeManager private constructor(val builder: UpgradeBuilder) {
             return this
         }
 
+        fun setUpgradeProvider(provider: IUpgradeProvider): UpgradeBuilder {
+            upgradeProvider = provider
+            return this
+        }
+
+        fun setApkName(name: String): UpgradeBuilder {
+            apkName = name
+            return this
+        }
+
         fun build(): UpgradeManager {
-            if (activity == null || TextUtils.isEmpty(upgradeToken)) {
+            if (activity == null || TextUtils.isEmpty(upgradeToken)
+                || upgradeProvider == null
+            ) {
                 throw NullPointerException("关键参数为空！")
             }
             return UpgradeManager(this)

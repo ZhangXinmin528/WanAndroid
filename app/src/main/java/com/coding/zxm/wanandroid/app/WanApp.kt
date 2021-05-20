@@ -9,12 +9,10 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import com.coding.zxm.core.base.BaseApp
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.wanandroid.BuildConfig
-import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.ui.activity.SplashActivity
 import com.coding.zxm.weather.WeatherManager
 import com.coding.zxm.webview.TbsManager
 import com.tencent.bugly.Bugly
-import com.tencent.bugly.beta.Beta
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.socialize.PlatformConfig
@@ -80,16 +78,8 @@ class WanApp : BaseApp() {
     }
 
     private fun initBugly() {
-//        CrashReport.initCrashReport(this, "c61c145a8e", false)
-        //延迟初始化
-        Beta.initDelay = 2 * 60 * 1000
-        //打断策略
-        Beta.showInterruptedStrategy = true
-        //只在该页面进行
-        Beta.canShowUpgradeActs.add(MainActivity::class.java)
 
         Bugly.init(this, "c61c145a8e", BuildConfig.DEBUG)
-
 
     }
 

@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.upgrade.UpgradeManager
+import com.coding.zxm.upgrade.provider.UpgradeProgressProvider
 import com.coding.zxm.util.AppUtils
 import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
@@ -66,6 +67,12 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         UpgradeManager.UpgradeBuilder()
             .setActivity(this)
             .setUpgradeToken("911a59ee1bfdd702ccdd1935bde1fe30")
+            .setUpgradeProvider(
+                UpgradeProgressProvider(
+                    this
+                )
+            )
+            .setApkName("WanAndroid")
             .build()
             .checkUpgrade()
     }
