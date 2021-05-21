@@ -70,6 +70,7 @@ class UpgradeService : Service() {
     override fun onDestroy() {
         Log.d(TAG, "onDestroy()")
         mNotificationManager = null
+
         super.onDestroy()
     }
 

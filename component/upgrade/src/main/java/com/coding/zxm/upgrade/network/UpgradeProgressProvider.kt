@@ -261,9 +261,4 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
         return apkFile
     }
 
-    override fun onRelease() {
-        sslSocketFactory = null
-        loggingInterceptor = null
-        okHttpClient = null
-    }
 }

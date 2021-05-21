@@ -320,12 +320,6 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        mProvider.onRelease()
-
-        super.onDismiss(dialog)
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

@@ -35,5 +35,4 @@ interface IUpgradeProvider {
      */
     fun getNewApkFile(): File?
 
-    fun onRelease()
 }
