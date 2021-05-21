@@ -13,10 +13,8 @@
 ###v1.0.3
 1.支持doc,docx,xls,xlsx,ppt,pptx,pdf,txt,epub格式文档阅读功能；
 2.应用更新模块，对接fir.im进行应用更新升级；
+3.UI优化
 
-3.更新接入fir.im；
-http://api.bq04.com/apps/latest/5fd2db28b2eb462419f80455?api_token=911a59ee1bfdd702ccdd1935bde1fe30
-https://download.jappstore.com/apps/5fd2db28b2eb462419f80455/install?download_token=6cafefad766eb63fcc965b656c7026b2&&source=update
 
 4.我的收藏
 
