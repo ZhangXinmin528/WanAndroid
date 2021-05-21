@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade
+package com.coding.zxm.upgrade.network
 
 import com.coding.zxm.upgrade.entity.UpdateEntity
 import okhttp3.ResponseBody

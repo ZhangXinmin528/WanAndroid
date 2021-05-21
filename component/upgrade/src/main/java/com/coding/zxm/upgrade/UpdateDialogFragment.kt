@@ -19,7 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.coding.zxm.upgrade.entity.UpdateEntity
-import com.coding.zxm.upgrade.provider.IUpgradeProvider
+import com.coding.zxm.upgrade.network.IUpgradeProvider
 import com.coding.zxm.upgrade.utils.ColorUtil
 import com.coding.zxm.upgrade.utils.DrawableUtil
 import com.coding.zxm.upgrade.widget.NumberProgressBar

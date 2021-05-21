@@ -18,6 +18,7 @@ class AboutActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
+        setStatusBarColorWhite()
     }
 
     override fun initViews() {
@@ -30,8 +31,12 @@ class AboutActivity : BaseActivity() {
         }
 
         val versionName = AppUtils.getAppVersionName(mContext!!)
+        val versionCode = AppUtils.getAppVersionCode(mContext!!)
+        val versionInfo = "$versionName($versionCode)"
 
         tv_about_version.text =
-            if (!TextUtils.isEmpty(versionName)) "${getString(R.string.all_abount_version)}${versionName}" else "版本：1.0.0"
+            if (!TextUtils.isEmpty(versionName))
+                "${getString(R.string.all_abount_version)}${versionInfo}"
+            else "版本：1.0.0"
     }
 }

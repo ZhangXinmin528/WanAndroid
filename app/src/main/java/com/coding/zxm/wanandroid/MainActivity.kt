@@ -4,16 +4,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.upgrade.UpgradeManager
+import com.coding.zxm.upgrade.network.IUpgradeProvider
+import com.coding.zxm.upgrade.network.UpgradeProgressProvider
 import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
 import com.coding.zxm.wanandroid.mine.MineFragment
 import com.zxm.utils.core.bar.StatusBarCompat
-import com.zxm.utils.core.log.MLogger
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     private val fragments = ArrayList<Fragment>()
     private var mLastReturnTime: Long = 0
+    private var mProvider: IUpgradeProvider? = null
 
     override fun setLayoutId(): Int {
         return R.layout.activity_main
@@ -21,6 +24,7 @@ class MainActivity : BaseActivity() {
 
     override fun initParamsAndValues() {
         StatusBarCompat.setTranslucentForImageViewInFragment(this, 0, null)
+        mProvider = UpgradeProgressProvider(this)
 
         fragments.add(HomeFragment.newInstance())
         fragments.add(BingWallpapersFragment.newInstance())
@@ -28,6 +32,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initViews() {
+        //检测更新
+        UpgradeManager.getInstance().checkUpgrade(mProvider)
+
         vp_home.adapter = HomePageAdapter(fragments, supportFragmentManager)
 
         vp_home.offscreenPageLimit = 2

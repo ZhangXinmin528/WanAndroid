@@ -41,7 +41,7 @@ class ImagePreviewActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarDark()
 
         mImageEntity = intent?.getSerializableExtra(PARAMS_IMAGE_URL) as BingImageEntity
 
@@ -73,7 +73,7 @@ class ImagePreviewActivity : BaseActivity() {
                         val center =
                             PointF(0.5f * ssiv_image.sWidth, 0.5f * ssiv_image.sHeight)
                         val animationBuilder = ssiv_image.animateScaleAndCenter(scale, center)
-                        animationBuilder?.withDuration(2000)
+                        animationBuilder?.withDuration(4000)
                             ?.withEasing(SubsamplingScaleImageView.EASE_IN_OUT_QUAD)
                             ?.withInterruptible(false)?.start()
                     }

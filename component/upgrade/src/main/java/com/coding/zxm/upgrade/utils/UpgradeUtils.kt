@@ -1,5 +1,7 @@
 package com.coding.zxm.upgrade.utils
 
+import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcessInfo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,8 +12,11 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.text.TextUtils
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.core.content.FileProvider
+import com.coding.zxm.upgrade.entity.UpdateEntity
 import java.io.File
 
 /**
@@ -42,6 +47,20 @@ class UpgradeUtils private constructor() {
                 return packageInfo.applicationInfo.loadLabel(context.packageManager).toString()
             }
             return ""
+        }
+
+        /**
+         * 是否存在新版本
+         */
+        fun hasNewVersion(@NonNull context: Context, @NonNull entity: UpdateEntity?): Boolean {
+            if (entity != null) {
+                val currVersion = getAppVersionCode(context)
+                val newVersion = entity.version
+                if (!TextUtils.isEmpty(newVersion) && currVersion != -1) {
+                    return newVersion!!.toInt() > currVersion
+                }
+            }
+            return false
         }
 
         /**
@@ -79,6 +98,23 @@ class UpgradeUtils private constructor() {
         }
 
         /**
+         * 是否前台
+         */
+        fun isAppOnForeground(context: Context): Boolean {
+            val activityManager =
+                context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            val packageName = context.packageName
+            val appProcesses =
+                activityManager.runningAppProcesses ?: return false
+            for (appProcess in appProcesses) {
+                if (appProcess.processName == packageName && appProcess.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        /**
          * install new version apk
          *
          * @param file
@@ -86,6 +122,18 @@ class UpgradeUtils private constructor() {
         fun installNewApkWithNoRoot(context: Context, file: File?) {
             if (file != null && file.exists()) {
                 Toast.makeText(context, "正在安装更新...", Toast.LENGTH_SHORT).show()
+                val intent = getInstallIntent(context, file)
+                context.startActivity(intent)
+            }
+        }
+
+        /**
+         * install new version apk
+         *
+         * @param file
+         */
+        fun getInstallIntent(context: Context, file: File?): Intent? {
+            if (file != null && file.exists()) {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -104,8 +152,9 @@ class UpgradeUtils private constructor() {
                         "application/vnd.android.package-archive"
                     )
                 }
-                context.startActivity(intent)
+                return intent
             }
+            return null
         }
     }
 }

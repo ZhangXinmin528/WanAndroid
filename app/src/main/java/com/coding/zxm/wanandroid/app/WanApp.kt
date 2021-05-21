@@ -8,6 +8,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.coding.zxm.core.base.BaseApp
 import com.coding.zxm.network.RetrofitClient
+import com.coding.zxm.upgrade.UpgradeManager
 import com.coding.zxm.wanandroid.BuildConfig
 import com.coding.zxm.wanandroid.ui.activity.SplashActivity
 import com.coding.zxm.weather.WeatherManager
@@ -71,6 +72,18 @@ class WanApp : BaseApp() {
         initLogger()
 
         initBugly()
+
+        initUpgrade()
+    }
+
+    private fun initUpgrade() {
+        val config = UpgradeManager.UpgradeConfig()
+            .setContext(this)
+            .setUpgradeToken("911a59ee1bfdd702ccdd1935bde1fe30")
+            .setApkName("wanandroid")
+            .create()
+
+        UpgradeManager.getInstance().init(config)
     }
 
     private fun initTBS() {

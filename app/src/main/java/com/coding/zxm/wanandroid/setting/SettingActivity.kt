@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.upgrade.UpgradeManager
-import com.coding.zxm.upgrade.provider.UpgradeProgressProvider
+import com.coding.zxm.upgrade.network.IUpgradeProvider
 import com.coding.zxm.util.AppUtils
 import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
@@ -24,12 +24,16 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     private val mLogoutViewModel: LogoutViewModel by viewModels { LogoutViewModel.LogoutViewModelFactory }
 
+    private var mProvider: IUpgradeProvider? = null
+
     override fun setLayoutId(): Int {
         return R.layout.activity_setting
     }
 
     override fun initParamsAndValues() {
         setStatusBarColorWhite()
+
+        mProvider = UpgradeManager.getInstance().getUpgradeConfig()?.upgradeProvider
     }
 
     override fun initViews() {
@@ -57,24 +61,19 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             tv_setting_logout.visibility = View.GONE
         }
 
+        mProvider?.let {
+            UpgradeManager.getInstance().hasNewVersion(it).observe(this, Observer { state ->
+                tv_setting_version_tag.visibility = if (state) View.VISIBLE else View.GONE
+            })
+
+        }
+
         tv_setting_curr_version.text = AppUtils.getAppVersionName(mContext!!)
-
-        checkUpgrade()
-
     }
 
     private fun checkUpgrade() {
-        UpgradeManager.UpgradeBuilder()
-            .setActivity(this)
-            .setUpgradeToken("911a59ee1bfdd702ccdd1935bde1fe30")
-            .setUpgradeProvider(
-                UpgradeProgressProvider(
-                    this
-                )
-            )
-            .setApkName("WanAndroid")
-            .build()
-            .checkUpgrade()
+        UpgradeManager.getInstance()
+            .checkUpgrade(mProvider)
     }
 
     override fun onClick(v: View?) {

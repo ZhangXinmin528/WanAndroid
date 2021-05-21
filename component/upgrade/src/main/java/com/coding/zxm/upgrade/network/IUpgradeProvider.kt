@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade.provider
+package com.coding.zxm.upgrade.network
 
 import androidx.annotation.NonNull
 import com.coding.zxm.upgrade.callback.FileDownloadCallback
@@ -14,6 +14,11 @@ interface IUpgradeProvider {
      * 检查更新
      */
     fun checkUpgrade(@NonNull token: String, apkName: String): Boolean
+
+    /**
+     * 是否有新版本
+     */
+    fun hasNewVersion(): Boolean
 
     /**
      * 下载apk

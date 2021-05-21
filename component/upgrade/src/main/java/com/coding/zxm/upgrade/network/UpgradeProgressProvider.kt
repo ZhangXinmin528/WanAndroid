@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade.provider
+package com.coding.zxm.upgrade.network
 
 import android.os.Environment
 import android.text.TextUtils
@@ -6,11 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.fragment.app.FragmentActivity
-import com.coding.zxm.upgrade.SSLSocketFactoryCompat
+import androidx.lifecycle.MutableLiveData
 import com.coding.zxm.upgrade.UpdateDialogFragment
-import com.coding.zxm.upgrade.UpgradeAPI
 import com.coding.zxm.upgrade.callback.FileDownloadCallback
 import com.coding.zxm.upgrade.entity.UpdateEntity
+import com.coding.zxm.upgrade.utils.SSLSocketFactoryCompat
 import com.coding.zxm.upgrade.utils.UpgradeUtils
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -38,8 +38,12 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
         private var okHttpClient: OkHttpClient? = null
         private var sslSocketFactory: SSLSocketFactoryCompat? = null
         private var loggingInterceptor: HttpLoggingInterceptor? = null
+
+        private var upgradeLivedata: MutableLiveData<UpdateEntity> = MutableLiveData()
+
         private var apkName: String = ""
         private var apkFile: File? = null
+        private var hasNewVersion: Boolean = false
     }
 
     init {
@@ -83,6 +87,21 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
             return false
         }
 
+        //已经请求过数据
+        val entity = upgradeLivedata.value
+        if (entity != null) {
+            hasNewVersion = UpgradeUtils.hasNewVersion(activity, entity)
+            if (hasNewVersion) {
+                apkName =
+                    name + "_" + entity.versionShort + "_build${entity.build}" + ".apk"
+
+                showUpgradeDialog(entity)
+            } else {
+                Toast.makeText(activity, "已是最新版本", Toast.LENGTH_SHORT).show()
+            }
+            return true
+        }
+
         val retrofit = Retrofit.Builder()
             .baseUrl("http://api.bq04.com/apps/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -93,6 +112,7 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
             .enqueue(object : Callback<UpdateEntity> {
                 override fun onFailure(call: Call<UpdateEntity>, t: Throwable) {
                     //TODO:检查更新失败
+                    upgradeLivedata.postValue(null)
                 }
 
                 override fun onResponse(
@@ -101,8 +121,11 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
                 ) {
                     if (response.isSuccessful) {
                         val entity = response.body()
-                        if (hasNewVersion(entity)) {
-                            apkName = name + "_" + entity?.versionShort + ".apk"
+                        upgradeLivedata.postValue(entity)
+                        hasNewVersion = UpgradeUtils.hasNewVersion(activity, entity)
+                        if (hasNewVersion) {
+                            apkName =
+                                name + "_" + entity?.versionShort + "_build${entity?.build}" + ".apk"
 
                             showUpgradeDialog(entity)
                         } else {
@@ -110,12 +133,20 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
                         }
                     } else {
                         //TODO:检查更新失败
-
+                        upgradeLivedata.postValue(null)
                     }
                 }
 
             })
         return true
+    }
+
+    override fun hasNewVersion(): Boolean {
+        val entity = upgradeLivedata.value
+        if (entity != null) {
+            hasNewVersion = UpgradeUtils.hasNewVersion(activity, entity)
+        }
+        return hasNewVersion
     }
 
     override fun downloadApk(downloadUrl: String?, callback: FileDownloadCallback?): Boolean {
@@ -152,7 +183,10 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
                                         activity.filesDir.absolutePath
                                     }
 
-                                    apkFile = File(apkPathDir, apkName)
+                                    apkFile = File(
+                                        apkPathDir,
+                                        apkName
+                                    )
 
                                     //输出流
                                     var sinkOut: Sink = Okio.sink(apkFile)
@@ -226,20 +260,4 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
     override fun getNewApkFile(): File? {
         return apkFile
     }
-
-    /**
-     * 是否存在新版本
-     */
-    private fun hasNewVersion(@NonNull entity: UpdateEntity?): Boolean {
-        if (entity != null) {
-            val currVersion = UpgradeUtils.getAppVersionCode(activity)
-            val newVersion = entity.version
-            if (!TextUtils.isEmpty(newVersion) && currVersion != -1) {
-                return newVersion!!.toInt() > currVersion
-            }
-        }
-        return false
-    }
-
-
 }

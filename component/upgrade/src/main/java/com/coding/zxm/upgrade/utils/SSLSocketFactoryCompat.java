@@ -1,4 +1,4 @@
-package com.coding.zxm.upgrade;
+package com.coding.zxm.upgrade.utils;
 
 import android.os.Build;
 
