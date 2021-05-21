@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.upgrade.UpgradeManager
 import com.coding.zxm.upgrade.network.IUpgradeProvider
+import com.coding.zxm.upgrade.network.UpgradeProgressProvider
 import com.coding.zxm.util.AppUtils
 import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
@@ -24,7 +25,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     private val mLogoutViewModel: LogoutViewModel by viewModels { LogoutViewModel.LogoutViewModelFactory }
 
-    private var mProvider: IUpgradeProvider? = null
+    private lateinit var mProvider: IUpgradeProvider
 
     override fun setLayoutId(): Int {
         return R.layout.activity_setting
@@ -33,7 +34,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     override fun initParamsAndValues() {
         setStatusBarColorWhite()
 
-        mProvider = UpgradeManager.getInstance().getUpgradeConfig()?.upgradeProvider
+        mProvider = UpgradeProgressProvider(this)
     }
 
     override fun initViews() {
@@ -61,12 +62,10 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             tv_setting_logout.visibility = View.GONE
         }
 
-        mProvider?.let {
-            UpgradeManager.getInstance().hasNewVersion(it).observe(this, Observer { state ->
-                tv_setting_version_tag.visibility = if (state) View.VISIBLE else View.GONE
-            })
+        UpgradeManager.getInstance().hasNewVersion(mProvider).observe(this, Observer { state ->
+            tv_setting_version_tag.visibility = if (state) View.VISIBLE else View.GONE
+        })
 
-        }
 
         tv_setting_curr_version.text = AppUtils.getAppVersionName(mContext!!)
     }

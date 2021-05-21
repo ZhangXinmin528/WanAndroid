@@ -34,4 +34,6 @@ interface IUpgradeProvider {
      * 获取下载的安装包文件
      */
     fun getNewApkFile(): File?
+
+    fun onRelease()
 }

@@ -260,4 +260,10 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
     override fun getNewApkFile(): File? {
         return apkFile
     }
+
+    override fun onRelease() {
+        sslSocketFactory = null
+        loggingInterceptor = null
+        okHttpClient = null
+    }
 }

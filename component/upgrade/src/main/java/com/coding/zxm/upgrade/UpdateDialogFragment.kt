@@ -3,6 +3,7 @@ package com.coding.zxm.upgrade
 import android.Manifest
 import android.content.ComponentName
 import android.content.Context
+import android.content.DialogInterface
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -317,6 +318,12 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
             })
             dismiss()
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        mProvider.onRelease()
+
+        super.onDismiss(dialog)
     }
 
     override fun onRequestPermissionsResult(

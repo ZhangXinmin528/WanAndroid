@@ -55,7 +55,6 @@ class UpgradeManager private constructor() {
             return
         }
         provider?.let {
-            config?.setUpgradeProvider(it)
             UpgradeService.bindService(config?.context!!, object : ServiceConnection {
                 override fun onServiceDisconnected(name: ComponentName?) {
 
@@ -122,7 +121,6 @@ class UpgradeManager private constructor() {
     class UpgradeConfig {
         var context: Context? = null
         var upgradeToken: String? = null
-        var upgradeProvider: IUpgradeProvider? = null
         var apkName: String? = null
 
         fun setContext(context: Context): UpgradeConfig {
@@ -132,11 +130,6 @@ class UpgradeManager private constructor() {
 
         fun setUpgradeToken(token: String): UpgradeConfig {
             this.upgradeToken = token
-            return this
-        }
-
-        fun setUpgradeProvider(provider: IUpgradeProvider): UpgradeConfig {
-            upgradeProvider = provider
             return this
         }
 
