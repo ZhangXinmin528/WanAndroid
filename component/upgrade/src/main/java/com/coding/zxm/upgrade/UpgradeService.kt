@@ -28,7 +28,7 @@ class UpgradeService : Service() {
         private var isDownloading: Boolean = false
         private const val TAG = "UpgradeService"
 
-                private var context: Context? = null
+        private var context: Context? = null
         private var conn: ServiceConnection? = null
 
         //Notification
@@ -206,7 +206,7 @@ class UpgradeService : Service() {
             val iconDrawable = UpgradeUtils.getAppIcon(context!!)
             mBuilder?.setContentTitle("开始下载")
                 ?.setContentText("正在连接服务器")
-                ?.setSmallIcon(R.mipmap.lib_update_app_update_icon)
+                ?.setSmallIcon(R.mipmap.lib_update_download_icon)
                 ?.setLargeIcon(iconDrawable?.let { UpgradeUtils.drawableToBitmap(it) })
                 ?.setOngoing(true)
                 ?.setAutoCancel(true)

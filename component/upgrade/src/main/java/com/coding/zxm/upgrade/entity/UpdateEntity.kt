@@ -38,6 +38,9 @@ class UpdateEntity : Serializable {
 
     //更新文件的对象
     var binary: Binary? = null
+
+    //强制更新
+    var isForce: Boolean = false
 }
 
 class Binary : Serializable {

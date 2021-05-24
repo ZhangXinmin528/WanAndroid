@@ -3,7 +3,6 @@ package com.coding.zxm.upgrade
 import android.Manifest
 import android.content.ComponentName
 import android.content.Context
-import android.content.DialogInterface
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -14,7 +13,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
@@ -24,6 +26,7 @@ import com.coding.zxm.upgrade.network.IUpgradeProvider
 import com.coding.zxm.upgrade.utils.ColorUtil
 import com.coding.zxm.upgrade.utils.DrawableUtil
 import com.coding.zxm.upgrade.widget.NumberProgressBar
+import kotlinx.android.synthetic.main.layout_update_app_dialog.*
 import java.util.*
 
 /**
@@ -40,11 +43,9 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
     private var mIvClose: ImageView? = null
     private var mTitleTextView: TextView? = null
 
-    private var mLlClose: LinearLayout? = null
-
     //默认色
     private val mDefaultColor = -0x16bcc7
-    private val mDefaultPicResId = R.mipmap.lib_update_app_top_bg
+    private val mDefaultPicResId = R.mipmap.lib_update_top_bg0
     private var mTopIv: ImageView? = null
     private var mIgnore: TextView? = null
 
@@ -98,8 +99,6 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
         mIvClose = view.findViewById(R.id.iv_close)
         mIvClose?.setOnClickListener(this)
 
-        //关闭按钮+线 的整个布局
-        mLlClose = view.findViewById<LinearLayout>(R.id.ll_close)
         //顶部图片
         mTopIv = view.findViewById<ImageView>(R.id.iv_top)
         //忽略
@@ -162,15 +161,15 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
             //标题
             mTitleTextView!!.text = String.format("是否升级到%s版本？", newVersion)
 
-            //TODO:强制更新
-//            if (mUpdateApp.isConstraint()) {
-//                mLlClose!!.visibility = View.GONE
-//            } else {
-//                //不是强制更新时，才生效
+            if (mEntity.isForce) {
+                iv_close!!.visibility = View.GONE
+            } else {
+                iv_close!!.visibility = View.VISIBLE
+                //不是强制更新时，才生效
 //                if (mUpdateApp.isShowIgnoreVersion()) {
 //                    mIgnore!!.visibility = View.VISIBLE
 //                }
-//            }
+            }
 
         }
     }
