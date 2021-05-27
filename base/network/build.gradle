@@ -35,8 +35,12 @@ dependencies {
     //retrofit
     api deps.retrofit.retrofit2
     api deps.retrofit_url_manager
+
     implementation deps.retrofit.gsonConverter
     implementation deps.okhttp_logging_interceptor
+
+//    debugImplementation deps.chuck.library
+//    releaseImplementation deps.chuck.library_no_op
 
     implementation deps.coroutines.android
 

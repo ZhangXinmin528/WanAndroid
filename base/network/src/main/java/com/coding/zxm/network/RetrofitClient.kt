@@ -26,11 +26,11 @@ class RetrofitClient private constructor(private val context: Context) {
         private var sDEBUG: Boolean = true
 
         @Synchronized
-        fun getInstance(context: Context): RetrofitClient? {
+        fun getInstance(context: Context): RetrofitClient {
             if (INSTANCE == null) {
                 INSTANCE = RetrofitClient(context)
             }
-            return INSTANCE
+            return INSTANCE!!
         }
 
         /**
@@ -77,6 +77,7 @@ class RetrofitClient private constructor(private val context: Context) {
             .addInterceptor(WanInterceptor())
             .addInterceptor(initLogInterceptor())
             .addInterceptor(NetworkInterceptor(context))
+//            .addInterceptor(ChuckInterceptor(context))
             .cookieJar(cookieJar)
             .connectTimeout(30000, TimeUnit.SECONDS)
             .readTimeout(30000, TimeUnit.SECONDS)
