@@ -1,6 +1,7 @@
 package com.coding.zxm.network
 
 import android.content.Context
+import com.coding.zxm.chuck.ChuckInterceptor
 import com.coding.zxm.network.cookie.PersistentCookieJar
 import com.coding.zxm.network.cookie.cache.SetCookieCache
 import com.coding.zxm.network.cookie.persistence.SharedPrefsCookiePersistor
@@ -77,7 +78,7 @@ class RetrofitClient private constructor(private val context: Context) {
             .addInterceptor(WanInterceptor())
             .addInterceptor(initLogInterceptor())
             .addInterceptor(NetworkInterceptor(context))
-//            .addInterceptor(ChuckInterceptor(context))
+            .addInterceptor(ChuckInterceptor(context))
             .cookieJar(cookieJar)
             .connectTimeout(30000, TimeUnit.SECONDS)
             .readTimeout(30000, TimeUnit.SECONDS)

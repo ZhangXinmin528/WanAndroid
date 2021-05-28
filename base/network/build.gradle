@@ -30,17 +30,19 @@ dependencies {
     implementation deps.kotlin.stdlib
     implementation deps.core_ktx
 
-    implementation deps.app_compat
+    //okhttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 
     //retrofit
     api deps.retrofit.retrofit2
+    implementation deps.retrofit.gsonConverter
     api deps.retrofit_url_manager
 
-    implementation deps.retrofit.gsonConverter
-    implementation deps.okhttp_logging_interceptor
-
-//    debugImplementation deps.chuck.library
-//    releaseImplementation deps.chuck.library_no_op
+    //chuck
+    debugImplementation deps.chuck.library
+    releaseImplementation deps.chuck.library_no_op
 
     implementation deps.coroutines.android
 

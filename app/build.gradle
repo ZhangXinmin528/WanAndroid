@@ -123,7 +123,7 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.viewmodel_ktx
     implementation deps.lifecycle.extensions
-    implementation project(path: ':component:upgrade')
+
 
 //    implementation deps.lifecycle.livedata_ktx
     kapt deps.lifecycle.compiler
@@ -179,9 +179,9 @@ dependencies {
     implementation project(path: ':base:util')
     implementation project(path: ':component:webview')
     implementation project(path: ':component:image')
-    api project(path: ':component:weather')
-
+    implementation project(path: ':component:weather')
     implementation project(path: ':component:map')
+    implementation project(path: ':component:upgrade')
 
 }
 

@@ -72,8 +72,8 @@ class UpgradeProvider(val activity: FragmentActivity) :
         }
 
         okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .sslSocketFactory(sslSocketFactory, trustAllCert)
+            .addInterceptor(loggingInterceptor!!)
+            .sslSocketFactory(sslSocketFactory!!, trustAllCert)
             .connectTimeout(30, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .build()

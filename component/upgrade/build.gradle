@@ -41,17 +41,18 @@ dependencies {
 
     implementation deps.constraint_layout
 
+    //okhttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
     //retrofit
-    implementation deps.retrofit.retrofit2
+    implementation (platform("com.squareup.retrofit2:retrofit:2.9.0"))
     implementation deps.retrofit.gsonConverter
-    implementation deps.okhttp_logging_interceptor
 
 //    implementation deps.arouter.api
 //
 //    kapt deps.arouter.compiler
-
-//    implementation project(path: ':base:core')
 //
     implementation project(path: ':base:util')
-//    implementation project(path: ':base:network')
 }

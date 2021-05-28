@@ -36,8 +36,8 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
     companion object {
         private const val TAG = "DownloadProvider"
         private var okHttpClient: OkHttpClient? = null
-        private var sslSocketFactory: SSLSocketFactoryCompat? = null
-        private var loggingInterceptor: HttpLoggingInterceptor? = null
+        private lateinit var sslSocketFactory: SSLSocketFactoryCompat
+        private lateinit var loggingInterceptor: HttpLoggingInterceptor
 
         private var upgradeLivedata: MutableLiveData<UpdateEntity> = MutableLiveData()
 
@@ -189,13 +189,13 @@ class UpgradeProgressProvider(val activity: FragmentActivity) :
                                     )
 
                                     //输出流
-                                    var sinkOut: Sink = Okio.sink(apkFile)
+                                    var sinkOut: Sink = apkFile!!.sink()
 
                                     //输入流
-                                    var source: Source = Okio.source(it.byteStream())
+                                    var source: Source = it.byteStream().source()
                                     val totalSize = it.contentLength()
                                     //写入到本地存储空间
-                                    var bufferSink: BufferedSink = Okio.buffer(sinkOut)
+                                    var bufferSink: BufferedSink = sinkOut.buffer()
 
                                     bufferSink.writeAll(object : ForwardingSource(source) {
 
