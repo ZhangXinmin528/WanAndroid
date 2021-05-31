@@ -13,6 +13,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Switch" parent="AppTheme">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
     <!--全屏-->
     <style name="AppTheme.FullScreen" parent="AppTheme">
         <item name="windowActionBar">false</item>

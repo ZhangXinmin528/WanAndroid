@@ -17,4 +17,6 @@ object SPConfig {
     const val CONFIG_FONT_SCALE = "config_font_scale"
 
     const val CONFIG_APP_LANGUAGE = "config_app_languge"
+
+    const val CONFIG_SETTING_NETWORK_STATE = "config_setting_network_STATE"
 }

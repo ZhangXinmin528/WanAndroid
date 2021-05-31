@@ -47,7 +47,6 @@
 
         </RelativeLayout>
 
-
         <include layout="@layout/layout_horizontal_divider" />
 
         <TextView
@@ -94,6 +93,69 @@
 
         <include layout="@layout/layout_horizontal_divider" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_setting_debug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/margin_12dp"
+                android:paddingBottom="@dimen/margin_12dp"
+                android:text="@string/all_setting_debug_title"
+                android:textColor="@color/colorMainText"
+                android:textSize="@dimen/textsize_16sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--network-->
+            <RelativeLayout
+                android:id="@+id/layout_net_debug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_setting_debug">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_arrow_right_gray_24dp"
+                    android:text="@string/all_setting_network_debug_title"
+                    android:textColor="@color/colorMainText"
+                    android:textSize="@dimen/textsize_16sp"
+                    tools:ignore="UseCompatTextViewDrawableXml" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_setting_network"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:checked="false"
+                    android:textOff="Off"
+                    android:textOn="On"
+                    android:theme="@style/AppTheme.Switch"
+                    app:showText="true"
+                    app:switchTextAppearance="@style/SwitchTextAppearance"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_setting_result_network"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/switch_setting_network"
+                    android:layout_alignParentEnd="true"
+                    android:padding="6dp"
+                    android:textSize="@dimen/textsize_12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/all_setting_network_result" />
+
+            </RelativeLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/layout_horizontal_divider" />
+
         <RelativeLayout
             android:id="@+id/layout_new_version"
             android:layout_width="match_parent"
@@ -133,8 +195,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/margin_12dp"
                     android:background="@drawable/shape_red_version_bg"
-                    android:text="new"
                     android:gravity="center"
+                    android:text="new"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/textsize_12sp"
                     android:visibility="visible"

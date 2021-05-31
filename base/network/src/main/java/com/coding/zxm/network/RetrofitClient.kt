@@ -1,6 +1,7 @@
 package com.coding.zxm.network
 
 import android.content.Context
+import com.coding.zxm.chuck.Chuck
 import com.coding.zxm.chuck.ChuckInterceptor
 import com.coding.zxm.network.cookie.PersistentCookieJar
 import com.coding.zxm.network.cookie.cache.SetCookieCache
@@ -24,7 +25,7 @@ class RetrofitClient private constructor(private val context: Context) {
 
     companion object {
         private var INSTANCE: RetrofitClient? = null
-        private var sDEBUG: Boolean = true
+        private var sLOGENABLE: Boolean = true
 
         @Synchronized
         fun getInstance(context: Context): RetrofitClient {
@@ -43,10 +44,10 @@ class RetrofitClient private constructor(private val context: Context) {
         }
 
         /**
-         * 设置调试模式
+         * 是否打印日志
          */
-        fun setDebugMode(debug: Boolean) {
-            sDEBUG = debug
+        fun setLogEnable(enable: Boolean) {
+            sLOGENABLE = enable
         }
 
     }
@@ -73,12 +74,15 @@ class RetrofitClient private constructor(private val context: Context) {
             SharedPrefsCookiePersistor(context)
         )
 
+        val chuckInterceptor = ChuckInterceptor(context)
+        chuckInterceptor.showNotification(false)
+
         val builder = OkHttpClient.Builder()
             .cache(cache)
             .addInterceptor(WanInterceptor())
             .addInterceptor(initLogInterceptor())
             .addInterceptor(NetworkInterceptor(context))
-            .addInterceptor(ChuckInterceptor(context))
+            .addInterceptor(chuckInterceptor)
             .cookieJar(cookieJar)
             .connectTimeout(30000, TimeUnit.SECONDS)
             .readTimeout(30000, TimeUnit.SECONDS)
@@ -91,7 +95,7 @@ class RetrofitClient private constructor(private val context: Context) {
 
     private fun initLogInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
-        if (sDEBUG) {
+        if (sLOGENABLE) {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         } else {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
@@ -101,5 +105,13 @@ class RetrofitClient private constructor(private val context: Context) {
 
     fun <T> create(service: Class<T>): T {
         return retrofit.create(service)
+    }
+
+    /**
+     * 查阅调试信息
+     */
+    fun toChuck(context: Context) {
+        val intent = Chuck.getLaunchIntent(context)
+        context.startActivity(intent)
     }
 }

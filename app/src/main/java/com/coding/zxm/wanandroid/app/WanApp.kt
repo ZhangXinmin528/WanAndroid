@@ -101,7 +101,7 @@ class WanApp : BaseApp() {
         //添加其余BaseUrl
         RetrofitClient.putDoman()
         //是否开启调试模式
-        RetrofitClient.setDebugMode(BuildConfig.DEBUG)
+        RetrofitClient.setLogEnable(BuildConfig.DEBUG)
     }
 
 

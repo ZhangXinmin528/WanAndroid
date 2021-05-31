@@ -7,4 +7,9 @@
         <attr name="font_text_color" format="color|reference" />
         <attr name="font_dot_color" format="color|reference" />
     </declare-styleable>
+
+    <style name="SwitchTextAppearance" parent="TextAppearance.AppCompat.Widget.Switch">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#CC000000</item>
+    </style>
 </resources>

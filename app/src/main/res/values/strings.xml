@@ -49,6 +49,9 @@
     <string name="all_setting_language_following_system">Follow up system</string>
     <string name="all_setting_language_chinese">Chinese</string>
     <string name="all_setting_language_english">English</string>
+    <string name="all_setting_debug_title">Debug Mode</string>
+    <string name="all_setting_network_debug_title">Network Debug</string>
+    <string name="all_setting_network_result">Network Debug Result</string>
 
     <string name="all_setting_font_size">Font scale</string>
 
@@ -59,4 +62,6 @@
 
     <!--Behavior-->
     <string name="behavior_app_toolbar">com.coding.zxm.wanandroid.home.AppToolbarBehavior</string>
+
+
 </resources>

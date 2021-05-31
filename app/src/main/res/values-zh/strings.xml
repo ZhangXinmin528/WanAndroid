@@ -50,6 +50,9 @@
     <string name="all_setting_language_following_system">更随系统</string>
     <string name="all_setting_language_chinese">中文</string>
     <string name="all_setting_language_english">英语</string>
+    <string name="all_setting_debug_title">调试模式</string>
+    <string name="all_setting_network_debug_title">网络调试</string>
+    <string name="all_setting_network_result">查看网络调试结果</string>
 
     <string name="all_setting_font_size">字体大小</string>
 

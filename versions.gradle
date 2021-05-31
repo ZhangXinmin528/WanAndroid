@@ -38,7 +38,7 @@ versions.glide = "4.11.0"
 versions.retrofit = "2.9.0"
 versions.fastjson = "1.2.73"
 versions.retrofit_url_manager = "1.4.0"
-versions.chuck = "1.0.2"
+versions.chuck = "1.0.3"
 //arouter
 versions.arouter_api = "1.5.0"
 versions.arouter_compiler = "1.2.2"
