@@ -11,7 +11,7 @@ import com.coding.zxm.network.common.CommonResponse
 class LogoutRepository(client: RetrofitClient) : BaseRepository(client = client) {
 
     suspend fun logout(): CommonResponse<Any> {
-        return creatService(LogoutService::class.java).logout()
+        return createService(LogoutService::class.java).logout()
     }
 
 }

@@ -21,7 +21,7 @@ class HomeRepository(client: RetrofitClient) : BaseRepository(client = client) {
     }
 
     private suspend fun requestBannerData(): CommonResult<MutableList<BannerEntity>> {
-        return excuteResponse(creatService(HomeService::class.java).getBannerData())
+        return executeResponse(createService(HomeService::class.java).getBannerData())
     }
 
     /**
@@ -32,7 +32,7 @@ class HomeRepository(client: RetrofitClient) : BaseRepository(client = client) {
     }
 
     private suspend fun requestHomeNews(@IntRange(from = 0) pageIndex: Int): CommonResult<NewsEntity> {
-        return excuteResponse(creatService(HomeService::class.java).getHomeList(pageIndex))
+        return executeResponse(createService(HomeService::class.java).getHomeList(pageIndex))
     }
 
 }

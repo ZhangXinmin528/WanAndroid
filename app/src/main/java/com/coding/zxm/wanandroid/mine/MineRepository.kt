@@ -16,6 +16,6 @@ class MineRepository(client: RetrofitClient) : BaseRepository(client = client) {
     }
 
     private suspend fun requestUserInfo(): CommonResult<UserDetialEntity> {
-        return excuteResponse(creatService(MineService::class.java).getUserInfo())
+        return executeResponse(createService(MineService::class.java).getUserInfo())
     }
 }

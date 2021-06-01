@@ -22,7 +22,7 @@ class KnowledgeRepository(client: RetrofitClient) : BaseRepository(client = clie
     }
 
     private suspend fun requestknowledgeTree(): CommonResult<MutableList<KnowledgeEntity>> {
-        return excuteResponse(creatService(KnowledgeService::class.java).getKnowledgeTree())
+        return executeResponse(createService(KnowledgeService::class.java).getKnowledgeTree())
     }
 
     /**
@@ -39,8 +39,8 @@ class KnowledgeRepository(client: RetrofitClient) : BaseRepository(client = clie
         @IntRange(from = 0) pageIndex: Int,
         id: Int
     ): CommonResult<NewsEntity> {
-        return excuteResponse(
-            creatService(KnowledgeService::class.java).getKnowledgeArticles(
+        return executeResponse(
+            createService(KnowledgeService::class.java).getKnowledgeArticles(
                 pageIndex,
                 id
             )

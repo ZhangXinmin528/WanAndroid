@@ -19,6 +19,6 @@ class NavigationReposity(client: RetrofitClient) : BaseRepository(client = clien
     }
 
     private suspend fun requestNavigationData(): CommonResult<MutableList<NaviEntity>> {
-        return excuteResponse(creatService(NavigationService::class.java).getNavigationData())
+        return executeResponse(createService(NavigationService::class.java).getNavigationData())
     }
 }

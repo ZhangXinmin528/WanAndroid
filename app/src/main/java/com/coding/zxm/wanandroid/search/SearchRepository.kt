@@ -21,7 +21,7 @@ class SearchRepository(client: RetrofitClient) : BaseRepository(client = client)
     }
 
     private suspend fun requestHotWord(): CommonResult<MutableList<HotWordEntity>> {
-        return excuteResponse(creatService(SearchService::class.java).getHotWord())
+        return executeResponse(createService(SearchService::class.java).getHotWord())
     }
 
     /**
@@ -38,7 +38,7 @@ class SearchRepository(client: RetrofitClient) : BaseRepository(client = client)
         @IntRange(from = 0) page: Int,
         key: String
     ): CommonResult<SearchEntity> {
-        return excuteResponse(creatService(SearchService::class.java).doSearch(page, key))
+        return executeResponse(createService(SearchService::class.java).doSearch(page, key))
     }
 
 }

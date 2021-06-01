@@ -22,7 +22,7 @@ class BingRepository(client: RetrofitClient) : BaseRepository(client = client) {
     }
 
     private suspend fun requestBingPicList(): CommonResult<MutableList<BingImageEntity>> {
-        return excuteBingResponse(creatService(BingService::class.java).getBingPicList())
+        return excuteBingResponse(createService(BingService::class.java).getBingPicList())
     }
 
     private suspend fun <T : Any> excuteBingResponse(

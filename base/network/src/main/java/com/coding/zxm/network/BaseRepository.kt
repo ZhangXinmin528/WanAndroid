@@ -20,7 +20,7 @@ open class BaseRepository(val client: RetrofitClient) {
     }
 
 
-    suspend fun <T : Any> excuteResponse(
+    suspend fun <T : Any> executeResponse(
         response: CommonResponse<T>,
         successBlock: (suspend CoroutineScope.() -> Unit)? = null,
         errorBlock: (suspend CoroutineScope.() -> Unit)? = null
@@ -37,7 +37,7 @@ open class BaseRepository(val client: RetrofitClient) {
 
     }
 
-    fun <T> creatService(service: Class<T>): T {
+    fun <T> createService(service: Class<T>): T {
         return client.create(service)
     }
 }

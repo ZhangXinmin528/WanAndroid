@@ -21,7 +21,7 @@ class ProjectReposity(client: RetrofitClient) : BaseRepository(client = client) 
     }
 
     private suspend fun requestProjectTree(): CommonResult<MutableList<ProjectEntity>> {
-        return excuteResponse(creatService(ProjectService::class.java).getProjectTree())
+        return executeResponse(createService(ProjectService::class.java).getProjectTree())
     }
 
     /**
@@ -38,8 +38,8 @@ class ProjectReposity(client: RetrofitClient) : BaseRepository(client = client) 
         @IntRange(from = 0) pageIndex: Int,
         cid: Int
     ): CommonResult<NewsEntity> {
-        return excuteResponse(
-            creatService(ProjectService::class.java).getProjectList(
+        return executeResponse(
+            createService(ProjectService::class.java).getProjectList(
                 pageIndex,
                 cid
             )

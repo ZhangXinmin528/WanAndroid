@@ -18,7 +18,7 @@ class LoginRepository(client: RetrofitClient) : BaseRepository(client = client) 
     }
 
     private suspend fun onLogin(userName: String, password: String): CommonResult<UserEntity> {
-        return excuteResponse(creatService(LoginService::class.java).login(userName, password))
+        return executeResponse(createService(LoginService::class.java).login(userName, password))
     }
 
     /**
@@ -37,8 +37,8 @@ class LoginRepository(client: RetrofitClient) : BaseRepository(client = client) 
         password: String,
         repassword: String
     ): CommonResult<UserEntity> {
-        return excuteResponse(
-            creatService(LoginService::class.java).register(
+        return executeResponse(
+            createService(LoginService::class.java).register(
                 userName,
                 password,
                 repassword
