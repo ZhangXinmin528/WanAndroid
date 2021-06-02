@@ -90,7 +90,7 @@
             android:name=".navigation.NavigationActivity"
             android:screenOrientation="portrait" />
 
-        <!--导航-->
+        <!--项目-->
         <activity
             android:name=".project.ProjectActivity"
             android:screenOrientation="portrait" />
@@ -113,31 +113,13 @@
         <!--天气-->
         <activity
             android:name=".weather.WeatherActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"/>
 
         <!--设置字体大小-->
         <activity
             android:name=".setting.FontScaleActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-        <!--Tencent升级-->
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <provider
-            android:name=".upgrade.BuglyFileProvider"
-            android:authorities="${applicationId}.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="name,authorities,exported,grantUriPermissions">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"
-                tools:replace="name,resource" />
-        </provider>
 
         <!--TODO:分享功能：必须声明-->
         <!--weixin-->
