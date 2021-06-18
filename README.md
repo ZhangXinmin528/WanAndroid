@@ -9,13 +9,20 @@
 
 ScreenShots
 ------
-![Home](/screenshot/Screenshot_home.png "首页"){:height = "50%" width = "50%"}
-![Find](/screenshot/Screenshot_find.png "发现"){:height = "50%" width = "50%"}
-![Mine](/screenshot/Screenshot_mine.png "我的"){:height = "50%" width = "50%"}
-![Navigation](/screenshot/Screenshot_navigation.png "导航"){:height = "50%" width = "50%"}
-![System](/screenshot/Screenshot_system.png "体系"){:height = "50%" width = "50%"}
-![Search](/screenshot/Screenshot_search.png "搜索"){:height = "50%" width = "50%"}
-![Weather](/screenshot/Screenshot_weather.png "天气"){:height = "50%" width = "50%"}
+
+<img src="/screenshot/Screenshot_home.jpg" width = "280" height = "600" alt="首页" align=center />
+
+<img src="/screenshot/Screenshot_find.jpg" width = "280" height = "600" alt="发现" align=center />
+
+<img src="/screenshot/Screenshot_mine.jpg" width = "280" height = "600" alt="我的" align=center />
+
+<img src="/screenshot/Screenshot_navigation.png" width = "280" height = "600" alt="导航" align=center />
+
+<img src="/screenshot/Screenshot_system.png" width = "280" height = "600" alt="体系" align=center />
+
+<img src="/screenshot/Screenshot_search.png" width = "280" height = "600" alt="搜索" align=center />
+
+<img src="/screenshot/Screenshot_weather.jpg" width = "280" height = "600" alt="天气" align=center />
 
 
 数据来源
