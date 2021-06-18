@@ -11,21 +11,12 @@ ScreenShots
 ------
 
 <center class="half">
-<img src="/screenshot/Screenshot_home.jpg" width = "280" height = "600" alt="首页"  />
-
-<img src="/screenshot/Screenshot_find.jpg" width = "280" height = "600" alt="发现"  />
-
-<img src="/screenshot/Screenshot_mine.jpg" width = "280" height = "600" alt="我的" />
+<img src="/screenshot/Screenshot_home.jpg" width = "280" height = "600" alt="首页"  /><img src="/screenshot/Screenshot_find.jpg" width = "280" height = "600" alt="发现"  /><img src="/screenshot/Screenshot_mine.jpg" width = "280" height = "600" alt="我的" />
 </center>
 
 <center class="half">
-<img src="/screenshot/Screenshot_navigation.png" width = "280" height = "600" alt="导航" />
-
-<img src="/screenshot/Screenshot_system.png" width = "280" height = "600" alt="体系"  />
-
-<img src="/screenshot/Screenshot_search.png" width = "280" height = "600" alt="搜索"  />
+<img src="/screenshot/Screenshot_navigation.png" width = "280" height = "600" alt="导航" /><img src="/screenshot/Screenshot_system.png" width = "280" height = "600" alt="体系"  /><img src="/screenshot/Screenshot_search.png" width = "280" height = "600" alt="搜索"  />
 </center>
-
 
 <img src="/screenshot/Screenshot_weather.jpg" width = "280" height = "600" alt="天气" align=center />
 
