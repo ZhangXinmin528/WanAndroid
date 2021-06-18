@@ -9,13 +9,13 @@
 
 ScreenShots
 ------
-![Home](/screenshot/Screenshot_home.png "首页")
-![Find](/screenshot/Screenshot_find.png "发现")
-![Mine](/screenshot/Screenshot_mine.png "我的")
-![Navigation](/screenshot/Screenshot_navigation.png "导航")
-![System](https://github.com/ZhangXinmin528/WanAndroid/blob/master/screenshot/Screenshot_system.png "体系")
-![Search](https://github.com/ZhangXinmin528/WanAndroid/blob/master/screenshot/Screenshot_search.png "搜索")
-![Weather](https://github.com/ZhangXinmin528/WanAndroid/blob/master/screenshot/Screenshot_weather.png "天气")
+![Home](/screenshot/Screenshot_home.png "首页"){:height = "50%" width = "50%"}
+![Find](/screenshot/Screenshot_find.png "发现"){:height = "50%" width = "50%"}
+![Mine](/screenshot/Screenshot_mine.png "我的"){:height = "50%" width = "50%"}
+![Navigation](/screenshot/Screenshot_navigation.png "导航"){:height = "50%" width = "50%"}
+![System](/screenshot/Screenshot_system.png "体系"){:height = "50%" width = "50%"}
+![Search](/screenshot/Screenshot_search.png "搜索"){:height = "50%" width = "50%"}
+![Weather](/screenshot/Screenshot_weather.png "天气"){:height = "50%" width = "50%"}
 
 
 数据来源
