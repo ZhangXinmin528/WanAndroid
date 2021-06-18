@@ -9,12 +9,12 @@ import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.upgrade.UpgradeManager
 import com.coding.zxm.upgrade.network.IUpgradeProvider
 import com.coding.zxm.upgrade.network.UpgradeProgressProvider
-import com.coding.zxm.util.AppUtils
-import com.coding.zxm.util.CacheUtil
 import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
+import com.zxm.utils.core.app.AppUtil
+import com.zxm.utils.core.cache.CacheUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_toolbar_back.*
@@ -87,7 +87,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         })
 
 
-        tv_setting_curr_version.text = AppUtils.getAppVersionName(mContext!!)
+        tv_setting_curr_version.text = AppUtil.getAppVersionName(mContext!!)
     }
 
     private fun checkUpgrade() {

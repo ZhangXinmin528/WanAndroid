@@ -27,6 +27,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    api deps.coreUtil
+    api deps.coreUtils
 
 }

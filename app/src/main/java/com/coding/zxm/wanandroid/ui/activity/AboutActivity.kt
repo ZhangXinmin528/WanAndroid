@@ -2,8 +2,8 @@ package com.coding.zxm.wanandroid.ui.activity
 
 import android.text.TextUtils
 import com.coding.zxm.core.base.BaseActivity
-import com.coding.zxm.util.AppUtils
 import com.coding.zxm.wanandroid.R
+import com.zxm.utils.core.app.AppUtil
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -30,8 +30,8 @@ class AboutActivity : BaseActivity() {
             actionBar.setDisplayShowHomeEnabled(true)
         }
 
-        val versionName = AppUtils.getAppVersionName(mContext!!)
-        val versionCode = AppUtils.getAppVersionCode(mContext!!)
+        val versionName = AppUtil.getAppVersionName(mContext!!)
+        val versionCode = AppUtil.getAppVersionCode(mContext!!)
         val versionInfo = "$versionName($versionCode)"
 
         tv_about_version.text =

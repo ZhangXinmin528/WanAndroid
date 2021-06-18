@@ -53,6 +53,5 @@ dependencies {
 //    implementation deps.arouter.api
 //
 //    kapt deps.arouter.compiler
-//
-    implementation project(path: ':base:util')
+
 }
