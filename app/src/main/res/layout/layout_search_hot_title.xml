@@ -4,7 +4,7 @@
     style="@style/ListItemPadding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
+    android:background="@color/color_light_bg"
     android:drawableStart="@mipmap/icon_hot"
     android:drawablePadding="@dimen/margin_6dp"
     android:text="@string/all_guess_what"

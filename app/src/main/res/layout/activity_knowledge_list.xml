@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar" />
+    <include layout="@layout/layout_toolbar_back" />
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/sr_list_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_0_5dp"
+        android:layout_marginTop="@dimen/margin_1dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_wan">
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:id="@+id/rv_fragment_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
+            android:background="@color/color_light_bg" />
 
         <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"

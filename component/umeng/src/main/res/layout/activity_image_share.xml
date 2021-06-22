@@ -76,7 +76,7 @@
             android:id="@+id/tv_share_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="@color/color_light_bg"
             android:gravity="center"
             android:padding="@dimen/margin_16dp"
             android:text="@string/all_cancel"

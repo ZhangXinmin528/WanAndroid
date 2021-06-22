@@ -11,7 +11,7 @@
         android:id="@+id/tab_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/color_light_bg"
         app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabIndicatorFullWidth="false"

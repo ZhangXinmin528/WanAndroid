@@ -12,7 +12,7 @@
         style="@style/ListItemPadding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/color_light_bg"
         android:textColor="@color/color_text_black"
         tools:text="Android开发" />
 
@@ -22,7 +22,7 @@
         android:id="@+id/flex_knowledge_detial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/color_light_bg"
         android:padding="@dimen/margin_12dp"
         app:alignContent="space_around"
         app:flexDirection="row"

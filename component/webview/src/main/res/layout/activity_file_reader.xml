@@ -10,7 +10,7 @@
         android:id="@+id/layout_reader_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorWhite"
+        android:background="@color/color_light_bg"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView

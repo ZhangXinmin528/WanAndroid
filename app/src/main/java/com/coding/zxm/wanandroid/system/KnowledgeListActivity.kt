@@ -16,6 +16,7 @@ import com.coding.zxm.wanandroid.system.viewmodel.KnowledgeListViewModel
 import com.coding.zxm.webview.X5WebviewActivity
 import kotlinx.android.synthetic.main.activity_knowledge_list.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -59,13 +60,9 @@ class KnowledgeListActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        setSupportActionBar(toolbar_wan)
-        val actionBar = supportActionBar
-        actionBar?.let {
-            actionBar.title = if (TextUtils.isEmpty(mTitle)) "知识体系专栏" else "${mTitle}专栏"
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setDisplayShowHomeEnabled(true)
-        }
+
+        tv_toolbar_title.text = if (TextUtils.isEmpty(mTitle)) "知识体系专栏" else "${mTitle}专栏"
+        iv_toolbar_back.setOnClickListener { finish() }
 
         //是否在刷新的时候禁止列表的操作
         sr_list_layout.setDisableContentWhenRefresh(true)

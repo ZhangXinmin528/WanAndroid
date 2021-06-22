@@ -21,7 +21,7 @@
             android:id="@+id/rv_bing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
+            android:background="@color/color_light_bg" />
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
     <color name="color_list_content">@color/color_text_black</color>
     <color name="color_list_small">@color/color_text_gray</color>
     <color name="color_list_light">@color/color_text_white</color>
-    <color name="color_list_item_bg">@color/color_config_white_pure</color>
+    <color name="color_list_item_bg">@color/color_light_bg</color>
 
     <!--text color-->
     <color name="color_text_gray">@color/color_config_gray_4</color>
