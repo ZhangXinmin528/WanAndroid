@@ -115,7 +115,7 @@ class HomeFragment private constructor() : BaseStatusBarFragment() {
             mContext,
             DividerItemDecoration.VERTICAL
         )
-        ContextCompat.getDrawable(context!!, R.drawable.icon_search_divider)?.let {
+        ContextCompat.getDrawable(context!!, R.drawable.shape_list_horizontal_divider_gray)?.let {
             itemDecoration.setDrawable(
                 it
             )

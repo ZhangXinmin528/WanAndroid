@@ -7,6 +7,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_gray_bg"
     android:gravity="center"
-    android:textColor="@color/colorMainText"
+    android:textColor="@color/color_text_black"
     android:textSize="@dimen/textsize_12sp"
     tools:text="Android开发" />

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/back_100d" />
+            android:src="@mipmap/back_100d" />
 
         <!--实况天气-->
         <androidx.constraintlayout.widget.ConstraintLayout

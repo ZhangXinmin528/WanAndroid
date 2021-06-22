@@ -12,8 +12,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0.5dp"
-        android:background="@color/colorWhite"
+        android:layout_marginTop="1dp"
+        android:background="@color/color_light_bg"
         android:orientation="vertical"
         android:paddingStart="@dimen/margin_12dp"
         android:paddingEnd="@dimen/margin_12dp"
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/all_setting_switch_language"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/color_text_black"
                 android:textSize="@dimen/textsize_16sp" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:paddingTop="@dimen/margin_12dp"
                 android:paddingBottom="@dimen/margin_12dp"
                 android:text="@string/all_setting_language_following_system"
-                android:textColor="@color/colorGrayText"
+                android:textColor="@color/color_text_gray"
                 android:textSize="@dimen/textsize_16sp"
                 app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
@@ -57,7 +57,7 @@
             android:paddingTop="@dimen/margin_12dp"
             android:paddingBottom="@dimen/margin_12dp"
             android:text="@string/all_setting_font_size"
-            android:textColor="@color/colorMainText"
+            android:textColor="@color/color_text_black"
             android:textSize="@dimen/textsize_16sp"
             app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 
@@ -76,7 +76,7 @@
                 android:paddingTop="@dimen/margin_12dp"
                 android:paddingBottom="@dimen/margin_12dp"
                 android:text="@string/all_setting_clear_cache"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/color_text_black"
                 android:textSize="@dimen/textsize_16sp" />
 
             <TextView
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/color_text_black"
                 android:textSize="@dimen/textsize_16sp"
                 tools:ignore="RelativeOverlap"
                 tools:text="0KB" />
@@ -104,7 +104,7 @@
                 android:paddingTop="@dimen/margin_12dp"
                 android:paddingBottom="@dimen/margin_12dp"
                 android:text="@string/all_setting_debug_title"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/color_text_black"
                 android:textSize="@dimen/textsize_16sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_arrow_right_gray_24dp"
                     android:text="@string/all_setting_network_debug_title"
-                    android:textColor="@color/colorMainText"
+                    android:textColor="@color/color_text_black"
                     android:textSize="@dimen/textsize_16sp"
                     tools:ignore="UseCompatTextViewDrawableXml" />
 
@@ -168,7 +168,7 @@
                 android:paddingTop="@dimen/margin_12dp"
                 android:paddingBottom="@dimen/margin_12dp"
                 android:text="@string/all_setting_new_version"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/color_text_black"
                 android:textSize="@dimen/textsize_16sp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="@color/colorMainText"
+                    android:textColor="@color/color_text_black"
                     android:textSize="@dimen/textsize_16sp"
                     tools:ignore="RelativeOverlap"
                     tools:text="1.0.0" />
@@ -197,7 +197,7 @@
                     android:background="@drawable/shape_red_version_bg"
                     android:gravity="center"
                     android:text="new"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/color_text_white"
                     android:textSize="@dimen/textsize_12sp"
                     android:visibility="visible"
                     tools:ignore="HardcodedText,RelativeOverlap" />
@@ -214,7 +214,7 @@
             android:paddingTop="@dimen/margin_12dp"
             android:paddingBottom="@dimen/margin_12dp"
             android:text="@string/all_setting_logout"
-            android:textColor="@color/colorMainText"
+            android:textColor="@color/color_text_black"
             android:textSize="@dimen/textsize_16sp"
             app:drawableEndCompat="@drawable/ic_arrow_right_gray_24dp" />
 

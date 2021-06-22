@@ -6,21 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar" />
+    <include layout="@layout/layout_toolbar_back" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_0_5dp"
-        android:background="@color/colorWhite"
+        android:layout_marginTop="@dimen/margin_1dp"
+        android:background="@color/color_light_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_wan">
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/MainPagePadding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <ImageView
                 android:id="@+id/iv_about_launcher"
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_12dp"
                 android:text="@string/app_name"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_text_black"
                 android:textSize="@dimen/textsize_24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_12dp"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/color_text_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_about_name"

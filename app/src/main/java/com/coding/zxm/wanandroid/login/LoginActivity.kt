@@ -35,7 +35,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViews() {
-        setStatusBarDark()
 
         tv_login.setOnClickListener(this)
         iv_login_close.setOnClickListener(this)

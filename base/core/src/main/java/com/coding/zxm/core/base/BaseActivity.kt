@@ -112,8 +112,8 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    protected fun setStatusBarDark() {
-        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.colorDark))
+    protected fun setStatusBarGray() {
+        StatusBarCompat.setColor(this, resources.getColor(R.color.color_tool_bar_gray))
     }
 
     protected fun initActionBar(toolbar: Toolbar, titile: String) {

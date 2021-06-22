@@ -21,7 +21,7 @@
         android:layout_marginEnd="@dimen/margin_12dp"
         android:background="@drawable/shape_timer"
         android:gravity="center"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/color_text_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="5s" />
@@ -33,7 +33,7 @@
         android:layout_marginBottom="40dp"
         android:background="@drawable/shape_try_it"
         android:text="@string/all_try_it_now"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/color_text_white"
         android:textSize="@dimen/textsize_18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -13,6 +13,7 @@ import com.coding.zxm.wanandroid.navigation.model.NaviEntity
 import com.coding.zxm.webview.X5WebviewActivity
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/8/30.
@@ -36,13 +37,11 @@ class NavigationActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        setSupportActionBar(toolbar_wan)
-        val actionBar = supportActionBar
-        actionBar?.let {
-            actionBar.title = "导航"
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setDisplayShowHomeEnabled(true)
-        }
+
+        iv_toolbar_back.setOnClickListener { finish() }
+
+        tv_toolbar_title.text = "导航"
+
 
         //是否在刷新的时候禁止列表的操作
         sr_navi_layout.setDisableContentWhenRefresh(true)
@@ -61,7 +60,7 @@ class NavigationActivity : BaseActivity() {
             DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL)
 
         val divider =
-            ContextCompat.getDrawable(mContext!!, R.drawable.shape_gray_horizontal_divider)
+            ContextCompat.getDrawable(mContext!!, R.drawable.shape_gray_horizontal_divider_8dp)
         itemDecoration.setDrawable(divider!!)
         rv_navi.addItemDecoration(itemDecoration)
 

@@ -39,7 +39,7 @@ class HotWordAdapter(words: MutableList<HotWordEntity>) :
             else -> {
                 holder.setTextColor(
                     R.id.tv_word_order,
-                    context.resources.getColor(R.color.colorMainText)
+                    context.resources.getColor(R.color.color_text_black)
                 )
             }
         }

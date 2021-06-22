@@ -14,6 +14,7 @@ import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.time.TimeUtil
 import kotlinx.android.synthetic.main.activity_project.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -94,6 +95,13 @@ class ProjectActivity : BaseActivity() {
 
     }
 
+    override fun initViews() {
+
+        tv_toolbar_title.text = "项目"
+        iv_toolbar_back.setOnClickListener { finish() }
+
+    }
+
     private fun initTagTab() {
         mTagList.forEach {
             mFragments.add(ProjectItemFragment.newInstance(it.id))
@@ -109,8 +117,4 @@ class ProjectActivity : BaseActivity() {
         vp_project.adapter = mTabAdapter
     }
 
-    override fun initViews() {
-        initActionBar(toolbar_wan, "项目")
-
-    }
 }

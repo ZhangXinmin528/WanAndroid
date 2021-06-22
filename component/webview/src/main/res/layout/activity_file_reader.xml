@@ -31,7 +31,7 @@
             android:ellipsize="marquee"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:textColor="@color/colorMainText"
+            android:textColor="@color/color_text_black"
             android:textSize="@dimen/textsize_16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/iv_reader_more"

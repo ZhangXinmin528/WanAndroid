@@ -26,7 +26,6 @@ class FileReaderActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarDark()
 
         ib_reader_back.setOnClickListener(this)
 

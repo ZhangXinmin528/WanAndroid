@@ -61,7 +61,7 @@ class LanguagesSettingActivity : BaseActivity(), View.OnClickListener {
             mContext,
             DividerItemDecoration.VERTICAL
         )
-        ContextCompat.getDrawable(mContext!!, R.drawable.icon_search_divider)?.let {
+        ContextCompat.getDrawable(mContext!!, R.drawable.shape_list_horizontal_divider_gray)?.let {
             itemDecoration.setDrawable(
                 it
             )

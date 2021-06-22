@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/all_setting_clear_cache"
         android:textSize="@dimen/textsize_16sp"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/color_text_black"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

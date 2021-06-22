@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Black-->
+    <color name="color_config_black_pure">#000000</color>
+    <color name="color_config_black_85pure">#D9000000</color>
+    <color name="color_config_black_75pure">#BF000000</color>
+    <color name="color_config_black_60pure">#99000000</color>
+    <color name="color_config_black_50pure">#80000000</color>
+    <color name="color_config_black_25pure">#40000000</color>
+    <color name="color_config_black_15pure">#26000000</color>
+
+    <!--white-->
+    <color name="color_config_white_pure">#ffffff</color>
+    <color name="color_config_white_75pure">#BFFFFFFF</color>
+    <color name="color_config_white_50pure">#80FFFFFF</color>
+    <color name="color_config_white_25pure">#40FFFFFF</color>
+    <color name="color_config_white_15pure">#26FFFFFF</color>
+
+    <!--gray-->
+    <color name="color_config_gray_1">#353C46</color>
+    <color name="color_config_gray_2">#49505A</color>
+    <color name="color_config_gray_3">#5D646E</color>
+    <color name="color_config_gray_4">#717882</color>
+    <color name="color_config_gray_5">#858C96</color>
+    <color name="color_config_gray_6">#99A0AA</color>
+    <color name="color_config_gray_7">#ADB4BE</color>
+    <color name="color_config_gray_8">#C4C8D0</color>
+    <color name="color_config_gray_9">#D8DCE4</color>
+
+    <!--list-->
+    <color name="color_drawable_list_separator">#DEE0E2</color>
+    <color name="color_drawable_list_pressed">#DEE0E2</color>
+
+    <!--background-->
+    <color name="color_config_background">#F4F5F7</color>
+    <color name="color_config_background_pressed">#EEEFF1</color>
+</resources>

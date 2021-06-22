@@ -16,6 +16,7 @@ import com.coding.zxm.wanandroid.system.model.NaviKnowledgeEntity
 import com.coding.zxm.wanandroid.system.viewmodel.KnowledgeViewModel
 import kotlinx.android.synthetic.main.activity_knowledge.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -47,13 +48,9 @@ class KnowledgeActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        setSupportActionBar(toolbar_wan)
-        val actionBar = supportActionBar
-        actionBar?.let {
-            actionBar.title = "知识体系"
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setDisplayShowHomeEnabled(true)
-        }
+
+        tv_toolbar_title.text = "知识体系"
+        iv_toolbar_back.setOnClickListener { finish() }
 
         //导航栏
         rv_knowledge_nav.adapter = mNavAdapter
@@ -71,7 +68,7 @@ class KnowledgeActivity : BaseActivity() {
             DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL)
 
         val divider =
-            ContextCompat.getDrawable(mContext!!, R.drawable.shape_gray_horizontal_divider)
+            ContextCompat.getDrawable(mContext!!, R.drawable.shape_gray_horizontal_divider_8dp)
         itemDecoration.setDrawable(divider!!)
         rv_knowledge_detial.addItemDecoration(itemDecoration)
 

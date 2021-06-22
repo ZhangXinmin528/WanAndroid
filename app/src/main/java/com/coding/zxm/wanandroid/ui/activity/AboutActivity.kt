@@ -5,7 +5,7 @@ import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
 import com.zxm.utils.core.app.AppUtil
 import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -22,13 +22,8 @@ class AboutActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        setSupportActionBar(toolbar_wan)
-        val actionBar = supportActionBar
-        actionBar?.let {
-            actionBar.title = getString(R.string.all_title_abount)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setDisplayShowHomeEnabled(true)
-        }
+        tv_toolbar_title.text = "关于"
+        iv_toolbar_back.setOnClickListener { finish() }
 
         val versionName = AppUtil.getAppVersionName(mContext!!)
         val versionCode = AppUtil.getAppVersionCode(mContext!!)

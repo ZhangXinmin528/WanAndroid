@@ -22,7 +22,7 @@
         android:ellipsize="end"
         android:maxLines="3"
         android:padding="@dimen/margin_8dp"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/color_text_black"
         app:layout_constraintTop_toBottomOf="@+id/tv_project_title"
         tools:text="Android图片选择器，仿微信的图片选择器的样式和效果。支持图片的单选、
         限数量的多选和不限数量的多选，支持图片剪切。支持图片预览和图片文件夹的切换。
@@ -55,7 +55,7 @@
         android:id="@+id/tv_project_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorGrayText"
+        android:textColor="@color/color_text_gray"
         android:textSize="@dimen/textsize_12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

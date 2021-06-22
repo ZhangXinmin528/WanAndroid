@@ -27,7 +27,7 @@ class KnowledgeNavAdapter(val dataList: MutableList<NaviKnowledgeEntity>) :
             itemView.setTextColor(context.resources.getColor(R.color.colorWhite))
         } else {
             itemView.background = null
-            itemView.setTextColor(context.resources.getColor(R.color.colorMainText))
+            itemView.setTextColor(context.resources.getColor(R.color.color_text_black))
         }
 
     }

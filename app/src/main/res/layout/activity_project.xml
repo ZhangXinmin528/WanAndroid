@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar" />
+    <include layout="@layout/layout_toolbar_back" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_wan"
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabIndicatorFullWidth="false"
         app:tabMode="scrollable" />
@@ -21,7 +21,7 @@
         android:id="@+id/vp_project"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_0_5dp"
+        android:layout_marginTop="@dimen/margin_1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_project" />
 

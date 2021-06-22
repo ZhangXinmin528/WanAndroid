@@ -8,6 +8,7 @@ import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
+import com.zxm.utils.core.bar.StatusBarCompat
 import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
 import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 

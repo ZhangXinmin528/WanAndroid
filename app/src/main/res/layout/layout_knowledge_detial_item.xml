@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/color_text_black"
         tools:text="Android开发" />
 
     <include layout="@layout/layout_horizontal_margin_divider" />
