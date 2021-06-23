@@ -35,7 +35,7 @@ class ProjectActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
 
         val time =
             SharedPreferencesUtil.get(

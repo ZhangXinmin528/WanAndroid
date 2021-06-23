@@ -4,17 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.coding.zxm.core.R
 import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.zxm.utils.core.bar.StatusBarCompat
+import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 
 /**
@@ -23,7 +22,7 @@ import com.zxm.utils.core.sp.SharedPreferencesUtil
  * Base activity~
  */
 abstract class BaseActivity : AppCompatActivity() {
-    protected val TAG = this.javaClass.simpleName
+    protected val sTAG = this.javaClass.simpleName
 
     protected var mContext: Context? = null
 
@@ -98,22 +97,25 @@ abstract class BaseActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    protected fun setStatusBarColor() {
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        MLogger.d(sTAG, "onConfigurationChanged()~")
+    }
+
+    //===============================status bar ==============================================//
+    protected fun setStatusBarColorPrimary() {
         StatusBarCompat.setColorNoTranslucent(
             this,
             resources.getColor(R.color.color_tool_bar_primary)
         )
     }
 
-    protected fun setStatusBarColorWhite() {
-        StatusBarCompat.setColorNoTranslucent(this, Color.WHITE)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
+    protected fun setStatusBarColorLight() {
+        StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.color_toolbar_light))
     }
 
-    protected fun setStatusBarGray() {
-        StatusBarCompat.setColor(this, resources.getColor(R.color.color_tool_bar_gray))
+    protected fun setStatusBarDark() {
+        StatusBarCompat.setColor(this, resources.getColor(R.color.color_toolbar_dark))
     }
 
     protected fun initActionBar(toolbar: Toolbar, titile: String) {
@@ -126,6 +128,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    //========================================页面跳转=========================================//
     protected fun jumpActivity(intent: Intent) {
         startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

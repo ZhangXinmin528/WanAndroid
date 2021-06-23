@@ -36,7 +36,7 @@ class LanguagesSettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
 
         val lanNameArray = resources.getStringArray(R.array.array_lan_name)
         val lanArray = resources.getStringArray(R.array.array_lan)

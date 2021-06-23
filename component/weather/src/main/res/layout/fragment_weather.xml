@@ -238,7 +238,7 @@
                     android:layout_height="120dp"
                     android:layout_marginTop="@dimen/margin_16dp"
                     app:color_aqi_text="@color/colorWhite"
-                    app:color_bg_arc_line="@color/color_main_bg"
+                    app:color_bg_arc_line="@color/colorWhite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title_aqi_now"

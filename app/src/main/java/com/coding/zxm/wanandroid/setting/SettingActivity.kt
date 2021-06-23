@@ -34,7 +34,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
 
         mProvider = UpgradeProgressProvider(this)
     }

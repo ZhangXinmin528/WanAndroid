@@ -2,6 +2,7 @@ package com.coding.zxm.wanandroid.app
 
 import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -58,7 +59,6 @@ class WanApp : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
-
         addAppLifecycleObserver()
 
         initRetrofit()

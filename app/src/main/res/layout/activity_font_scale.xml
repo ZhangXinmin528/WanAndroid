@@ -11,7 +11,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/app_color_blue_3"
+        android:layout_marginTop="@dimen/margin_1dp"
+        android:background="@color/color_light_bg"
         android:padding="@dimen/margin_12dp"
         app:layout_constraintBottom_toTopOf="@+id/font_seekbar"
         app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back"
@@ -33,6 +34,7 @@
         android:id="@+id/font_seekbar"
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        app:background_color="@color/color_main_bg"
         app:font_line_color="@color/color_text_black"
         app:font_line_width="@dimen/dp_1"
         app:font_text_color="@color/color_text_black"

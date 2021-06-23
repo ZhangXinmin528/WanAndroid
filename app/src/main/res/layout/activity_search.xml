@@ -88,7 +88,7 @@
         android:id="@+id/layout_hot_word"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_0_5dp"
+        android:layout_marginTop="@dimen/margin_1dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_search">
@@ -111,7 +111,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_0_5dp"
-            android:background="@color/color_text_white"
             app:layout_constraintTop_toBottomOf="@+id/tv_guess_sou" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,7 +120,7 @@
         android:id="@+id/sr_search_result"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_0_5dp"
+        android:layout_marginTop="@dimen/margin_1dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_search">
@@ -129,8 +128,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_result"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_light_bg" />
+            android:layout_height="match_parent" />
 
         <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"

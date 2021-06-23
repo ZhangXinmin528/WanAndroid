@@ -26,15 +26,14 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
     }
 
     override fun initViews() {
         iv_toolbar_back.setOnClickListener(this)
         tv_toolbar_confirm.setOnClickListener(this)
         tv_toolbar_confirm.visibility = View.VISIBLE
-
-        tv_toolbar_title.text = "字体大小"
+                tv_toolbar_title.text = "字体大小"
         val scale =
             SharedPreferencesUtil.get(
                 mContext!!,

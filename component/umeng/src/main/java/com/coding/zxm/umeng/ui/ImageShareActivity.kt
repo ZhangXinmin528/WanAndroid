@@ -155,7 +155,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     }
 
     override fun onResult(p0: SHARE_MEDIA?) {
-        Log.d(TAG, "$p0..onResult")
+        Log.d(sTAG, "$p0..onResult")
         if (mImageFile.exists()) {
             mImageFile.delete()
         }
@@ -163,16 +163,16 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     }
 
     override fun onCancel(p0: SHARE_MEDIA?) {
-        Log.d(TAG, "$p0..onCancel")
+        Log.d(sTAG, "$p0..onCancel")
     }
 
     override fun onError(p0: SHARE_MEDIA?, p1: Throwable?) {
-        Log.d(TAG, "$p0..onError : " + p1?.message)
+        Log.d(sTAG, "$p0..onError : " + p1?.message)
         Toast.makeText(mContext, "${p0}分享失败", Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart(p0: SHARE_MEDIA?) {
-        Log.d(TAG, "$p0..onStart")
+        Log.d(sTAG, "$p0..onStart")
     }
 
 

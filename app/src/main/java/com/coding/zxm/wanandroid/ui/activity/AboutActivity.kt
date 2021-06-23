@@ -18,7 +18,7 @@ class AboutActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
     }
 
     override fun initViews() {

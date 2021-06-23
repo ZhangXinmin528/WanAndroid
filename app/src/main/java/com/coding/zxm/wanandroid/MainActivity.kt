@@ -29,6 +29,7 @@ class MainActivity : BaseActivity() {
         fragments.add(HomeFragment.newInstance())
         fragments.add(BingWallpapersFragment.newInstance())
         fragments.add(MineFragment.newInstance())
+
     }
 
     override fun initViews() {

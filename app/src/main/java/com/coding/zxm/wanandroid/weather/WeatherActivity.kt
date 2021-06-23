@@ -20,7 +20,7 @@ class WeatherActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
 
         LocationManager.INSTANCE.initClient(WanApp.getApplicationContext())
             .setOnceLocationOption()

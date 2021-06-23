@@ -49,7 +49,7 @@ class KnowledgeListActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
         if (intent != null) {
             mTitle = intent.getStringExtra(PARAMAS_TITLE)
             mCid = intent.getIntExtra(PARAMAS_CID, 0)
@@ -86,7 +86,7 @@ class KnowledgeListActivity : BaseActivity() {
             mContext,
             DividerItemDecoration.VERTICAL
         )
-        ContextCompat.getDrawable(mContext!!, R.drawable.icon_search_divider)?.let {
+        ContextCompat.getDrawable(mContext!!, R.drawable.shape_list_horizontal_divider_gray)?.let {
             itemDecoration.setDrawable(
                 it
             )

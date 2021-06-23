@@ -40,7 +40,7 @@ class KnowledgeActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
         mNavAdapter = KnowledgeNavAdapter(mNavDataList)
 
         mDetialAdapter = KnowledgeDetialAdapter(mDetialList)

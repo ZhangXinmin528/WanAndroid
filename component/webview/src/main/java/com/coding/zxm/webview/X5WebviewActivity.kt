@@ -47,7 +47,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
 
         mUrl = intent.getStringExtra(PARAMS_WEBVIEW_URL)
         mTitle = intent.getStringExtra(PARAMS_WEBVIEW_TITLE)
@@ -119,7 +119,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
         val state = ImageUtil.save(bitmap, filePath, Bitmap.CompressFormat.PNG)
 
-        Log.d(TAG, "save state $state .. file path $filePath")
+        Log.d(sTAG, "save state $state .. file path $filePath")
 
         if (state) {
             ImageShareActivity.doImageShare(mContext!!, filePath)
@@ -151,7 +151,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
             val state = ImageUtil.save(x5bitmap, filePath, Bitmap.CompressFormat.PNG)
 
-            Log.d(TAG, "save state $state .. file path $filePath")
+            Log.d(sTAG, "save state $state .. file path $filePath")
 
             if (state) {
                 ImageShareActivity.doImageShare(mContext!!, filePath)

@@ -17,21 +17,31 @@
     <color name="color_config_white_15pure">#26FFFFFF</color>
 
     <!--gray-->
-    <color name="color_config_gray_1">#353C46</color>
-    <color name="color_config_gray_2">#49505A</color>
-    <color name="color_config_gray_3">#5D646E</color>
-    <color name="color_config_gray_4">#717882</color>
-    <color name="color_config_gray_5">#858C96</color>
-    <color name="color_config_gray_6">#99A0AA</color>
-    <color name="color_config_gray_7">#ADB4BE</color>
-    <color name="color_config_gray_8">#C4C8D0</color>
-    <color name="color_config_gray_9">#D8DCE4</color>
+    <color name="color_config_light_gray_1">#353C46</color>
+    <color name="color_config_light_gray_2">#49505A</color>
+    <color name="color_config_light_gray_3">#5D646E</color>
+    <color name="color_config_light_gray_4">#717882</color>
+    <color name="color_config_light_gray_5">#858C96</color>
+    <color name="color_config_light_gray_6">#99A0AA</color>
+    <color name="color_config_light_gray_7">#ADB4BE</color>
+    <color name="color_config_light_gray_8">#C4C8D0</color>
+    <color name="color_config_light_gray_9">#D8DCE4</color>
+
+    <color name="color_config_dark_gray_1">#000000</color>
+    <color name="color_config_dark_gray_2">#0B0B0B</color>
+    <color name="color_config_dark_gray_3">#181818</color>
+    <color name="color_config_dark_gray_4">#212121</color>
+    <color name="color_config_dark_gray_5">#232323</color>
+    <color name="color_config_dark_gray_6">#2F2F2F</color>
+    <color name="color_config_dark_gray_7">#3A3A3A</color>
+    <color name="color_config_dark_gray_8">#414141</color>
+    <color name="color_config_dark_gray_9">#4D4D4D</color>
 
     <!--list-->
     <color name="color_drawable_list_separator">#DEE0E2</color>
     <color name="color_drawable_list_pressed">#DEE0E2</color>
 
     <!--background-->
-    <color name="color_config_background">#F4F5F7</color>
+    <color name="color_config_background">#EDEDEE</color>
     <color name="color_config_background_pressed">#EEEFF1</color>
 </resources>

@@ -31,7 +31,7 @@ class NavigationActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarColorWhite()
+        setStatusBarColorLight()
         mNaviAdapter = NavigationAdapter(mDataList)
 
     }

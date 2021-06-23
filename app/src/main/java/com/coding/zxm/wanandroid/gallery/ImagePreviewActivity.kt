@@ -41,7 +41,7 @@ class ImagePreviewActivity : BaseActivity() {
     }
 
     override fun initParamsAndValues() {
-        setStatusBarGray()
+        setStatusBarDark()
         mImageEntity = intent?.getSerializableExtra(PARAMS_IMAGE_URL) as BingImageEntity
 
         if (mImageEntity == null) {

@@ -42,6 +42,7 @@ class FontSeekbar :
     private var mHeight: Int = 0
     private var mWidth: Int = 0
 
+    private var mBackColor: Int = Color.WHITE
     private lateinit var mLinePaint: Paint
     private var mLineColor: Int = Color.parseColor("#747474")
     private var mLineWidth: Float = 1.0f
@@ -94,6 +95,11 @@ class FontSeekbar :
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FontSeekbarStyleable)
 
             if (typedArray != null) {
+                mBackColor = typedArray.getColor(
+                    R.styleable.FontSeekbarStyleable_background_color,
+                    Color.WHITE
+                )
+
                 mLineColor = typedArray.getColor(
                     R.styleable.FontSeekbarStyleable_font_line_color,
                     Color.parseColor("#747474")
@@ -183,7 +189,7 @@ class FontSeekbar :
         super.draw(canvas)
 
         canvas?.let {
-            it.drawColor(Color.WHITE)
+            it.drawColor(mBackColor)
 
             drawScale(canvas)
         }

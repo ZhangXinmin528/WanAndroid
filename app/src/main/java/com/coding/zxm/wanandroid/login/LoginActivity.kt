@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initParamsAndValues() {
-
+        setStatusBarDark()
     }
 
     override fun initViews() {

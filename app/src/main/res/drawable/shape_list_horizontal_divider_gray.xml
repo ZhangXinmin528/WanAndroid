@@ -4,7 +4,7 @@
 
     <solid android:color="@color/color_divider_line" />
 
-    <size android:height="0.5dp" />
+    <size android:height="1dp" />
 
     <padding
         android:left="@dimen/margin_16dp"
