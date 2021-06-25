@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_mine.*
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/8/24 . All rights reserved.
  */
-class MineFragment private constructor() : BaseStatusBarFragment(), View.OnClickListener {
+class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
 
     private val mMineViewModel: MineViewModel by viewModels { MineViewModel.MineViewModelFactory }
 

@@ -43,7 +43,7 @@ import kotlinx.android.synthetic.main.layout_fake_status_bar.*
  * Copyright (c) 2020 . All rights reserved.
  * TODO：功能列表后面做
  */
-class HomeFragment private constructor() : BaseStatusBarFragment() {
+class HomeFragment() : BaseStatusBarFragment() {
 
     private val mHomeViewModel: HomeViewModel by viewModels { HomeViewModel.HomeViewModelFactory }
     private val mNewsList: MutableList<NewsDetialEntity> = ArrayList()
