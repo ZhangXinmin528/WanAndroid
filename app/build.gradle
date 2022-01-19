@@ -37,6 +37,10 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
+
+        manifestPlaceholders = [
+                qqappid       : "1110995000",//友盟QQ分享,登录，腾讯开发平台qq的appid
+        ]
     }
 
     Properties properties = new Properties()

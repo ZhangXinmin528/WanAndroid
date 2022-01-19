@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

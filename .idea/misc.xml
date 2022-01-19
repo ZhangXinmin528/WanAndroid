@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/launch_background.xml" value="0.25972222222222224" />
+        <entry key="app/src/main/res/drawable/shape_red_version_bg.xml" value="0.25972222222222224" />
+        <entry key="app/src/main/res/layout/fragment_home_behavior.xml" value="0.24077868852459017" />
+        <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

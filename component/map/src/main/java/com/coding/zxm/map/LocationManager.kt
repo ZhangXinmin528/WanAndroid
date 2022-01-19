@@ -42,6 +42,10 @@ class LocationManager private constructor() : AMapLocationListener {
      */
     fun initClient(context: Context): LocationManager {
         if (mLocationClient == null) {
+            //在构造AMapLocationClient 之前必须进行合规检查，设置接口之前保证隐私政策合规，检查接口
+            AMapLocationClient.updatePrivacyShow(context, true, true)
+            AMapLocationClient.updatePrivacyAgree(context, true)
+
             mLocationClient = AMapLocationClient(context)
 
         }

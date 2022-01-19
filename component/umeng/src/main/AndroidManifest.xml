@@ -23,17 +23,5 @@
             android:screenOrientation="portrait"
             android:theme="@style/ScreenshotTheme" />
 
-        <!--必须声明-->
-        <!--weixin：主工程-->
-
-        <!--dingding：主工程-->
-
-        <!--weibo-->
-        <activity
-            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
     </application>
 </manifest>

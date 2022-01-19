@@ -9,11 +9,10 @@ android {
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
     }
 
     buildTypes {
@@ -32,10 +31,19 @@ dependencies {
     implementation deps.constraint_layout
 
     //umeng
-//    implementation deps.umsdk_share_qq
-//    implementation deps.umsdk_share_wx
+    api deps.umsdk_share_core
+    implementation deps.umsdk_share_board
+
+    api deps.umsdk_share_qq
+    api deps.umsdk_qq_okhttp
+
+    api deps.umsdk_share_wx
+    api deps.umsdk_wechat_sdk
+
 //    implementation deps.umsdk_share_sina
-//    implementation deps.umsdk_share_dingding
+
+    api deps.umsdk_share_dingding
+    api deps.umsdk_dingding_sdk
 
     //module
     implementation project(path: ':base:core')

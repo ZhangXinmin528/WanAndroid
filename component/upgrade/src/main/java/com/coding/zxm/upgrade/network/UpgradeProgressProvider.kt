@@ -1,10 +1,12 @@
 package com.coding.zxm.upgrade.network
 
+import android.app.Activity
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.coding.zxm.upgrade.UpdateDialogFragment
@@ -30,7 +32,7 @@ import javax.net.ssl.X509TrustManager
  * Created by ZhangXinmin on 2021/05/20.
  * Copyright (c) 5/20/21 . All rights reserved.
  */
-class UpgradeProgressProvider(val activity: FragmentActivity) :
+class UpgradeProgressProvider(val activity: AppCompatActivity) :
     IUpgradeProvider {
 
     companion object {

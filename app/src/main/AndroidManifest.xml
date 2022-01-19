@@ -25,16 +25,31 @@
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <queries>
+        <!--指定微信包名-->
+        <package android:name="com.tencent.mm" />
+        <!--指定qq包名-->
+        <package android:name="com.tencent.mobileqq" />
+        <!--指定微博包名-->
+        <package android:name="com.sina.weibo" />
+        <!--指定QQ空间包名-->
+        <package android:name="com.qzone" />
+        <!--指定钉钉包名-->
+        <package android:name="com.alibaba.android.rimet" />
+    </queries>
 
     <application
         android:name=".app.WanApp"
         android:allowBackup="true"
+        android:appComponentFactory="1"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m">
+        tools:ignore="AllowBackup"
+        tools:replace="android:appComponentFactory"
+        tools:targetApi="p">
 
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
@@ -113,7 +128,7 @@
         <!--天气-->
         <activity
             android:name=".weather.WeatherActivity"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
 
         <!--设置字体大小-->
         <activity
@@ -125,14 +140,14 @@
         <!--weixin-->
         <activity
             android:name="com.coding.zxm.wanandroid.wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!--dingding-->
         <activity
             android:name="com.coding.zxm.wanandroid.ddshare.DDShareActivity"
-            android:configChanges="keyboardHidden|screenSize"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
@@ -152,9 +167,9 @@
                 <data android:scheme="tencent1110995000" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <provider

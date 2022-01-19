@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -31,7 +29,7 @@ dependencies {
     implementation deps.core_ktx
 
     //okhttp
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.2"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 

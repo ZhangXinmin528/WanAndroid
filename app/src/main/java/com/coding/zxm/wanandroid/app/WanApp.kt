@@ -15,6 +15,7 @@ import com.coding.zxm.wanandroid.ui.activity.SplashActivity
 import com.coding.zxm.weather.WeatherManager
 import com.coding.zxm.webview.TbsManager
 import com.tencent.bugly.Bugly
+import com.tencent.tauth.Tencent
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.socialize.PlatformConfig
@@ -42,8 +43,11 @@ class WanApp : BaseApp() {
         //qq
         PlatformConfig.setQQZone("1110995000", "JLvvTN0zi5w25Rh2")
         PlatformConfig.setQQFileProvider("com.tencent.wanandroid.fileprovider")
+
+//        PlatformConfig.setWXFileProvider("com.tencent.wanandroid.fileprovider")
         //dingding
         PlatformConfig.setDing("dingoafgactegaqwn14eih")
+        PlatformConfig.setDingFileProvider("com.tencent.wanandroid.fileprovider")
     }
 
 
@@ -132,6 +136,8 @@ class WanApp : BaseApp() {
 
         //选择AUTO页面采集模式，统计SDK基础指标无需手动埋点可自动采集。
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
+
+        Tencent.setIsPermissionGranted(true)
     }
 
     /**

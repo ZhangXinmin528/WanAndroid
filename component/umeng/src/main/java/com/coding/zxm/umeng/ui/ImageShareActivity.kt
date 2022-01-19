@@ -11,6 +11,7 @@ import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.umeng.R
 import com.example.image.loader.ImageLoader
 import com.example.image.model.GlideApp
+import com.tencent.tauth.Tencent
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareListener

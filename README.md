@@ -11,7 +11,7 @@ ScreenShots
 ------
 
 <center class="half">
-<img src="/screenshot/Screenshot_home.jpg" width = "280" height = "600" alt="首页"  /><img src="/screenshot/Screenshot_find.jpg" width = "280" height = "600" alt="发现"  /><img src="/screenshot/Screenshot_mine.jpg" width = "280" height = "600" alt="我的" />
+<img src="/screenshot/Screenshot_home.jpg" width = "28" height = "60" alt="首页"  /><img src="/screenshot/Screenshot_find.jpg" width = "280" height = "600" alt="发现"  /><img src="/screenshot/Screenshot_mine.jpg" width = "280" height = "600" alt="我的" />
 </center>
 
 <center class="half">
