@@ -4,8 +4,25 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/launch_background.xml" value="0.25972222222222224" />
+        <entry key="app/src/main/res/drawable/rounded_rect.xml" value="0.15703125" />
+        <entry key="app/src/main/res/drawable/shape_banner_bg.xml" value="0.16805555555555557" />
+        <entry key="app/src/main/res/drawable/shape_list_horizontal_divider_gray.xml" value="0.174609375" />
         <entry key="app/src/main/res/drawable/shape_red_version_bg.xml" value="0.25972222222222224" />
-        <entry key="app/src/main/res/layout/fragment_home_behavior.xml" value="0.24077868852459017" />
+        <entry key="app/src/main/res/drawable/shape_search_bg.xml" value="0.174609375" />
+        <entry key="app/src/main/res/drawable/shape_search_home_bg.xml" value="0.15703125" />
+        <entry key="app/src/main/res/layout/activity_font_scale.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_knowledge.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15069444444444444" />
+        <entry key="app/src/main/res/layout/activity_project.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.14652777777777778" />
+        <entry key="app/src/main/res/layout/activity_weather.xml" value="0.15704387990762125" />
+        <entry key="app/src/main/res/layout/fragment_bings_wallpapers.xml" value="0.15069444444444444" />
+        <entry key="app/src/main/res/layout/fragment_home_behavior.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.14652777777777778" />
+        <entry key="app/src/main/res/layout/layout_fake_status_bar.xml" value="0.15069444444444444" />
+        <entry key="app/src/main/res/layout/layout_home_banner.xml" value="0.141796875" />
+        <entry key="app/src/main/res/layout/layout_search_hot_item.xml" value="0.159375" />
         <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />
       </map>
     </option>

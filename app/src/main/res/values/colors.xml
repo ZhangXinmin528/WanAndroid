@@ -24,4 +24,10 @@
     <color name="app_color_theme_8">#AC8FEF</color> <!-- Lavender -->
     <color name="app_color_theme_9">#EE85C1</color> <!-- Pink Rose -->
 
+    <color name="app_status_bar_1">#FE6D4B</color>
+    <color name="app_status_bar_2">#3FD0AD</color>
+    <color name="app_status_bar_3">#2BBDF3</color>
+    <color name="app_status_bar_4">#5A9AEF</color>
+    <color name="app_status_bar_5">#AC8FEF</color>
+    <color name="app_status_bar_6">#9FD661</color>
 </resources>

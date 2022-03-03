@@ -39,25 +39,40 @@
     <string name="all_font_scale_title">字体大小</string>
     <string name="all_font_scale_example">本项目是基于开放API进行开发，主要功能是为广大Android开发人员提供阅读技术文章的平台，同时项目中主要使用kotlin作为开发语言，利用jetpack中的livedata和viewmode等进行开发。</string>
 
+    <!--知识体系-->
+    <string name="all_system_title">知识体系</string>
+
+    <!--导航-->
+    <string name="all_navigation_title">导航</string>
+
+    <!--项目-->
+    <string name="all_project_title">项目</string>
+
     <!--关于-->
-    <string name="all_title_abount">关于</string>
+    <string name="all_title_about">关于</string>
     <string name="all_abount_version">版本：</string>
 
     <!--设置页面-->
     <string name="all_setting">设置</string>
-
+    <!--语言设置-->
     <string name="all_setting_switch_language">语言选择</string>
     <string name="all_setting_language_following_system">更随系统</string>
     <string name="all_setting_language_chinese">中文</string>
     <string name="all_setting_language_english">英语</string>
+    <!--调试模式-->
     <string name="all_setting_debug_title">调试模式</string>
     <string name="all_setting_network_debug_title">网络调试</string>
     <string name="all_setting_network_result">查看网络调试结果</string>
-
+    <!--字体大小-->
     <string name="all_setting_font_size">字体大小</string>
-
+    <!--清理缓存-->
     <string name="all_setting_clear_cache">清除缓存</string>
+    <!--检查更新-->
     <string name="all_setting_new_version">检查更新</string>
+    <!--退出登录-->
     <string name="all_setting_logout">退出登录</string>
     <string name="all_logout_succeess">退出登陆成功</string>
+
+    <!--Behavior-->
+    <string name="behavior_app_toolbar">com.coding.zxm.wanandroid.home.AppToolbarBehavior</string>
 </resources>

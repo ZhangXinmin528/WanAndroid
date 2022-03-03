@@ -15,8 +15,10 @@ import com.coding.zxm.wanandroid.setting.SettingActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.coding.zxm.wanandroid.util.ToastUtil
+import com.zxm.utils.core.bar.StatusBarCompat
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
+import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -44,6 +46,10 @@ class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
     }
 
     override fun initViews(rootView: View) {
+        val layoutParams = fake_status_bar.layoutParams
+        layoutParams.height = StatusBarCompat.getStatusBarHeight(mContext!!)
+        fake_status_bar.layoutParams = layoutParams
+
         tv_user_name.setOnClickListener(this)
         tv_mine_system.setOnClickListener(this)
         tv_mine_navigation.setOnClickListener(this)

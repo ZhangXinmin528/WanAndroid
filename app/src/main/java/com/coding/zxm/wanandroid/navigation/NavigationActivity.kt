@@ -40,7 +40,7 @@ class NavigationActivity : BaseActivity() {
 
         iv_toolbar_back.setOnClickListener { finish() }
 
-        tv_toolbar_title.text = "导航"
+        tv_toolbar_title.text = getString(R.string.all_navigation_title)
 
 
         //是否在刷新的时候禁止列表的操作

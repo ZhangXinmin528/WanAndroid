@@ -33,7 +33,7 @@ class FontScaleActivity : BaseActivity(), View.OnClickListener {
         iv_toolbar_back.setOnClickListener(this)
         tv_toolbar_confirm.setOnClickListener(this)
         tv_toolbar_confirm.visibility = View.VISIBLE
-                tv_toolbar_title.text = "字体大小"
+                tv_toolbar_title.text = getString(R.string.all_setting_font_size)
         val scale =
             SharedPreferencesUtil.get(
                 mContext!!,

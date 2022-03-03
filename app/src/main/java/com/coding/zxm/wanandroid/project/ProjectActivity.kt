@@ -97,7 +97,7 @@ class ProjectActivity : BaseActivity() {
 
     override fun initViews() {
 
-        tv_toolbar_title.text = "项目"
+        tv_toolbar_title.text = getString(R.string.all_project_title)
         iv_toolbar_back.setOnClickListener { finish() }
 
     }

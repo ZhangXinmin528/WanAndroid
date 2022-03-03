@@ -30,9 +30,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(setLayoutId())
-
         mContext = this
 
         LanguageUtil.setLanguageConfig(mContext!!)
@@ -112,10 +110,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun setStatusBarColorLight() {
         StatusBarCompat.setColorNoTranslucent(this, resources.getColor(R.color.color_toolbar_light))
+        StatusBarCompat.setStatusBarLightMode(this, true)
     }
 
     protected fun setStatusBarDark() {
         StatusBarCompat.setColor(this, resources.getColor(R.color.color_toolbar_dark))
+        StatusBarCompat.setStatusBarLightMode(this, false)
     }
 
     protected fun initActionBar(toolbar: Toolbar, titile: String) {

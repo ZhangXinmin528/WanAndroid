@@ -22,7 +22,7 @@ class AboutActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        tv_toolbar_title.text = "关于"
+        tv_toolbar_title.text = getString(R.string.all_title_about)
         iv_toolbar_back.setOnClickListener { finish() }
 
         val versionName = AppUtil.getAppVersionName(mContext!!)

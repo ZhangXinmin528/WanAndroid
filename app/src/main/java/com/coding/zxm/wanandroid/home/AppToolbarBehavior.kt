@@ -14,6 +14,7 @@ import kotlin.math.roundToInt
  * Copyright (c) 4/27/21 . All rights reserved.
  * 首页搜索栏的行为
  * 注意：该行为会导致该颜色alpha发生变化，其他页面如果使用的为同一种颜色也会发生变化，原因未知！！
+ * TODO:实现效果不理想 暂时不用！！
  */
 class AppToolbarBehavior : CoordinatorLayout.Behavior<ConstraintLayout> {
 
@@ -52,20 +53,21 @@ class AppToolbarBehavior : CoordinatorLayout.Behavior<ConstraintLayout> {
         consumed: IntArray
     ) {
 
+
         targetHeight = if (targetHeight == 0) 200 else targetHeight
 
         offset += dyConsumed
         when {
             offset <= 0 -> {  //alpha为0
-                child.background.alpha = 0
+                child.getChildAt(0).background.alpha = 0
             }
             offset in 1 until targetHeight -> { //alpha为0到255
                 val precent: Float = offset / targetHeight.toFloat()
                 val alpha = (precent * 255).roundToInt()
-                child.background.alpha = alpha
+                child.getChildAt(0).background.alpha = alpha
             }
             offset >= targetHeight -> {  //alpha为255
-                child.background.alpha = 255
+                child.getChildAt(0).background.alpha = 255
             }
         }
     }

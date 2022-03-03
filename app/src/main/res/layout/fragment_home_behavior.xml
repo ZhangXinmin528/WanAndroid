@@ -6,106 +6,111 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/sr_home_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_0_5dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.scwang.smart.refresh.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_fragment_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <com.scwang.smart.refresh.footer.ClassicsFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
+    <!--    app:layout_behavior="@string/behavior_app_toolbar"-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_home_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_tool_bar_primary"
-        app:layout_behavior="@string/behavior_app_toolbar"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/layout_fake_status_bar"/>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layout_home_weather"
-            android:layout_width="70dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginStart="@dimen/margin_8dp"
-            android:orientation="vertical"
-            android:padding="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fake_status_bar">
-
-            <TextView
-                android:id="@+id/tv_location_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/color_text_white"
-                android:textSize="@dimen/textsize_14sp"
-                tools:text="北京市" />
-
-            <com.sunfusheng.marqueeview.MarqueeView
-                android:id="@+id/marquee_weather"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_2dp"
-                app:mvAnimDuration="1000"
-                app:mvDirection="bottom_to_top"
-                app:mvGravity="center"
-                app:mvInterval="3000"
-                app:mvSingleLine="true"
-                app:mvTextColor="@color/color_text_white"
-                app:mvTextSize="@dimen/textsize_12sp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layout_home_search"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_home_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_6dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:background="@drawable/shape_search_home_bg"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/layout_home_weather"
-            app:layout_constraintTop_toBottomOf="@+id/fake_status_bar">
+            android:background="@color/color_tool_bar_primary"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_12dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:src="@drawable/ic_search_gray_24dp" />
+            <include layout="@layout/layout_fake_status_bar" />
 
-            <TextView
-                android:id="@+id/tv_home_search"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_home_weather"
+                android:layout_width="70dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:orientation="vertical"
+                android:padding="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fake_status_bar">
+
+                <TextView
+                    android:id="@+id/tv_location_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/color_text_white"
+                    android:textSize="@dimen/textsize_14sp"
+                    tools:text="北京市" />
+
+                <com.sunfusheng.marqueeview.MarqueeView
+                    android:id="@+id/marquee_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_2dp"
+                    app:mvAnimDuration="1000"
+                    app:mvDirection="bottom_to_top"
+                    app:mvGravity="center"
+                    app:mvInterval="3000"
+                    app:mvSingleLine="true"
+                    app:mvTextColor="@color/color_text_white"
+                    app:mvTextSize="@dimen/textsize_12sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_home_search"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_6dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/all_search_hint"
-                android:textColor="@color/color_text_black"
-                android:textSize="@dimen/textsize_14sp" />
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:background="@drawable/shape_search_home_bg"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/layout_home_weather"
+                app:layout_constraintTop_toBottomOf="@+id/fake_status_bar">
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:src="@drawable/ic_search_gray_24dp" />
+
+                <TextView
+                    android:id="@+id/tv_home_search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/margin_6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/all_search_hint"
+                    android:textColor="@color/color_text_black"
+                    android:textSize="@dimen/textsize_14sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/sr_home_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_home_title">
+
+            <com.scwang.smart.refresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_fragment_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

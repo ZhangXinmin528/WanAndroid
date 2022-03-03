@@ -8,6 +8,7 @@ import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
+import com.zxm.utils.core.bar.StatusBarCompat.getStatusBarHeight
 import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
 import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 
@@ -38,6 +39,10 @@ class BingWallpapersFragment : BaseStatusBarFragment() {
     }
 
     override fun initViews(rootView: View) {
+        val layoutParams = fake_status_bar.layoutParams
+        layoutParams.height = getStatusBarHeight(mContext!!)
+        fake_status_bar.layoutParams = layoutParams
+
         fake_status_bar.setBackgroundColor(resources.getColor(R.color.color_toolbar_light))
 
         //是否在刷新的时候禁止列表的操作

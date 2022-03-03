@@ -35,7 +35,7 @@
     <color name="color_status_bar">@color/color_main_bg</color>
 
     <!--divider line-->
-    <color name="color_divider_line">@color/color_main_bg</color>
+    <color name="color_divider_line">@color/color_config_white_75pure</color>
 
     <!--Button-->
     <color name="color_btn_pressed">@color/colorPrimary</color>

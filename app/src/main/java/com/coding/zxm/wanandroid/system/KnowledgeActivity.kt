@@ -49,7 +49,7 @@ class KnowledgeActivity : BaseActivity() {
 
     override fun initViews() {
 
-        tv_toolbar_title.text = "知识体系"
+        tv_toolbar_title.text = getString(R.string.all_system_title)
         iv_toolbar_back.setOnClickListener { finish() }
 
         //导航栏

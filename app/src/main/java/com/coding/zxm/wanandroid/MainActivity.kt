@@ -24,6 +24,7 @@ class MainActivity : BaseActivity() {
 
     override fun initParamsAndValues() {
         StatusBarCompat.setTranslucentForImageViewInFragment(this, 0, null)
+        StatusBarCompat.setStatusBarLightMode(this,false)
         mProvider = UpgradeProgressProvider(this)
 
         fragments.add(HomeFragment.newInstance())
@@ -44,16 +45,19 @@ class MainActivity : BaseActivity() {
             when (it.itemId) {
                 R.id.action_home -> {
                     vp_home.currentItem = 0
+                    StatusBarCompat.setStatusBarLightMode(this,false)
                     true
                 }
 
                 R.id.action_gallery -> {
                     vp_home.currentItem = 1
+                    StatusBarCompat.setStatusBarLightMode(this,true)
                     true
                 }
 
                 R.id.action_mine -> {
                     vp_home.currentItem = 2
+                    StatusBarCompat.setStatusBarLightMode(this,false)
                     true
 
                 }

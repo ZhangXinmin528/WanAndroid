@@ -6,6 +6,8 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -31,12 +33,16 @@ import com.coding.zxm.weather.listener.OnWeatherResultListener
 import com.coding.zxm.webview.X5WebviewActivity
 import com.sunfusheng.marqueeview.MarqueeView
 import com.youth.banner.Banner
-import com.youth.banner.indicator.RoundLinesIndicator
+import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.listener.OnBannerListener
+import com.youth.banner.listener.OnPageChangeListener
+import com.zxm.utils.core.bar.StatusBarCompat.getStatusBarHeight
 import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.screen.ScreenUtil
 import kotlinx.android.synthetic.main.fragment_home_behavior.*
 import kotlinx.android.synthetic.main.layout_fake_status_bar.*
+import kotlinx.android.synthetic.main.layout_home_banner.*
+import kotlinx.android.synthetic.main.layout_home_banner.view.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -53,9 +59,15 @@ class HomeFragment() : BaseStatusBarFragment() {
     private val mMarqueeList: MutableList<String> = ArrayList()
     private var mMarqueeView: MarqueeView<String>? = null
 
+    private lateinit var mBannerContainer: ConstraintLayout
     private lateinit var mBanner: Banner<*, *>
 
     companion object {
+
+        val COLORS_RES = mutableListOf(
+            R.color.app_status_bar_1, R.color.app_status_bar_2, R.color.app_status_bar_3,
+            R.color.app_status_bar_4, R.color.app_status_bar_5,
+        )
 
         fun newInstance(): HomeFragment {
             return HomeFragment()
@@ -70,7 +82,6 @@ class HomeFragment() : BaseStatusBarFragment() {
     }
 
     override fun initViews(rootView: View) {
-        layout_home_title.background.alpha = 0
 
         val layoutParams = fake_status_bar.layoutParams
         layoutParams.height = getStatusBarHeight(mContext!!)
@@ -78,21 +89,26 @@ class HomeFragment() : BaseStatusBarFragment() {
 
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
 
-        mBanner = layoutInflater.inflate(
-            R.layout.layout_home_banner,
-            null
-        ) as Banner<*, *>
-        mBanner.layoutParams = FrameLayout.LayoutParams(
+        mBannerContainer =
+            layoutInflater.inflate(R.layout.layout_home_banner, null) as ConstraintLayout
+
+        mBanner = mBannerContainer.findViewById(R.id.banner_home)
+
+        setTitleBarColor(COLORS_RES[0])
+
+        val lp: FrameLayout.LayoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
-            ScreenUtil.dp2px(mContext!!, 180f)
+            ScreenUtil.dp2px(mContext!!, 204f)
         )
+
+        mBannerContainer.layoutParams = lp
 
         val bannerLiveData = mHomeViewModel.getBannerData()
         bannerLiveData.observe(this, Observer {
             it?.let {
                 val bannerAdapter = BannerImageAdapter(it)
                 mBanner.addBannerLifecycleObserver(this)
-                mBanner.indicator = RoundLinesIndicator(mContext)
+                mBanner.indicator = RectangleIndicator(mContext)
                 mBanner.adapter = bannerAdapter
                 mBanner.setOnBannerListener(object : OnBannerListener<BannerEntity> {
                     override fun OnBannerClick(data: BannerEntity?, position: Int) {
@@ -103,23 +119,45 @@ class HomeFragment() : BaseStatusBarFragment() {
                     }
 
                 })
+                mBanner.addOnPageChangeListener(object : OnPageChangeListener {
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+                    }
+
+                    override fun onPageSelected(position: Int) {
+                        val index = if (position > COLORS_RES.size) {
+                            position % COLORS_RES.size
+                        } else {
+                            position
+                        }
+                        setTitleBarColor(COLORS_RES[index])
+                    }
+
+                    override fun onPageScrollStateChanged(state: Int) {
+                    }
+
+                })
 
                 mBanner.isAutoLoop(true)
             }
         })
 
-        mNewsAdapter.addHeaderView(mBanner)
+        mNewsAdapter.addHeaderView(mBannerContainer)
         rv_fragment_home.layoutManager = LinearLayoutManager(mContext)
         rv_fragment_home.adapter = mNewsAdapter
         val itemDecoration = DividerItemDecoration(
             mContext,
             DividerItemDecoration.VERTICAL
         )
-        ContextCompat.getDrawable(context!!, R.drawable.shape_list_horizontal_divider_gray)?.let {
-            itemDecoration.setDrawable(
-                it
-            )
-        }
+        ContextCompat.getDrawable(requireContext(), R.drawable.shape_list_horizontal_divider_gray)
+            ?.let {
+                itemDecoration.setDrawable(
+                    it
+                )
+            }
         rv_fragment_home.addItemDecoration(itemDecoration)
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
@@ -269,17 +307,11 @@ class HomeFragment() : BaseStatusBarFragment() {
         super.onStop()
     }
 
-    /**
-     * 获取状态栏高度
-     *
-     * @param context context
-     * @return 状态栏高度
-     */
-    private fun getStatusBarHeight(context: Context): Int {
-        // 获得状态栏高度
-        val resourceId =
-            context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        return context.resources.getDimensionPixelSize(resourceId)
+
+    private fun setTitleBarColor(@DrawableRes resId: Int) {
+        layout_home_title.setBackgroundResource(resId)
+        fake_status_bar.setBackgroundResource(resId)
+        mBannerContainer.setBackgroundResource(resId)
     }
 
     override fun onDestroyView() {
