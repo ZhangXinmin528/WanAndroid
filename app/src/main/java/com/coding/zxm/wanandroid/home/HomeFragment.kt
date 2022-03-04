@@ -1,6 +1,5 @@
 package com.coding.zxm.wanandroid.home
 
-import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
@@ -21,6 +20,7 @@ import com.coding.zxm.map.location.listener.OnLocationListener
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.databinding.FragmentHomeBinding
 import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.BannerEntity
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
@@ -39,10 +39,6 @@ import com.youth.banner.listener.OnPageChangeListener
 import com.zxm.utils.core.bar.StatusBarCompat.getStatusBarHeight
 import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.screen.ScreenUtil
-import kotlinx.android.synthetic.main.fragment_home_behavior.*
-import kotlinx.android.synthetic.main.layout_fake_status_bar.*
-import kotlinx.android.synthetic.main.layout_home_banner.*
-import kotlinx.android.synthetic.main.layout_home_banner.view.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -62,6 +58,8 @@ class HomeFragment() : BaseStatusBarFragment() {
     private lateinit var mBannerContainer: ConstraintLayout
     private lateinit var mBanner: Banner<*, *>
 
+    private lateinit var homeBinding: FragmentHomeBinding
+
     companion object {
 
         val COLORS_RES = mutableListOf(
@@ -75,17 +73,20 @@ class HomeFragment() : BaseStatusBarFragment() {
 
     }
 
-    override fun setLayoutId(): Int = R.layout.fragment_home_behavior
+    override fun setContentLayout(): View {
+        homeBinding = FragmentHomeBinding.inflate(layoutInflater)
+        return homeBinding.root
+    }
 
     override fun initParamsAndValues() {
         mNewsAdapter = HomeNewsAdapter(mNewsList)
     }
 
-    override fun initViews(rootView: View) {
+    override fun initViews() {
 
-        val layoutParams = fake_status_bar.layoutParams
+        val layoutParams = homeBinding.fakeStatusBar.fakeStatusBar.layoutParams
         layoutParams.height = getStatusBarHeight(mContext!!)
-        fake_status_bar.layoutParams = layoutParams
+        homeBinding.fakeStatusBar.fakeStatusBar.layoutParams = layoutParams
 
         mMarqueeView = view?.findViewById(R.id.marquee_weather)
 
@@ -146,8 +147,8 @@ class HomeFragment() : BaseStatusBarFragment() {
         })
 
         mNewsAdapter.addHeaderView(mBannerContainer)
-        rv_fragment_home.layoutManager = LinearLayoutManager(mContext)
-        rv_fragment_home.adapter = mNewsAdapter
+        homeBinding.rvFragmentHome.layoutManager = LinearLayoutManager(mContext)
+        homeBinding.rvFragmentHome.adapter = mNewsAdapter
         val itemDecoration = DividerItemDecoration(
             mContext,
             DividerItemDecoration.VERTICAL
@@ -158,7 +159,7 @@ class HomeFragment() : BaseStatusBarFragment() {
                     it
                 )
             }
-        rv_fragment_home.addItemDecoration(itemDecoration)
+        homeBinding.rvFragmentHome.addItemDecoration(itemDecoration)
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
@@ -167,30 +168,30 @@ class HomeFragment() : BaseStatusBarFragment() {
         }
 
         //是否在刷新的时候禁止列表的操作
-        sr_home_layout.setDisableContentWhenRefresh(true)
+        homeBinding.srHomeLayout.setDisableContentWhenRefresh(true)
         //是否在加载的时候禁止列表的操作
-        sr_home_layout.setDisableContentWhenLoading(true)
+        homeBinding.srHomeLayout.setDisableContentWhenLoading(true)
 
         //延迟400毫秒后自动刷新
-        sr_home_layout.autoRefresh(600)
+        homeBinding.srHomeLayout.autoRefresh(600)
 
-        sr_home_layout.setOnRefreshListener {
+        homeBinding.srHomeLayout.setOnRefreshListener {
             refreshLocationAndWeather()
             requestNewsData(true)
         }
 
-        sr_home_layout.setOnLoadMoreListener {
+        homeBinding.srHomeLayout.setOnLoadMoreListener {
             requestNewsData(false)
         }
 
-        layout_home_search.setOnClickListener {
+        homeBinding.layoutHomeSearch.setOnClickListener {
             mContext?.let {
                 SearchActivity.startSearch(mContext!!)
             }
 
         }
 
-        layout_home_weather.setOnClickListener {
+        homeBinding.layoutHomeWeather.setOnClickListener {
             val weather = Intent(mContext!!, WeatherActivity::class.java)
             startActivity(weather)
         }
@@ -203,7 +204,7 @@ class HomeFragment() : BaseStatusBarFragment() {
             .startLocation(object : OnLocationListener {
 
                 override fun onLocationSuccess(location: AMapLocation) {
-                    tv_location_city.text = location.city
+                    homeBinding.tvLocationCity.text = location.city
                     getWeatherNow(location.longitude, location.latitude)
                 }
 
@@ -233,9 +234,9 @@ class HomeFragment() : BaseStatusBarFragment() {
         newsLiveData.observeForever(Observer {
 
             if (isRefresh) {
-                sr_home_layout?.finishRefresh()
+                homeBinding.srHomeLayout?.finishRefresh()
             } else {
-                sr_home_layout?.finishLoadMore()
+                homeBinding.srHomeLayout?.finishLoadMore()
             }
 
             if (it == null)
@@ -250,7 +251,7 @@ class HomeFragment() : BaseStatusBarFragment() {
 
             //没有更多数据
             if (it.over) {
-                sr_home_layout.finishLoadMoreWithNoMoreData()
+                homeBinding.srHomeLayout.finishLoadMoreWithNoMoreData()
             }
         })
 
@@ -309,8 +310,8 @@ class HomeFragment() : BaseStatusBarFragment() {
 
 
     private fun setTitleBarColor(@DrawableRes resId: Int) {
-        layout_home_title.setBackgroundResource(resId)
-        fake_status_bar.setBackgroundResource(resId)
+        homeBinding.layoutHomeTitle.setBackgroundResource(resId)
+        homeBinding.fakeStatusBar.fakeStatusBar.setBackgroundResource(resId)
         mBannerContainer.setBackgroundResource(resId)
     }
 

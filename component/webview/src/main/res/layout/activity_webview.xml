@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ib_web_back"
+            android:id="@+id/iv_web_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -35,7 +35,7 @@
             android:textSize="@dimen/textsize_16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/iv_web_more"
-            app:layout_constraintStart_toEndOf="@+id/ib_web_back"
+            app:layout_constraintStart_toEndOf="@+id/iv_web_back"
             tools:text="Title" />
 
         <ImageView

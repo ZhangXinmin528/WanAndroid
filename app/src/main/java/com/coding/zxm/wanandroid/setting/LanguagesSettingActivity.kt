@@ -12,10 +12,9 @@ import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityLanguagesSettingBinding
 import com.coding.zxm.wanandroid.setting.model.LanguageEntity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
-import kotlinx.android.synthetic.main.activity_languages_setting.*
-import kotlinx.android.synthetic.main.layout_toolbar_back.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -30,9 +29,11 @@ class LanguagesSettingActivity : BaseActivity(), View.OnClickListener {
     private lateinit var mAdapter: LanguageAdapter
 
     private var mLanguageEntity: LanguageEntity? = null
+    private lateinit var languagesBinding: ActivityLanguagesSettingBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_languages_setting
+    override fun setContentLayout(): Any {
+        languagesBinding = ActivityLanguagesSettingBinding.inflate(layoutInflater)
+        return languagesBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -49,14 +50,14 @@ class LanguagesSettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViews() {
-        tv_toolbar_title.setText(R.string.all_setting_switch_language)
+        languagesBinding.toolbar.tvToolbarTitle.setText(R.string.all_setting_switch_language)
 
-        iv_toolbar_back.setOnClickListener(this)
-        tv_toolbar_confirm.setOnClickListener(this)
-        tv_toolbar_confirm.visibility = View.VISIBLE
+        languagesBinding.toolbar.ivToolbarBack.setOnClickListener(this)
+        languagesBinding.toolbar.tvToolbarConfirm.setOnClickListener(this)
+        languagesBinding.toolbar.tvToolbarConfirm.visibility = View.VISIBLE
 
-        rv_lan_setting.layoutManager = LinearLayoutManager(mContext)
-        rv_lan_setting.adapter = mAdapter
+        languagesBinding.rvLanSetting.layoutManager = LinearLayoutManager(mContext)
+        languagesBinding.rvLanSetting.adapter = mAdapter
         val itemDecoration = DividerItemDecoration(
             mContext,
             DividerItemDecoration.VERTICAL
@@ -66,7 +67,7 @@ class LanguagesSettingActivity : BaseActivity(), View.OnClickListener {
                 it
             )
         }
-        rv_lan_setting.addItemDecoration(itemDecoration)
+        languagesBinding.rvLanSetting.addItemDecoration(itemDecoration)
 
         val position = LanguageUtil.getSettingLanguagePosition(mContext!!)
         updateLanguageList(position)

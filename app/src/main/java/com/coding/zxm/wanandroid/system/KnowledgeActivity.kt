@@ -9,14 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityKnowledgeBinding
 import com.coding.zxm.wanandroid.system.adapter.KnowledgeDetialAdapter
 import com.coding.zxm.wanandroid.system.adapter.KnowledgeNavAdapter
 import com.coding.zxm.wanandroid.system.model.KnowledgeEntity
 import com.coding.zxm.wanandroid.system.model.NaviKnowledgeEntity
 import com.coding.zxm.wanandroid.system.viewmodel.KnowledgeViewModel
-import kotlinx.android.synthetic.main.activity_knowledge.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
-import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -35,8 +33,10 @@ class KnowledgeActivity : BaseActivity() {
     private lateinit var mDetialAdapter: KnowledgeDetialAdapter
     private val mDetialList: MutableList<KnowledgeEntity> = ArrayList()
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_knowledge
+    private lateinit var knowledgeBinding: ActivityKnowledgeBinding
+    override fun setContentLayout(): Any {
+        knowledgeBinding = ActivityKnowledgeBinding.inflate(layoutInflater)
+        return knowledgeBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -49,28 +49,28 @@ class KnowledgeActivity : BaseActivity() {
 
     override fun initViews() {
 
-        tv_toolbar_title.text = getString(R.string.all_system_title)
-        iv_toolbar_back.setOnClickListener { finish() }
+        knowledgeBinding.toolbar.tvToolbarTitle.text = getString(R.string.all_system_title)
+        knowledgeBinding.toolbar.ivToolbarBack.setOnClickListener { finish() }
 
         //导航栏
-        rv_knowledge_nav.adapter = mNavAdapter
-        rv_knowledge_nav.layoutManager = LinearLayoutManager(mContext)
+        knowledgeBinding.rvKnowledgeNav.adapter = mNavAdapter
+        knowledgeBinding.rvKnowledgeNav.layoutManager = LinearLayoutManager(mContext)
 
         mNavAdapter.setOnItemClickListener { adapter, view, position ->
             selectNavItem(position)
-            rv_knowledge_detial.smoothScrollToPosition(position)
+            knowledgeBinding.rvKnowledgeDetial.smoothScrollToPosition(position)
         }
 
         //详情
-        rv_knowledge_detial.adapter = mDetialAdapter
-        rv_knowledge_detial.layoutManager = LinearLayoutManager(mContext)
+        knowledgeBinding.rvKnowledgeDetial.adapter = mDetialAdapter
+        knowledgeBinding.rvKnowledgeDetial.layoutManager = LinearLayoutManager(mContext)
         val itemDecoration =
             DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL)
 
         val divider =
             ContextCompat.getDrawable(mContext!!, R.drawable.shape_gray_horizontal_divider_8dp)
         itemDecoration.setDrawable(divider!!)
-        rv_knowledge_detial.addItemDecoration(itemDecoration)
+        knowledgeBinding.rvKnowledgeDetial.addItemDecoration(itemDecoration)
 
         mDetialAdapter.setSystemTagClicklistener(object :
             KnowledgeDetialAdapter.OnSystemTagClickListener {
@@ -84,7 +84,7 @@ class KnowledgeActivity : BaseActivity() {
 
         })
 
-        rv_knowledge_detial.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        knowledgeBinding.rvKnowledgeDetial.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 //TODO:需要实现

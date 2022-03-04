@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -12,6 +12,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {

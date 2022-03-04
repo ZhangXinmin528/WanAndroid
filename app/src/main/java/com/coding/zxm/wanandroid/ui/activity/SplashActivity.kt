@@ -7,11 +7,10 @@ import android.os.CountDownTimer
 import androidx.core.app.ActivityCompat
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.MainActivity
-import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivitySplashBinding
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.zxm.utils.core.dialog.DialogUtil
 import com.zxm.utils.core.permission.PermissionChecker
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -28,8 +27,11 @@ class SplashActivity : BaseActivity() {
         Manifest.permission.ACCESS_FINE_LOCATION
     )
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_splash
+    private lateinit var splashBinding: ActivitySplashBinding
+
+    override fun setContentLayout(): Any {
+        splashBinding = ActivitySplashBinding.inflate(layoutInflater)
+        return splashBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -45,18 +47,18 @@ class SplashActivity : BaseActivity() {
 
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
-                tv_splash_timer.text = String.format("%ss", time)
+                splashBinding.tvSplashTimer.text = String.format("%ss", time)
             }
 
         }
 
         checkPermissions()
 
-        tv_splash_timer.setOnClickListener {
+        splashBinding.tvSplashTimer.setOnClickListener {
             jumpHome()
         }
 
-        tv_try.setOnClickListener {
+        splashBinding.tvTry.setOnClickListener {
             jumpHome()
         }
     }

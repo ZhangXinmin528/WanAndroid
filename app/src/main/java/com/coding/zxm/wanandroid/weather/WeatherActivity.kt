@@ -7,6 +7,7 @@ import com.coding.zxm.map.LocationManager
 import com.coding.zxm.map.location.listener.OnLocationListener
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.databinding.ActivityWeatherBinding
 import com.coding.zxm.weather.ui.fragment.WeatherFragment
 
 /**
@@ -15,8 +16,11 @@ import com.coding.zxm.weather.ui.fragment.WeatherFragment
  */
 class WeatherActivity : BaseActivity() {
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_weather
+    private lateinit var weatherBinding: ActivityWeatherBinding
+
+    override fun setContentLayout(): Any {
+        weatherBinding = ActivityWeatherBinding.inflate(layoutInflater)
+        return weatherBinding.root
     }
 
     override fun initParamsAndValues() {

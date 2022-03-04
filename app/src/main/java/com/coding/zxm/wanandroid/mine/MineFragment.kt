@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.FragmentMineBinding
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
 import com.coding.zxm.wanandroid.project.ProjectActivity
@@ -17,8 +18,6 @@ import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.coding.zxm.wanandroid.util.ToastUtil
 import com.zxm.utils.core.bar.StatusBarCompat
 import com.zxm.utils.core.sp.SharedPreferencesUtil
-import kotlinx.android.synthetic.main.fragment_mine.*
-import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -38,29 +37,37 @@ class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
 
     }
 
-    override fun setLayoutId(): Int {
-        return R.layout.fragment_mine
+    private lateinit var mineBinding: FragmentMineBinding
+
+    override fun setContentLayout(): View {
+        mineBinding = FragmentMineBinding.inflate(layoutInflater)
+        return mineBinding.root
     }
 
     override fun initParamsAndValues() {
     }
 
-    override fun initViews(rootView: View) {
-        val layoutParams = fake_status_bar.layoutParams
+    override fun initViews() {
+        val layoutParams = mineBinding.fakeStatusBar.fakeStatusBar.layoutParams
         layoutParams.height = StatusBarCompat.getStatusBarHeight(mContext!!)
-        fake_status_bar.layoutParams = layoutParams
+        mineBinding.fakeStatusBar.fakeStatusBar.layoutParams = layoutParams
 
-        tv_user_name.setOnClickListener(this)
-        tv_mine_system.setOnClickListener(this)
-        tv_mine_navigation.setOnClickListener(this)
-        tv_user_name.setOnClickListener(this)
-        tv_mine_about.setOnClickListener(this)
-        tv_mine_project.setOnClickListener(this)
-        iv_mine_setting.setOnClickListener(this)
-        tv_mine_collection.setOnClickListener(this)
-        tv_mine_share.setOnClickListener(this)
-        tv_mine_todo.setOnClickListener(this)
+        mineBinding.ivUser.setImageResource(R.mipmap.icon_splash)
 
+        mineBinding.tvUserName.setOnClickListener(this)
+        mineBinding.tvMineSystem.setOnClickListener(this)
+        mineBinding.tvMineNavigation.setOnClickListener(this)
+        mineBinding.tvMineAbout.setOnClickListener(this)
+        mineBinding.tvMineProject.setOnClickListener(this)
+        mineBinding.ivMineSetting.setOnClickListener(this)
+        mineBinding.tvMineCollection.setOnClickListener(this)
+        mineBinding.tvMineShare.setOnClickListener(this)
+        mineBinding.tvMineTodo.setOnClickListener(this)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         getUserInfo()
     }
 
@@ -85,17 +92,17 @@ class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
                         ""
                     ) as String
 
-                    tv_user_name.text = userName
-                    tv_user_coin.text =
+                    mineBinding.tvUserName.text = userName
+                    mineBinding.tvUserCoin.text =
                         getString(R.string.all_coin_count, userDetialEntity.coinCount.toString())
-                    tv_user_level.text =
+                    mineBinding.tvUserLevel.text =
                         getString(R.string.all_coin_level, userDetialEntity.level.toString())
                 }
             })
         } else {
-            tv_user_name.text = getString(R.string.all_not_login)
-            tv_user_coin.text = getString(R.string.all_coin_count, "--")
-            tv_user_level.text = getString(R.string.all_coin_level, "--")
+            mineBinding.tvUserName.text = getString(R.string.all_not_login)
+            mineBinding.tvUserCoin.text = getString(R.string.all_coin_count, "--")
+            mineBinding.tvUserLevel.text = getString(R.string.all_coin_level, "--")
         }
     }
 

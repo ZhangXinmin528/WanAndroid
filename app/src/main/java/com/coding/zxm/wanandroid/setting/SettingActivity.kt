@@ -13,11 +13,10 @@ import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.databinding.ActivitySettingBinding
 import com.zxm.utils.core.app.AppUtil
 import com.zxm.utils.core.cache.CacheUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
-import kotlinx.android.synthetic.main.activity_setting.*
-import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/10/18.
@@ -28,9 +27,11 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     private val mLogoutViewModel: LogoutViewModel by viewModels { LogoutViewModel.LogoutViewModelFactory }
 
     private lateinit var mProvider: IUpgradeProvider
+    private lateinit var settingBinding: ActivitySettingBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_setting
+    override fun setContentLayout(): Any {
+        settingBinding = ActivitySettingBinding.inflate(layoutInflater)
+        return settingBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -41,18 +42,19 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     override fun initViews() {
 
-        tv_toolbar_title.setText(R.string.all_setting)
+        settingBinding.toolbar.tvToolbarTitle.setText(R.string.all_setting)
 
-        iv_toolbar_back.setOnClickListener(this)
-        tv_setting_switch_language.setOnClickListener(this)
-        tv_setting_switch_language.text = LanguageUtil.getSettingLanguageName(mContext!!)
+        settingBinding.toolbar.ivToolbarBack.setOnClickListener(this)
+        settingBinding.tvSettingSwitchLanguage.setOnClickListener(this)
+        settingBinding.tvSettingSwitchLanguage.text =
+            LanguageUtil.getSettingLanguageName(mContext!!)
 
-        tv_setting_font.setOnClickListener(this)
-        layout_clear_cache.setOnClickListener(this)
-        tv_setting_logout.setOnClickListener(this)
-        tv_setting_new_version.setOnClickListener(this)
+        settingBinding.tvSettingFont.setOnClickListener(this)
+        settingBinding.layoutClearCache.setOnClickListener(this)
+        settingBinding.tvSettingLogout.setOnClickListener(this)
+        settingBinding.tvSettingNewVersion.setOnClickListener(this)
 
-        tv_setting_cache_size.text = mContext?.let { CacheUtil.getAppCacheSize(it) }
+        settingBinding.tvSettingCacheSize.text = mContext?.let { CacheUtil.getAppCacheSize(it) }
 
         //调试模式
         //网络调试
@@ -62,15 +64,17 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
                 SPConfig.CONFIG_SETTING_NETWORK_STATE,
                 false
             ) as Boolean
-        tv_setting_result_network.visibility = if (networkState) View.VISIBLE else View.GONE
+        settingBinding.tvSettingResultNetwork.visibility =
+            if (networkState) View.VISIBLE else View.GONE
 
-        switch_setting_network.isChecked = networkState
-        switch_setting_network.setOnCheckedChangeListener { buttonView, isChecked ->
-            tv_setting_result_network.visibility = if (isChecked) View.VISIBLE else View.GONE
+        settingBinding.switchSettingNetwork.isChecked = networkState
+        settingBinding.switchSettingNetwork.setOnCheckedChangeListener { buttonView, isChecked ->
+            settingBinding.tvSettingResultNetwork.visibility =
+                if (isChecked) View.VISIBLE else View.GONE
             SharedPreferencesUtil.put(mContext!!, SPConfig.CONFIG_SETTING_NETWORK_STATE, isChecked)
         }
 
-        tv_setting_result_network.setOnClickListener(this)
+        settingBinding.tvSettingResultNetwork.setOnClickListener(this)
 
         val logState = SharedPreferencesUtil.get(
             mContext!!,
@@ -79,15 +83,15 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         ) as Boolean
 
         if (!logState) {
-            tv_setting_logout.visibility = View.GONE
+            settingBinding.tvSettingLogout.visibility = View.GONE
         }
 
         UpgradeManager.getInstance().hasNewVersion(mProvider).observe(this, Observer { state ->
-            tv_setting_version_tag.visibility = if (state) View.VISIBLE else View.GONE
+            settingBinding.tvSettingVersionTag.visibility = if (state) View.VISIBLE else View.GONE
         })
 
 
-        tv_setting_curr_version.text = AppUtil.getAppVersionName(mContext!!)
+        settingBinding.tvSettingCurrVersion.text = AppUtil.getAppVersionName(mContext!!)
     }
 
     private fun checkUpgrade() {
@@ -109,7 +113,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             R.id.layout_clear_cache -> {
                 mContext?.let {
                     CacheUtil.clearAppCache(it)
-                    tv_setting_cache_size.text = CacheUtil.getAppCacheSize(it)
+                    settingBinding.tvSettingCacheSize.text = CacheUtil.getAppCacheSize(it)
                 }
 
             }

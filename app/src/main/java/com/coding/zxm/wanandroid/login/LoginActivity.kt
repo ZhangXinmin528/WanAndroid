@@ -12,10 +12,10 @@ import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.MainActivity
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityLoginBinding
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.text.ClickableMovementMethod
 import com.zxm.utils.core.text.SpanUtils
-import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * Created by ZhangXinmin on 2020/8/2.
@@ -24,10 +24,12 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
-    private val mLoginViewModel: LoginViewModel by viewModels { LoginViewModel.LoginViewModelFactory }
+    private lateinit var loginBinding: ActivityLoginBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_login
+    private val mLoginViewModel: LoginViewModel by viewModels { LoginViewModel.LoginViewModelFactory }
+    override fun setContentLayout(): Any {
+        loginBinding = ActivityLoginBinding.inflate(layoutInflater)
+        return loginBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -36,8 +38,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     override fun initViews() {
 
-        tv_login.setOnClickListener(this)
-        iv_login_close.setOnClickListener(this)
+        loginBinding.tvLogin.setOnClickListener(this)
+        loginBinding.ivLoginClose.setOnClickListener(this)
 
         val spannableStringBuilder =
             SpanUtils.getBuilder(mContext!!, getString(R.string.all_tips_not_register), false)
@@ -56,8 +58,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 .append(getString(R.string.all_register), true)
                 .create()
 
-        tv_tips_register.text = spannableStringBuilder
-        tv_tips_register.movementMethod = ClickableMovementMethod.getInstance()
+        loginBinding.tvTipsRegister.text = spannableStringBuilder
+        loginBinding.tvTipsRegister.movementMethod = ClickableMovementMethod.getInstance()
 
         val userName: String =
             SharedPreferencesUtil.get(
@@ -66,7 +68,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 ""
             ) as String
         if (!TextUtils.isEmpty(userName)) {
-            et_user_name.setText(userName)
+            loginBinding.etUserName.setText(userName)
         }
 
     }
@@ -74,13 +76,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_login -> {
-                val userName = et_user_name.editableText.toString().trim()
+                val userName = loginBinding.etUserName.editableText.toString().trim()
                 if (userName.isEmpty()) {
                     Toast.makeText(mContext!!, "请输入用户名~", Toast.LENGTH_SHORT).show()
                     return
                 }
 
-                val password = et_password.editableText.toString().trim()
+                val password = loginBinding.etPassword.editableText.toString().trim()
                 if (password.isEmpty()) {
                     Toast.makeText(mContext!!, "请输入密码~", Toast.LENGTH_SHORT).show()
                     return

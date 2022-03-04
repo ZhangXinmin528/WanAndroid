@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityKnowledgeListBinding
 import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.system.viewmodel.KnowledgeListViewModel
 import com.coding.zxm.webview.X5WebviewActivity
-import kotlinx.android.synthetic.main.activity_knowledge_list.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
-import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -44,8 +42,11 @@ class KnowledgeListActivity : BaseActivity() {
     private val mArticleList: MutableList<NewsDetialEntity> = ArrayList()
     private lateinit var mNewsAdapter: HomeNewsAdapter
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_knowledge_list
+    private lateinit var listBinding: ActivityKnowledgeListBinding
+
+    override fun setContentLayout(): Any {
+        listBinding = ActivityKnowledgeListBinding.inflate(layoutInflater)
+        return listBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -61,27 +62,27 @@ class KnowledgeListActivity : BaseActivity() {
 
     override fun initViews() {
 
-        tv_toolbar_title.text = if (TextUtils.isEmpty(mTitle)) "知识体系专栏" else "${mTitle}专栏"
-        iv_toolbar_back.setOnClickListener { finish() }
+        listBinding.toolbar.tvToolbarTitle.text = if (TextUtils.isEmpty(mTitle)) "知识体系专栏" else "${mTitle}专栏"
+        listBinding.toolbar.ivToolbarBack.setOnClickListener { finish() }
 
         //是否在刷新的时候禁止列表的操作
-        sr_list_layout.setDisableContentWhenRefresh(true)
+        listBinding.srListLayout.setDisableContentWhenRefresh(true)
         //是否在加载的时候禁止列表的操作
-        sr_list_layout.setDisableContentWhenLoading(true)
+        listBinding.srListLayout.setDisableContentWhenLoading(true)
 
         //延迟400毫秒后自动刷新
-        sr_list_layout.autoRefresh(400)
+        listBinding.srListLayout.autoRefresh(400)
 
-        sr_list_layout.setOnRefreshListener {
+        listBinding.srListLayout.setOnRefreshListener {
             getArticles(true)
         }
 
-        sr_list_layout.setOnLoadMoreListener {
+        listBinding.srListLayout.setOnLoadMoreListener {
             getArticles(false)
         }
 
-        rv_fragment_list.layoutManager = LinearLayoutManager(mContext)
-        rv_fragment_list.adapter = mNewsAdapter
+        listBinding.rvFragmentList.layoutManager = LinearLayoutManager(mContext)
+        listBinding.rvFragmentList.adapter = mNewsAdapter
         val itemDecoration = DividerItemDecoration(
             mContext,
             DividerItemDecoration.VERTICAL
@@ -91,7 +92,7 @@ class KnowledgeListActivity : BaseActivity() {
                 it
             )
         }
-        rv_fragment_list.addItemDecoration(itemDecoration)
+        listBinding.rvFragmentList.addItemDecoration(itemDecoration)
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
@@ -115,9 +116,9 @@ class KnowledgeListActivity : BaseActivity() {
 
             liveData.observe(this, Observer {
                 if (isRefresh) {
-                    sr_list_layout.finishRefresh()
+                    listBinding.srListLayout.finishRefresh()
                 } else {
-                    sr_list_layout.finishLoadMore()
+                    listBinding.srListLayout.finishLoadMore()
                 }
 
                 if (it == null) return@Observer
@@ -130,7 +131,7 @@ class KnowledgeListActivity : BaseActivity() {
 
                 //没有更多数据
                 if (it.over) {
-                    sr_list_layout.finishLoadMoreWithNoMoreData()
+                    listBinding.srListLayout.finishLoadMoreWithNoMoreData()
                 }
             })
         }

@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.coding.zxm.core.R
@@ -26,11 +27,25 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected var mContext: Context? = null
 
-    abstract fun setLayoutId(): Int
+    /**
+     * Set content layout for the activity,if you will use the 'ViewBinding'.
+     */
+    abstract fun setContentLayout(): Any
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(setLayoutId())
+        val layout = setContentLayout()
+        if (layout != null) {
+            if (layout is Int) {
+                setContentView(layout)
+            } else if (layout is View) {
+                setContentView(layout)
+            } else {
+                throw IllegalStateException("Content layout type is illegal!")
+            }
+        } else {
+            throw NullPointerException("Content layout is null or empty!")
+        }
         mContext = this
 
         LanguageUtil.setLanguageConfig(mContext!!)

@@ -18,7 +18,9 @@
             android:background="@color/color_tool_bar_primary"
             app:layout_constraintTop_toTopOf="parent">
 
-            <include layout="@layout/layout_fake_status_bar" />
+            <include
+                android:id="@+id/fake_status_bar"
+                layout="@layout/layout_fake_status_bar" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/layout_home_weather"

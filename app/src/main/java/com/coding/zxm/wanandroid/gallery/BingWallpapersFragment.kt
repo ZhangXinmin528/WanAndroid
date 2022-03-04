@@ -6,11 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.FragmentBingsWallpapersBinding
 import com.coding.zxm.wanandroid.gallery.adapter.BingWallpapersAdapter
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
 import com.zxm.utils.core.bar.StatusBarCompat.getStatusBarHeight
-import kotlinx.android.synthetic.main.fragment_bings_wallpapers.*
-import kotlinx.android.synthetic.main.layout_fake_status_bar.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -28,9 +27,11 @@ class BingWallpapersFragment : BaseStatusBarFragment() {
 
     private val mDataList: MutableList<BingImageEntity> = ArrayList()
     private lateinit var mAdapter: BingWallpapersAdapter
+    private lateinit var bingsBinding: FragmentBingsWallpapersBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.fragment_bings_wallpapers
+    override fun setContentLayout(): View {
+        bingsBinding = FragmentBingsWallpapersBinding.inflate(layoutInflater)
+        return bingsBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -38,25 +39,25 @@ class BingWallpapersFragment : BaseStatusBarFragment() {
 
     }
 
-    override fun initViews(rootView: View) {
-        val layoutParams = fake_status_bar.layoutParams
+    override fun initViews() {
+        val layoutParams = bingsBinding.fakeStatusBar.fakeStatusBar.layoutParams
         layoutParams.height = getStatusBarHeight(mContext!!)
-        fake_status_bar.layoutParams = layoutParams
+        bingsBinding.fakeStatusBar.fakeStatusBar.layoutParams = layoutParams
 
-        fake_status_bar.setBackgroundColor(resources.getColor(R.color.color_toolbar_light))
+        setFakeStatusColor(bingsBinding.fakeStatusBar.fakeStatusBar, R.color.color_toolbar_light)
 
         //是否在刷新的时候禁止列表的操作
-        sr_bing_layout.setDisableContentWhenRefresh(true)
+        bingsBinding.srBingsLayout.setDisableContentWhenRefresh(true)
 
         //延迟400毫秒后自动刷新
-        sr_bing_layout.autoRefresh(600)
+        bingsBinding.srBingsLayout.autoRefresh(600)
 
-        sr_bing_layout.setOnRefreshListener {
+        bingsBinding.srBingsLayout.setOnRefreshListener {
             requestBingData()
         }
 
-        rv_bing.layoutManager = LinearLayoutManager(mContext)
-        rv_bing.adapter = mAdapter
+        bingsBinding.rvBing.layoutManager = LinearLayoutManager(mContext)
+        bingsBinding.rvBing.adapter = mAdapter
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
             val imageEntity = (adapter as BingWallpapersAdapter).getItem(position)
@@ -75,7 +76,7 @@ class BingWallpapersFragment : BaseStatusBarFragment() {
 
         mBingViewModel.getBingPicList()
             .observe(this, Observer {
-                sr_bing_layout.finishRefresh()
+                bingsBinding.srBingsLayout.finishRefresh()
                 if (it == null)
                     return@Observer
                 if (it != null && it.isNotEmpty()) {

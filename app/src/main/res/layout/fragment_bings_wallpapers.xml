@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/layout_fake_status_bar" />
+    <include
+        android:id="@+id/fake_status_bar"
+        layout="@layout/layout_fake_status_bar" />
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/sr_bing_layout"
+        android:id="@+id/sr_bings_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/color_light_bg"

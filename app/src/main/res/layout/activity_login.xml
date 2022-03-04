@@ -7,24 +7,24 @@
 
     <TextView
         android:id="@+id/iv_login_close"
+        style="@style/StyleTagPadding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_20dp"
-        style="@style/StyleTagPadding"
-        android:textSize="@dimen/textsize_18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:src="@mipmap/icon_white_close"
         android:text="@string/all_cancel"
-        android:textColor="@color/color_text_white" />
+        android:textColor="@color/color_text_white"
+        android:textSize="@dimen/textsize_18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_login_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_50dp"
-        android:layout_marginEnd="@dimen/margin_50dp"
+        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginEnd="@dimen/margin_20dp"
         android:background="@drawable/shape_white_bg"
         android:padding="@dimen/margin_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,18 +34,19 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_user_name"
             style="@style/MainPagePadding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintTop_toBottomOf="@+id/iv_logo">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -68,7 +69,7 @@
             style="@style/MainPagePadding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             app:layout_constraintTop_toBottomOf="@+id/layout_user_name">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -110,7 +111,8 @@
         style="@style/MainPageMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_12dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
         android:text="@string/all_tips_not_register"
         android:textColor="@color/color_text_gray"
         android:textSize="@dimen/textsize_14sp"

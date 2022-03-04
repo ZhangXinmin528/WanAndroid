@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivitySearchBinding
 import com.coding.zxm.wanandroid.search.adapter.HotWordAdapter
 import com.coding.zxm.wanandroid.search.adapter.SearchResultAdapter
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
@@ -24,7 +25,6 @@ import com.coding.zxm.webview.X5WebviewActivity
 import com.zxm.utils.core.keyborad.KeyboradUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.time.TimeUtil
-import kotlinx.android.synthetic.main.activity_search.*
 
 /**
  * Created by ZhangXinmin on 2020/8/19.
@@ -51,9 +51,12 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     private val mSearchResult: MutableList<SearchDetialEntity> = ArrayList()
     private lateinit var mSearchResultAdapter: SearchResultAdapter
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_search
+    private lateinit var searchBinding: ActivitySearchBinding
+    override fun setContentLayout(): Any {
+        searchBinding = ActivitySearchBinding.inflate(layoutInflater)
+        return searchBinding.root
     }
+
 
     override fun initParamsAndValues() {
         setStatusBarColorLight()
@@ -64,12 +67,12 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initViews() {
-        iv_search_back.setOnClickListener(this)
-        tv_search_action.setOnClickListener(this)
-        iv_search_clear.setOnClickListener(this)
+        searchBinding.ivSearchBack.setOnClickListener(this)
+        searchBinding.tvSearchAction.setOnClickListener(this)
+        searchBinding.ivSearchClear.setOnClickListener(this)
 
-        rv_search.adapter = mHotWordAdapter
-        rv_search.layoutManager = LinearLayoutManager(mContext)
+        searchBinding.rvSearch.adapter = mHotWordAdapter
+        searchBinding.rvSearch.layoutManager = LinearLayoutManager(mContext)
 
         val itemDecoration = DividerItemDecoration(
             mContext,
@@ -80,31 +83,31 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                 it
             )
         }
-        rv_search.addItemDecoration(itemDecoration)
+        searchBinding.rvSearch.addItemDecoration(itemDecoration)
 
         mHotWordAdapter.setOnItemClickListener { adapter, view, position ->
             val keyWord = (adapter as HotWordAdapter).getItem(position).name as String
 
             if (!TextUtils.isEmpty(keyWord)) {
-                et_search.setText(keyWord)
+                searchBinding.etSearch.setText(keyWord)
                 doSearch(keyWord)
             }
         }
 
 
-        et_search.addTextChangedListener(object : TextWatcher {
+        searchBinding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val result = s?.toString()?.trim()
                 if (!TextUtils.isEmpty(result)) {
-                    iv_search_clear.visibility = View.VISIBLE
+                    searchBinding.ivSearchClear.visibility = View.VISIBLE
                     //TODO:搜索
                 } else {
-                    iv_search_clear.visibility = View.GONE
-                    if (!layout_hot_word.isShown) {
-                        layout_hot_word.visibility = View.VISIBLE
+                    searchBinding.ivSearchClear.visibility = View.GONE
+                    if (!searchBinding.layoutHotWord.isShown) {
+                        searchBinding.layoutHotWord.visibility = View.VISIBLE
                     }
-                    if (sr_search_result.isShown) {
-                        sr_search_result.visibility = View.GONE
+                    if (searchBinding.srSearchResult.isShown) {
+                        searchBinding.srSearchResult.visibility = View.GONE
                     }
                     if (mSearchResult.isNotEmpty()) {
                         mSearchResult.clear()
@@ -123,16 +126,16 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
         //search action
         //是否在加载的时候禁止列表的操作
-        sr_search_result.setDisableContentWhenLoading(true)
-        sr_search_result.setEnableRefresh(false)
+        searchBinding.srSearchResult.setDisableContentWhenLoading(true)
+        searchBinding.srSearchResult.setEnableRefresh(false)
 
-        sr_search_result.setOnLoadMoreListener {
-            val key = et_search.editableText.toString().trim()
+        searchBinding.srSearchResult.setOnLoadMoreListener {
+            val key = searchBinding.etSearch.editableText.toString().trim()
             doSearch(key)
         }
-        rv_search_result.adapter = mSearchResultAdapter
-        rv_search_result.layoutManager = LinearLayoutManager(mContext)
-        rv_search_result.addItemDecoration(itemDecoration)
+        searchBinding.rvSearchResult.adapter = mSearchResultAdapter
+        searchBinding.rvSearchResult.layoutManager = LinearLayoutManager(mContext)
+        searchBinding.rvSearchResult.addItemDecoration(itemDecoration)
         mSearchResultAdapter.setOnItemClickListener { adapter, view, position ->
             val searchDetialEntity = (adapter as SearchResultAdapter).getItem(position)
             searchDetialEntity?.let {
@@ -209,16 +212,16 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_search_action -> {
                 mPage = 0
                 KeyboradUtil.hideSoftInput(this)
-                val key = et_search.editableText.toString().trim()
+                val key = searchBinding.etSearch.editableText.toString().trim()
                 doSearch(key)
             }
             R.id.iv_search_clear -> {
-                et_search.editableText.clear()
-                if (!layout_hot_word.isShown) {
-                    layout_hot_word.visibility = View.VISIBLE
+                searchBinding.etSearch.editableText.clear()
+                if (!searchBinding.layoutHotWord.isShown) {
+                    searchBinding.layoutHotWord.visibility = View.VISIBLE
                 }
-                if (sr_search_result.isShown) {
-                    sr_search_result.visibility = View.GONE
+                if (searchBinding.srSearchResult.isShown) {
+                    searchBinding.srSearchResult.visibility = View.GONE
                 }
 
                 if (mSearchResult.isNotEmpty()) {
@@ -234,11 +237,11 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
             return
         }
 
-        if (layout_hot_word.isShown) {
-            layout_hot_word.visibility = View.GONE
+        if (searchBinding.layoutHotWord.isShown) {
+            searchBinding.layoutHotWord.visibility = View.GONE
         }
-        if (!sr_search_result.isShown) {
-            sr_search_result.visibility = View.VISIBLE
+        if (!searchBinding.srSearchResult.isShown) {
+            searchBinding.srSearchResult.visibility = View.VISIBLE
         }
 
         val searchLiveData = mSearchViewModel.doSearch(mPage, key)
@@ -247,7 +250,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
         searchLiveData.observe(this, Observer {
 
-            sr_search_result.finishLoadMore()
+            searchBinding.srSearchResult.finishLoadMore()
             if (it == null)
                 return@Observer
 
@@ -259,7 +262,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
 
             if (it.over) {
-                sr_search_result.finishLoadMoreWithNoMoreData()
+                searchBinding.srSearchResult.finishLoadMoreWithNoMoreData()
             }
         })
 

@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar_back" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_back" />
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/sr_list_layout"
@@ -14,7 +16,7 @@
         android:layout_marginTop="@dimen/margin_1dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"

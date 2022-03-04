@@ -19,9 +19,7 @@ abstract class BaseFragment() : Fragment() {
 
     protected var mContext: Context? = null
 
-    protected lateinit var rootView: View
-
-    abstract fun setLayoutId(): Int
+    abstract fun setContentLayout(): View
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,8 +31,7 @@ abstract class BaseFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(setLayoutId(), container, false)
-        return rootView
+        return setContentLayout()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,7 +39,7 @@ abstract class BaseFragment() : Fragment() {
 
         initParamsAndValues()
 
-        initViews(rootView)
+        initViews()
     }
 
     fun setStatusbarColor(@ColorRes colorRes: Int) {
@@ -57,5 +54,5 @@ abstract class BaseFragment() : Fragment() {
 
     abstract fun initParamsAndValues();
 
-    abstract fun initViews(rootView: View);
+    abstract fun initViews()
 }

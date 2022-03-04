@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.weather.R
 import com.coding.zxm.weather.adapter.Weather7DayAdapter
+import com.coding.zxm.weather.databinding.FragmentWeatherBinding
 import com.coding.zxm.weather.util.IconUtils
 import com.coding.zxm.weather.util.WeatherUtil
 import com.qweather.sdk.bean.IndicesBean
@@ -28,7 +29,6 @@ import com.qweather.sdk.view.QWeather
 import com.zxm.utils.core.bar.StatusBarCompat
 import com.zxm.utils.core.log.MLogger
 import com.zxm.utils.core.time.TimeUtil
-import kotlinx.android.synthetic.main.fragment_weather.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -62,6 +62,8 @@ class WeatherFragment : BaseFragment() {
     }
 
 
+    private lateinit var weatherBinding: FragmentWeatherBinding
+
     private lateinit var mLocationName: String
 
     private var mLatitude: Double = 0.0
@@ -69,8 +71,9 @@ class WeatherFragment : BaseFragment() {
 
     private var mBackBitmap: Bitmap? = null
 
-    override fun setLayoutId(): Int {
-        return R.layout.fragment_weather
+    override fun setContentLayout(): View {
+        weatherBinding = FragmentWeatherBinding.inflate(layoutInflater)
+        return weatherBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -80,10 +83,10 @@ class WeatherFragment : BaseFragment() {
         mLatitude = arguments?.getDouble(PARAMS_LAT, 0.0) as Double
         mLongitude = arguments?.getDouble(PARAMS_LON, 0.0) as Double
 
-        tv_weather_location.text = mLocationName
+        weatherBinding.tvWeatherLocation.text = mLocationName
     }
 
-    override fun initViews(rootView: View) {
+    override fun initViews() {
 
         getWeatherNow()
 
@@ -114,22 +117,23 @@ class WeatherFragment : BaseFragment() {
 
                     if (p0 != null && p0.code == "200") {
 
-                        tv_weather_temp.text = "${p0.now.temp}°"
+                        weatherBinding.tvWeatherTemp.text = "${p0.now.temp}°"
 
-                        tv_weather_text.text = p0.now.text
+                        weatherBinding.tvWeatherText.text = p0.now.text
 
                         val iconId = IconUtils.getWeatherIcon(p0.now.icon)
                         if (iconId != -1) {
-                            iv_weather_now_icon.setImageResource(iconId)
+                            weatherBinding.ivWeatherNowIcon.setImageResource(iconId)
                         }
 
-                        tv_weather_humidity.text = "湿度 ${p0.now.humidity}%"
+                        weatherBinding.tvWeatherHumidity.text = "湿度 ${p0.now.humidity}%"
 
-                        tv_weather_feellike_temp.text = "体感温度 ${p0.now.feelsLike}°"
+                        weatherBinding.tvWeatherFeellikeTemp.text = "体感温度 ${p0.now.feelsLike}°"
 
-                        tv_weather_pressure.text = "气压 ${p0.now.pressure} 百帕"
+                        weatherBinding.tvWeatherPressure.text = "气压 ${p0.now.pressure} 百帕"
 
-                        tv_weather_time.text = "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
+                        weatherBinding.tvWeatherTime.text =
+                            "${TimeUtil.getNowString(DEFAULT_FORMAT)} 更新"
 
                         if (WeatherUtil.isInDayOrNight()) {
                             mBackBitmap = BitmapFactory.decodeResource(
@@ -144,7 +148,7 @@ class WeatherFragment : BaseFragment() {
                         }
 
                         mBackBitmap?.let {
-                            iv_weather_back.setImageBitmap(it)
+                            weatherBinding.ivWeatherBack.setImageBitmap(it)
                             Palette.from(it).generate { palette ->
                                 palette.let {
                                     val muteSwatch = palette?.mutedSwatch
@@ -153,7 +157,9 @@ class WeatherFragment : BaseFragment() {
 
                                     if (swatch != null) {
                                         val bgColor = swatch.rgb
-                                        layout_weather_content.setBackgroundColor(bgColor)
+                                        weatherBinding.layoutWeatherContent.setBackgroundColor(
+                                            bgColor
+                                        )
                                         StatusBarCompat.setColorNoTranslucent(activity, bgColor)
                                     }
                                 }
@@ -161,9 +167,9 @@ class WeatherFragment : BaseFragment() {
                         }
 
                         //风力风向
-                        tv_wind_dir.text = "风向：${p0.now.windDir}"
-                        tv_wind_scale.text = "风力： ${p0.now.windScale}级"
-                        tv_wind_speed.text = "风速： ${p0.now.windSpeed}公里/小时"
+                        weatherBinding.tvWindDir.text = "风向：${p0.now.windDir}"
+                        weatherBinding.tvWindScale.text = "风力： ${p0.now.windScale}级"
+                        weatherBinding.tvWindSpeed.text = "风速： ${p0.now.windSpeed}公里/小时"
                     }
                 }
 
@@ -271,11 +277,12 @@ class WeatherFragment : BaseFragment() {
 //                    MLogger.d(TAG, "getWeather7D${JSON.toJSONString(p0)}")
                     p0?.let {
                         if (it.code == "200") {
-                            rv_weather_7d?.adapter =
+                            weatherBinding.rvWeather7d?.adapter =
                                 Weather7DayAdapter(
                                     it.daily
                                 )
-                            rv_weather_7d?.layoutManager = LinearLayoutManager(mContext)
+                            weatherBinding.rvWeather7d?.layoutManager =
+                                LinearLayoutManager(mContext)
 //                            val itemDecoration = DividerItemDecoration(
 //                                mContext,
 //                                DividerItemDecoration.VERTICAL
@@ -315,29 +322,29 @@ class WeatherFragment : BaseFragment() {
 
                         val nowBean = p0.now
 
-                        tv_aqi_value.text = "AQI ${nowBean.category}"
+                        weatherBinding.tvAqiValue.text = "AQI ${nowBean.category}"
                         when (nowBean.level) {
                             "1" -> {
-                                tv_aqi_value.setBackgroundResource(R.drawable.shape_aqi_excellent)
+                                weatherBinding.tvAqiValue.setBackgroundResource(R.drawable.shape_aqi_excellent)
                             }
                             "2" -> {
-                                tv_aqi_value.setBackgroundResource(R.drawable.shape_aqi_good)
+                                weatherBinding.tvAqiValue.setBackgroundResource(R.drawable.shape_aqi_good)
                             }
                             "3" -> {
-                                tv_aqi_value.setBackgroundResource(R.drawable.shape_aqi_low)
+                                weatherBinding.tvAqiValue.setBackgroundResource(R.drawable.shape_aqi_low)
                             }
                             "4" -> {
-                                tv_aqi_value.setBackgroundResource(R.drawable.shape_aqi_mid)
+                                weatherBinding.tvAqiValue.setBackgroundResource(R.drawable.shape_aqi_mid)
                             }
                             "5" -> {
-                                tv_aqi_value.setBackgroundResource(R.drawable.shape_aqi_bad)
+                                weatherBinding.tvAqiValue.setBackgroundResource(R.drawable.shape_aqi_bad)
                             }
                             "6" -> {
-                                tv_aqi_value.setBackgroundResource(R.drawable.shape_aqi_serious)
+                                weatherBinding.tvAqiValue.setBackgroundResource(R.drawable.shape_aqi_serious)
                             }
                         }
 
-                        aqiview.setAQIData(p0)
+                        weatherBinding.aqiview.setAQIData(p0)
 
                         val layoutInflater = LayoutInflater.from(mContext)
 
@@ -349,7 +356,7 @@ class WeatherFragment : BaseFragment() {
                         pm2_5.findViewById<TextView>(R.id.tv_aqi_indicator)
                             .setBackgroundResource(WeatherUtil.getAQIPM2_5DrawableRes(nowBean.pm2p5))
 
-                        layout_air_container.addView(pm2_5)
+                        weatherBinding.layoutAirContainer.addView(pm2_5)
 
                         //PM10
                         val pm10 = layoutInflater.inflate(R.layout.layout_air_now_item, null)
@@ -358,7 +365,7 @@ class WeatherFragment : BaseFragment() {
                         pm10.findViewById<TextView>(R.id.tv_aqi_indicator)
                             .setBackgroundResource(WeatherUtil.getAQIPM10DrawableRes(nowBean.pm10))
 
-                        layout_air_container.addView(pm10)
+                        weatherBinding.layoutAirContainer.addView(pm10)
 
                         //O3
                         val o3 = layoutInflater.inflate(R.layout.layout_air_now_item, null)
@@ -367,7 +374,7 @@ class WeatherFragment : BaseFragment() {
                         o3.findViewById<TextView>(R.id.tv_aqi_indicator)
                             .setBackgroundResource(WeatherUtil.getAQIO3DrawableRes(nowBean.o3))
 
-                        layout_air_container.addView(o3)
+                        weatherBinding.layoutAirContainer.addView(o3)
 
                         //CO
                         val co = layoutInflater.inflate(R.layout.layout_air_now_item, null)
@@ -376,7 +383,7 @@ class WeatherFragment : BaseFragment() {
                         co.findViewById<TextView>(R.id.tv_aqi_indicator)
                             .setBackgroundResource(WeatherUtil.getAQICODrawableRes(nowBean.co))
 
-                        layout_air_container.addView(co)
+                        weatherBinding.layoutAirContainer.addView(co)
 
                         //so2
                         val so2 = layoutInflater.inflate(R.layout.layout_air_now_item, null)
@@ -385,7 +392,7 @@ class WeatherFragment : BaseFragment() {
                         so2.findViewById<TextView>(R.id.tv_aqi_indicator)
                             .setBackgroundResource(WeatherUtil.getAQISO2DrawableRes(nowBean.so2))
 
-                        layout_air_container.addView(so2)
+                        weatherBinding.layoutAirContainer.addView(so2)
 
                         //no2
                         val no2 = layoutInflater.inflate(R.layout.layout_air_now_item, null)
@@ -394,7 +401,7 @@ class WeatherFragment : BaseFragment() {
                         no2.findViewById<TextView>(R.id.tv_aqi_indicator)
                             .setBackgroundResource(WeatherUtil.getAQINO2DrawableRes(nowBean.no2))
 
-                        layout_air_container.addView(no2)
+                        weatherBinding.layoutAirContainer.addView(no2)
                     }
                 }
 
@@ -438,7 +445,7 @@ class WeatherFragment : BaseFragment() {
                                 layout.findViewById<ImageView>(R.id.iv_indices_logo)
                                     .setImageResource(WeatherUtil.getIndicesLogo(item.type))
 
-                                layout_indices_container.addView(layout)
+                                weatherBinding.layoutIndicesContainer.addView(layout)
 
                                 if (!TextUtils.isEmpty(item.text)) {
                                     layout.setOnClickListener {

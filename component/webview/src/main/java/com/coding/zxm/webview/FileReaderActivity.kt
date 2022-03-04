@@ -7,9 +7,9 @@ import android.view.View
 import android.widget.Toast
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.UriUtils
+import com.coding.zxm.webview.databinding.ActivityFileReaderBinding
 import com.coding.zxm.webview.fragment.FileReaderFragment
 import com.zxm.utils.core.log.MLogger
-import kotlinx.android.synthetic.main.activity_file_reader.*
 
 /**
  * Created by ZhangXinmin on 2021/05/11.
@@ -21,13 +21,16 @@ class FileReaderActivity : BaseActivity(), View.OnClickListener {
     private var mFilePath: String? = ""
     private var mFileName: String = ""
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_file_reader
+    private lateinit var readerBinding: ActivityFileReaderBinding
+
+    override fun setContentLayout(): Any {
+        readerBinding = ActivityFileReaderBinding.inflate(layoutInflater)
+        return readerBinding.root
     }
 
     override fun initParamsAndValues() {
 
-        ib_reader_back.setOnClickListener(this)
+        readerBinding.ivReaderBack.setOnClickListener(this)
 
         intent?.let {
             val action = intent.action
@@ -40,7 +43,7 @@ class FileReaderActivity : BaseActivity(), View.OnClickListener {
                 mFilePath = UriUtils.getFilePathFromUri(mContext!!, uri!!)
                 mFileName = getFileName()
                 mFileName = if (TextUtils.isEmpty(mFileName)) "文档查看" else mFileName
-                tv_reader_title.text = mFileName
+                readerBinding.tvReaderTitle.text = mFileName
                 MLogger.d("reader", "path:${path}..mFilePath:${mFilePath}")
             }
         }
@@ -71,7 +74,7 @@ class FileReaderActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.ib_reader_back -> {
+            R.id.iv_reader_back -> {
                 finish()
             }
         }

@@ -8,12 +8,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityNavigationBinding
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.navigation.model.NaviEntity
 import com.coding.zxm.webview.X5WebviewActivity
-import kotlinx.android.synthetic.main.activity_navigation.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
-import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/8/30.
@@ -25,9 +23,11 @@ class NavigationActivity : BaseActivity() {
 
     private val mDataList: MutableList<NaviEntity> = ArrayList()
     private lateinit var mNaviAdapter: NavigationAdapter
+    private lateinit var navigationBinding: ActivityNavigationBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_navigation
+    override fun setContentLayout(): Any {
+        navigationBinding = ActivityNavigationBinding.inflate(layoutInflater)
+        return navigationBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -38,31 +38,31 @@ class NavigationActivity : BaseActivity() {
 
     override fun initViews() {
 
-        iv_toolbar_back.setOnClickListener { finish() }
+        navigationBinding.toolbar.ivToolbarBack.setOnClickListener { finish() }
 
-        tv_toolbar_title.text = getString(R.string.all_navigation_title)
+        navigationBinding.toolbar.tvToolbarTitle.text = getString(R.string.all_navigation_title)
 
 
         //是否在刷新的时候禁止列表的操作
-        sr_navi_layout.setDisableContentWhenRefresh(true)
-        sr_navi_layout.setEnableLoadMore(false)
+        navigationBinding.srNaviLayout.setDisableContentWhenRefresh(true)
+        navigationBinding.srNaviLayout.setEnableLoadMore(false)
 
         //延迟400毫秒后自动刷新
-        sr_navi_layout.autoRefresh(400)
+        navigationBinding.srNaviLayout.autoRefresh(400)
 
-        sr_navi_layout.setOnRefreshListener {
+        navigationBinding.srNaviLayout.setOnRefreshListener {
             getNavigationData()
         }
 
-        rv_navi.adapter = mNaviAdapter
-        rv_navi.layoutManager = LinearLayoutManager(mContext)
+        navigationBinding.rvNavi.adapter = mNaviAdapter
+        navigationBinding.rvNavi.layoutManager = LinearLayoutManager(mContext)
         val itemDecoration =
             DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL)
 
         val divider =
             ContextCompat.getDrawable(mContext!!, R.drawable.shape_gray_horizontal_divider_8dp)
         itemDecoration.setDrawable(divider!!)
-        rv_navi.addItemDecoration(itemDecoration)
+        navigationBinding.rvNavi.addItemDecoration(itemDecoration)
 
         mNaviAdapter.setNaviTagClicklistener(object : NavigationAdapter.OnNaviTagClickListener {
             override fun onTagItemClick(view: View, newsEntity: NewsDetialEntity) {
@@ -77,7 +77,7 @@ class NavigationActivity : BaseActivity() {
         val liveData = mNaviViewModel.getNavigationData()
 
         liveData.observe(this, Observer {
-            sr_navi_layout.finishRefresh()
+            navigationBinding.srNaviLayout.finishRefresh()
             if (it == null)
                 return@Observer
 

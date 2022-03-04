@@ -8,13 +8,11 @@ import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityProjectBinding
 import com.coding.zxm.wanandroid.project.adapter.ProjectTabAdapter
 import com.coding.zxm.wanandroid.project.model.ProjectEntity
 import com.zxm.utils.core.sp.SharedPreferencesUtil
 import com.zxm.utils.core.time.TimeUtil
-import kotlinx.android.synthetic.main.activity_project.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
-import kotlinx.android.synthetic.main.layout_toolbar_back.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -29,10 +27,13 @@ class ProjectActivity : BaseActivity() {
 
     private val mFragments: MutableList<Fragment> = ArrayList()
     private val mTagList: MutableList<ProjectEntity> = ArrayList()
+    private lateinit var projectBinding: ActivityProjectBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_project
+    override fun setContentLayout(): Any {
+        projectBinding = ActivityProjectBinding.inflate(layoutInflater)
+        return projectBinding.root
     }
+
 
     override fun initParamsAndValues() {
         setStatusBarColorLight()
@@ -97,8 +98,8 @@ class ProjectActivity : BaseActivity() {
 
     override fun initViews() {
 
-        tv_toolbar_title.text = getString(R.string.all_project_title)
-        iv_toolbar_back.setOnClickListener { finish() }
+        projectBinding.toolbar.tvToolbarTitle.text = getString(R.string.all_project_title)
+        projectBinding.toolbar.ivToolbarBack.setOnClickListener { finish() }
 
     }
 
@@ -113,8 +114,8 @@ class ProjectActivity : BaseActivity() {
                 fragmentManager = supportFragmentManager
             )
 
-        tab_project.setupWithViewPager(vp_project)
-        vp_project.adapter = mTabAdapter
+        projectBinding.tabProject.setupWithViewPager(projectBinding.vpProject)
+        projectBinding.vpProject.adapter = mTabAdapter
     }
 
 }

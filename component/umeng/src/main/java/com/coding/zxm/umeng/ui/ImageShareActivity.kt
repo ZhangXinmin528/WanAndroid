@@ -9,15 +9,14 @@ import android.view.View
 import android.widget.Toast
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.umeng.R
+import com.coding.zxm.umeng.databinding.ActivityImageShareBinding
 import com.example.image.loader.ImageLoader
 import com.example.image.model.GlideApp
-import com.tencent.tauth.Tencent
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareListener
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
-import kotlinx.android.synthetic.main.activity_image_share.*
 import java.io.File
 
 /**
@@ -41,9 +40,11 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     private var mFilePath: String? = null
     private lateinit var mUmImage: UMImage
     private lateinit var mImageFile: File
+    private lateinit var shareBinding: ActivityImageShareBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_image_share
+    override fun setContentLayout(): Any {
+        shareBinding = ActivityImageShareBinding.inflate(layoutInflater)
+        return shareBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -62,25 +63,25 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     }
 
     override fun initViews() {
-        tv_share_cancel.setOnClickListener(this)
+        shareBinding.tvShareCancel.setOnClickListener(this)
 //        tv_share_wechat.setOnClickListener(this)
 //        tv_share_wxcircle.setOnClickListener(this)
-        tv_share_qq.setOnClickListener(this)
-        tv_share_qzone.setOnClickListener(this)
-        tv_share_ding.setOnClickListener(this)
+        shareBinding.tvShareQq.setOnClickListener(this)
+        shareBinding.tvShareQzone.setOnClickListener(this)
+        shareBinding.tvShareDing.setOnClickListener(this)
 
         if (mImageFile.exists()) {
             val bitmap = BitmapFactory.decodeFile(mFilePath)
             mUmImage = UMImage(mContext, bitmap)
             mUmImage.compressStyle = UMImage.CompressStyle.QUALITY
-            ImageLoader.INSTANCE.loadImageRes(iv_share_screenshot, mFilePath!!)
+            ImageLoader.INSTANCE.loadImageRes(shareBinding.ivShareScreenshot, mFilePath!!)
 //            iv_share_screenshot.setImageBitmap(bitmap)
             GlideApp
                 .with(mContext!!)
                 .asBitmap()
                 .override(bitmap.width, bitmap.height)
                 .load(bitmap)
-                .into(iv_share_screenshot)
+                .into(shareBinding.ivShareScreenshot)
 
 
         }

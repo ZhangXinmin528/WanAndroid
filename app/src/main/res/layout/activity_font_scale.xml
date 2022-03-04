@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar_back" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_back" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,7 +17,7 @@
         android:background="@color/color_light_bg"
         android:padding="@dimen/margin_12dp"
         app:layout_constraintBottom_toTopOf="@+id/font_seekbar"
-        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp">
 

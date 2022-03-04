@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_bg">
 
-    <include layout="@layout/layout_toolbar_back" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_back" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
         android:layout_marginTop="@dimen/margin_1dp"
         android:background="@color/color_light_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar_back">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/MainPagePadding"

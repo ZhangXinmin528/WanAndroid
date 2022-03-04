@@ -10,13 +10,13 @@ import com.bumptech.glide.request.transition.Transition
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.network.APIConstants
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.databinding.ActivityImagePreviewBinding
 import com.coding.zxm.wanandroid.gallery.model.BingImageEntity
 import com.coding.zxm.wanandroid.util.ToastUtil
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.example.image.model.GlideApp
 import com.zxm.utils.core.screen.ScreenUtil
-import kotlinx.android.synthetic.main.activity_image_preview.*
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -35,9 +35,11 @@ class ImagePreviewActivity : BaseActivity() {
     }
 
     private var mImageEntity: BingImageEntity? = null
+    private lateinit var previewBinding: ActivityImagePreviewBinding
 
-    override fun setLayoutId(): Int {
-        return R.layout.activity_image_preview
+    override fun setContentLayout(): Any {
+        previewBinding = ActivityImagePreviewBinding.inflate(layoutInflater)
+        return previewBinding.root
     }
 
     override fun initParamsAndValues() {
@@ -53,7 +55,7 @@ class ImagePreviewActivity : BaseActivity() {
 
     override fun initViews() {
 
-        GlideApp.with(ssiv_image)
+        GlideApp.with(previewBinding.ssivImage)
             .asBitmap()
             .load(APIConstants.BING_URL + mImageEntity?.url)
             .into(object : CustomTarget<Bitmap>() {
@@ -65,13 +67,13 @@ class ImagePreviewActivity : BaseActivity() {
                     resource: Bitmap,
                     transition: Transition<in Bitmap>?
                 ) {
-                    ssiv_image.setImage(ImageSource.bitmap(resource))
-                    if (ssiv_image.isReady) {
+                    previewBinding.ssivImage.setImage(ImageSource.bitmap(resource))
+                    if (previewBinding.ssivImage.isReady) {
                         val scale: Float =
-                            ScreenUtil.getScreenHeight(mContext) / ssiv_image.sHeight.toFloat()
+                            ScreenUtil.getScreenHeight(mContext) / previewBinding.ssivImage.sHeight.toFloat()
                         val center =
-                            PointF(0.5f * ssiv_image.sWidth, 0.5f * ssiv_image.sHeight)
-                        val animationBuilder = ssiv_image.animateScaleAndCenter(scale, center)
+                            PointF(0.5f * previewBinding.ssivImage.sWidth, 0.5f * previewBinding.ssivImage.sHeight)
+                        val animationBuilder = previewBinding.ssivImage.animateScaleAndCenter(scale, center)
                         animationBuilder?.withDuration(4000)
                             ?.withEasing(SubsamplingScaleImageView.EASE_IN_OUT_QUAD)
                             ?.withInterruptible(false)?.start()
@@ -80,7 +82,7 @@ class ImagePreviewActivity : BaseActivity() {
 
             })
 
-        ssiv_image.setOnClickListener {
+        previewBinding.ssivImage.setOnClickListener {
             finish()
         }
     }

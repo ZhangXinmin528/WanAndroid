@@ -10,20 +10,34 @@
         <entry key="app/src/main/res/drawable/shape_red_version_bg.xml" value="0.25972222222222224" />
         <entry key="app/src/main/res/drawable/shape_search_bg.xml" value="0.174609375" />
         <entry key="app/src/main/res/drawable/shape_search_home_bg.xml" value="0.15703125" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_font_scale.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_image_preview.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_knowledge.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_knowledge_list.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_languages_setting.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15069444444444444" />
+        <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_project.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.14652777777777778" />
         <entry key="app/src/main/res/layout/activity_weather.xml" value="0.15704387990762125" />
-        <entry key="app/src/main/res/layout/fragment_bings_wallpapers.xml" value="0.15069444444444444" />
+        <entry key="app/src/main/res/layout/fragment_bings_wallpapers.xml" value="0.10703125" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/fragment_home_behavior.xml" value="0.159375" />
-        <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.14652777777777778" />
+        <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_bing_list_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_fake_status_bar.xml" value="0.15069444444444444" />
         <entry key="app/src/main/res/layout/layout_home_banner.xml" value="0.141796875" />
         <entry key="app/src/main/res/layout/layout_search_hot_item.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.159375" />
+        <entry key="component/umeng/src/main/res/layout/activity_image_share.xml" value="0.159375" />
         <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />
+        <entry key="component/weather/src/main/res/layout/fragment_weather.xml" value="0.159375" />
+        <entry key="component/webview/src/main/res/layout/activity_file_reader.xml" value="0.159375" />
+        <entry key="component/webview/src/main/res/layout/activity_webview.xml" value="0.159375" />
       </map>
     </option>
   </component>
