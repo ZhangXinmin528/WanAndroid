@@ -12,7 +12,7 @@ android {
         applicationId "com.coding.zxm.wanandroid"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 6
+        versionCode 7
         versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -39,7 +39,7 @@ android {
         }
 
         manifestPlaceholders = [
-                qqappid       : "1110995000",//友盟QQ分享,登录，腾讯开发平台qq的appid
+                qqappid: "1110995000",//友盟QQ分享,登录，腾讯开发平台qq的appid
         ]
     }
 

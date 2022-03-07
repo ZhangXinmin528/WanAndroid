@@ -43,6 +43,27 @@ class UpdateEntity : Serializable {
     var isForce: Boolean = false
 }
 
+class UpdateResult {
+    //检查更新状态：-1-未检查；0-检查更新失败；1-检查更新成功；2-忽略此版本
+    var code: Int = -1
+
+    var msg: String? = ""
+
+    var updateEntity: UpdateEntity? = null
+
+    constructor(code: Int, msg: String?, updateEntity: UpdateEntity? = null) {
+        this.code = code
+        this.msg = msg
+        this.updateEntity = updateEntity
+    }
+
+    override fun toString(): String {
+        return "UpdateResult(code=$code, msg=$msg, updateEntity=$updateEntity)"
+    }
+
+
+}
+
 class Binary : Serializable {
     //包大小
     var fsize: Long = 0

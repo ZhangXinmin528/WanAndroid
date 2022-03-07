@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/layout/layout_search_hot_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.159375" />
         <entry key="component/umeng/src/main/res/layout/activity_image_share.xml" value="0.159375" />
+        <entry key="component/upgrade/src/main/res/layout/layout_update_app_dialog.xml" value="0.25" />
         <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />
         <entry key="component/weather/src/main/res/layout/fragment_weather.xml" value="0.159375" />
         <entry key="component/webview/src/main/res/layout/activity_file_reader.xml" value="0.159375" />

@@ -86,10 +86,8 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             settingBinding.tvSettingLogout.visibility = View.GONE
         }
 
-        UpgradeManager.getInstance().hasNewVersion(mProvider).observe(this, Observer { state ->
-            settingBinding.tvSettingVersionTag.visibility = if (state) View.VISIBLE else View.GONE
-        })
-
+        val state = UpgradeManager.getInstance().hasNewVersion(this)
+        settingBinding.tvSettingVersionTag.visibility = if (state) View.VISIBLE else View.GONE
 
         settingBinding.tvSettingCurrVersion.text = AppUtil.getAppVersionName(mContext!!)
     }

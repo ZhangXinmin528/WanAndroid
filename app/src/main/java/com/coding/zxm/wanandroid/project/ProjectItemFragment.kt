@@ -2,6 +2,7 @@ package com.coding.zxm.wanandroid.project
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -45,8 +46,8 @@ class ProjectItemFragment : BaseFragment() {
 
     private lateinit var itemBinding: FragmentProjectItemBinding
 
-    override fun setContentLayout(): View {
-        itemBinding = FragmentProjectItemBinding.inflate(layoutInflater)
+    override fun setContentLayout(container: ViewGroup?): View {
+        itemBinding = FragmentProjectItemBinding.inflate(layoutInflater, container, false)
         return itemBinding.root
     }
 

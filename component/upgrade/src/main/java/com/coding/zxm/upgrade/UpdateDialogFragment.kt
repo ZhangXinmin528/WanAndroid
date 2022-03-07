@@ -1,6 +1,7 @@
 package com.coding.zxm.upgrade
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.ServiceConnection
@@ -21,19 +22,20 @@ import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.coding.zxm.upgrade.databinding.FragmentUpdateAppDialogBinding
 import com.coding.zxm.upgrade.entity.UpdateEntity
 import com.coding.zxm.upgrade.network.IUpgradeProvider
 import com.coding.zxm.upgrade.utils.ColorUtil
 import com.coding.zxm.upgrade.utils.DrawableUtil
 import com.coding.zxm.upgrade.widget.NumberProgressBar
-import kotlinx.android.synthetic.main.layout_update_app_dialog.*
+import com.zxm.utils.core.sp.SharedPreferencesUtil
 import java.util.*
 
 /**
  * Created by ZhangXinmin on 2021/05/19.
  * Copyright (c) 5/19/21 . All rights reserved.
  * 应用更新Dialog
- * TODO:1.强制更新功能；2.忽略此版本；
+ * TODO:1.强制更新功能-需要接口支持
  */
 class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
 
@@ -48,6 +50,8 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
     private val mDefaultPicResId = R.mipmap.lib_update_top_bg0
     private var mTopIv: ImageView? = null
     private var mIgnore: TextView? = null
+
+    private lateinit var dialogBinding: FragmentUpdateAppDialogBinding
 
     //参数
     private lateinit var mEntity: UpdateEntity
@@ -75,7 +79,8 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.layout_update_app_dialog, container)
+        dialogBinding = FragmentUpdateAppDialogBinding.inflate(layoutInflater, container, false)
+        return dialogBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,10 +128,12 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
 
     }
 
+    @SuppressLint("MissingSuperCall")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData()
     }
+
 
     private fun initData() {
         arguments?.let {
@@ -154,17 +161,14 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
             }
 
             //更新内容
-
-            //更新内容
             mContentTextView!!.text = msg
-            //标题
             //标题
             mTitleTextView!!.text = String.format("是否升级到%s版本？", newVersion)
 
             if (mEntity.isForce) {
-                iv_close!!.visibility = View.GONE
+                dialogBinding.ivClose.visibility = View.GONE
             } else {
-                iv_close!!.visibility = View.VISIBLE
+                dialogBinding.ivClose.visibility = View.VISIBLE
                 //不是强制更新时，才生效
 //                if (mUpdateApp.isShowIgnoreVersion()) {
 //                    mIgnore!!.visibility = View.VISIBLE
@@ -291,6 +295,10 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
                     upgradeApp()
                 }
             }
+            R.id.tv_ignore -> {//忽略此版本
+                ignoreCurrVersion()
+                dismiss()
+            }
             R.id.iv_close -> {
                 dismiss()
             }
@@ -316,6 +324,17 @@ class UpdateDialogFragment : DialogFragment(), View.OnClickListener {
 
             })
             dismiss()
+        }
+    }
+
+    private fun ignoreCurrVersion() {
+        if (mEntity != null && !TextUtils.isEmpty(mEntity.name)) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.all_tips_ignore_version),
+                Toast.LENGTH_SHORT
+            ).show()
+            mEntity.version?.let { SharedPreferencesUtil.put(requireContext(), mEntity.name!!, it) }
         }
     }
 

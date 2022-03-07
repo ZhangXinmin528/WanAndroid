@@ -1,6 +1,7 @@
 package com.coding.zxm.wanandroid.gallery
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,8 +30,8 @@ class BingWallpapersFragment : BaseStatusBarFragment() {
     private lateinit var mAdapter: BingWallpapersAdapter
     private lateinit var bingsBinding: FragmentBingsWallpapersBinding
 
-    override fun setContentLayout(): View {
-        bingsBinding = FragmentBingsWallpapersBinding.inflate(layoutInflater)
+    override fun setContentLayout(container: ViewGroup?): View {
+        bingsBinding = FragmentBingsWallpapersBinding.inflate(layoutInflater, container, false)
         return bingsBinding.root
     }
 

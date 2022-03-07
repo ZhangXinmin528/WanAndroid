@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -71,8 +72,8 @@ class WeatherFragment : BaseFragment() {
 
     private var mBackBitmap: Bitmap? = null
 
-    override fun setContentLayout(): View {
-        weatherBinding = FragmentWeatherBinding.inflate(layoutInflater)
+    override fun setContentLayout(container: ViewGroup?): View {
+        weatherBinding = FragmentWeatherBinding.inflate(layoutInflater,container,false)
         return weatherBinding.root
     }
 

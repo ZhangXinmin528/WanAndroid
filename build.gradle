@@ -9,6 +9,8 @@ buildscript {
         classpath deps.kotlin.plugin
         classpath deps.arouter.register
 //        classpath deps.bugly_tinker_support
+
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 

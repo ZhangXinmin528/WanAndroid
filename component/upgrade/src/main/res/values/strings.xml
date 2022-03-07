@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="all_btn_upgrade">升级</string>
+    <string name="all_btn_upgrade">Upgrade</string>
 
-    <string name="all_upgrade_tips_need_permissions">请授权应用访问空间存储权限，否则无法更新App.</string>
-    <string name="all_ignore_version">忽略此版本</string>
+    <string name="all_upgrade_tips_need_permissions">Please authorize the app to access the space storage permission, otherwise the app cannot be updated.</string>
+    <string name="all_ignore_version">Ignore This Version</string>
+    <string name="all_tips_ignore_version">You have ignored the current version.</string>
+    <string name="all_has_no_new_version">Currently the latest version.</string>
 </resources>

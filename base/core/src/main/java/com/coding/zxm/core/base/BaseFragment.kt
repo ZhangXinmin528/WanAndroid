@@ -19,7 +19,7 @@ abstract class BaseFragment() : Fragment() {
 
     protected var mContext: Context? = null
 
-    abstract fun setContentLayout(): View
+    abstract fun setContentLayout(container: ViewGroup?): View
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,7 +31,7 @@ abstract class BaseFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return setContentLayout()
+        return setContentLayout(container)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

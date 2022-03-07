@@ -3,6 +3,7 @@ package com.coding.zxm.wanandroid.mine
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.coding.zxm.util.SPConfig
@@ -39,8 +40,8 @@ class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
 
     private lateinit var mineBinding: FragmentMineBinding
 
-    override fun setContentLayout(): View {
-        mineBinding = FragmentMineBinding.inflate(layoutInflater)
+    override fun setContentLayout(container: ViewGroup?): View {
+        mineBinding = FragmentMineBinding.inflate(layoutInflater, container, false)
         return mineBinding.root
     }
 

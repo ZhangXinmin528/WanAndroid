@@ -3,6 +3,7 @@ package com.coding.zxm.wanandroid.home
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -73,8 +74,8 @@ class HomeFragment() : BaseStatusBarFragment() {
 
     }
 
-    override fun setContentLayout(): View {
-        homeBinding = FragmentHomeBinding.inflate(layoutInflater)
+    override fun setContentLayout(container: ViewGroup?): View {
+        homeBinding = FragmentHomeBinding.inflate(layoutInflater,container,false)
         return homeBinding.root
     }
 
