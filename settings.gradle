@@ -12,3 +12,4 @@ include ':component:webview'
 include ':component:upgrade'
 
 rootProject.name = "WanAndroid"
+include ':component:qrcode'

@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/component" />
             <option value="$PROJECT_DIR$/component/image" />
             <option value="$PROJECT_DIR$/component/map" />
+            <option value="$PROJECT_DIR$/component/qrcode" />
             <option value="$PROJECT_DIR$/component/umeng" />
             <option value="$PROJECT_DIR$/component/upgrade" />
             <option value="$PROJECT_DIR$/component/weather" />

@@ -7,4 +7,5 @@
     <string name="all_name_qzone">Qzone</string>
     <string name="all_name_ding">DingDing</string>
 
+    <string name="all_qr_long_press_tips">Long press to identify the QR code to read the article.</string>
 </resources>

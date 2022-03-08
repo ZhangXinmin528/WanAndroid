@@ -12,7 +12,7 @@ import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.core.base.constants.RoutePath
-import com.coding.zxm.umeng.ui.ImageShareActivity
+import com.coding.zxm.umeng.ui.ArticleShareActivity
 import com.coding.zxm.webview.databinding.ActivityWebviewBinding
 import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIEW_TITLE
 import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIEW_URL
@@ -125,7 +125,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
         Log.d(sTAG, "save state $state .. file path $filePath")
 
         if (state) {
-            ImageShareActivity.doImageShare(mContext!!, filePath)
+            ArticleShareActivity.doArticleShare(mContext!!, filePath)
         }
 
     }
@@ -157,7 +157,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             Log.d(sTAG, "save state $state .. file path $filePath")
 
             if (state) {
-                ImageShareActivity.doImageShare(mContext!!, filePath)
+                ArticleShareActivity.doArticleShare(mContext!!, filePath)
             }
         })
 

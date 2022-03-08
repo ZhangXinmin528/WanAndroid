@@ -6,7 +6,7 @@ buildscript {
 
     dependencies {
         classpath deps.android_gradle_plugin
-        classpath deps.kotlin.plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
         classpath deps.arouter.register
 //        classpath deps.bugly_tinker_support
 

@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_about_black_24dp.xml" value="0.174609375" />
+        <entry key="app/src/main/res/drawable/ic_like.xml" value="0.174609375" />
+        <entry key="app/src/main/res/drawable/ic_like_not_gray_24dp.xml" value="0.174609375" />
+        <entry key="app/src/main/res/drawable/ic_search_dark_24dp.xml" value="0.159765625" />
+        <entry key="app/src/main/res/drawable/ic_share_white_24dp.xml" value="0.174609375" />
+        <entry key="app/src/main/res/drawable/ic_todo_gray_24dp.xml" value="0.174609375" />
+        <entry key="app/src/main/res/drawable/ic_todo_white_24dp.xml" value="0.174609375" />
         <entry key="app/src/main/res/drawable/launch_background.xml" value="0.25972222222222224" />
         <entry key="app/src/main/res/drawable/rounded_rect.xml" value="0.15703125" />
         <entry key="app/src/main/res/drawable/shape_banner_bg.xml" value="0.16805555555555557" />
@@ -11,6 +18,7 @@
         <entry key="app/src/main/res/drawable/shape_search_bg.xml" value="0.174609375" />
         <entry key="app/src/main/res/drawable/shape_search_home_bg.xml" value="0.15703125" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_collections_list.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_font_scale.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_image_preview.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_knowledge.xml" value="0.159375" />
@@ -25,15 +33,23 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.14652777777777778" />
         <entry key="app/src/main/res/layout/activity_weather.xml" value="0.15704387990762125" />
         <entry key="app/src/main/res/layout/fragment_bings_wallpapers.xml" value="0.10703125" />
+        <entry key="app/src/main/res/layout/fragment_collections_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/fragment_home_behavior.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/fragment_mine.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_bing_list_item.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/layout_collections_news_text_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_fake_status_bar.xml" value="0.15069444444444444" />
         <entry key="app/src/main/res/layout/layout_home_banner.xml" value="0.141796875" />
+        <entry key="app/src/main/res/layout/layout_home_news_text_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_horizontal_divider.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_search_hot_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.159375" />
-        <entry key="component/umeng/src/main/res/layout/activity_image_share.xml" value="0.159375" />
+        <entry key="component/umeng/src/main/res/drawable/shape_share_selection_bg.xml" value="0.174609375" />
+        <entry key="component/umeng/src/main/res/drawable/shape_shot_bg.xml" value="0.174609375" />
+        <entry key="component/umeng/src/main/res/drawable/shape_shot_grey_bg.xml" value="0.174609375" />
+        <entry key="component/umeng/src/main/res/drawable/shape_shot_white_bg.xml" value="0.174609375" />
+        <entry key="component/umeng/src/main/res/layout/activity_image_share.xml" value="0.25" />
         <entry key="component/upgrade/src/main/res/layout/layout_update_app_dialog.xml" value="0.25" />
         <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />
         <entry key="component/weather/src/main/res/layout/fragment_weather.xml" value="0.159375" />

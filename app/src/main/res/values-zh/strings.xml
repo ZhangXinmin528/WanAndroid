@@ -26,7 +26,6 @@
     <string name="all_not_login">未登录</string>
     <string name="all_sign">签到</string>
     <string name="all_signed">已签到</string>
-    <string name="all_mine_collection">我的收藏</string>
     <string name="all_mine_about">关于</string>
     <string name="all_coin_count">积分：%s</string>
     <string name="all_coin_level">Level：%s</string>
@@ -41,6 +40,8 @@
 
     <!--知识体系-->
     <string name="all_system_title">知识体系</string>
+    <string name="all_system_column_title">知识体系专栏</string>
+    <string name="all_target_column_title">%s专栏</string>
 
     <!--导航-->
     <string name="all_navigation_title">导航</string>
@@ -51,6 +52,9 @@
     <!--关于-->
     <string name="all_title_about">关于</string>
     <string name="all_abount_version">版本：</string>
+
+    <!--我的收藏-->
+    <string name="all_my_collections">我的收藏</string>
 
     <!--设置页面-->
     <string name="all_setting">设置</string>

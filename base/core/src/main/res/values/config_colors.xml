@@ -38,7 +38,7 @@
     <color name="color_config_dark_gray_9">#4D4D4D</color>
 
     <!--list-->
-    <color name="color_drawable_list_separator">#DEE0E2</color>
+    <color name="color_drawable_list_separator">#EFEFEF</color>
     <color name="color_drawable_list_pressed">#DEE0E2</color>
 
     <!--background-->

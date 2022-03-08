@@ -26,7 +26,6 @@
     <string name="all_not_login">Not logged in</string>
     <string name="all_sign">Sign in</string>
     <string name="all_signed">Signed in</string>
-    <string name="all_mine_collection">Collections</string>
     <string name="all_mine_about">About</string>
     <string name="all_coin_count">Coin：%s</string>
     <string name="all_coin_level">Level：%s</string>
@@ -41,6 +40,8 @@
 
     <!--知识体系-->
     <string name="all_system_title">Knowledge System</string>
+    <string name="all_system_column_title">Knowledge System Column</string>
+    <string name="all_target_column_title">%s Column</string>
 
     <!--导航-->
     <string name="all_navigation_title">Navigation</string>
@@ -51,6 +52,9 @@
     <!--关于-->
     <string name="all_title_about">About</string>
     <string name="all_abount_version">Version：</string>
+
+    <!--我的收藏-->
+    <string name="all_my_collections">My Collection</string>
 
     <!--设置页面-->
     <string name="all_setting">Setting</string>

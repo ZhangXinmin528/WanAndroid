@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/color_config_white_50pure" />
+    <solid android:color="@color/color_drawable_list_separator" />
 
     <size android:height="1dp" />
 

@@ -1,26 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_news_shot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_20dp"
+        android:layout_marginEnd="@dimen/margin_20dp"
+        android:layout_marginBottom="@dimen/margin_50dp"
+        android:background="@drawable/shape_shot_bg"
+        android:padding="@dimen/margin_16dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_share_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <ImageView
-        android:id="@+id/iv_share_screenshot"
-        android:layout_width="300dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:layout_weight="1"
-        android:src="@drawable/icon_share_image" />
+        <ImageView
+            android:id="@+id/iv_shot_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_shot_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_6dp"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:text="WanAndroid"
+            android:textColor="@color/color_text_black"
+            android:textSize="@dimen/textsize_24sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toEndOf="@+id/iv_shot_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_shot_news_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:background="@drawable/shape_shot_white_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_12dp"
+            app:layout_constraintTop_toBottomOf="@+id/iv_shot_logo">
+
+            <TextView
+                android:id="@+id/tv_news_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/color_text_black"
+                android:textSize="@dimen/textsize_20sp"
+                android:textStyle="bold"
+                tools:text="行业中长期业绩趋势向好，证券板块或迎来估值修复机会" />
+
+            <TextView
+                android:id="@+id/tv_news_nice_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_6dp"
+                android:textColor="@color/color_text_gray"
+                android:textSize="@dimen/textsize_14sp"
+                tools:text="4小时前" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:background="@drawable/shape_shot_grey_bg"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_12dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout_shot_news_content">
+
+            <TextView
+                android:id="@+id/tv_qr_press_tips"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@string/all_qr_long_press_tips"
+                android:textColor="@color/color_text_black"
+                android:textSize="@dimen/textsize_16sp" />
+
+            <ImageView
+                android:id="@+id/iv_shot_qrcode"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_share_image" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_share_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <HorizontalScrollView
             android:id="@+id/layout_share_selection"
@@ -84,4 +173,4 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_share_selection" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

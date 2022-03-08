@@ -110,6 +110,11 @@
             android:name=".project.ProjectActivity"
             android:screenOrientation="portrait" />
 
+        <!--我的收藏-->
+        <activity
+            android:name=".collection.CollectionsActivity"
+            android:screenOrientation="portrait" />
+
         <!--设置-->
         <activity
             android:name=".setting.SettingActivity"

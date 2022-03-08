@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
+import com.coding.zxm.wanandroid.collection.CollectionsActivity
 import com.coding.zxm.wanandroid.databinding.FragmentMineBinding
 import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
@@ -134,7 +135,8 @@ class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
                 startActivity(setting)
             }
             R.id.tv_mine_collection -> {
-                ToastUtil.showToast("开发小伙伴正紧张开发中")
+                val collections = Intent(mContext!!, CollectionsActivity::class.java)
+                startActivity(collections)
             }
             R.id.tv_mine_share -> {
                 ToastUtil.showToast("开发小伙伴正紧张开发中")

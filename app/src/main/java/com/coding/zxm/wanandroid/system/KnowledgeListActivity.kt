@@ -62,7 +62,10 @@ class KnowledgeListActivity : BaseActivity() {
 
     override fun initViews() {
 
-        listBinding.toolbar.tvToolbarTitle.text = if (TextUtils.isEmpty(mTitle)) "知识体系专栏" else "${mTitle}专栏"
+        listBinding.toolbar.tvToolbarTitle.text =
+            if (TextUtils.isEmpty(mTitle)) getString(R.string.all_system_column_title) else getString(
+                R.string.all_target_column_title, mTitle
+            )
         listBinding.toolbar.ivToolbarBack.setOnClickListener { finish() }
 
         //是否在刷新的时候禁止列表的操作

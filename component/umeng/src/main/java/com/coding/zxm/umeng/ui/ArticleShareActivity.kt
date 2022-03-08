@@ -22,17 +22,16 @@ import java.io.File
 /**
  * Created by ZhangXinmin on 2020/7/26.
  * Copyright (c) 2020/9/7 . All rights reserved.
- * TODO:优化截图显示效果
- * TODO:大图显示存在问题，1.截取长图存在不完整问题；2.长图在分享页展示问题；
+ * 文章分享
  */
-class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener {
+class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListener {
 
     companion object {
-        private const val PARAMS_IMAGE_PATH = "params_view"
+        private const val PARAMS_ARTICLE_DATA = "params_article"
 
-        fun doImageShare(context: Context, path: String) {
-            val intent = Intent(context, ImageShareActivity::class.java)
-            intent.putExtra(PARAMS_IMAGE_PATH, path)
+        fun doArticleShare(context: Context, data: String) {
+            val intent = Intent(context, ArticleShareActivity::class.java)
+            intent.putExtra(PARAMS_ARTICLE_DATA, data)
             context.startActivity(intent)
         }
     }
@@ -50,7 +49,7 @@ class ImageShareActivity : BaseActivity(), View.OnClickListener, UMShareListener
     override fun initParamsAndValues() {
 
         if (intent != null) {
-            mFilePath = intent.getStringExtra(PARAMS_IMAGE_PATH)
+            mFilePath = intent.getStringExtra(PARAMS_ARTICLE_DATA)
 
         }
 
