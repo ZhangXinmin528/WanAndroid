@@ -27,6 +27,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs project(':component:qrcode').file("libs")
+    }
+}
+
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
 
@@ -48,6 +54,9 @@ dependencies {
 
     api deps.umsdk_share_dingding
     api deps.umsdk_dingding_sdk
+
+    //fastjson
+    implementation deps.fastjson
 
     //module
     implementation project(path: ':base:core')

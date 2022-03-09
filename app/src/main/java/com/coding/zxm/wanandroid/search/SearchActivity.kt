@@ -139,10 +139,12 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         mSearchResultAdapter.setOnItemClickListener { adapter, view, position ->
             val searchDetialEntity = (adapter as SearchResultAdapter).getItem(position)
             searchDetialEntity?.let {
+                val jsonData = JSON.toJSONString(searchDetialEntity)
                 X5WebviewActivity.loadUrl(
                     mContext!!,
                     searchDetialEntity.title,
-                    searchDetialEntity.link
+                    searchDetialEntity.link,
+                    jsonData
                 )
             }
 

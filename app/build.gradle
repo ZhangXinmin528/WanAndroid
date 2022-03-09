@@ -112,6 +112,12 @@ android {
 
 }
 
+repositories {
+    flatDir {
+        dirs project(':component:qrcode').file("libs")
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 

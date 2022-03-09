@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_20dp"
         android:layout_marginEnd="@dimen/margin_20dp"
-        android:layout_marginBottom="@dimen/margin_50dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/shape_shot_bg"
         android:padding="@dimen/margin_16dp"
         app:layout_constraintBottom_toTopOf="@+id/layout_share_bottom"
@@ -36,7 +36,7 @@
             android:text="WanAndroid"
             android:textColor="@color/color_text_black"
             android:textSize="@dimen/textsize_24sp"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/iv_shot_logo"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
@@ -125,38 +125,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_share_qq"
+                <com.coding.zxm.umeng.widget.LogoPadView
+                    android:id="@+id/logo_qq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_12dp"
-                    android:drawableTop="@drawable/umeng_socialize_qq"
-                    android:gravity="center_horizontal"
-                    android:text="@string/all_name_qq"
-                    android:textColor="@color/color_text_black"
-                    android:textSize="@dimen/textsize_12sp" />
+                    app:logoName="@string/all_name_qq"
+                    app:logoRes="@drawable/umeng_socialize_qq" />
 
-                <TextView
-                    android:id="@+id/tv_share_qzone"
+                <com.coding.zxm.umeng.widget.LogoPadView
+                    android:id="@+id/logo_qzone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_12dp"
-                    android:drawableTop="@drawable/umeng_socialize_qzone"
-                    android:gravity="center_horizontal"
-                    android:text="@string/all_name_qzone"
-                    android:textColor="@color/color_text_black"
-                    android:textSize="@dimen/textsize_12sp" />
+                    app:logoName="@string/all_name_qzone"
+                    app:logoRes="@drawable/umeng_socialize_qzone" />
 
-                <TextView
-                    android:id="@+id/tv_share_ding"
+                <com.coding.zxm.umeng.widget.LogoPadView
+                    android:id="@+id/logo_dingding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_12dp"
-                    android:drawableTop="@drawable/umeng_socialize_ding"
-                    android:gravity="center_horizontal"
-                    android:text="@string/all_name_ding"
-                    android:textColor="@color/color_text_black"
-                    android:textSize="@dimen/textsize_12sp" />
+                    app:logoName="@string/all_name_ding"
+                    app:logoRes="@drawable/umeng_socialize_ding" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </HorizontalScrollView>

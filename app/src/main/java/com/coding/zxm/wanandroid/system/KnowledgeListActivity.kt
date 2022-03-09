@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.databinding.ActivityKnowledgeListBinding
@@ -99,8 +100,13 @@ class KnowledgeListActivity : BaseActivity() {
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
-
-            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link)
+            val jsonData = JSON.toJSONString(newsDetialEntity)
+            X5WebviewActivity.loadUrl(
+                mContext!!,
+                newsDetialEntity.title,
+                newsDetialEntity.link,
+                jsonData
+            )
         }
 
     }

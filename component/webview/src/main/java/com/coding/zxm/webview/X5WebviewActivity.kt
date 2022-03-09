@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.KeyEvent
@@ -29,15 +30,22 @@ import java.io.File
 class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClickListener {
 
     private var mIsWebViewAvailable = false
-    private var mUrl: String? = null
     private var mIsPageFinished = false
+
+    private var mUrl: String? = null
     private var mTitle: String? = null
+    private var mJsonData: String? = ""
 
     companion object {
-        fun loadUrl(context: Context, title: String?, url: String) {
+        const val PARAMS_WEBVIEW_DATA = "webview_data"
+
+        fun loadUrl(context: Context, title: String?, url: String, jsonData: String? = "") {
             val intent = Intent(context, X5WebviewActivity::class.java)
-            intent.putExtra(PARAMS_WEBVIEW_URL, url)
-            intent.putExtra(PARAMS_WEBVIEW_TITLE, title)
+            val args = Bundle()
+            args.putString(PARAMS_WEBVIEW_URL, url)
+            args.putString(PARAMS_WEBVIEW_TITLE, title)
+            args.putString(PARAMS_WEBVIEW_DATA, jsonData)
+            intent.putExtras(args)
             context.startActivity(intent)
         }
     }
@@ -52,8 +60,18 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     override fun initParamsAndValues() {
         setStatusBarColorLight()
 
-        mUrl = intent.getStringExtra(PARAMS_WEBVIEW_URL)
-        mTitle = intent.getStringExtra(PARAMS_WEBVIEW_TITLE)
+        val args = intent.extras
+        if (args != null) {
+            if (args.containsKey(PARAMS_WEBVIEW_URL)) {
+                mUrl = args.getString(PARAMS_WEBVIEW_URL)
+            }
+            if (args.containsKey(PARAMS_WEBVIEW_TITLE)) {
+                mTitle = args.getString(PARAMS_WEBVIEW_TITLE)
+            }
+            if (args.containsKey(PARAMS_WEBVIEW_DATA)) {
+                mJsonData = args.getString(PARAMS_WEBVIEW_DATA)
+            }
+        }
 
         if (mUrl.isNullOrEmpty() || mUrl.isNullOrBlank()) {
             Toast.makeText(mContext, "Url is invalid!", Toast.LENGTH_SHORT).show()
@@ -105,19 +123,24 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 finish()
             }
             R.id.iv_web_more -> {
-                shareScreenShot()
-//                longScreenShot()
+                shareArticle()
             }
+        }
+    }
 
+    private fun shareArticle() {
+        if (!TextUtils.isEmpty(mJsonData)) {
+            ArticleShareActivity.doArticleShare(mContext!!, mJsonData!!)
         }
     }
 
     /**
      * 屏幕截图
      */
+    @Deprecated(message = "其他方案替代")
     private fun shareScreenShot() {
 
-        val bitmap = ImageUtil.view2Bitmap( x5Binding.x5webview)
+        val bitmap = ImageUtil.view2Bitmap(x5Binding.x5webview)
         val filePath =
             filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
         val state = ImageUtil.save(bitmap, filePath, Bitmap.CompressFormat.PNG)
@@ -136,19 +159,19 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
      */
     @Deprecated(message = "存在问题")
     private fun longScreenShot() {
-        val wholeWidth: Int =  x5Binding.x5webview.computeHorizontalScrollRange()
-        var wholeHeight: Int =  x5Binding.x5webview.computeVerticalScrollRange()
+        val wholeWidth: Int = x5Binding.x5webview.computeHorizontalScrollRange()
+        var wholeHeight: Int = x5Binding.x5webview.computeVerticalScrollRange()
         wholeHeight /= 2 //高度截取一半，防止oom，后面可以指定高度，缩放进行换算
 
         val x5bitmap = Bitmap.createBitmap(wholeWidth, wholeHeight, Bitmap.Config.RGB_565)
 
         val x5canvas = Canvas(x5bitmap)
         x5canvas.scale(
-            wholeWidth.toFloat() /  x5Binding.x5webview.contentWidth.toFloat(),
-            wholeHeight.toFloat() / ( x5Binding.x5webview.contentHeight / 2).toFloat()
+            wholeWidth.toFloat() / x5Binding.x5webview.contentWidth.toFloat(),
+            wholeHeight.toFloat() / (x5Binding.x5webview.contentHeight / 2).toFloat()
         )
 
-        val x5WebViewExtension =  x5Binding.x5webview.x5WebViewExtension
+        val x5WebViewExtension = x5Binding.x5webview.x5WebViewExtension
         x5WebViewExtension?.snapshotWholePage(x5canvas, false, false, Runnable {
             val filePath =
                 filesDir.absolutePath + File.separator + "share" + File.separator + "share_image.png"
@@ -164,7 +187,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK &&  x5Binding.x5webview.canGoBack()) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && x5Binding.x5webview.canGoBack()) {
             x5Binding.x5webview.goBack()
             return true
         }

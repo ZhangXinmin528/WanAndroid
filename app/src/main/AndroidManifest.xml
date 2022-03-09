@@ -48,7 +48,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
-        tools:replace="android:appComponentFactory"
+        tools:replace="android:appComponentFactory,android:theme"
         tools:targetApi="p">
 
         <activity android:name=".ui.activity.SplashActivity">

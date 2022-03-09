@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.databinding.FragmentProjectItemBinding
@@ -80,8 +81,8 @@ class ProjectItemFragment : BaseFragment() {
 
         mProjectAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as ProjectItemAdapter).data[position]
-
-            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link)
+            val jsonData = JSON.toJSONString(newsDetialEntity)
+            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link,jsonData)
         }
 
         //是否在刷新的时候禁止列表的操作

@@ -57,6 +57,7 @@ dependencies {
     implementation deps.material
     implementation deps.constraint_layout
 
-    implementation(name: 'lib.zxing_1.0.2_release', ext: 'aar')
+    api(name: 'lib.zxing_1.0.2_release', ext: 'aar')
+    api "com.google.zxing:core:3.4.1"
 
 }

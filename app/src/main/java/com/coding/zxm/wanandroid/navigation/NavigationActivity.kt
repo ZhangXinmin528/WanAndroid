@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.databinding.ActivityNavigationBinding
@@ -66,8 +67,8 @@ class NavigationActivity : BaseActivity() {
 
         mNaviAdapter.setNaviTagClicklistener(object : NavigationAdapter.OnNaviTagClickListener {
             override fun onTagItemClick(view: View, newsEntity: NewsDetialEntity) {
-
-                X5WebviewActivity.loadUrl(mContext!!, newsEntity.title, newsEntity.link)
+                val jsonData = JSON.toJSONString(newsEntity)
+                X5WebviewActivity.loadUrl(mContext!!, newsEntity.title, newsEntity.link,jsonData)
             }
 
         })

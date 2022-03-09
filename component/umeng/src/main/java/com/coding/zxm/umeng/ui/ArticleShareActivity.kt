@@ -2,22 +2,22 @@ package com.coding.zxm.umeng.ui
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.alibaba.fastjson.JSON
 import com.coding.zxm.core.base.BaseActivity
+import com.coding.zxm.lib.qrcode.QrCodeUtils
 import com.coding.zxm.umeng.R
 import com.coding.zxm.umeng.databinding.ActivityImageShareBinding
-import com.example.image.loader.ImageLoader
-import com.example.image.model.GlideApp
+import com.coding.zxm.umeng.model.ArticleEntity
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareListener
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
-import java.io.File
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -31,14 +31,15 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
 
         fun doArticleShare(context: Context, data: String) {
             val intent = Intent(context, ArticleShareActivity::class.java)
-            intent.putExtra(PARAMS_ARTICLE_DATA, data)
+            val args = Bundle()
+            args.putString(PARAMS_ARTICLE_DATA, data)
+            intent.putExtras(args)
             context.startActivity(intent)
         }
     }
 
-    private var mFilePath: String? = null
+    private var mArticleEntity: ArticleEntity? = null
     private lateinit var mUmImage: UMImage
-    private lateinit var mImageFile: File
     private lateinit var shareBinding: ActivityImageShareBinding
 
     override fun setContentLayout(): Any {
@@ -47,42 +48,34 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
     }
 
     override fun initParamsAndValues() {
-
-        if (intent != null) {
-            mFilePath = intent.getStringExtra(PARAMS_ARTICLE_DATA)
-
+        val args = intent.extras
+        if (args != null) {
+            if (args.containsKey(PARAMS_ARTICLE_DATA)) {
+                val data = args.getString(PARAMS_ARTICLE_DATA)
+                if (!TextUtils.isEmpty(data)) {
+                    mArticleEntity = JSON.parseObject(data, ArticleEntity::class.java)
+                }
+            }
         }
-
-        if (TextUtils.isEmpty(mFilePath)) {
-            Toast.makeText(mContext, "截图资源不存在", Toast.LENGTH_SHORT).show()
-        } else {
-            mImageFile = File(mFilePath)
-        }
-
     }
 
     override fun initViews() {
         shareBinding.tvShareCancel.setOnClickListener(this)
+        shareBinding.tvNewsTitle.text = mArticleEntity?.title
+        shareBinding.tvNewsNiceDate.text = mArticleEntity?.niceDate
 //        tv_share_wechat.setOnClickListener(this)
 //        tv_share_wxcircle.setOnClickListener(this)
-        shareBinding.tvShareQq.setOnClickListener(this)
-        shareBinding.tvShareQzone.setOnClickListener(this)
-        shareBinding.tvShareDing.setOnClickListener(this)
+        shareBinding.logoQq.setOnClickListener(this)
+        shareBinding.logoQzone.setOnClickListener(this)
+        shareBinding.logoDingding.setOnClickListener(this)
 
-        if (mImageFile.exists()) {
-            val bitmap = BitmapFactory.decodeFile(mFilePath)
+        if (mArticleEntity != null && !TextUtils.isEmpty(mArticleEntity!!.link)) {
+//            val logoBm = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+
+            val bitmap = QrCodeUtils.generateQRCode(mContext!!, 100f, mArticleEntity?.link!!)
+            shareBinding.ivShotQrcode.setImageBitmap(bitmap)
             mUmImage = UMImage(mContext, bitmap)
             mUmImage.compressStyle = UMImage.CompressStyle.QUALITY
-            ImageLoader.INSTANCE.loadImageRes(shareBinding.ivShareScreenshot, mFilePath!!)
-//            iv_share_screenshot.setImageBitmap(bitmap)
-            GlideApp
-                .with(mContext!!)
-                .asBitmap()
-                .override(bitmap.width, bitmap.height)
-                .load(bitmap)
-                .into(shareBinding.ivShareScreenshot)
-
-
         }
 
     }
@@ -98,13 +91,13 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
 //            R.id.tv_share_wxcircle -> {
 //
 //            }
-            R.id.tv_share_qq -> {
+            R.id.logo_qq -> {
                 doQQShare()
             }
-            R.id.tv_share_qzone -> {
+            R.id.logo_qzone -> {
                 doQZoneShare()
             }
-            R.id.tv_share_ding -> {
+            R.id.logo_dingding -> {
                 doDingShare()
             }
         }
@@ -157,9 +150,6 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
 
     override fun onResult(p0: SHARE_MEDIA?) {
         Log.d(sTAG, "$p0..onResult")
-        if (mImageFile.exists()) {
-            mImageFile.delete()
-        }
         finish()
     }
 

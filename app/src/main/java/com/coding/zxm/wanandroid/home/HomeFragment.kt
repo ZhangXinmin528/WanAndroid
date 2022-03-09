@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON
 import com.amap.api.location.AMapLocation
 import com.coding.zxm.map.LocationManager
 import com.coding.zxm.map.location.listener.OnLocationListener
+import com.coding.zxm.umeng.model.ArticleEntity
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
@@ -75,7 +76,7 @@ class HomeFragment() : BaseStatusBarFragment() {
     }
 
     override fun setContentLayout(container: ViewGroup?): View {
-        homeBinding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+        homeBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return homeBinding.root
     }
 
@@ -115,8 +116,11 @@ class HomeFragment() : BaseStatusBarFragment() {
                 mBanner.setOnBannerListener(object : OnBannerListener<BannerEntity> {
                     override fun OnBannerClick(data: BannerEntity?, position: Int) {
                         data?.let {
-
-                            X5WebviewActivity.loadUrl(mContext!!, data.title, data.url)
+                            val entity = ArticleEntity()
+                            entity.title = data.title
+                            entity.link = data.url
+                            val jsonData = JSON.toJSONString(entity)
+                            X5WebviewActivity.loadUrl(mContext!!, data.title, data.url, jsonData)
                         }
                     }
 
@@ -164,8 +168,13 @@ class HomeFragment() : BaseStatusBarFragment() {
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
-
-            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link)
+            val jsonData = JSON.toJSONString(newsDetialEntity)
+            X5WebviewActivity.loadUrl(
+                mContext!!,
+                newsDetialEntity.title,
+                newsDetialEntity.link,
+                jsonData
+            )
         }
 
         //是否在刷新的时候禁止列表的操作

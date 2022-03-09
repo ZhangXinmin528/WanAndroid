@@ -10,6 +10,6 @@ include ':component:umeng'
 include ':component:image'
 include ':component:webview'
 include ':component:upgrade'
+include ':component:qrcode'
 
 rootProject.name = "WanAndroid"
-include ':component:qrcode'

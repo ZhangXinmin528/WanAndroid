@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LogoPadView">
+        <attr name="logoRes" format="reference" />
+        <attr name="logoName" format="string" />
+    </declare-styleable>
+
+</resources>
