@@ -43,6 +43,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation deps.constraint_layout
+    implementation deps.material
 
     implementation deps.arouter.api
 

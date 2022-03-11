@@ -45,13 +45,15 @@
         <entry key="app/src/main/res/layout/layout_horizontal_divider.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_search_hot_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.159375" />
+        <entry key="base/core/src/main/res/drawable/ic_like.xml" value="0.174609375" />
+        <entry key="base/core/src/main/res/drawable/ic_like_not_gray_24dp.xml" value="0.174609375" />
         <entry key="component/umeng/src/main/res/drawable/shape_circle_white_bg.xml" value="0.174609375" />
         <entry key="component/umeng/src/main/res/drawable/shape_share_selection_bg.xml" value="0.174609375" />
         <entry key="component/umeng/src/main/res/drawable/shape_shot_bg.xml" value="0.174609375" />
         <entry key="component/umeng/src/main/res/drawable/shape_shot_grey_bg.xml" value="0.174609375" />
         <entry key="component/umeng/src/main/res/drawable/shape_shot_white_bg.xml" value="0.174609375" />
         <entry key="component/umeng/src/main/res/layout/activity_image_share.xml" value="0.159375" />
-        <entry key="component/umeng/src/main/res/layout/layout_logo_pad.xml" value="0.159375" />
+        <entry key="component/umeng/src/main/res/layout/layout_logo_pad.xml" value="0.25" />
         <entry key="component/umeng/src/main/res/layout/layout_share_logo.xml" value="0.335" />
         <entry key="component/upgrade/src/main/res/layout/layout_update_app_dialog.xml" value="0.25" />
         <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />

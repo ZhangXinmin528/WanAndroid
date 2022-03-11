@@ -18,6 +18,7 @@ import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareListener
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
+import com.zxm.utils.core.image.ImageUtil
 
 /**
  * Created by ZhangXinmin on 2020/7/26.
@@ -39,7 +40,7 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
     }
 
     private var mArticleEntity: ArticleEntity? = null
-    private lateinit var mUmImage: UMImage
+    private var mUmImage: UMImage? = null
     private lateinit var shareBinding: ActivityImageShareBinding
 
     override fun setContentLayout(): Any {
@@ -68,14 +69,18 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
         shareBinding.logoQq.setOnClickListener(this)
         shareBinding.logoQzone.setOnClickListener(this)
         shareBinding.logoDingding.setOnClickListener(this)
-
         if (mArticleEntity != null && !TextUtils.isEmpty(mArticleEntity!!.link)) {
 //            val logoBm = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
 
-            val bitmap = QrCodeUtils.generateQRCode(mContext!!, 100f, mArticleEntity?.link!!)
-            shareBinding.ivShotQrcode.setImageBitmap(bitmap)
-            mUmImage = UMImage(mContext, bitmap)
-            mUmImage.compressStyle = UMImage.CompressStyle.QUALITY
+            val qrBitmap = QrCodeUtils.generateQRCode(mContext!!, 100f, mArticleEntity?.link!!)
+            shareBinding.ivShotQrcode.setImageBitmap(qrBitmap)
+
+            shareBinding.layoutNewsShot.viewTreeObserver.addOnGlobalLayoutListener {
+                val shotBitmap = ImageUtil.view2Bitmap(shareBinding.layoutNewsShot)
+
+                mUmImage = UMImage(mContext, shotBitmap)
+                mUmImage?.compressStyle = UMImage.CompressStyle.QUALITY
+            }
         }
 
     }
@@ -104,12 +109,13 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
     }
 
     private fun doDingShare() {
-        ShareAction(this)
-            .setPlatform(SHARE_MEDIA.DINGTALK)
-            .setCallback(this)
-            .withMedia(mUmImage)
-            .share()
-
+        if (mUmImage != null) {
+            ShareAction(this)
+                .setPlatform(SHARE_MEDIA.DINGTALK)
+                .setCallback(this)
+                .withMedia(mUmImage)
+                .share()
+        }
     }
 
     private fun doWechatShare() {
@@ -122,19 +128,23 @@ class ArticleShareActivity : BaseActivity(), View.OnClickListener, UMShareListen
     }
 
     private fun doQQShare() {
-        ShareAction(this)
-            .setPlatform(SHARE_MEDIA.QQ)
-            .setCallback(this)
-            .withMedia(mUmImage)
-            .share()
+        if (mUmImage != null) {
+            ShareAction(this)
+                .setPlatform(SHARE_MEDIA.QQ)
+                .setCallback(this)
+                .withMedia(mUmImage)
+                .share()
+        }
     }
 
     private fun doQZoneShare() {
-        ShareAction(this)
-            .setPlatform(SHARE_MEDIA.QZONE)
-            .setCallback(this)
-            .withMedia(mUmImage)
-            .share()
+        if (mUmImage != null) {
+            ShareAction(this)
+                .setPlatform(SHARE_MEDIA.QZONE)
+                .setCallback(this)
+                .withMedia(mUmImage)
+                .share()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
