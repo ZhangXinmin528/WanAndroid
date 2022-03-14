@@ -52,8 +52,12 @@ dependencies {
     //tbs
     api deps.tbssdk
 
+    //fastjson
+    implementation deps.fastjson
+
     implementation project(path: ':base:core')
     implementation project(path: ':base:util')
+    implementation project(path: ':base:network')
 
     api project(path: ':component:umeng')
 

@@ -9,4 +9,7 @@ class ArticleEntity {
     var title: String? = ""
     var niceDate: String? = ""
     var link: String? = ""
+
+    //文章id
+    var id: String = ""
 }

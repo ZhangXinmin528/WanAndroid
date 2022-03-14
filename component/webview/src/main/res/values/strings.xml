@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="all_lable_collection">Collection</string>
+    <string name="all_tips_collection_success">Collection success</string>
+    <string name="all_tips_uncollection_success">Unfavorite successful</string>
 </resources>

@@ -10,9 +10,13 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.fastjson.JSONObject
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.core.base.constants.RoutePath
+import com.coding.zxm.umeng.model.ArticleEntity
 import com.coding.zxm.umeng.ui.ArticleShareActivity
 import com.coding.zxm.webview.databinding.ActivityWebviewBinding
 import com.coding.zxm.webview.fragment.X5WebViewFragment.Companion.PARAMS_WEBVIEW_TITLE
@@ -29,6 +33,8 @@ import java.io.File
 @Route(path = RoutePath.ROUTE_PATH_WEBVIEW)
 class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClickListener {
 
+    private val mViewModel: CollectionViewModel by viewModels { CollectionViewModel.CollectionViewModelFactory }
+
     private var mIsWebViewAvailable = false
     private var mIsPageFinished = false
 
@@ -37,6 +43,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     private var mJsonData: String? = ""
     private var mIsBanner: Boolean = false
     private var mCollect: Boolean = false
+    private var mArticleEntity: ArticleEntity? = null
 
     companion object {
         const val PARAMS_WEBVIEW_DATA = "webview_data"
@@ -96,6 +103,9 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             }
             if (args.containsKey(PARAMS_WEBVIEW_DATA)) {
                 mJsonData = args.getString(PARAMS_WEBVIEW_DATA)
+                if (!TextUtils.isEmpty(mJsonData)) {
+                    mArticleEntity = JSONObject.parseObject(mJsonData, ArticleEntity::class.java)
+                }
             }
             if (args.containsKey(PARAMS_WEBVIEW_BANNER)) {
                 mIsBanner = args.getBoolean(PARAMS_WEBVIEW_BANNER)
@@ -171,11 +181,44 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 shareArticle()
             }
             R.id.layout_collect -> {
-                if (mCollect){
-
+                if (mArticleEntity == null)
+                    return
+                val id = mArticleEntity?.id
+                if (!mCollect) {
+                    id?.let { collect(it) }
+                } else {
+                    id?.let { uncollect(it) }
                 }
             }
         }
+    }
+
+    private fun collect(id: String) {
+        mViewModel.collect(id).observe(this, Observer {
+            if (it == 0) {
+                Toast.makeText(
+                    mContext,
+                    resources.getString(R.string.all_tips_collection_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+                x5Binding.ivCollect.setImageResource(R.drawable.icon_collected)
+                mCollect = true
+            }
+        })
+    }
+
+    private fun uncollect(id: String) {
+        mViewModel.uncollect(id).observe(this, Observer {
+            if (it == 0) {
+                Toast.makeText(
+                    mContext,
+                    resources.getString(R.string.all_tips_uncollection_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+                x5Binding.ivCollect.setImageResource(R.drawable.icon_not_collected)
+                mCollect = false
+            }
+        })
     }
 
     private fun shareArticle() {

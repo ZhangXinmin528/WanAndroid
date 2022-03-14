@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.app.WanApp
+import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
-import com.coding.zxm.wanandroid.search.model.SearchEntity
 import com.coding.zxm.wanandroid.util.ToastUtil
 import kotlinx.coroutines.launch
 
@@ -32,8 +32,8 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         return liveData
     }
 
-    fun doSearch(page: Int, key: String): MutableLiveData<SearchEntity> {
-        val liveData = MutableLiveData<SearchEntity>()
+    fun doSearch(page: Int, key: String): MutableLiveData<NewsEntity> {
+        val liveData = MutableLiveData<NewsEntity>()
 
         viewModelScope.launch {
             val result = searchRepository.doSearch(page, key)

@@ -17,10 +17,10 @@ import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.util.SPConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.databinding.ActivitySearchBinding
+import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.search.adapter.HotWordAdapter
 import com.coding.zxm.wanandroid.search.adapter.SearchResultAdapter
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
-import com.coding.zxm.wanandroid.search.model.SearchDetialEntity
 import com.coding.zxm.webview.X5WebviewActivity
 import com.zxm.utils.core.keyborad.KeyboradUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -48,7 +48,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
     //搜索结果
     private var mPage: Int = 0
-    private val mSearchResult: MutableList<SearchDetialEntity> = ArrayList()
+    private val mSearchResult: MutableList<NewsDetialEntity> = ArrayList()
     private lateinit var mSearchResultAdapter: SearchResultAdapter
 
     private lateinit var searchBinding: ActivitySearchBinding
@@ -137,13 +137,13 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         searchBinding.rvSearchResult.layoutManager = LinearLayoutManager(mContext)
         searchBinding.rvSearchResult.addItemDecoration(itemDecoration)
         mSearchResultAdapter.setOnItemClickListener { adapter, view, position ->
-            val searchDetialEntity = (adapter as SearchResultAdapter).getItem(position)
-            searchDetialEntity?.let {
-                val jsonData = JSON.toJSONString(searchDetialEntity)
+            val entity = (adapter as SearchResultAdapter).getItem(position)
+            entity?.let {
+                val jsonData = JSON.toJSONString(entity)
                 X5WebviewActivity.loadUrl(
                     mContext!!,
-                    searchDetialEntity.title,
-                    searchDetialEntity.link,
+                    entity.title,
+                    entity.link,
                     jsonData,
                     collect = it.collect
                 )

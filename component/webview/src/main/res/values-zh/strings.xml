@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="all_lable_collection">收藏</string>
+    <string name="all_tips_collection_success">收藏成功</string>
+    <string name="all_tips_uncollection_success">取消收藏成功</string>
 </resources>
