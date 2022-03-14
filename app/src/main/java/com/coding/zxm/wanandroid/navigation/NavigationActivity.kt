@@ -68,7 +68,7 @@ class NavigationActivity : BaseActivity() {
         mNaviAdapter.setNaviTagClicklistener(object : NavigationAdapter.OnNaviTagClickListener {
             override fun onTagItemClick(view: View, newsEntity: NewsDetialEntity) {
                 val jsonData = JSON.toJSONString(newsEntity)
-                X5WebviewActivity.loadUrl(mContext!!, newsEntity.title, newsEntity.link,jsonData)
+                X5WebviewActivity.loadUrl(mContext!!, newsEntity.title, newsEntity.link,jsonData,collect = newsEntity.collect)
             }
 
         })

@@ -82,7 +82,13 @@ class ProjectItemFragment : BaseFragment() {
         mProjectAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as ProjectItemAdapter).data[position]
             val jsonData = JSON.toJSONString(newsDetialEntity)
-            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link,jsonData)
+            X5WebviewActivity.loadUrl(
+                mContext!!,
+                newsDetialEntity.title,
+                newsDetialEntity.link,
+                jsonData,
+                collect = newsDetialEntity.collect
+            )
         }
 
         //是否在刷新的时候禁止列表的操作

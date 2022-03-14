@@ -144,7 +144,8 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                     mContext!!,
                     searchDetialEntity.title,
                     searchDetialEntity.link,
-                    jsonData
+                    jsonData,
+                    collect = it.collect
                 )
             }
 

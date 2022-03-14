@@ -79,7 +79,13 @@ class CollectionsActivity : BaseActivity() {
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as CollectionNewsAdapter).data[position]
             val jsonData = JSON.toJSONString(newsDetialEntity)
-            X5WebviewActivity.loadUrl(mContext!!, newsDetialEntity.title, newsDetialEntity.link,jsonData)
+            X5WebviewActivity.loadUrl(
+                mContext!!,
+                newsDetialEntity.title,
+                newsDetialEntity.link,
+                jsonData,
+                collect = true
+            )
         }
 
     }

@@ -18,7 +18,6 @@ import com.alibaba.fastjson.JSON
 import com.amap.api.location.AMapLocation
 import com.coding.zxm.map.LocationManager
 import com.coding.zxm.map.location.listener.OnLocationListener
-import com.coding.zxm.umeng.model.ArticleEntity
 import com.coding.zxm.wanandroid.BaseStatusBarFragment
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
@@ -116,11 +115,12 @@ class HomeFragment() : BaseStatusBarFragment() {
                 mBanner.setOnBannerListener(object : OnBannerListener<BannerEntity> {
                     override fun OnBannerClick(data: BannerEntity?, position: Int) {
                         data?.let {
-                            val entity = ArticleEntity()
-                            entity.title = data.title
-                            entity.link = data.url
-                            val jsonData = JSON.toJSONString(entity)
-                            X5WebviewActivity.loadUrl(mContext!!, data.title, data.url, jsonData)
+                            X5WebviewActivity.loadUrl(
+                                mContext!!,
+                                data.title,
+                                data.url,
+                                isBanner = true
+                            )
                         }
                     }
 
@@ -173,7 +173,8 @@ class HomeFragment() : BaseStatusBarFragment() {
                 mContext!!,
                 newsDetialEntity.title,
                 newsDetialEntity.link,
-                jsonData
+                jsonData,
+                collect = newsDetialEntity.collect
             )
         }
 

@@ -35,16 +35,42 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     private var mUrl: String? = null
     private var mTitle: String? = null
     private var mJsonData: String? = ""
+    private var mIsBanner: Boolean = false
+    private var mCollect: Boolean = false
 
     companion object {
         const val PARAMS_WEBVIEW_DATA = "webview_data"
+        const val PARAMS_WEBVIEW_BANNER = "webview_isbanner"
+        const val PARAMS_WEBVIEW_COLLECT = "webview_data_collect"
 
-        fun loadUrl(context: Context, title: String?, url: String, jsonData: String? = "") {
+        fun loadUrl(
+            context: Context,
+            title: String?,
+            url: String,
+            isBanner: Boolean
+        ) {
+            val intent = Intent(context, X5WebviewActivity::class.java)
+            val args = Bundle()
+            args.putString(PARAMS_WEBVIEW_URL, url)
+            args.putString(PARAMS_WEBVIEW_TITLE, title)
+            args.putBoolean(PARAMS_WEBVIEW_BANNER, isBanner)
+            intent.putExtras(args)
+            context.startActivity(intent)
+        }
+
+        fun loadUrl(
+            context: Context,
+            title: String?,
+            url: String,
+            jsonData: String? = "",
+            collect: Boolean = false
+        ) {
             val intent = Intent(context, X5WebviewActivity::class.java)
             val args = Bundle()
             args.putString(PARAMS_WEBVIEW_URL, url)
             args.putString(PARAMS_WEBVIEW_TITLE, title)
             args.putString(PARAMS_WEBVIEW_DATA, jsonData)
+            args.putBoolean(PARAMS_WEBVIEW_COLLECT, collect)
             intent.putExtras(args)
             context.startActivity(intent)
         }
@@ -71,6 +97,12 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             if (args.containsKey(PARAMS_WEBVIEW_DATA)) {
                 mJsonData = args.getString(PARAMS_WEBVIEW_DATA)
             }
+            if (args.containsKey(PARAMS_WEBVIEW_BANNER)) {
+                mIsBanner = args.getBoolean(PARAMS_WEBVIEW_BANNER)
+            }
+            if (args.containsKey(PARAMS_WEBVIEW_COLLECT)) {
+                mCollect = args.getBoolean(PARAMS_WEBVIEW_COLLECT)
+            }
         }
 
         if (mUrl.isNullOrEmpty() || mUrl.isNullOrBlank()) {
@@ -88,6 +120,19 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
         mIsWebViewAvailable = true
 
         x5Binding.ivWebMore.setOnClickListener(this)
+
+        if (!mIsBanner) {
+            x5Binding.layoutBottomFunc.visibility = View.VISIBLE
+            if (mCollect) {
+                x5Binding.ivCollect.setImageResource(R.drawable.icon_collected)
+            } else {
+                x5Binding.ivCollect.setImageResource(R.drawable.icon_not_collected)
+            }
+        } else {
+            x5Binding.layoutBottomFunc.visibility = View.GONE
+        }
+
+        x5Binding.layoutCollect.setOnClickListener(this)
     }
 
     override fun onStart() {
@@ -124,6 +169,11 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             }
             R.id.iv_web_more -> {
                 shareArticle()
+            }
+            R.id.layout_collect -> {
+                if (mCollect){
+
+                }
             }
         }
     }

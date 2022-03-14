@@ -105,7 +105,8 @@ class KnowledgeListActivity : BaseActivity() {
                 mContext!!,
                 newsDetialEntity.title,
                 newsDetialEntity.link,
-                jsonData
+                jsonData,
+                collect = newsDetialEntity.collect
             )
         }
 
