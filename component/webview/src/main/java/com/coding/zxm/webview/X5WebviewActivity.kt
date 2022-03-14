@@ -45,10 +45,12 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
     private var mCollect: Boolean = false
     private var mArticleEntity: ArticleEntity? = null
 
+
     companion object {
         const val PARAMS_WEBVIEW_DATA = "webview_data"
         const val PARAMS_WEBVIEW_BANNER = "webview_isbanner"
         const val PARAMS_WEBVIEW_COLLECT = "webview_data_collect"
+        private var mCallback: OnCollectionChangedListener? = null
 
         fun loadUrl(
             context: Context,
@@ -70,8 +72,10 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             title: String?,
             url: String,
             jsonData: String? = "",
-            collect: Boolean = false
+            collect: Boolean = false,
+            callback: OnCollectionChangedListener
         ) {
+            mCallback = callback
             val intent = Intent(context, X5WebviewActivity::class.java)
             val args = Bundle()
             args.putString(PARAMS_WEBVIEW_URL, url)
@@ -80,6 +84,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             args.putBoolean(PARAMS_WEBVIEW_COLLECT, collect)
             intent.putExtras(args)
             context.startActivity(intent)
+
         }
     }
 
@@ -203,6 +208,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 ).show()
                 x5Binding.ivCollect.setImageResource(R.drawable.icon_collected)
                 mCollect = true
+                mCallback?.collectionChanged()
             }
         })
     }
@@ -217,6 +223,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 ).show()
                 x5Binding.ivCollect.setImageResource(R.drawable.icon_not_collected)
                 mCollect = false
+                mCallback?.collectionChanged()
             }
         })
     }
@@ -292,4 +299,8 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
         super.onDestroy()
     }
 
+}
+
+interface OnCollectionChangedListener {
+    fun collectionChanged()
 }

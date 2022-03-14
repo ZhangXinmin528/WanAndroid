@@ -12,6 +12,7 @@ import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.databinding.ActivityNavigationBinding
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.navigation.model.NaviEntity
+import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 
 /**
@@ -68,7 +69,19 @@ class NavigationActivity : BaseActivity() {
         mNaviAdapter.setNaviTagClicklistener(object : NavigationAdapter.OnNaviTagClickListener {
             override fun onTagItemClick(view: View, newsEntity: NewsDetialEntity) {
                 val jsonData = JSON.toJSONString(newsEntity)
-                X5WebviewActivity.loadUrl(mContext!!, newsEntity.title, newsEntity.link,jsonData,collect = newsEntity.collect)
+                X5WebviewActivity.loadUrl(
+                    mContext!!,
+                    newsEntity.title,
+                    newsEntity.link,
+                    jsonData,
+                    collect = newsEntity.collect,
+                    callback = object :
+                        OnCollectionChangedListener {
+                        override fun collectionChanged() {
+                            navigationBinding.srNaviLayout.autoRefresh(400)
+                        }
+                    }
+                )
             }
 
         })

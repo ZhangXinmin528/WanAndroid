@@ -31,6 +31,7 @@ import com.coding.zxm.wanandroid.weather.WeatherActivity
 import com.coding.zxm.weather.WeatherManager
 import com.coding.zxm.weather.entity.WeatherNowEntity
 import com.coding.zxm.weather.listener.OnWeatherResultListener
+import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 import com.sunfusheng.marqueeview.MarqueeView
 import com.youth.banner.Banner
@@ -169,13 +170,21 @@ class HomeFragment() : BaseStatusBarFragment() {
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
             val newsDetialEntity = (adapter as HomeNewsAdapter).data[position]
             val jsonData = JSON.toJSONString(newsDetialEntity)
-            X5WebviewActivity.loadUrl(
-                mContext!!,
-                newsDetialEntity.title,
-                newsDetialEntity.link,
-                jsonData,
-                collect = newsDetialEntity.collect
-            )
+            activity?.let {
+                X5WebviewActivity.loadUrl(
+                    it,
+                    newsDetialEntity.title,
+                    newsDetialEntity.link,
+                    jsonData,
+                    collect = newsDetialEntity.collect,
+                    callback = object :
+                        OnCollectionChangedListener {
+                        override fun collectionChanged() {
+                            homeBinding.srHomeLayout.autoRefresh(400)
+                        }
+                    }
+                )
+            }
         }
 
         //是否在刷新的时候禁止列表的操作

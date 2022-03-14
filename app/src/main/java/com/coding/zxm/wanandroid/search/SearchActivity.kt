@@ -21,6 +21,7 @@ import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.search.adapter.HotWordAdapter
 import com.coding.zxm.wanandroid.search.adapter.SearchResultAdapter
 import com.coding.zxm.wanandroid.search.model.HotWordEntity
+import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 import com.zxm.utils.core.keyborad.KeyboradUtil
 import com.zxm.utils.core.sp.SharedPreferencesUtil
@@ -145,7 +146,13 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                     entity.title,
                     entity.link,
                     jsonData,
-                    collect = it.collect
+                    collect = it.collect,
+                    callback = object :
+                        OnCollectionChangedListener {
+                        override fun collectionChanged() {
+                            searchBinding.srSearchResult.autoRefresh(400)
+                        }
+                    }
                 )
             }
 

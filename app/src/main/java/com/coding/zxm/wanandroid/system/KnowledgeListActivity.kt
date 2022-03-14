@@ -15,6 +15,7 @@ import com.coding.zxm.wanandroid.databinding.ActivityKnowledgeListBinding
 import com.coding.zxm.wanandroid.home.adapter.HomeNewsAdapter
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.system.viewmodel.KnowledgeListViewModel
+import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 
 /**
@@ -106,7 +107,13 @@ class KnowledgeListActivity : BaseActivity() {
                 newsDetialEntity.title,
                 newsDetialEntity.link,
                 jsonData,
-                collect = newsDetialEntity.collect
+                collect = newsDetialEntity.collect,
+                callback = object :
+                    OnCollectionChangedListener {
+                    override fun collectionChanged() {
+                        listBinding.srListLayout.autoRefresh(400)
+                    }
+                }
             )
         }
 

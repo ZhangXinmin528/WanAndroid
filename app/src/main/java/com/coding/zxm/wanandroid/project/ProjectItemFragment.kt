@@ -16,6 +16,7 @@ import com.coding.zxm.wanandroid.databinding.FragmentProjectItemBinding
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.project.adapter.ProjectItemAdapter
+import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 
 /**
@@ -87,7 +88,13 @@ class ProjectItemFragment : BaseFragment() {
                 newsDetialEntity.title,
                 newsDetialEntity.link,
                 jsonData,
-                collect = newsDetialEntity.collect
+                collect = newsDetialEntity.collect,
+                callback = object :
+                    OnCollectionChangedListener {
+                    override fun collectionChanged() {
+                        itemBinding.srProjectLayout.autoRefresh(400)
+                    }
+                }
             )
         }
 

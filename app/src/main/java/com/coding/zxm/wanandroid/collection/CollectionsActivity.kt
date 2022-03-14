@@ -13,6 +13,7 @@ import com.coding.zxm.wanandroid.collection.adapter.CollectionNewsAdapter
 import com.coding.zxm.wanandroid.databinding.ActivityCollectionsListBinding
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
+import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 
 /**
@@ -80,11 +81,16 @@ class CollectionsActivity : BaseActivity() {
             val newsDetialEntity = (adapter as CollectionNewsAdapter).data[position]
             val jsonData = JSON.toJSONString(newsDetialEntity)
             X5WebviewActivity.loadUrl(
-                mContext!!,
+                this,
                 newsDetialEntity.title,
                 newsDetialEntity.link,
                 jsonData,
-                collect = true
+                collect = true,
+                callback = object :OnCollectionChangedListener{
+                    override fun collectionChanged() {
+                        listBinding.srCollectionsLayout.autoRefresh(400)
+                    }
+                }
             )
         }
 
