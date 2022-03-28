@@ -115,6 +115,11 @@
             android:name=".collection.CollectionsActivity"
             android:screenOrientation="portrait" />
 
+        <!--我的分享-->
+        <activity
+            android:name=".share.SharedActivity"
+            android:screenOrientation="portrait" />
+
         <!--设置-->
         <activity
             android:name=".setting.SettingActivity"

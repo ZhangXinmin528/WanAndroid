@@ -56,6 +56,9 @@
     <!--我的收藏-->
     <string name="all_my_collections">My Collection</string>
 
+    <!--我的分享-->
+    <string name="all_my_share">My Share</string>
+
     <!--设置页面-->
     <string name="all_setting">Setting</string>
     <!--语言设置-->

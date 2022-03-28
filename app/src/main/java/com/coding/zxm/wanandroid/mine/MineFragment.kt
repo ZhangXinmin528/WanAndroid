@@ -15,6 +15,7 @@ import com.coding.zxm.wanandroid.login.LoginActivity
 import com.coding.zxm.wanandroid.navigation.NavigationActivity
 import com.coding.zxm.wanandroid.project.ProjectActivity
 import com.coding.zxm.wanandroid.setting.SettingActivity
+import com.coding.zxm.wanandroid.share.SharedActivity
 import com.coding.zxm.wanandroid.system.KnowledgeActivity
 import com.coding.zxm.wanandroid.ui.activity.AboutActivity
 import com.coding.zxm.wanandroid.util.ToastUtil
@@ -139,7 +140,8 @@ class MineFragment() : BaseStatusBarFragment(), View.OnClickListener {
                 startActivity(collections)
             }
             R.id.tv_mine_share -> {
-                ToastUtil.showToast("开发小伙伴正紧张开发中")
+                val share = Intent(mContext!!, SharedActivity::class.java)
+                startActivity(share)
             }
             R.id.tv_mine_todo -> {
                 ToastUtil.showToast("开发小伙伴正紧张开发中")

@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/activity_project.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_shared_list.xml" value="0.1076388888888889" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.14652777777777778" />
         <entry key="app/src/main/res/layout/activity_weather.xml" value="0.15704387990762125" />
         <entry key="app/src/main/res/layout/fragment_bings_wallpapers.xml" value="0.10703125" />
@@ -44,6 +45,7 @@
         <entry key="app/src/main/res/layout/layout_home_news_text_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_horizontal_divider.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_search_hot_item.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/layout_share_news_text_item.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/layout_toolbar_back.xml" value="0.159375" />
         <entry key="base/core/src/main/res/drawable/ic_like.xml" value="0.174609375" />
         <entry key="base/core/src/main/res/drawable/ic_like_not_gray_24dp.xml" value="0.174609375" />
