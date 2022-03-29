@@ -89,13 +89,9 @@ class ProjectItemFragment : BaseFragment() {
                 newsDetialEntity.link,
                 jsonData,
                 collect = newsDetialEntity.collect,
-                callback = object :
-                    OnCollectionChangedListener {
-                    override fun collectionChanged() {
-                        itemBinding.srProjectLayout.autoRefresh(400)
-                    }
-                }
-            )
+            ).observe(this, Observer {
+                itemBinding.srProjectLayout.autoRefresh(1000)
+            })
         }
 
         //是否在刷新的时候禁止列表的操作

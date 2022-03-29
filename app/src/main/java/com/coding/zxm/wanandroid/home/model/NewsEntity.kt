@@ -18,39 +18,39 @@ data class NewsEntity(
  * 资讯详情
  */
 data class NewsDetialEntity(
-    val apkLink: String,
-    val audit: Int,
-    val author: String,//作者
-    val canEdit: Boolean,
-    val chapterId: Int,
-    val chapterName: String,
-    val collect: Boolean,
-    val courseId: Int,
-    val desc: String,
-    val descMd: String,
-    val envelopePic: String,
-    val fresh: Boolean,
-    val id: Int,
-    val link: String,//链接
-    val niceDate: String,
-    val niceShareDate: String,
-    val origin: String,
-    val originId: Int,
-    val prefix: String,
-    val projectLink: String,
-    val publishTime: Long,
-    val realSuperChapterId: Int,
-    val selfVisible: Int,
-    val shareDate: Long,//分享日期
-    val shareUser: String,//分享人
-    val superChapterId: Int,//一级分类的第一个子类目的id,用于拼接Url
-    val superChapterName: String,
-    val tags: MutableList<Tag>,//标签
-    val title: String,//标题
-    val type: Int,
-    val userId: Int,
-    val visible: Int,
-    val zan: Int
+    var apkLink: String,
+    var audit: Int,
+    var author: String,//作者
+    var canEdit: Boolean,
+    var chapterId: Int,
+    var chapterName: String,
+    var collect: Boolean,
+    var courseId: Int,
+    var desc: String,
+    var descMd: String,
+    var envelopePic: String,
+    var fresh: Boolean,
+    var id: Int,
+    var link: String,//链接
+    var niceDate: String,
+    var niceShareDate: String,
+    var origin: String,
+    var originId: Int,
+    var prefix: String,
+    var projectLink: String,
+    var publishTime: Long,
+    var realSuperChapterId: Int,
+    var selfVisible: Int,
+    var shareDate: Long,//分享日期
+    var shareUser: String,//分享人
+    var superChapterId: Int,//一级分类的第一个子类目的id,用于拼接Url
+    var superChapterName: String,
+    var tags: MutableList<Tag>,//标签
+    var title: String,//标题
+    var type: Int,
+    var userId: Int,
+    var visible: Int,
+    var zan: Int
 )
 
 /**

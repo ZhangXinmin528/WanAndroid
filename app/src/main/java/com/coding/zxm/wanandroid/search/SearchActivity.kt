@@ -147,13 +147,9 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
                     entity.link,
                     jsonData,
                     collect = it.collect,
-                    callback = object :
-                        OnCollectionChangedListener {
-                        override fun collectionChanged() {
-                            searchBinding.srSearchResult.autoRefresh(400)
-                        }
-                    }
-                )
+                ).observe(this, Observer {
+                    searchBinding.srSearchResult.autoRefresh(1000)
+                })
             }
 
         }

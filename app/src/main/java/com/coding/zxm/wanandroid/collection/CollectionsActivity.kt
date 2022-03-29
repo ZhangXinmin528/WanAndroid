@@ -13,7 +13,6 @@ import com.coding.zxm.wanandroid.collection.adapter.CollectionNewsAdapter
 import com.coding.zxm.wanandroid.databinding.ActivityCollectionsListBinding
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
-import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 
 /**
@@ -86,12 +85,9 @@ class CollectionsActivity : BaseActivity() {
                 newsDetialEntity.link,
                 jsonData,
                 collect = true,
-                callback = object : OnCollectionChangedListener {
-                    override fun collectionChanged() {
-                        listBinding.srCollectionsLayout.autoRefresh(400)
-                    }
-                }
-            )
+            ).observe(this, Observer {
+                listBinding.srCollectionsLayout.autoRefresh(1000)
+            })
         }
 
     }

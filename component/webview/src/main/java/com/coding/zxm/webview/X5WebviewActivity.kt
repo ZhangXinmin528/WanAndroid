@@ -11,6 +11,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.fastjson.JSONObject
@@ -50,7 +51,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
         const val PARAMS_WEBVIEW_DATA = "webview_data"
         const val PARAMS_WEBVIEW_BANNER = "webview_isbanner"
         const val PARAMS_WEBVIEW_COLLECT = "webview_data_collect"
-        private var mCallback: OnCollectionChangedListener? = null
+        private var liveData: MutableLiveData<Boolean> = MutableLiveData()
 
         fun loadUrl(
             context: Context,
@@ -72,10 +73,9 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             title: String?,
             url: String,
             jsonData: String? = "",
-            collect: Boolean = false,
-            callback: OnCollectionChangedListener
-        ) {
-            mCallback = callback
+            collect: Boolean = false
+        ): MutableLiveData<Boolean> {
+            liveData.postValue(false)
             val intent = Intent(context, X5WebviewActivity::class.java)
             val args = Bundle()
             args.putString(PARAMS_WEBVIEW_URL, url)
@@ -84,7 +84,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             args.putBoolean(PARAMS_WEBVIEW_COLLECT, collect)
             intent.putExtras(args)
             context.startActivity(intent)
-
+            return liveData
         }
     }
 
@@ -117,6 +117,7 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
             }
             if (args.containsKey(PARAMS_WEBVIEW_COLLECT)) {
                 mCollect = args.getBoolean(PARAMS_WEBVIEW_COLLECT)
+                mArticleEntity?.collect = mCollect
             }
         }
 
@@ -192,7 +193,12 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 if (!mCollect) {
                     id?.let { collect(it) }
                 } else {
-                    id?.let { uncollect(it) }
+                    val originId = mArticleEntity?.originId
+                    if ("0" != originId && !TextUtils.isEmpty(originId)) {
+                        uncollect(originId!!)
+                    } else {
+                        id?.let { uncollect(it) }
+                    }
                 }
             }
         }
@@ -208,7 +214,6 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 ).show()
                 x5Binding.ivCollect.setImageResource(R.drawable.icon_collected)
                 mCollect = true
-                mCallback?.collectionChanged()
             }
         })
     }
@@ -223,7 +228,6 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
                 ).show()
                 x5Binding.ivCollect.setImageResource(R.drawable.icon_not_collected)
                 mCollect = false
-                mCallback?.collectionChanged()
             }
         })
     }
@@ -296,6 +300,9 @@ class X5WebviewActivity : BaseActivity(), X5WebView.WebViewListener, View.OnClic
 
     override fun onDestroy() {
         x5Binding.x5webview.destroy()
+        if (mCollect != mArticleEntity?.collect) {
+            liveData.postValue(true)
+        }
         super.onDestroy()
     }
 

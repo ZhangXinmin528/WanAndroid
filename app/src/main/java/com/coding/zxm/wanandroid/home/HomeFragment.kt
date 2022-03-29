@@ -177,13 +177,9 @@ class HomeFragment() : BaseStatusBarFragment() {
                     newsDetialEntity.link,
                     jsonData,
                     collect = newsDetialEntity.collect,
-                    callback = object :
-                        OnCollectionChangedListener {
-                        override fun collectionChanged() {
-                            homeBinding.srHomeLayout.autoRefresh(400)
-                        }
-                    }
-                )
+                ).observe(this, Observer {
+                    homeBinding.srHomeLayout.autoRefresh(400)
+                })
             }
         }
 

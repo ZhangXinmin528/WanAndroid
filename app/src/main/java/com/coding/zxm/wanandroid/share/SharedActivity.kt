@@ -14,7 +14,6 @@ import com.coding.zxm.wanandroid.databinding.ActivitySharedListBinding
 import com.coding.zxm.wanandroid.home.model.NewsDetialEntity
 import com.coding.zxm.wanandroid.home.model.NewsEntity
 import com.coding.zxm.wanandroid.share.adapter.ShareArticleAdapter
-import com.coding.zxm.webview.OnCollectionChangedListener
 import com.coding.zxm.webview.X5WebviewActivity
 
 /**
@@ -84,13 +83,10 @@ class SharedActivity : BaseActivity() {
                 newsDetialEntity.title,
                 newsDetialEntity.link,
                 jsonData,
-                collect = true,
-                callback = object : OnCollectionChangedListener {
-                    override fun collectionChanged() {
-                        listBinding.srSharedLayout.autoRefresh(400)
-                    }
-                }
-            )
+                collect = newsDetialEntity.collect,
+            ).observe(this, Observer {
+                listBinding.srSharedLayout.autoRefresh(1000)
+            })
         }
 
     }

@@ -10,6 +10,12 @@ class ArticleEntity {
     var niceDate: String? = ""
     var link: String? = ""
 
+    //文章原ID
+    var originId: String = "0"
+
     //文章id
     var id: String = ""
+
+    //搜藏状态
+    var collect: Boolean = false
 }

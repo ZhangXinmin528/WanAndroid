@@ -75,12 +75,6 @@ class NavigationActivity : BaseActivity() {
                     newsEntity.link,
                     jsonData,
                     collect = newsEntity.collect,
-                    callback = object :
-                        OnCollectionChangedListener {
-                        override fun collectionChanged() {
-                            navigationBinding.srNaviLayout.autoRefresh(400)
-                        }
-                    }
                 )
             }
 

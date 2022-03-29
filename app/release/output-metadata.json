@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 7,
-      "versionName": "1.0.5",
-      "outputFile": "WanAndroid_1.0.5_release.apk"
+      "versionCode": 8,
+      "versionName": "1.0.6",
+      "outputFile": "WanAndroid_1.0.6_release.apk"
     }
   ],
   "elementType": "File"
