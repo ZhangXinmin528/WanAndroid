@@ -11,6 +11,7 @@ import com.coding.zxm.upgrade.network.IUpgradeProvider
 import com.coding.zxm.upgrade.network.UpgradeProgressProvider
 import com.coding.zxm.util.LanguageUtil
 import com.coding.zxm.util.SPConfig
+import com.coding.zxm.wanandroid.BuildConfig
 import com.coding.zxm.wanandroid.R
 import com.coding.zxm.wanandroid.app.WanApp
 import com.coding.zxm.wanandroid.databinding.ActivitySettingBinding
@@ -90,6 +91,12 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         settingBinding.tvSettingVersionTag.visibility = if (state) View.VISIBLE else View.GONE
 
         settingBinding.tvSettingCurrVersion.text = AppUtil.getAppVersionName(mContext!!)
+
+        if (BuildConfig.DEBUG){
+            settingBinding.layoutDebug.visibility = View.VISIBLE
+        }else{
+            settingBinding.layoutDebug.visibility = View.GONE
+        }
     }
 
     private fun checkUpgrade() {

@@ -19,12 +19,11 @@
 
     <ImageView
         android:id="@+id/iv_day_icon_7d"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_16dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/icon100" />
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/tv_icon_divider"
@@ -38,12 +37,11 @@
 
     <ImageView
         android:id="@+id/iv_night_icon_7d"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/margin_6dp"
         android:scaleType="fitXY"
-        android:src="@mipmap/icon150"
         app:layout_goneMarginStart="@dimen/margin_6dp" />
 
     <TextView

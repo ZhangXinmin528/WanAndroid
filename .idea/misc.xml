@@ -29,7 +29,7 @@
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_project.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.159375" />
-        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_shared_list.xml" value="0.1076388888888889" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.14652777777777778" />
         <entry key="app/src/main/res/layout/activity_weather.xml" value="0.15704387990762125" />
@@ -58,8 +58,16 @@
         <entry key="component/umeng/src/main/res/layout/layout_logo_pad.xml" value="0.25" />
         <entry key="component/umeng/src/main/res/layout/layout_share_logo.xml" value="0.335" />
         <entry key="component/upgrade/src/main/res/layout/layout_update_app_dialog.xml" value="0.25" />
+        <entry key="component/weather/src/main/res/drawable/ic_100_fill.xml" value="0.174609375" />
+        <entry key="component/weather/src/main/res/drawable/ic_102_fill.xml" value="0.174609375" />
+        <entry key="component/weather/src/main/res/drawable/ic_103_fill.xml" value="0.134375" />
+        <entry key="component/weather/src/main/res/drawable/ic_308_fill.xml" value="0.174609375" />
+        <entry key="component/weather/src/main/res/drawable/ic_410_fill.xml" value="0.174609375" />
+        <entry key="component/weather/src/main/res/drawable/ic_800.xml" value="0.174609375" />
+        <entry key="component/weather/src/main/res/drawable/ic_901_fill.xml" value="0.174609375" />
         <entry key="component/weather/src/main/res/drawable/shape_aqi_excellent.xml" value="0.266015625" />
         <entry key="component/weather/src/main/res/layout/fragment_weather.xml" value="0.159375" />
+        <entry key="component/weather/src/main/res/layout/layout_weather_7d_item.xml" value="0.159375" />
         <entry key="component/webview/src/main/res/layout/activity_file_reader.xml" value="0.159375" />
         <entry key="component/webview/src/main/res/layout/activity_webview.xml" value="0.159375" />
       </map>

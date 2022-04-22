@@ -9,191 +9,194 @@ public class IconUtils {
         int iconId = -1;
         switch (code) {
             case "100":
-                iconId = R.mipmap.icon100;
+                iconId = R.drawable.ic_100_fill;
                 break;
             case "101":
-                iconId = R.mipmap.icon101;
+                iconId = R.drawable.ic_101_fill;
                 break;
             case "102":
-                iconId = R.mipmap.icon102;
+                iconId = R.drawable.ic_102_fill;
                 break;
             case "103":
-                iconId = R.mipmap.icon103;
+                iconId = R.drawable.ic_103_fill;
                 break;
             case "104":
-                iconId = R.mipmap.icon104;
+                iconId = R.drawable.ic_104_fill;
                 break;
             case "150":
-                iconId = R.mipmap.icon150;
+                iconId = R.drawable.ic_150_fill;
+                break;
+            case "151":
+                iconId = R.drawable.ic_151_fill;
+                break;
+            case "152":
+                iconId = R.drawable.ic_152_fill;
                 break;
             case "153":
-                iconId = R.mipmap.icon153;
-                break;
-            case "154":
-                iconId = R.mipmap.icon154;
+                iconId = R.drawable.ic_153_fill;
                 break;
             case "300":
-                iconId = R.mipmap.icon300;
+                iconId = R.drawable.ic_300_fill;
                 break;
             case "301":
-                iconId = R.mipmap.icon301;
+                iconId = R.drawable.ic_301_fill;
                 break;
             case "302":
-                iconId = R.mipmap.icon302;
+                iconId = R.drawable.ic_302_fill;
                 break;
             case "303":
-                iconId = R.mipmap.icon303;
+                iconId = R.drawable.ic_303_fill;
                 break;
             case "304":
-                iconId = R.mipmap.icon304;
+                iconId = R.drawable.ic_304_fill;
                 break;
             case "305":
-                iconId = R.mipmap.icon305;
+                iconId = R.drawable.ic_305_fill;
                 break;
             case "306":
-                iconId = R.mipmap.icon306;
+                iconId = R.drawable.ic_306_fill;
                 break;
             case "307":
-                iconId = R.mipmap.icon307;
+                iconId = R.drawable.ic_307_fill;
                 break;
             case "308":
-                iconId = R.mipmap.icon308;
+                iconId = R.drawable.ic_308_fill;
                 break;
             case "309":
-                iconId = R.mipmap.icon309;
+                iconId = R.drawable.ic_309_fill;
                 break;
             case "310":
-                iconId = R.mipmap.icon310;
+                iconId = R.drawable.ic_310_fill;
                 break;
             case "311":
-                iconId = R.mipmap.icon311;
+                iconId = R.drawable.ic_311_fill;
                 break;
             case "312":
-                iconId = R.mipmap.icon312;
+                iconId = R.drawable.ic_312_fill;
                 break;
             case "313":
-                iconId = R.mipmap.icon313;
+                iconId = R.drawable.ic_313_fill;
                 break;
             case "314":
-                iconId = R.mipmap.icon314;
+                iconId = R.drawable.ic_314_fill;
                 break;
             case "315":
-                iconId = R.mipmap.icon315;
+                iconId = R.drawable.ic_315_fill;
                 break;
             case "316":
-                iconId = R.mipmap.icon316;
+                iconId = R.drawable.ic_316_fill;
                 break;
             case "317":
-                iconId = R.mipmap.icon317;
+                iconId = R.drawable.ic_317_fill;
                 break;
             case "318":
-                iconId = R.mipmap.icon318;
+                iconId = R.drawable.ic_318_fill;
                 break;
             case "350":
-                iconId = R.mipmap.icon350;
+                iconId = R.drawable.ic_350_fill;
                 break;
             case "351":
-                iconId = R.mipmap.icon351;
+                iconId = R.drawable.ic_351_fill;
                 break;
             case "399":
-                iconId = R.mipmap.icon399;
+                iconId = R.drawable.ic_399_fill;
                 break;
             case "400":
-                iconId = R.mipmap.icon400;
+                iconId = R.drawable.ic_400_fill;
                 break;
             case "401":
-                iconId = R.mipmap.icon401;
+                iconId = R.drawable.ic_401_fill;
                 break;
             case "402":
-                iconId = R.mipmap.icon402;
+                iconId = R.drawable.ic_402_fill;
                 break;
             case "403":
-                iconId = R.mipmap.icon403;
+                iconId = R.drawable.ic_403_fill;
                 break;
             case "404":
-                iconId = R.mipmap.icon404;
+                iconId = R.drawable.ic_404_fill;
                 break;
             case "405":
-                iconId = R.mipmap.icon405;
+                iconId = R.drawable.ic_405_fill;
                 break;
             case "406":
-                iconId = R.mipmap.icon406;
+                iconId = R.drawable.ic_406_fill;
                 break;
             case "407":
-                iconId = R.mipmap.icon407;
+                iconId = R.drawable.ic_407_fill;
                 break;
             case "408":
-                iconId = R.mipmap.icon408;
+                iconId = R.drawable.ic_408_fill;
                 break;
             case "409":
-                iconId = R.mipmap.icon409;
+                iconId = R.drawable.ic_409_fill;
                 break;
             case "410":
-                iconId = R.mipmap.icon410;
+                iconId = R.drawable.ic_410_fill;
                 break;
             case "499":
-                iconId = R.mipmap.icon499;
+                iconId = R.drawable.ic_499_fill;
                 break;
             case "456":
-                iconId = R.mipmap.icon456;
+                iconId = R.drawable.ic_456_fill;
                 break;
             case "457":
-                iconId = R.mipmap.icon457;
+                iconId = R.drawable.ic_457_fill;
                 break;
             case "500":
-                iconId = R.mipmap.icon500;
+                iconId = R.drawable.ic_500_fill;
                 break;
             case "501":
-                iconId = R.mipmap.icon501;
+                iconId = R.drawable.ic_501_fill;
                 break;
             case "502":
-                iconId = R.mipmap.icon502;
+                iconId = R.drawable.ic_502_fill;
                 break;
             case "503":
-                iconId = R.mipmap.icon503;
+                iconId = R.drawable.ic_503_fill;
                 break;
             case "504":
-                iconId = R.mipmap.icon504;
+                iconId = R.drawable.ic_504_fill;
                 break;
             case "507":
-                iconId = R.mipmap.icon507;
+                iconId = R.drawable.ic_507_fill;
                 break;
             case "508":
-                iconId = R.mipmap.icon508;
+                iconId = R.drawable.ic_508_fill;
                 break;
             case "509":
-                iconId = R.mipmap.icon509;
+                iconId = R.drawable.ic_509_fill;
                 break;
             case "510":
-                iconId = R.mipmap.icon510;
+                iconId = R.drawable.ic_510_fill;
                 break;
             case "511":
-                iconId = R.mipmap.icon511;
+                iconId = R.drawable.ic_511_fill;
                 break;
             case "512":
-                iconId = R.mipmap.icon512;
+                iconId = R.drawable.ic_512_fill;
                 break;
             case "513":
-                iconId = R.mipmap.icon513;
+                iconId = R.drawable.ic_513_fill;
                 break;
             case "514":
-                iconId = R.mipmap.icon514;
+                iconId = R.drawable.ic_514_fill;
                 break;
             case "515":
-                iconId = R.mipmap.icon515;
+                iconId = R.drawable.ic_515_fill;
                 break;
             case "900":
-                iconId = R.mipmap.icon900;
+                iconId = R.drawable.ic_900_fill;
                 break;
             case "901":
-                iconId = R.mipmap.icon901;
+                iconId = R.drawable.ic_901_fill;
                 break;
             case "999":
-                iconId = R.mipmap.icon999;
+                iconId = R.drawable.ic_999_fill;
                 break;
 
         }
-        return R.mipmap.icon999;
+        return iconId;
     }
 
     /**

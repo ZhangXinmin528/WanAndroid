@@ -293,7 +293,7 @@ class HomeFragment() : BaseStatusBarFragment() {
 
                     val weatherEntity = JSON.parseObject(result, WeatherNowEntity::class.java)
                     if (weatherEntity != null) {
-                        if (weatherEntity.code == "200") {
+                        if (weatherEntity.code == "OK") {
                             val nowBaseBean = weatherEntity.now
                             if (nowBaseBean != null) {
                                 if (mMarqueeList.isNotEmpty()) {

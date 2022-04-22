@@ -22,6 +22,7 @@ import com.coding.zxm.weather.util.IconUtils
 import com.coding.zxm.weather.util.WeatherUtil
 import com.qweather.sdk.bean.IndicesBean
 import com.qweather.sdk.bean.air.AirNowBean
+import com.qweather.sdk.bean.base.Code
 import com.qweather.sdk.bean.base.Unit
 import com.qweather.sdk.bean.weather.WeatherDailyBean
 import com.qweather.sdk.bean.weather.WeatherHourlyBean
@@ -116,7 +117,7 @@ class WeatherFragment : BaseFragment() {
 
 //                    MLogger.d(TAG, "getWeatherNow${JSON.toJSONString(p0)}")
 
-                    if (p0 != null && p0.code == "200") {
+                    if (p0 != null && p0.code == Code.OK) {
 
                         weatherBinding.tvWeatherTemp.text = "${p0.now.temp}°"
 
@@ -197,7 +198,7 @@ class WeatherFragment : BaseFragment() {
 //                    MLogger.d(TAG, "getWeather24Hourly${JSON.toJSONString(p0)}")
 
                     p0?.let {
-                        if (it.code == "200") {
+                        if (it.code == Code.OK) {
                             dealWithHourlyData(it)
                         }
                     }
@@ -275,9 +276,9 @@ class WeatherFragment : BaseFragment() {
                 }
 
                 override fun onSuccess(p0: WeatherDailyBean?) {
-//                    MLogger.d(TAG, "getWeather7D${JSON.toJSONString(p0)}")
+                    MLogger.d(TAG, "getWeather7D${JSON.toJSONString(p0)}")
                     p0?.let {
-                        if (it.code == "200") {
+                        if (it.code == Code.OK) {
                             weatherBinding.rvWeather7d?.adapter =
                                 Weather7DayAdapter(
                                     it.daily
@@ -319,7 +320,7 @@ class WeatherFragment : BaseFragment() {
 
                     MLogger.d(TAG, "getAirNow${JSON.toJSONString(p0)}")
 
-                    if (p0 != null && p0.code == "200") {
+                    if (p0 != null && p0.code == Code.OK) {
 
                         val nowBean = p0.now
 
@@ -431,7 +432,7 @@ class WeatherFragment : BaseFragment() {
                 override fun onSuccess(p0: IndicesBean?) {
 //                    MLogger.d(TAG, "getIndices1D${JSON.toJSONString(p0)}")
                     p0?.let {
-                        if (it.code == "200") {
+                        if (it.code == Code.OK) {
                             val layoutInflater = LayoutInflater.from(mContext)
                             it.dailyList.forEach { item ->
 

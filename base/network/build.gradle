@@ -38,7 +38,7 @@ dependencies {
     implementation deps.retrofit.gsonConverter
     api deps.retrofit_url_manager
 
-    //chuck
+    //chuck TODO:处理打Release包会崩溃
     debugImplementation deps.chuck.library
     releaseImplementation deps.chuck.library_no_op
 

@@ -96,8 +96,10 @@
         <include layout="@layout/layout_horizontal_divider" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_debug"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_setting_debug"
