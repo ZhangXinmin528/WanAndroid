@@ -1,9 +1,11 @@
 package com.coding.zxm.wanandroid.home
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.coding.zxm.core.base.BaseViewModel
 import com.coding.zxm.network.RetrofitClient
 import com.coding.zxm.network.common.CommonResult
 import com.coding.zxm.wanandroid.app.WanApp
@@ -16,7 +18,7 @@ import kotlinx.coroutines.launch
  * Created by ZhangXinmin on 2020/8/12.
  * Copyright (c) 2020 . All rights reserved.
  */
-class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel2(private val homeRepository: HomeRepository,val app:Application) : BaseViewModel(app) {
 
     fun getBannerData(): MutableLiveData<MutableList<BannerEntity>> {
         val liveData = MutableLiveData<MutableList<BannerEntity>>()
@@ -45,14 +47,6 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
             }
         }
         return liveData
-    }
-
-
-    object HomeViewModelFactory : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            @Suppress("UNCHECKED_CAST")
-            return HomeViewModel(HomeRepository(RetrofitClient.getInstance(WanApp.getApplicationContext())!!)) as T
-        }
     }
 
 }

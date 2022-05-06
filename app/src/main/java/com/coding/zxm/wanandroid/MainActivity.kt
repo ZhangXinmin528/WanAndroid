@@ -1,7 +1,9 @@
 package com.coding.zxm.wanandroid
 
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.coding.zxm.core.base.BaseActivity
 import com.coding.zxm.upgrade.UpgradeManager
@@ -10,6 +12,7 @@ import com.coding.zxm.upgrade.network.UpgradeProgressProvider
 import com.coding.zxm.wanandroid.databinding.ActivityMainBinding
 import com.coding.zxm.wanandroid.gallery.BingWallpapersFragment
 import com.coding.zxm.wanandroid.home.HomeFragment
+import com.coding.zxm.wanandroid.home.HomeViewModel2
 import com.coding.zxm.wanandroid.mine.MineFragment
 import com.zxm.utils.core.bar.StatusBarCompat
 
