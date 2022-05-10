@@ -76,7 +76,7 @@ class SharedActivity : BaseActivity() {
         listBinding.rvSharedList.addItemDecoration(itemDecoration)
 
         mNewsAdapter.setOnItemClickListener { adapter, view, position ->
-            val newsDetialEntity = (adapter as CollectionNewsAdapter).data[position]
+            val newsDetialEntity = (adapter as ShareArticleAdapter).data[position]
             val jsonData = JSON.toJSONString(newsDetialEntity)
             X5WebviewActivity.loadUrl(
                 this,
