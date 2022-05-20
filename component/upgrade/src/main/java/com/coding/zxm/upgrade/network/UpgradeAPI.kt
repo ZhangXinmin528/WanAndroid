@@ -17,7 +17,7 @@ interface UpgradeAPI {
     /**
      * 检查版本更新
      */
-    @GET("latest/5fd2db28b2eb462419f80455")
+    @GET("latest/6287009723389f711da85339")
     fun checkUpdate(@Query("api_token") token: String): Call<UpdateEntity>
 
     /**
